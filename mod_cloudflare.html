@@ -1,0 +1,146 @@
+<div class="row">
+  <div class="col-md-12">
+    <h2>{{langmod.CF_TITLE}}</h2>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="?">Home</a></li>
+      <li class="breadcrumb-item active"><strong>Cloudflare</strong></li>
+    </ol>
+    <div class="card panel panel-default">
+      <div class="card-body panel-body">
+        <p>Gestiona tu conexión con Cloudflare y sincroniza tus registros DNS de forma automática.</p>
+        
+        <hr>
+
+        <div class="row">
+          <!-- Configuración del Token -->
+          <div class="col-md-6" style="border-right: 1px solid #eee;">
+            <h4 style="margin-top:0;">{{langmod.CF_SETTINGS}}</h4>
+            
+            {% if mod.cf_configured %}
+            <div class="cf-token-status {% if mod.cf_settings.is_valid %}valid{% else %}invalid{% endif %}">
+              <i class="fa {% if mod.cf_settings.is_valid %}fa-check-circle{% else %}fa-exclamation-circle{% endif %}" style="margin-right:10px;"></i>
+              <span>
+                {{langmod.CF_CURRENT_TOKEN}}: <code>{{mod.cf_settings.token_masked}}</code>
+                {% if mod.cf_settings.validated_at %}
+                <br><small style="color:#666;">Última validación: {{mod.cf_settings.validated_at}}</small>
+                {% endif %}
+              </span>
+            </div>
+            {% else %}
+            <div style="margin-top:5px; margin-bottom:15px;">
+              <small style="color:#999;">{{langmod.CF_NO_TOKEN_CONFIGURED}}</small>
+            </div>
+            {% endif %}
+
+            <div class="form-group" style="margin-top:15px; margin-bottom: 25px;">
+              <label><b>{{langmod.CF_API_TOKEN}}:</b></label>
+              <div style="position: relative;">
+                <input type="password" id="cf_token_input" class="form-control" placeholder="{{langmod.CF_TOKEN_PLACEHOLDER}}" style="height: 34px; padding-right: 45px;">
+                <button type="button" id="cf_toggle_token_vis" onclick="toggleCfTokenVis()" style="position: absolute; right: 10px; top: 0; height: 34px; background: none; border: none; color: #777; outline: none;">
+                  <i class="fa fa-eye"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="form-group clearfix" style="margin-top:15px;">
+              <div class="pull-left">
+                <button class="btn btn-primary" onclick="saveCfToken()">{{langmod.DOMSAVEBTN}}</button>
+                <button class="btn btn-default" onclick="validateCfToken()">{{langmod.CF_VALIDATE}}</button>
+              </div>
+              {% if mod.cf_configured %}
+              <div class="pull-right">
+                <button class="btn btn-danger" onclick="deleteCfToken()">{{langmod.CF_DELETE_TOKEN}}</button>
+              </div>
+              {% endif %}
+            </div>
+
+            <div id="cf_validation_msg" style="margin-top:15px; display:none;"></div>
+            
+            <div id="cf_zones_list" style="margin-top:15px; display:none;">
+                <label><b>{{langmod.CF_ZONES}}:</b></label>
+                <div id="cf_zones_container" class="cf-zones-container"></div>
+            </div>
+          </div>
+
+          <!-- Sincronización -->
+          <div class="col-md-6">
+            <h4 style="margin-top:0;">{{langmod.CF_SYNC_LABEL}}</h4>
+            <p>Sincroniza los registros DNS de tus dominios con Cloudflare.</p>
+            
+            <div class="well well-sm" style="background-color: #f9f9f9; border-left: 4px solid #f0ad4e; margin-bottom: 20px;">
+                <div class="form-group">
+                    <label for="cf_domain_select"><b>Seleccionar dominio:</b></label>
+                    <select id="cf_domain_select" class="form-control select2">
+                        {% for domain in mod.user_domains %}
+                            <option value="{{ domain }}" {% if domain == mod.main_domain %}selected{% endif %}>{{ domain }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <p id="cf_sync_desc" style="margin-bottom:15px;">{{ langmod.CF_SYNC_MAIN_DESC|format(mod.main_domain)|raw }}</p>
+                <button id="btn_sync_main" class="btn btn-warning btn-block" onclick="syncMainDomain()" {% if not mod.cf_configured %}disabled{% endif %}>
+                  <i class="fa fa-refresh"></i> {{langmod.CF_SYNC_BUTTON}}
+                </button>
+            </div>
+
+            <div id="cf_sync_result" style="margin-top:15px; display:none;"></div>
+
+            <hr>
+            
+            <div class="alert alert-info" style="margin-bottom:0;">
+              <strong style="font-size: 1.1em; display: block; margin-bottom: 5px;">{{langmod.CF_PERMISSIONS_TITLE}}</strong>
+              {{langmod.CF_PERMISSIONS_DESC|raw}}
+              <ul style="margin-top:10px; margin-bottom:0; padding-left:20px;">
+                <li>Zone - DNS: {{langmod.CF_PERMISSIONS_EDIT}}</li>
+                <li>Zone - Zone: {{langmod.CF_PERMISSIONS_READ}}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.cf-token-status {
+    padding: 12px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+.cf-token-status.valid {
+    background-color: #dff0d8;
+    color: #3c763d;
+    border: 1px solid #d6e9c6;
+}
+.cf-token-status.invalid {
+    background-color: #f2dede;
+    color: #a94442;
+    border: 1px solid #ebccd1;
+}
+.cf-zones-container {
+    max-height: 150px;
+    overflow-y: auto;
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 8px;
+    border-radius: 4px;
+}
+.cf-zone-item {
+    padding: 4px 0;
+    border-bottom: 1px solid #eee;
+}
+.cf-zone-item:last-child {
+    border-bottom: none;
+}
+.cf-zone-status {
+    font-size: 0.85em;
+    color: #999;
+}
+.cf-zone-status.active {
+    color: #5cb85c;
+    font-weight: bold;
+}
+</style>
