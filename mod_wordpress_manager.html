@@ -1,0 +1,16 @@
+<style>
+{% include 'modules/wordpress_manager/styles.css' %}
+</style>
+
+{% if mod.mod_installed == 1 %}
+    {% include 'modules/wordpress_manager/dashboard.html' %}
+{% else %}
+    {% include 'modules/wordpress_manager/not_available.html' %}
+{% endif %}
+
+{% include 'modules/wordpress_manager/modals.html' %}
+
+<script>
+// Variable para almacenar las instalaciones de WordPress
+var wpm_installations = {{ mod.installations|json_encode|raw }};
+</script>

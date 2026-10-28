@@ -327,7 +327,7 @@
                       {% endif %}
                       {% if ("statistics" in rmenu )or(swmenu==1) %}
                       <div class="col-md-3 dashboard-item">
-                          <a href="?module=mod_security"><i class="fa fa-lock fa-3x"></i>   <span>Mod Security</span>
+                          <a href="?module=mod_security"><i class="fa fa-lock fa-3x"></i>   <span>{{langene.MODSECURITY}}</span>
                           </a>
                       </div>
                       {% endif %}
@@ -458,19 +458,19 @@
                         <div class="col-md-3 dashboard-item"><a href="?module=vdomaincache"><i class="fa fa-space-shuttle fa-3x"></i>  <span>{{langene.CACHE1}}</span></a></div>
                         {% endif %}
                     {% endif %}
-                      {% if ("cloudflare" in extra_rmenu )or(swmenu==1) %}
-                      <div class="col-md-3 dashboard-item"><a href="?module=cloudflare"><i class="fa fa-cloud fa-3x"></i>
-                          <span>Cloudflare</span></a></div>
-                      {% endif %}
-                    {% if ("nodejs" in extra_rmenu )or(swmenu==1) %}
-                    <div class="col-md-3 dashboard-item"><a href="?module=nodejs_manager"><i class="fa fa-server fa-3x"></i>
-                        <span>Node.JS Apps</span></a></div>
-                    {% endif %}
+                       {% if ("cloudflare" in extra_rmenu )or(swmenu==1) %}
+                       <div class="col-md-3 dashboard-item"><a href="?module=cloudflare"><i class="fa fa-cloud fa-3x"></i>
+                           <span>{{langene.CLOUDFLARE}}</span></a></div>
+                       {% endif %}
+                     {% if ("nodejs" in extra_rmenu )or(swmenu==1) %}
+                     <div class="col-md-3 dashboard-item"><a href="?module=nodejs_manager"><i class="fa fa-server fa-3x"></i>
+                         <span>{{langene.NODEJSAPPS}}</span></a></div>
+                     {% endif %}
 
-                      {% if ("tomcat_manager" in extra_rmenu )or(swmenu==1) %}
-                      <div class="col-md-3 dashboard-item"><a href="?module=tomcat_manager"><i class="fa fa-server fa-3x"></i>
-                          <span>Tomcat Manager</span></a></div>
-                      {% endif %}
+                       {% if ("tomcat_manager" in extra_rmenu )or(swmenu==1) %}
+                       <div class="col-md-3 dashboard-item"><a href="?module=tomcat_manager"><i class="fa fa-server fa-3x"></i>
+                           <span>{{langene.TOMCATMANAGER}}</span></a></div>
+                       {% endif %}
                   </div>
               </div>
           </div>
@@ -508,12 +508,12 @@
                   </div>
                   <div class="row">
                       {% if ("mongodb_manager" in extra_rmenu ) or ("mongodb_manager" in rmenu )or(swmenu==1) %}
-                      <div class="col-md-3 dashboard-item">
-                        <a href="?module=nodejs_manager">
-                          <i class="fa fa-database fa-3x"></i>
-                          <span>Mongo Database</span>
-                        </a>
-                      </div>
+                       <div class="col-md-3 dashboard-item">
+                         <a href="?module=nodejs_manager">
+                           <i class="fa fa-database fa-3x"></i>
+                           <span>{{langene.MONGODB}}</span>
+                         </a>
+                       </div>
                     {% endif %}
                   </div>
               </div>
@@ -557,6 +557,9 @@
                     {% endif %}
                     {% if ("email_importer" in rmenu ) or (swmenu==1) %}
                         <div class="col-md-3 dashboard-item"><a href="?module=email_importer"><i class="fa fa-download fa-3x"></i> <span>{{langene.GEN001}}</span></a></div>
+                    {% endif %}
+                    {% if ("spam_annihilator" in rmenu ) or (swmenu==1) %}
+                    <div class="col-md-3 dashboard-item"><a href="?module=spam_annihilator"><i class="fa fa-filter fa-3x"></i> <span>{{langene.SPAMANNIHILATOR}}</span></a></div>
                     {% endif %}
                 </div>
               </div>
@@ -604,10 +607,13 @@
                     <div class="col-md-3 dashboard-item"><a href="?module=addons&acc=installed"><i class="fa fa-asterisk fa-3x"></i> <span>{{langene.ADDEFMBTNON}}</span></a></div>
                     {% endif %}
                     {% if ("siteprobuilder" in rmenu )or(swmenu==1) %}
-                    <div class="col-md-3 dashboard-item"><a href="?module=siteprobuilder"><i class="fa fa-asterisk fa-3x"></i> <span>Site.pro Website Builder</span></a></div>
+                    <div class="col-md-3 dashboard-item"><a href="?module=siteprobuilder"><i class="fa fa-asterisk fa-3x"></i> <span>{{langene.SITEPROBUILDER}}</span></a></div>
+                    {% endif %}
+                    {% if ("wordpress_manager" in rmenu )or(swmenu==1) %}
+                    <div class="col-md-3 dashboard-item"><a href="?module=wordpress_manager"><i class="fa fa-wordpress fa-3x"></i> <span>{{langene.WORDPRESSMANAGER}}</span></a></div>
                     {% endif %}
                     {% if ("git_manager" in rmenu )or(swmenu==1) %}
-                    <div class="col-md-3 dashboard-item"><a href="?module=git_manager"><i class="fa fa-github fa-3x"></i> <span>Git Manager</span></a></div>
+                    <div class="col-md-3 dashboard-item"><a href="?module=git_manager"><i class="fa fa-github fa-3x"></i> <span>{{langene.GITMANAGER}}</span></a></div>
                     {% endif %}
                 </div>
             </div>

@@ -60,7 +60,7 @@ function installWP(){
         value : wpuserdb
       }
     ];
-    let data = 'wpurl=' + wpurl + '&wpdomain=' + wpdomain + '&wppach=' + wppach + '&wplang=' + wplang + '&wpbd=' + wpbd + '&wpuserdb=' + wpuserdb + '&dompath=' + dompath + '&domssl=' + domssl + '&wppassbd=' + wppassbd+ '&wpadminpass=' +wpadminpass + '&wpadminuser=' + wpadminuser+ '&wpsitetitle=' + wpsitetitle+ '&wpadminemail=' + wpadminemail;
+    let data = 'wpurl=' + encodeURIComponent(wpurl) + '&wpdomain=' + encodeURIComponent(wpdomain) + '&wppach=' + encodeURIComponent(wppach) + '&wplang=' + encodeURIComponent(wplang) + '&wpbd=' + encodeURIComponent(wpbd) + '&wpuserdb=' + encodeURIComponent(wpuserdb) + '&dompath=' + encodeURIComponent(dompath) + '&domssl=' + encodeURIComponent(domssl) + '&wppassbd=' + encodeURIComponent(wppassbd) + '&wpadminpass=' + encodeURIComponent(wpadminpass) + '&wpadminuser=' + encodeURIComponent(wpadminuser) + '&wpsitetitle=' + encodeURIComponent(wpsitetitle) + '&wpadminemail=' + encodeURIComponent(wpadminemail);
     confirmInstallation({
       type: 'wordpress',
       script: 'WordPress',
@@ -116,12 +116,6 @@ function wpTable(list){
     let html_content = '';
     let index = 0;
     wplist.forEach(function(installation){
-      // Clean PHP Warnings from all string fields
-      for (let prop in installation) {
-        if (typeof installation[prop] === 'string') {
-          installation[prop] = installation[prop].replace(/PHP Warning:[\s\S]*?line \d+\s*/g, '').trim();
-        }
-      }
       let insturl = installation.hasOwnProperty('url') ? installation.url : 'http://' + installation.domain;
       let dbinf = '';
       if(installation.hasOwnProperty('db_result') && installation.db_result.result != 'success'){
@@ -144,14 +138,9 @@ function wpTable(list){
                           '</div>' +
                         '</td>' +
                         '<td>' +
-                          '<div class="addon-td-item text-center">' +
-                            '<button title="Auto Login" data-path="' + installation.path + '" data-url="' + insturl + '" data-toggle="tooltip" data-placement="top" aria-hidden="true" class="btn btn-primary btn-xs btn-autologin" onclick="return wpAutologin(this)">' +
-                              '<i aria-hidden="true" class="fa fa-sign-in"></i>' +
-                            '</button>' +
-                            '<button title="{{langmod.ADDDWP3}}" data-traddon="#tdwp_' + index + '" data-type="wordpress" data-installation=\'' + JSON.stringify(installation) + '\' data-toggle="tooltip" data-placement="top" aria-hidden="true" class="btn btn-danger btn-xs btn-delete" onclick="return deleteAddon(this, 0)">' +
-                              '<i aria-hidden="true" class="fa fa-trash"></i>' +
-                            '</button>' +
-                          '</div>' +
+                          '<div class="addon-td-item text-center"><button title="{{langmod.ADDDWP3}}" data-traddon="#tdwp_' + index + '" data-type="wordpress" data-installation=\'' + JSON.stringify(installation) + '\' data-toggle="tooltip" data-placement="top" aria-hidden="true" class="btn btn-danger btn-xs btn-delete" onclick="return deleteAddon(this, 0)">' +
+                            '<i aria-hidden="true" class="fa fa-trash"></i>' +
+                          '</button></div>' +
                         '</td>' +
                       '</tr>';
       index++;
@@ -178,23 +167,6 @@ function wpTable(list){
     $('#table_wp_container').html('<div class="empty_list"><h4 class="text-success">{{langmod.ADDNOTWP}}</h4></div>');
   }
   $('[data-toggle="tooltip"]').tooltip();
-}
-function wpAutologin(btn){
-  let path = $(btn).data('path');
-  let url = $(btn).data('url');
-  uchip.handleButton(btn, 'fa-sign-in');
-  uchip.call('module=addons&act=wp_autologin', {
-    data: 'path=' + path + '&url=' + url,
-    callback: function(response){
-      uchip.handleButton(btn, 'fa-sign-in', true);
-      if(response.result == 'success'){
-        window.open(response.login_url, '_blank');
-      }else{
-        noti_bubble('Error generating login URL','{{langmod.FERROR}}','error',false,false,'3000',true);
-      }
-    }
-  });
-  return false;
 }
 
 /* Start .THEMELY */

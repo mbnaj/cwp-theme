@@ -933,9 +933,25 @@ $("#storage").click(function () {
       uchip.call('acc=disk_space', {
         callback: function (data_consumption) {
           displayConsumptionInfo(data_consumption.packquota, data_consumption.backup_quota, 'backup', uchip);
-          displayConsumptionInfo(data_consumption.packquota, data_consumption.quota / 1024, 'home', uchip);
+          displayConsumptionInfo(data_consumption.packquota, data_consumption.sizehome / 1024, 'home', uchip);
           displayConsumptionInfo(data_consumption.packquota, data_consumption.sizemail / 1024, 'email', uchip);
           displayConsumptionInfo(data_consumption.packquota, data_consumption.sizemysql / 1024, 'mysql', uchip);
+
+          var total_used = (data_consumption.sizehome / 1024) + (data_consumption.sizemail / 1024) + (data_consumption.sizemysql / 1024) + (data_consumption.backup_quota || 0);
+          var total_percent = data_consumption.packquota > 0 ? Math.round((100 / data_consumption.packquota) * total_used) : 0;
+          total_percent = total_percent > 100 ? 100 : total_percent;
+          if ($("#top-quota-percent").length) {
+            $("#top-quota-percent").text(total_percent + '%');
+          }
+          if ($("#top-quota-bar").length) {
+            $("#top-quota-bar").css('width', total_percent + '%');
+            $("#top-quota-bar").removeClass('progress-bar-success progress-bar-warning progress-bar-danger');
+            $("#top-quota-bar").addClass(uchip.getBarColor(total_percent));
+          }
+          if ($("#top-quota-text").length) {
+            var limit_str = data_consumption.packquota == -1 ? '&infin; MB' : Math.round(data_consumption.packquota) + ' MB';
+            $("#top-quota-text").html(total_used.toFixed(2) + ' MB / ' + limit_str);
+          }
 
           $('#divstorage_loader').fadeOut('fast', function () {
             $('#divstorage_info').fadeIn('fast');

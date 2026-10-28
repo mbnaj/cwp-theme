@@ -13,6 +13,11 @@
     </div>
   </div>-->
   <div class="script-container" id="wp_form">
+    {% if mod.mysqlpack and mod.mysqlpack.package != -1 and mod.mysqlpack.used >= mod.mysqlpack.package %}
+    <div class="alert alert-danger" style="margin-bottom: 15px;">
+      <i class="fa fa-exclamation-triangle"></i> <strong>{{langmod.ADDATENTION}}:</strong> {{langmod.ADDMYSQLEX}} ({{mod.mysqlpack.used}} / {{mod.mysqlpack.package}}).
+    </div>
+    {% endif %}
     <div class="panel panel-default" id="wptap1">
       <div class="panel-heading white-bg script-container-title">
         <h4 class="panel-title">{{langmod.ADDDWP4}}</h4>

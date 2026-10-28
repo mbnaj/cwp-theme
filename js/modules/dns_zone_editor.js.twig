@@ -1,4 +1,3 @@
-
 console.log();
 function ValidateIPaddressLocal(ipaddress){
   var ipformat = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
@@ -124,24 +123,19 @@ function validform(regname){
   var domainsel=$("#domainsel").val();
   if(regname=='TXT'){
     let name_txt = $('#namereg_TXT').val();
-    let value_txt = base64Encode($('#valuereg_TXT').val());
+    let raw_val = $('#valuereg_TXT').val();
+    let value_txt = base64Encode(raw_val);
     let cache_txt = $('#cachereg_TXT').val();
-    if((name_txt=='')||(value_txt=='')){
+    if((name_txt=='')||(raw_val=='')){
         if(name_txt==''){$("#namereg_TXT").css("border-color", "#A80705");}
-        if(value_txt==''){$("#valuereg_TXT").css("border-color", "#A80705");}
+        if(raw_val==''){$("#valuereg_TXT").css("border-color", "#A80705");}
         noti_bubble('{{langmod.DNSMSJ1}}','{{langmod.DNSERROR}}','error',false,false,'3000',true);
         return false;
     }
     if(cache_txt == ''){
       cache_txt = '14400';
     }
-    if(value_txt.charAt(value_txt.length-1) != '"'){
-      value_txt += '"';
-    }
-    if(value_txt.charAt(0) != '"'){
-      value_txt = '"' + value_txt;
-    }
-    var data = "domain=" + domainsel + "&cachereg=" + cache_txt + "&namereg=" + name_txt + "&valuereg=" + value_txt + "&reg=" + regname;
+    var data = "domain=" + encodeURIComponent(domainsel) + "&cachereg=" + encodeURIComponent(cache_txt) + "&namereg=" + encodeURIComponent(name_txt) + "&valuereg=" + encodeURIComponent(value_txt) + "&reg=" + encodeURIComponent(regname);
   }else if(regname=='AFSDB'){
       var afsdbaddress = $("#afsdbaddress").val();
       var afsdbtl = $("#afsdbtl").val();
@@ -205,10 +199,7 @@ function validform(regname){
           if(ptrprio==''){$("#ptrprio").css("border-color", "#A80705");}
           noti_bubble('{{langmod.DNSMSJ1}}','{{langmod.DNSERROR}}','error',false,false,'3000',true);
           return false;
-      }//
-      // if(ptrname.charAt(ptrname.length-1) != '.'){
-      //   ptrname += '.';
-      // }
+      }
       if(ptrapunta.charAt(ptrapunta.length-1) != '.'){
         ptrapunta += '.';
       }
@@ -266,12 +257,6 @@ function validform(regname){
           noti_bubble('{{langmod.DNSMSJ1}}','{{langmod.DNSERROR}}','error',false,false,'3000',true);
           return false;
       }
-      // if(nsname.charAt(nsname.length-1) != '.'){
-      //   nsname += '.';
-      // }
-      // if(nsapunta.charAt(nsapunta.length-1) != '.'){
-      //   nsapunta += '.';
-      // }
       var data = "domain="+domainsel+"&nsname="+nsname+"&nsapunta="+nsapunta+"&nsprio="+nsprio+"&reg="+regname;
   }else if(regname=='CNAME'){
     var namereg=$("#namereg_"+reg).val();
@@ -283,9 +268,6 @@ function validform(regname){
         noti_bubble('{{langmod.DNSMSJ1}}','{{langmod.DNSERROR}}','error',false,false,'3000',true);
         return false;
     }
-    // if(namereg.charAt(namereg.length-1) != '.'){
-    //   namereg += '.';
-    // }
     if(valuereg.charAt(valuereg.length-1) != '.'){
       valuereg += '.';
     }
@@ -301,9 +283,6 @@ function validform(regname){
         if(tag_CAA == ''){$("#tag_CAA").css("border-color", "#A80705");}
         if(valuereg_CAA == ''){$("#valuereg_CAA").css("border-color", "#A80705");}
       }
-      // if(namereg_CAA.charAt(namereg_CAA.length-1) != '.'){
-      //   namereg_CAA += '.';
-      // }
       var data = "domain="+domainsel+"&namereg=" +namereg_CAA + "&valuereg=" + valuereg_CAA + "&flag="+flag_CAA+"&tag="+tag_CAA+"&reg="+regname;
   }else if(regname=='RP'){
       var rphost = $("#rphost").val();
@@ -318,11 +297,7 @@ function validform(regname){
           noti_bubble('{{langmod.DNSMSJ1}}','{{langmod.DNSERROR}}','error',false,false,'3000',true);
           return false;
       }else{
-        // if(rphost.charAt(rphost.length-1) != '.'){
-        //   rphost += '.';
-        // }
         let email_slices = email.split('@');
-        // let username_slices = email_slices[0].replace(/./g, String.fromCharCode(92) + '.');
         let username_slices = email_slices[0].split('.');
         let username = '';
         username_slices.forEach(function(slice){
@@ -358,23 +333,20 @@ function validform(regname){
       var srvport=$("#srvport").val();
 
       var srvttl=$("#srvttl").val();
-      // if(srvname.charAt(srvname.length-1) != '.'){
-      //   srvname += '.';
-      // }
       if(srvtarget.charAt(srvtarget.length-1) != '.'){
         srvtarget += '.';
       }
       var data = "domain="+domainsel+"&srvname="+srvname+"&srvsymb="+srvsymb+"&srvprotocol="+srvprotocol+"&srvprio="+srvprio+"&srvweight="+srvweight+"&srvport="+srvport+"&srvtarget="+srvtarget+"&srvttl="+srvttl+"&reg="+regname;
-      // var data = "domain="+domainsel+"&rphost="+rphost+"&rpcache="+rpcache+"&email="+email+"&reg="+regname;
     }
   }else{
       var namereg=$("#namereg_"+reg).val();
       var cachereg=$("#cachereg_"+reg).val();
       var valuereg=$("#valuereg_"+reg).val();
 
-      //var domainsel=$("#domainsel_"+reg).val();
-      var flag=$("#flag_"+reg).val();
-      var tag=$("#tag_"+reg).val();
+      var flag = $("#flag_"+reg).length ? $("#flag_"+reg).val() : '';
+      var tag = $("#tag_"+reg).length ? $("#tag_"+reg).val() : '';
+      if(flag === undefined || flag === 'undefined'){ flag = ''; }
+      if(tag === undefined || tag === 'undefined'){ tag = ''; }
 
       if((namereg=='')|| valuereg == ''){
           if(namereg==''){$("#namereg").css("border-color", "#A80705");}
@@ -382,9 +354,6 @@ function validform(regname){
           noti_bubble('{{langmod.DNSMSJ1}}','{{langmod.DNSERROR}}','error',false,false,'3000',true);
           return false;
       }
-      // if(namereg.charAt(namereg.length-1) != '.'){
-      //   namereg += '.';
-      // }
       var data = "domain="+domainsel+"&namereg="+namereg+"&valuereg="+valuereg+"&cachereg="+cachereg+"&reg="+reg+"&flag="+flag+"&tag="+tag;
   }
   return data;
@@ -407,44 +376,48 @@ function addregdns(regname){
         url: "./{{users}}/index.php?module=dns_zone_editor&acc=addregdns",
         data:data,
         complete: function(datos){
-            //console.log(datos.responseText);
-            $.ajax({
-                type: "POST",
-                url: "./{{users}}/index.php?module=dns_zone_editor&acc=restbind",
-                data:"domain="+$("#domainsel").val(),
-                complete: function(datos){
-                    //console.log(datos.responseText);
-                    if(datos.responseText==1){
-                        $("#namereg").val('');
-                        $("#cachereg").val('');
-                        $("#valuereg").val('');
-                        //$("#addregdns").removeClass('disabled');
-                        $.ajaxSetup({ headers: { 'csrftoken' : '{{ tokenajax }}' } });
-                        $.ajax({
-                            type: "POST",
-                            url: "./{{users}}/index.php?module=dns_zone_editor&acc=paserrecord",
-                            data:"domain="+$("#domainsel").val(),
-                            complete: function(datos){
-                                noti_bubble('{{langmod.DNSZONEOK}}','{{langmod.DNSSUCCT}}','success',false,false,'3000',true);
-                                $('#table_records_dns').dataTable().fnClearTable();
-                                $('#table_records_dns').DataTable().destroy();
-                                $("#trnew").html(datos.responseText);
-                                if($('.ns_record').length < 2){
-                                  $('.ns_record').find('.btn-danger').remove();
-                                }
-                                dns_table = $('#table_records_dns').dataTable();
-                                $("#table3").show('blind');
-                                canceldnsform();
-                                return false;
-                            }
-                        });
-                    }else{
-                        noti_bubble('{{langmod.DNSZONEOFF}}','{{langmod.DNSERROR}}','error',false,false,'3000',true);
-                        canceldnsform();
-                    }
-                    return false;
+            var respText = datos.responseText;
+            var isSuccess = false;
+            try {
+                if(respText == "1" || respText == 1){
+                    isSuccess = true;
                 }
-            });
+            } catch(e){}
+
+            if(isSuccess){
+                $("#namereg").val('');
+                $("#cachereg").val('');
+                $("#valuereg").val('');
+                $.ajaxSetup({ headers: { 'csrftoken' : '{{ tokenajax }}' } });
+                $.ajax({
+                    type: "POST",
+                    url: "./{{users}}/index.php?module=dns_zone_editor&acc=paserrecord",
+                    data:"domain="+$("#domainsel").val(),
+                    complete: function(datos){
+                        noti_bubble('{{langmod.DNSZONEOK}}','{{langmod.DNSSUCCT}}','success',false,false,'3000',true);
+                        $('#table_records_dns').dataTable().fnClearTable();
+                        $('#table_records_dns').DataTable().destroy();
+                        $("#trnew").html(datos.responseText);
+                        if($('.ns_record').length < 2){
+                          $('.ns_record').find('.btn-danger').remove();
+                        }
+                        dns_table = $('#table_records_dns').dataTable();
+                        $("#table3").show('blind');
+                        canceldnsform();
+                        return false;
+                    }
+                });
+            }else{
+                var errorDetails = '{{langmod.DNSERROR}}';
+                try {
+                    var jsonRes = JSON.parse(respText);
+                    if(jsonRes && (jsonRes.error || jsonRes.msj)){
+                        errorDetails = jsonRes.error ? jsonRes.error : jsonRes.msj;
+                    }
+                } catch(e){}
+                noti_bubble('{{langmod.DNSZONEOFF}}', errorDetails, 'error', false, false, '10000', true);
+                canceldnsform();
+            }
             return false;
         }
     });
@@ -472,7 +445,6 @@ function deleterecord(st,domain,line,tr){
             url: "./{{users}}/index.php?module=dns_zone_editor&acc=deleteregzone",
             data:"domain="+domain+"&line="+line,
             complete: function(datos){
-                //alert(datos.responseText);}
                 if(datos.responseText == 1){
                   if($('#line_editing').val() == line){
                     canceldnsform();
@@ -526,16 +498,23 @@ function editdnsrecord(domain, reg, line){
                   }
                   dns_table = $('#table_records_dns').dataTable();
                   $("#table3").show('blind');
-                  // $(".btn-reg").removeClass('disabled');
-                  // $(".btn-reg").attr('disabled',false);
-                  // $("#btn-"+reg.toLowerCase()).html(contbtn);
-                  // $("#modal-"+reg).modal('hide');
                   canceldnsform();
                   return false;
               }
           });
         }else{
-          noti_bubble('{{langmod.DNSUNKNERROR}}','{{langmod.DNSERROR}}','error',false,false,'3000',true);
+          var editError = '{{langmod.DNSUNKNERROR}}';
+          try {
+            var jsonRes = JSON.parse(datos.responseText);
+            if(jsonRes && (jsonRes.error || jsonRes.msj)){
+              editError = jsonRes.error ? jsonRes.error : jsonRes.msj;
+            }
+          } catch(e){}
+          noti_bubble('{{langmod.DNSZONEOFF}}', editError, 'error', false, false, '10000', true);
+          $('#dns_save_mk').removeClass('disabled').prop('disabled', false);
+          $('#dns_save_cancel').removeClass('disabled');
+          $('#dns_save_mk i').remove();
+          $('#dns_save_mk').prepend('<i class="fa fa-save"></i>');
         }
       }
   });
@@ -569,54 +548,52 @@ function btnsrvreg(){
             url: "./{{users}}/index.php?module=dns_zone_editor&acc=addregdns",
             data:"domain="+domainsel+"&srvname="+srvname+"&srvsymb="+srvsymb+"&srvprotocol="+srvprotocol+"&srvprio="+srvprio+"&srvweight="+srvweight+"&srvport="+srvport+"&srvtarget="+srvtarget+"&srvttl="+srvttl+"&reg="+reg,
             complete: function(datos){
-                $("#trnew").html(datos.responseText);
-                $("#srvname").val('');
-                $("#srvsymb").val('');
-                $("#srvprotocol").val('');
-                $("#srvprio").val('');
-                $("#srvweight").val('');
-                $("#srvport").val('');
-                $("#srvtarget").val('');
-                $("#srvttl").val('');
-                $.ajax({
-                    type: "POST",
-                    url: "./{{users}}/index.php?module=dns_zone_editor&acc=restbind",
-                    data:"domain="+$("#domainsel").val(),
-                    complete: function(datos){
-                        if(datos.responseText==1){
-                            $("#namereg").val('');
-                            $("#cachereg").val('');
-                            $("#valuereg").val('');
+                if(datos.responseText.trim() == "1"){
+                    $("#srvname").val('');
+                    $("#srvsymb").val('');
+                    $("#srvprotocol").val('');
+                    $("#srvprio").val('');
+                    $("#srvweight").val('');
+                    $("#srvport").val('');
+                    $("#srvtarget").val('');
+                    $("#srvttl").val('');
+                    $("#namereg").val('');
+                    $("#cachereg").val('');
+                    $("#valuereg").val('');
+                    $("#btn-srvreg").removeClass('disabled');
+                    $.ajaxSetup({ headers: { 'csrftoken' : '{{ tokenajax }}' } });
+                    $.ajax({
+                        type: "POST",
+                        url: "./{{users}}/index.php?module=dns_zone_editor&acc=paserrecord",
+                        data:"domain="+$("#domainsel").val(),
+                        complete: function(datos){
+                            noti_bubble('{{langmod.DNSZONEOK}}','{{langmod.DNSSUCCT}}','success',false,false,'3000',true);
                             $("#btn-srvreg").removeClass('disabled');
-                            $.ajaxSetup({ headers: { 'csrftoken' : '{{ tokenajax }}' } });
-                            $.ajax({
-                                type: "POST",
-                                url: "./{{users}}/index.php?module=dns_zone_editor&acc=paserrecord",
-                                data:"domain="+$("#domainsel").val(),
-                                complete: function(datos){
-                                    noti_bubble('{{langmod.DNSZONEOK}}','{{langmod.DNSSUCCT}}','success',false,false,'3000',true);
-                                    $("#btn-srvreg").removeClass('disabled');
-                                    $('#table_records_dns').dataTable().fnClearTable();
-                                    $('#table_records_dns').DataTable().destroy();
-                                    $("#trnew").html(datos.responseText);
-                                    if($('.ns_record').length < 2){
-                                      $('.ns_record').find('.btn-danger').remove();
-                                    }
-                                    dns_table = $('#table_records_dns').dataTable();
-                                    $("#table3").show('blind');
-
-                                    return false;
-                                }
-                            });
-                        }else{
-                            noti_bubble('{{langmod.DNSZONEOFF}}','{{langmod.DNSERROR}}','error',false,false,'3000',true);
-                            $("#btn-srvreg").removeClass('disabled');
-                            $("#divbtn-test").show();
-                            $("#divbtn-addregdns").hide();
+                            $('#table_records_dns').dataTable().fnClearTable();
+                            $('#table_records_dns').DataTable().destroy();
+                            $("#trnew").html(datos.responseText);
+                            if($('.ns_record').length < 2){
+                              $('.ns_record').find('.btn-danger').remove();
+                            }
+                            dns_table = $('#table_records_dns').dataTable();
+                            $("#table3").show('blind');
+                            return false;
                         }
-                        return false;
-                    }
-                });
+                    });
+                }else{
+                    var resText = datos.responseText;
+                    var errorDetails = '{{langmod.DNSERROR}}';
+                    try {
+                        var jsonRes = JSON.parse(resText);
+                        if(jsonRes && (jsonRes.error || jsonRes.msj)){
+                            errorDetails = jsonRes.error ? jsonRes.error : jsonRes.msj;
+                        }
+                    } catch(e){}
+                    noti_bubble('{{langmod.DNSZONEOFF}}', errorDetails, 'error', false, false, '10000', true);
+                    $("#btn-srvreg").removeClass('disabled');
+                    $("#divbtn-test").show();
+                    $("#divbtn-addregdns").hide();
+                }
                 return false;
             }
         });
@@ -627,7 +604,6 @@ function canceldnsform(){
 }
 function openmodalreg(reg, edit){
     $("#domainsel_"+reg).val($("#domainsel").val());
-    // $("#modal-"+reg).modal('toggle');
     let record_form = $("#modal-"+reg).find('.modal-body').html();
     if(edit == undefined){
       record_form += '<div class="row" style="margin-top:20px;">'+
@@ -647,7 +623,6 @@ function openmodalreg(reg, edit){
     }
 
     $('#new_item_form').html(record_form);
-    // Cab JM
     $("#aipv4").show();
 
     if(edit == undefined){
@@ -680,7 +655,6 @@ function executeChange(){
             url: "./{{users}}/index.php?module=dns_zone_editor&acc=paserrecord",
             data:"domain="+domain,
             complete: function(datos){
-                //alert(datos.responseText);
                 $('#table_records_dns').dataTable().fnClearTable();
                 $('#table_records_dns').DataTable().destroy();
                 $("#trnew").html(datos.responseText);
@@ -689,8 +663,6 @@ function executeChange(){
                 }
                 dns_table = $('#table_records_dns').dataTable();
                 $("#table3").show('blind');
-                // $("#btnaddreg").show();
-                //$("#uladdreg").show();
                 $("#divloader").hide();
                 $("#btnaddreg").show();
                 $('#dns_records').slideDown();
@@ -707,7 +679,6 @@ function executeChange(){
         $("#btnaddreg").hide();
         $('#dns_records').slideUp();
         $('#dns_form').slideUp();
-        //$("#uladdreg").hide();
     }
     return false;
 }

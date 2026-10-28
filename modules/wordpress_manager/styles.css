@@ -1,0 +1,1445 @@
+/* WordPress Manager — Modern CWP Design */
+
+/* Modal fixes — apply to ALL WPM modals via attribute selector */
+[id^="wpm-modal-"] .modal-content {
+    overflow: hidden;
+    max-height: 95vh;
+    border-radius: 8px;
+    border: none;
+    display: flex;
+    flex-direction: column;
+}
+[id^="wpm-modal-"] .modal-header {
+    padding: 10px 16px;
+    border-bottom: 1px solid #e2e8f0;
+    background: #f8f9fa;
+    flex: 0 0 auto;
+}
+[id^="wpm-modal-"] .modal-footer {
+    padding: 10px 16px;
+    border-top: 1px solid #e2e8f0;
+    background: #f8f9fa;
+    flex: 0 0 auto;
+    margin-top: auto;
+}
+[id^="wpm-modal-"] .modal-body {
+    overflow-y: auto;
+    flex-grow: 1;
+    padding: 20px 16px;
+}
+/* Ensure all checkboxes/labels inside ALL WPM modals are clickable */
+[id^="wpm-modal-"] .modal-body input[type="checkbox"],
+[id^="wpm-modal-"] .modal-body label,
+[id^="wpm-modal-"] .modal-body .checkbox,
+[id^="wpm-modal-"] .modal-body .wpm-checkbox-row {
+    pointer-events: auto;
+    cursor: pointer;
+    position: relative;
+    z-index: 2;
+}
+/* Progress modal vertical center */
+#wpm-modal-progress .modal-dialog {
+    display: flex;
+    align-items: center;
+    min-height: calc(100vh - 60px);
+    margin-top: 30px;
+}
+/* Modal xl size fixes */
+.modal-xl {
+    max-width: 95% !important;
+    margin: 1.75rem auto;
+}
+.modal-xl .modal-content {
+    min-height: 80vh;
+    height: auto;
+    max-height: 95vh;
+}
+.modal-xl .modal-body {
+    max-height: calc(95vh - 100px);
+}
+/* Backup modal: wider layout and better table fit */
+#wpm-modal-backup .modal-dialog {
+    max-width: 1100px !important;
+    width: 95%;
+}
+#wpm-modal-backup .table {
+    table-layout: fixed;
+    width: 100%;
+    word-break: break-all;
+}
+#wpm-modal-backup .table > thead > tr > th:nth-child(1),
+#wpm-modal-backup .table > tbody > tr > td:nth-child(1) {
+    width: 50%;
+}
+#wpm-modal-backup .table > thead > tr > th:nth-child(2),
+#wpm-modal-backup .table > tbody > tr > td:nth-child(2) {
+    width: 15%;
+    text-align: center;
+}
+#wpm-modal-backup .table > thead > tr > th:nth-child(3),
+#wpm-modal-backup .table > tbody > tr > td:nth-child(3) {
+    width: 15%;
+    text-align: center;
+}
+#wpm-modal-backup .table > thead > tr > th:nth-child(4),
+#wpm-modal-backup .table > tbody > tr > td:nth-child(4) {
+    width: 20%;
+    text-align: center;
+    white-space: nowrap;
+}
+#wpm-modal-backup .table small {
+    word-break: break-word;
+}
+/* Modal lg size fixes */
+.modal-lg {
+    max-width: 90% !important;
+    margin: 2rem auto;
+}
+.modal-lg .modal-content {
+    min-height: 75vh;
+    height: auto;
+    max-height: 95vh;
+}
+.modal-lg .modal-body {
+    max-height: calc(95vh - 100px);
+}
+/* Modal md size fixes */
+.modal-md {
+    max-width: 70% !important;
+    margin: 2.5rem auto;
+}
+.modal-md .modal-content {
+    min-height: 60vh;
+    height: auto;
+    max-height: 95vh;
+}
+.modal-md .modal-body {
+    max-height: calc(95vh - 100px);
+}
+
+/* ============================================================
+   Enhanced Stats Bar
+   ============================================================ */
+.wpm-stats-bar-modern {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    background: #f4f6f8;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.wpm-stat-card {
+    display: flex;
+    align-items: center;
+    background: white;
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    flex: 1;
+    min-width: 160px;
+}
+.wpm-stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+.wpm-stat-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    margin-right: 10px;
+    flex-shrink: 0;
+}
+.wpm-stat-icon.wpm-stat-installations {
+    background: #e8f4fd;
+    color: #2f4050;
+}
+.wpm-stat-icon.wpm-stat-updates {
+    background: #fef3e2;
+    color: #e67e22;
+}
+.wpm-stat-icon.wpm-stat-cli {
+    background: #e8f8f5;
+    color: #1ab394;
+}
+.wpm-stat-icon.wpm-stat-vulnerabilities {
+    background: #fdecea;
+    color: #e74c3c;
+}
+.wpm-stat-icon.wpm-stat-plugins {
+    background: #e8f0fb;
+    color: #3498db;
+}
+.wpm-stat-icon.wpm-stat-themes {
+    background: #f4ecf7;
+    color: #8e44ad;
+}
+.wpm-stat-icon.wpm-stat-status {
+    background: #e8f8f5;
+    color: #1ab394;
+}
+.wpm-stat-content {
+    display: flex;
+    flex-direction: column;
+}
+.wpm-stat-num {
+    font-size: 20px;
+    font-weight: 700;
+    color: #2d3748;
+    line-height: 1;
+}
+.wpm-stat-label {
+    font-size: 10px;
+    color: #7f8c8d;
+    margin-top: 2px;
+}
+.wpm-stat-card-divider {
+    width: 1px;
+    background: #d1d8dd;
+    align-self: stretch;
+    min-height: 40px;
+    flex: 0 0 1px;
+    min-width: 0;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+}
+.wpm-stat-card-activity {
+    font-size: 13px;
+    color: #2d3748;
+    font-weight: 600;
+    margin-top: 2px;
+    line-height: 1.2;
+}
+.wpm-stat-card-activity small {
+    font-weight: 400;
+    color: #7f8c8d;
+    font-size: 10px;
+    display: block;
+    margin-top: 2px;
+}
+
+/* ============================================================
+   Filter Card
+   ============================================================ */
+.wpm-filter-card {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+.wpm-filter-card-title {
+    font-size: 11px;
+    font-weight: 700;
+    color: #2f4050;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin: 0 0 8px 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.wpm-filter-card-title i {
+    color: #1ab394;
+}
+.wpm-filter-controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+}
+.wpm-filter-controls .wpm-filter-item {
+    flex: 1 1 140px;
+    min-width: 140px;
+    max-width: 220px;
+}
+.wpm-filter-controls .wpm-search-wrap.wpm-filter-item {
+    flex: 1 1 220px;
+    min-width: 200px;
+    max-width: 300px;
+    position: relative;
+}
+.wpm-filter-controls .wpm-filter-spacer {
+    flex: 1 1 auto;
+}
+.wpm-filter-controls .wpm-filter-tag-btn {
+    flex: 0 0 auto;
+    max-width: none;
+    white-space: nowrap;
+}
+.wpm-filter-card select.form-control,
+.wpm-filter-card .btn-default {
+    height: 34px;
+    line-height: 34px;
+    padding: 0 12px;
+    border-radius: 6px;
+    border-color: #dce1e6;
+    font-size: 13px;
+    color: #2d3748;
+    background: #fff;
+    box-shadow: none;
+    margin: 0;
+    vertical-align: middle;
+}
+.wpm-filter-card select.form-control:hover,
+.wpm-filter-card .btn-default:hover {
+    border-color: #1ab394;
+}
+.wpm-filter-card select.form-control:focus,
+.wpm-filter-card .btn-default:focus {
+    border-color: #1ab394;
+    box-shadow: 0 0 0 2px rgba(26, 179, 148, 0.15);
+    outline: none;
+}
+/* Search wrapper: icon + input */
+.wpm-filter-card .wpm-search-wrap {
+    display: flex;
+    align-items: center;
+    height: 34px;
+    background: #fff;
+    border: 1px solid #dce1e6;
+    border-radius: 6px;
+    overflow: hidden;
+}
+.wpm-filter-card .wpm-search-wrap:hover {
+    border-color: #1ab394;
+}
+.wpm-filter-card .wpm-search-wrap:focus-within {
+    border-color: #1ab394;
+    box-shadow: 0 0 0 2px rgba(26, 179, 148, 0.15);
+}
+.wpm-filter-card .wpm-search-icon {
+    padding: 0 10px;
+    color: #95a5a6;
+    font-size: 13px;
+    flex-shrink: 0;
+}
+.wpm-filter-card .wpm-search-wrap .form-control {
+    flex: 1;
+    height: 32px;
+    border: none;
+    border-radius: 0;
+    margin: 0;
+    padding: 0 8px 0 0;
+    font-size: 13px;
+    color: #2d3748;
+    box-shadow: none;
+    background: transparent;
+    width: 100%;
+}
+.wpm-filter-card .wpm-search-wrap .form-control:focus {
+    outline: none;
+    box-shadow: none;
+}
+/* New Installation button: icon spacing */
+.wpm-btn-install i {
+    margin-right: 6px;
+}
+
+/* ============================================================
+   Installation Cards — One Per Row, 3-Zone Layout
+   ============================================================ */
+
+/* --- Card container --- */
+.wpm-card {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+    border: 1px solid #e8e8e8;
+    margin-bottom: 12px;
+    overflow: visible;
+    position: relative;
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.wpm-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-color: #cbd5e0;
+}
+
+/* Status left borders */
+.wpm-card.active {
+    border-left: 4px solid #27ae60;
+}
+.wpm-card.broken {
+    border-left: 4px solid #e74c3c;
+}
+.wpm-card.inactive {
+    border-left: 4px solid #95a5a6;
+}
+
+/* --- Zone 0: Site Preview Thumbnail --- */
+.wpm-card-preview {
+    flex: 0 0 140px;
+    width: 140px;
+    min-height: 100%;
+    overflow: hidden;
+    position: relative;
+    background: linear-gradient(135deg, #f0f4f8 0%, #e2e8f0 100%);
+    border-right: 1px solid #e8e8e8;
+}
+.wpm-card-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
+    transition: opacity 0.4s ease, transform 0.3s ease;
+}
+.wpm-card:hover .wpm-card-preview img {
+    transform: scale(1.05);
+}
+.wpm-card-preview-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    min-height: 100px;
+    color: #a0aec0;
+    font-size: 12px;
+    gap: 6px;
+}
+.wpm-card-preview-placeholder i {
+    font-size: 28px;
+    opacity: 0.5;
+}
+.wpm-card-preview img.wpm-preview-loading {
+    opacity: 0;
+}
+.wpm-card-preview img.wpm-preview-loaded {
+    opacity: 1;
+}
+
+/* --- Zone 1: Identity --- */
+.wpm-card-identity {
+    flex: 1 1 auto;
+    min-width: 0;
+    padding: 16px 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+}
+.wpm-identity-top {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+.wpm-card-icon {
+    position: relative;
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+}
+.wpm-card:hover .wpm-card-icon {
+    transform: scale(1.05);
+}
+.wpm-icon-wordpress {
+    color: #1ab394;
+    font-size: 22px;
+}
+.wpm-icon-broken {
+    color: #e74c3c;
+    font-size: 18px;
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    background: white;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.wpm-card-title {
+    flex: 1;
+    min-width: 0;
+}
+.wpm-card-name {
+    font-size: 16px;
+    font-weight: 700;
+    color: #2d3748;
+    margin: 0 0 2px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.wpm-card-domain {
+    font-size: 12px;
+    color: #718096;
+    text-decoration: none;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.wpm-card-domain:hover {
+    color: #1ab394;
+    text-decoration: underline;
+}
+.wpm-card-path {
+    font-size: 11px;
+    color: #a0aec0;
+    font-family: monospace;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 400px;
+}
+
+/* --- Meta line: Version, PHP, Tags --- */
+.wpm-identity-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0;
+    padding-left: 58px; /* align with text after icon */
+}
+.wpm-meta-item {
+    font-size: 12px;
+    color: #4a5568;
+}
+.wpm-meta-item strong {
+    color: #718096;
+    font-weight: 600;
+}
+.wpm-meta-sep {
+    color: #cbd5e0;
+    margin: 0 8px;
+    font-size: 14px;
+}
+.wpm-tags-inline {
+    display: inline-flex;
+    gap: 4px;
+    flex-wrap: wrap;
+}
+.wpm-tags-inline .badge {
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 3px;
+    margin: 0;
+}
+
+/* --- Badges row --- */
+.wpm-identity-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding-left: 58px; /* align with text after icon */
+}
+.wpm-identity-badges .badge {
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    cursor: default;
+}
+
+/* --- Zone 2: Stats --- */
+.wpm-card-stats {
+    flex: 0 0 140px;
+    border-left: 1px solid #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    padding: 14px 16px;
+    background: #fafbfc;
+}
+.wpm-stat-mini {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    padding: 6px 12px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    width: 100%;
+}
+.wpm-stat-mini:hover {
+    background: #e6f7f4;
+}
+.wpm-stat-mini:active {
+    background: #d0f0ea;
+}
+.wpm-stat-mini-num {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1ab394;
+    line-height: 1;
+}
+.wpm-stat-mini-label {
+    font-size: 10px;
+    color: #718096;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    margin-top: 2px;
+}
+
+/* --- Zone 3: Toolbar --- */
+.wpm-card-toolbar {
+    flex: 0 0 auto;
+    border-left: 1px solid #f0f0f0;
+    display: flex;
+    align-items: center;
+    padding: 8px 10px;
+    gap: 5px;
+    background: #f8f9fa;
+}
+.wpm-toolbar-separator {
+    width: 1px;
+    height: 24px;
+    background: #dce1e6;
+    flex-shrink: 0;
+    margin: 0 2px;
+}
+
+/* --- Icon Buttons --- */
+.wpm-btn-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    color: #4a5568;
+    font-size: 14px;
+    flex-shrink: 0;
+    padding: 0;
+    outline: none;
+}
+.wpm-btn-icon:hover {
+    background: #1ab394;
+    color: white;
+    border-color: #1ab394;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 6px rgba(26, 179, 148, 0.3);
+}
+.wpm-btn-icon:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 3px rgba(26, 179, 148, 0.2);
+}
+
+/* --- Toolbar Dropdown "More Actions" --- */
+.wpm-toolbar-dropdown {
+    position: relative;
+}
+.wpm-toolbar-dropdown.open {
+    z-index: 1060;
+}
+.wpm-dropdown-menu {
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    min-width: 185px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    border: 1px solid #e2e8f0;
+    padding: 6px 0;
+    z-index: 1061;
+    display: none;
+    list-style: none;
+    margin: 0;
+}
+.wpm-toolbar-dropdown.open .wpm-dropdown-menu {
+    display: block;
+}
+.wpm-dropdown-menu > li {
+    margin: 0;
+}
+.wpm-dropdown-menu > li > a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 14px;
+    color: #2d3748;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+    text-decoration: none;
+    white-space: nowrap;
+}
+.wpm-dropdown-menu > li > a:hover {
+    background: #f0faf8;
+    color: #1ab394;
+}
+.wpm-dropdown-menu > li > a i {
+    width: 16px;
+    text-align: center;
+    font-size: 13px;
+    color: #718096;
+    transition: color 0.15s;
+}
+.wpm-dropdown-menu > li > a:hover i {
+    color: #1ab394;
+}
+.wpm-dropdown-danger {
+    color: #e74c3c !important;
+}
+.wpm-dropdown-danger:hover {
+    background: #fff5f5 !important;
+    color: #e74c3c !important;
+}
+.wpm-dropdown-danger i {
+    color: #e74c3c !important;
+}
+.wpm-dropdown-divider {
+    height: 1px;
+    background: #edf2f7;
+    margin: 4px 0;
+}
+
+/* --- Install column wrapper --- */
+.wpm-install-col {
+    margin-bottom: 0;
+}
+
+/* ============================================================
+   Empty State
+   ============================================================ */
+.wpm-empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    background: white;
+    border-radius: 10px;
+    border: 2px dashed #e8e8e8;
+}
+.wpm-empty-state i {
+    color: #d1d5db;
+    margin-bottom: 20px;
+}
+
+/* ============================================================
+   Tooltip styles
+   ============================================================ */
+[data-tooltip] {
+    position: relative;
+}
+[data-tooltip]:hover::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #2d3748;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    white-space: nowrap;
+    margin-bottom: 8px;
+    z-index: 100;
+}
+
+/* ============================================================
+   Sort Button
+   ============================================================ */
+.wpm-sort-btn {
+    padding: 8px 12px;
+    border: 1px solid #e2e8f0;
+    background: white;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.wpm-sort-btn:hover {
+    background: #f7fafc;
+    border-color: #cbd5e0;
+}
+.wpm-sort-btn.active {
+    background: #1ab394;
+    color: white;
+    border-color: #1ab394;
+}
+.wpm-sort-btn.active i {
+    color: white;
+}
+
+/* ============================================================
+   Responsive Breakpoints
+   ============================================================ */
+
+/* Desktop mediano 992-1199px */
+@media (min-width: 992px) and (max-width: 1199px) {
+    .wpm-card-preview {
+        flex: 0 0 120px;
+        width: 120px;
+    }
+    .wpm-card-stats {
+        flex: 0 0 120px;
+        padding: 12px 10px;
+    }
+    .wpm-card-toolbar {
+        gap: 3px;
+        padding: 6px 8px;
+    }
+    .wpm-btn-icon {
+        width: 32px;
+        height: 32px;
+        font-size: 13px;
+    }
+    .wpm-card-path {
+        max-width: 250px;
+    }
+    .wpm-identity-meta,
+    .wpm-identity-badges {
+        padding-left: 0;
+    }
+    .wpm-card-identity {
+        padding: 14px 14px;
+    }
+}
+
+/* Tablet 768-991px: 2 filas */
+@media (max-width: 991px) {
+    .wpm-card-preview {
+        flex: 0 0 110px;
+        width: 110px;
+    }
+    .wpm-card {
+        flex-wrap: wrap;
+    }
+    .wpm-card-identity {
+        flex: 1 1 calc(100% - 140px);
+        border-bottom: 1px solid #f0f0f0;
+        padding: 14px 16px;
+    }
+    .wpm-card-stats {
+        flex: 0 0 140px;
+        border-left: 1px solid #f0f0f0;
+        border-bottom: none;
+        padding: 14px 12px;
+    }
+    .wpm-card-toolbar {
+        flex: 0 0 100%;
+        border-left: none;
+        border-top: 1px solid #f0f0f0;
+        padding: 8px 12px;
+    }
+    .wpm-identity-meta,
+    .wpm-identity-badges {
+        padding-left: 0;
+    }
+    .wpm-card-path {
+        max-width: 300px;
+    }
+}
+
+/* Móvil <768px: 3 filas apiladas */
+@media (max-width: 767px) {
+    .wpm-card-preview {
+        flex: 0 0 auto;
+        width: 100%;
+        height: 120px;
+        min-height: 120px;
+        border-right: none;
+        border-bottom: 1px solid #e8e8e8;
+    }
+    .wpm-stats-bar-modern {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .wpm-stat-card {
+        min-width: 0;
+    }
+    .wpm-stat-card-divider {
+        width: 100%;
+        height: 1px;
+        min-height: 1px;
+        margin: 4px 0;
+    }
+    .wpm-filter-controls .wpm-filter-spacer {
+        display: none;
+    }
+    .wpm-filter-controls .wpm-filter-item {
+        flex: 1 1 100%;
+        max-width: 100%;
+    }
+
+    /* Cards stack vertically */
+    .wpm-card {
+        flex-direction: column;
+    }
+    .wpm-card-identity {
+        border-bottom: 1px solid #f0f0f0;
+        padding: 14px 16px;
+    }
+    .wpm-card-stats {
+        flex-direction: row;
+        flex: 0 0 auto;
+        border-left: none;
+        justify-content: space-around;
+        padding: 10px 16px;
+        border-bottom: 1px solid #f0f0f0;
+    }
+    .wpm-card-toolbar {
+        border-left: none;
+        border-top: 1px solid #f0f0f0;
+        padding: 8px 12px;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    .wpm-btn-icon {
+        width: 34px;
+        height: 34px;
+    }
+    .wpm-toolbar-separator {
+        display: none;
+    }
+    .wpm-identity-meta,
+    .wpm-identity-badges {
+        padding-left: 0;
+    }
+    .wpm-card-path {
+        max-width: 200px;
+    }
+}
+
+/* Móvil pequeño <480px */
+@media (max-width: 480px) {
+    .wpm-card-name {
+        font-size: 14px;
+    }
+    .wpm-card-domain {
+        font-size: 11px;
+    }
+    .wpm-card-path {
+        max-width: 150px;
+        font-size: 10px;
+    }
+    .wpm-stat-mini-num {
+        font-size: 16px;
+    }
+    .wpm-stat-mini-label {
+        font-size: 9px;
+    }
+    .wpm-btn-icon {
+        width: 32px;
+        height: 32px;
+        font-size: 13px;
+    }
+    /* Hide desktop-only icon buttons on very small screens */
+    .wpm-btn-icon-desktop {
+        display: none !important;
+    }
+    .wpm-card-icon {
+        width: 38px;
+        height: 38px;
+    }
+    .wpm-icon-wordpress {
+        font-size: 18px;
+    }
+    .wpm-card-identity {
+        padding: 12px 14px;
+    }
+    .wpm-card-toolbar {
+        padding: 6px 10px;
+        gap: 4px;
+    }
+    .wpm-meta-item {
+        font-size: 11px;
+    }
+    .wpm-meta-sep {
+        margin: 0 5px;
+    }
+}
+
+/* Backup modal responsive overrides */
+@media (max-width: 991px) {
+    #wpm-modal-backup .modal-dialog {
+        max-width: 95% !important;
+        width: 95%;
+    }
+    #wpm-modal-backup .table > thead > tr > th:nth-child(1),
+    #wpm-modal-backup .table > tbody > tr > td:nth-child(1) {
+        width: 45%;
+    }
+    #wpm-modal-backup .table > thead > tr > th:nth-child(2),
+    #wpm-modal-backup .table > tbody > tr > td:nth-child(2) {
+        width: 15%;
+    }
+}
+@media (max-width: 767px) {
+    #wpm-modal-backup .modal-dialog {
+        max-width: 98% !important;
+        width: 98%;
+        margin: 0.5rem auto;
+    }
+    #wpm-modal-backup .table {
+        font-size: 12px;
+        table-layout: auto;
+    }
+    #wpm-modal-backup .table > thead > tr > th:nth-child(1),
+    #wpm-modal-backup .table > tbody > tr > td:nth-child(1),
+    #wpm-modal-backup .table > thead > tr > th:nth-child(2),
+    #wpm-modal-backup .table > tbody > tr > td:nth-child(2),
+    #wpm-modal-backup .table > thead > tr > th:nth-child(3),
+    #wpm-modal-backup .table > tbody > tr > td:nth-child(3),
+    #wpm-modal-backup .table > thead > tr > th:nth-child(4),
+    #wpm-modal-backup .table > tbody > tr > td:nth-child(4) {
+        width: auto;
+    }
+    #wpm-modal-backup .panel-body {
+        padding: 8px !important;
+        overflow-x: auto;
+    }
+}
+
+/* ============================================================
+   Security Checklist
+   ============================================================ */
+.wpm-security-score {
+    text-align: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #e8e8e8;
+    margin-bottom: 15px;
+}
+.wpm-security-score .score-num {
+    font-size: 36px;
+    font-weight: 700;
+}
+.wpm-security-score .score-label {
+    font-size: 12px;
+    color: #718096;
+}
+.wpm-security-checklist {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.wpm-security-check {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+.wpm-security-check:last-child { border-bottom: none; }
+.wpm-modal-actions {
+    display: flex;
+    gap: 6px;
+    padding-top: 15px;
+    border-top: 1px solid #e8e8e8;
+    margin-top: 15px;
+}
+
+/* ============================================================
+   Install Steps
+   ============================================================ */
+.wpm-install-steps {
+    display: flex;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #e2e8f0;
+}
+.wpm-step {
+    flex: 1;
+    text-align: center;
+    padding: 8px 0;
+    font-size: 12px;
+    color: #718096;
+    cursor: default;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+}
+.wpm-step span {
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    line-height: 22px;
+    border-radius: 50%;
+    background: #e2e8f0;
+    color: #718096;
+    font-size: 11px;
+    font-weight: 600;
+    margin-right: 5px;
+}
+.wpm-step.active {
+    color: #3498db;
+    border-bottom-color: #3498db;
+}
+.wpm-step.active span {
+    background: #3498db;
+    color: #fff;
+}
+.wpm-step-content { display: none; padding: 15px 0; }
+.wpm-step-content.active { display: block; }
+
+/* Spinner */
+.wpm-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid #e2e8f0;
+    border-top-color: #3498db;
+    border-radius: 50%;
+    animation: wpm-spin 0.7s linear infinite;
+    margin: 0 auto 12px;
+}
+@keyframes wpm-spin { to { transform: rotate(360deg); } }
+
+/* Backup Items */
+.wpm-backup-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+.wpm-backup-item:last-child { border-bottom: none; }
+.wpm-backup-info { font-size: 12px; }
+/* Backup table improvements */
+.wpm-backup-list table {
+    font-size: 12px;
+}
+.wpm-backup-list th {
+    font-weight: 600;
+    color: #718096;
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+    padding: 8px 10px;
+}
+.wpm-backup-list td {
+    padding: 10px;
+    vertical-align: middle;
+}
+
+/* Password row buttons */
+.wpm-step-content .form-group.row .col-lg-4 .btn {
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+/* Step form-group spacing */
+.wpm-step-content .form-group {
+    margin-bottom: 18px;
+}
+.wpm-step-content .form-group:last-child {
+    margin-bottom: 0;
+}
+
+/* Validation styles */
+.wpm-step-content .form-group.has-error .form-control {
+    border-color: #e74c3c;
+}
+.wpm-step-content .form-group.has-error .help-block {
+    display: block;
+    color: #e74c3c;
+    font-size: 12px;
+    margin-top: 4px;
+    margin-bottom: 0;
+}
+.wpm-step-content .form-group .help-block {
+    display: none;
+}
+
+/* ============================================================
+   Vulnerability Scan
+   ============================================================ */
+.wpm-vuln-badge {
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+.wpm-vuln-badge:hover {
+    opacity: 0.85;
+}
+.wpm-vuln-summary {
+    display: flex;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid #e8e8e8;
+    margin-bottom: 12px;
+}
+.wpm-vuln-count {
+    font-size: 13px;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 4px;
+}
+.wpm-vuln-critical {
+    background: #fde8e8;
+    color: #c0392b;
+}
+.wpm-vuln-high {
+    background: #fef3cd;
+    color: #856404;
+}
+.wpm-vuln-medium {
+    background: #d1ecf1;
+    color: #0c5460;
+}
+.wpm-vuln-low {
+    background: #e2e8f0;
+    color: #4a5568;
+}
+.wpm-vuln-table {
+    font-size: 13px;
+    margin-bottom: 0;
+}
+.wpm-vuln-table td {
+    vertical-align: middle;
+}
+.wpm-vuln-sev-critical td {
+    background: #fff5f5;
+}
+.wpm-vuln-sev-high td {
+    background: #fffbeb;
+}
+
+/* ============================================================
+   Sync Mode Radio Group
+   ============================================================ */
+.wpm-sync-mode-group {
+    display: flex;
+    gap: 15px;
+    padding: 8px 0;
+}
+.wpm-sync-mode-group .radio-inline {
+    margin-right: 0;
+}
+
+/* Modal overflow fixes for specific modals */
+#wpm-modal-vulnerabilities .modal-content,
+#wpm-modal-sync .modal-content,
+#wpm-modal-backup-delete .modal-content,
+#wpm-modal-schedule .modal-content,
+#wpm-modal-schedule-logs .modal-content {
+    overflow: hidden;
+    max-height: 95vh;
+}
+#wpm-modal-vulnerabilities .modal-body,
+#wpm-modal-sync .modal-body,
+#wpm-modal-schedule .modal-body,
+#wpm-modal-schedule-logs .modal-body {
+    overflow-y: auto;
+    max-height: calc(95vh - 100px);
+    padding: 20px 16px;
+}
+
+/* ============================================================
+   Schedule styles
+   ============================================================ */
+.wpm-schedule-info {
+    padding: 12px;
+    background: #f7f9fb;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    margin-bottom: 15px;
+}
+.wpm-schedule-info .wpm-info-label {
+    font-size: 11px;
+    color: #718096;
+}
+.wpm-schedule-info .wpm-info-value {
+    font-size: 14px;
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 8px;
+}
+.wpm-schedule-info .wpm-info-value:last-child {
+    margin-bottom: 0;
+}
+.wpm-schedule-actions {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    padding-top: 12px;
+    border-top: 1px solid #e8e8e8;
+    margin-top: 12px;
+}
+.wpm-schedule-status {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 3px;
+    font-size: 11px;
+    font-weight: 600;
+}
+.wpm-schedule-status-enabled {
+    background: #d4edda;
+    color: #155724;
+}
+.wpm-schedule-status-disabled {
+    background: #f8d7da;
+    color: #721c24;
+}
+.wpm-schedule-last-run {
+    font-size: 11px;
+    color: #718096;
+    margin-top: 4px;
+}
+.wpm-schedule-form .form-group {
+    margin-bottom: 12px;
+}
+.wpm-schedule-form .form-group label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #2d3748;
+}
+.wpm-schedule-form .help-block {
+    font-size: 11px;
+    color: #718096;
+}
+.wpm-no-schedule {
+    text-align: center;
+    padding: 20px;
+}
+.wpm-no-schedule i {
+    font-size: 36px;
+    color: #ddd;
+}
+.wpm-schedule-logs-table {
+    font-size: 12px;
+    margin-bottom: 0;
+}
+.wpm-schedule-logs-table td {
+    vertical-align: middle;
+}
+
+/* ============================================================
+   Plugins & Themes item list inside modal
+   ============================================================ */
+.wpm-modal-tabs {
+    border-bottom: 2px solid #e2e8f0;
+    margin-bottom: 12px;
+    font-size: 13px;
+}
+.wpm-modal-tabs > li > a {
+    padding: 8px 14px;
+    font-weight: 600;
+    color: #7f8c8d;
+    border: none;
+    border-bottom: 3px solid transparent;
+    border-radius: 0;
+    margin-right: 8px;
+}
+.wpm-modal-tabs > li > a:hover {
+    color: #2f4050;
+    background: transparent;
+}
+.wpm-modal-tabs > li.active > a {
+    color: #1ab394;
+    border-bottom-color: #1ab394;
+    background: transparent;
+}
+.wpm-item-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+.wpm-item-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    background: #f8f9fa;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+.wpm-item-card:hover {
+    background: #fff;
+    border-color: #1ab394;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+.wpm-item-card.wpm-item-active {
+    border-left: 4px solid #1ab394;
+    background: #f0fbf9;
+}
+.wpm-item-info {
+    flex: 1;
+    min-width: 0;
+}
+.wpm-item-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 1px;
+}
+.wpm-item-name .label {
+    font-size: 10px;
+    margin-left: 6px;
+    vertical-align: middle;
+}
+.wpm-item-meta {
+    font-size: 11px;
+    color: #95a5a6;
+}
+.wpm-item-meta .label {
+    margin-right: 6px;
+}
+.wpm-item-actions {
+    display: flex;
+    gap: 4px;
+    flex-shrink: 0;
+    margin-left: 8px;
+}
+.wpm-item-actions .btn-xs {
+    padding: 3px 7px;
+    font-size: 11px;
+    border-radius: 4px;
+}
+.wpm-search-bar {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+.wpm-search-bar .form-control {
+    height: 32px;
+    border-radius: 6px;
+    border-color: #dce1e6;
+    font-size: 12px;
+}
+.wpm-search-bar .form-control:focus {
+    border-color: #1ab394;
+    box-shadow: 0 0 0 2px rgba(26, 179, 148, 0.15);
+}
+.wpm-search-bar .btn-primary {
+    height: 32px;
+    width: 36px;
+    padding: 0;
+    border-radius: 6px;
+}
+/* Tab content area */
+.wpm-tab-content {
+    max-height: 60vh;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+.wpm-tab-content::-webkit-scrollbar {
+    width: 6px;
+}
+.wpm-tab-content::-webkit-scrollbar-thumb {
+    background: #cbd5e0;
+    border-radius: 3px;
+}
+.wpm-tab-content::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}

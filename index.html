@@ -14,8 +14,6 @@
     <link href="{{url}}/js/plugins/gritter/jquery.gritter.css" rel="stylesheet">
     <link href="{{url}}/css/animate.css" rel="stylesheet">
     <link id="ccsmain" href="{{url}}/css/{{mod.style}}.css" rel="stylesheet">
-    <!-- cPanel-style skin (override layer; safe to remove to revert) -->
-    <link href="{{url}}/css/cpanel.css" rel="stylesheet">
     <link href="{{url}}/css/plugins/switchery/switchery.css" rel="stylesheet">
     <link href="{{url}}/css/plugins/ladda/ladda-themeless.min.css" rel="stylesheet">
     <link href="{{url}}/css/plugins/dataTables/datatables.min.css" rel="stylesheet">
@@ -208,18 +206,6 @@
       }
     </style>
     <!-- TOP NOTIFICATIONS STYLES -->
-    <!-- cPanel skin: apply persisted dark/light mode before paint to avoid flash -->
-    <script>
-        (function () {
-            try {
-                var t = localStorage.getItem('cwp-cp-theme');
-                if (t === 'dark') {
-                    document.documentElement.classList.add('cp-pre-dark');
-                }
-            } catch (e) { /* localStorage blocked */ }
-        })();
-    </script>
-    <style>html.cp-pre-dark body { background-color: #0f1521 !important; color: #e6ecf5 !important; }</style>
 </head>
 <body>
     <div id="wrapper">
@@ -249,11 +235,6 @@
                     </div>
 
                     <ul class="nav navbar-top-links navbar-right">
-                        <li>
-                            <button type="button" class="cp-theme-toggle" id="cp-theme-toggle" title="Toggle dark mode" aria-label="Toggle dark mode">
-                                <i class="fa fa-moon-o" aria-hidden="true"></i>
-                            </button>
-                        </li>
                         <li>
                             {% if mod.fa2 == 1%} <span style="margin-right: 20px;font-weight: bold"><i class="glyphicon glyphicon-phone" style="color:green"></i> 2FA</span> {% endif %}
                             <span data-toggle="dropdown" class="dropdown-toggle m-r-sm text-muted welcome-message" style="cursor:pointer">
@@ -573,69 +554,6 @@
             });
             return false;
         }
-
-        /* ===== cPanel skin: dark-mode toggle + dashboard tile filter ===== */
-        (function () {
-            var STORAGE_KEY = 'cwp-cp-theme';
-            var body = document.body;
-            var html = document.documentElement;
-
-            function applyTheme(mode) {
-                if (mode === 'dark') {
-                    body.classList.add('dark-mode');
-                    html.classList.add('cp-pre-dark');
-                } else {
-                    body.classList.remove('dark-mode');
-                    html.classList.remove('cp-pre-dark');
-                }
-                var icon = document.querySelector('#cp-theme-toggle i');
-                if (icon) {
-                    icon.className = (mode === 'dark') ? 'fa fa-sun-o' : 'fa fa-moon-o';
-                }
-            }
-
-            var saved = 'light';
-            try { saved = localStorage.getItem(STORAGE_KEY) || 'light'; } catch (e) {}
-            applyTheme(saved);
-
-            var btn = document.getElementById('cp-theme-toggle');
-            if (btn) {
-                btn.addEventListener('click', function () {
-                    var next = body.classList.contains('dark-mode') ? 'light' : 'dark';
-                    try { localStorage.setItem(STORAGE_KEY, next); } catch (e) {}
-                    applyTheme(next);
-                });
-            }
-
-            /* Dashboard tile filter: filter .dashboard-item by label using the top search box */
-            var search = document.getElementById('top-search');
-            var tiles = document.querySelectorAll('.dashboard-wrapper .dashboard-item');
-            if (search && tiles.length) {
-                var groups = document.querySelectorAll('.dashboard-wrapper > .row > .col-lg-12 > .ibox, .dashboard-wrapper > .row > [class^="col-"] > .ibox');
-                search.addEventListener('input', function () {
-                    var q = (search.value || '').trim().toLowerCase();
-                    tiles.forEach(function (tile) {
-                        var label = (tile.textContent || '').toLowerCase();
-                        if (!q || label.indexOf(q) !== -1) {
-                            tile.classList.remove('cp-hidden');
-                        } else {
-                            tile.classList.add('cp-hidden');
-                        }
-                    });
-                    /* Hide an entire group card if every tile inside it is hidden */
-                    groups.forEach(function (g) {
-                        var inside = g.querySelectorAll('.dashboard-item');
-                        if (!inside.length) return;
-                        var anyVisible = false;
-                        inside.forEach(function (t) {
-                            if (!t.classList.contains('cp-hidden')) anyVisible = true;
-                        });
-                        if (anyVisible) g.classList.remove('cp-empty');
-                        else g.classList.add('cp-empty');
-                    });
-                });
-            }
-        })();
 
     </script>
 </body>

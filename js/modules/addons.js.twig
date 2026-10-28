@@ -334,7 +334,11 @@ function deleteAddon(elem, st){
         }else if(type == 'joomla'){
             dbname = details.dbjl;
             dbuname = details.userbdjl;
-            jltable = jl_table;
+            addontable = jl_table;
+        }else if(type == 'prestashop'){
+            dbname = details.psbd;
+            dbuname = details.psuserdb;
+            addontable = ps_table;
         }else if(type == 'laravel'){
             dbname = details.lvbd;
             dbuname = details.lvuserdb;
@@ -388,23 +392,30 @@ function deleteAddon(elem, st){
         let option = $('.rem-option:checked').val();
         let btn_del = tr + ' .btn-delete';
         uchip.handleButton(btn_del,'fa-trash');
-        tr = $(tr);
-        tr.addClass('deleting_tr');
+        let $tr = $(tr);
+        $tr.addClass('deleting_tr');
         $('#deleteaddons').modal('toggle');
         uchip.call('module=addons&act=removeaddon', {
-            data: 'type=' + type + '&path=' + details.path + '&option=' + option + '&dbname=' + dbname + '&dbuname=' + dbuname,
+            data: 'type=' + encodeURIComponent(type) + '&path=' + encodeURIComponent(details.path) + '&option=' + encodeURIComponent(option) + '&dbname=' + encodeURIComponent(dbname || '') + '&dbuname=' + encodeURIComponent(dbuname || ''),
             callback: function(response){
                 if(response.result == 'success'){
                     noti_bubble('{{langmod.ADDDELLLAB2}}','{{langmod.SUCCESS}}','success',false,false,'3000',true);
-                    tr.slideUp('fast', function(){
-                        addontable.row(this).remove().draw();
+                    $tr.slideUp('fast', function(){
+                        if(addontable && typeof addontable.row === 'function'){
+                            addontable.row(this).remove().draw();
+                        }else{
+                            $(this).remove();
+                        }
                     });
                 }else{
                     let message = '{{langmod.ADDERRORGEN}}';
                     if(response.code == '01'){
                         message = '{{langmod.ADDDELLLAB3}}';
                     }
-                    tr.removeClass('deleting_tr');
+                    if(response.message){
+                        message = response.message;
+                    }
+                    $tr.removeClass('deleting_tr');
                     uchip.handleButton(btn_del,'fa-trash', true);
                     noti_bubble(message,'{{langmod.FERROR}}','error',false,false,'3000',true);
                 }

@@ -8,16 +8,16 @@
                     {% else %}
                         {% if mod.imglogo !='0' %}
                             <img alt="" id="logomenu"  src="{{url}}/img/{{mod.imglogo}}" width="200" style="margin-right: 15px"/></a>
-                        {% else %}
+            {% else %}
                             <img alt="" id="logomenu"  src="{{url}}/img/cwp_logo.png" width="200" style="margin-right: 15px"/></a>
-                        {% endif%}
+            {% endif%}
                     {% endif%}
                 {% else %}
                     {% if mod.imglogo =='0' %}
                             <img alt="" id="logomenu"  src="{{url}}/img/cwp_logo.png" width="200" style="margin-right: 15px"/></a>
-                    {% else %}
+            {% else %}
                             <img alt="" id="logomenu"  src="{{url}}/img/{{mod.imglogo}}" width="200" style="margin-right: 15px"/></a>
-                    {% endif%}
+            {% endif%}
                 {% endif%}
             </span>
     </div>
@@ -34,28 +34,28 @@
     <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">{{langene.CWPSETTING}}</span><span class="fa arrow"></span></a>
     <ul class="nav nav-second-level collapse">
         {% if ("crontab" in rmenu )or(swmenu==1) %}
-            <li class="search"><a href="?module=crontab">{{langene.CRON}}</a></li>
+        <li class="search"><a href="?module=crontab">{{langene.CRON}}</a></li>
         {% endif %}
         {% if ("process_list" in rmenu )or(swmenu==1) %}
-            <li class="search"><a href="#"data-toggle="modal" data-target="#modalprocesslist"  class="mod_process_list">{{langene.PROCESSLIST}}</a></li>
+        <li class="search"><a href="#"data-toggle="modal" data-target="#modalprocesslist"  class="mod_process_list">{{langene.PROCESSLIST}}</a></li>
         {% endif %}
         {% if ("phpini_editor" in rmenu )or(swmenu==1) %}
-            <li class="search" id="phpiniid"><a href="?module=phpini_editor">{{langene.PHPINI}}</a></li>
+        <li class="search" id="phpiniid"><a href="?module=phpini_editor">{{langene.PHPINI}}</a></li>
         {% endif %}
         {% if ("phpselector" in rmenu )or(swmenu==1) %}
-            <li class="search"><a href="?module=phpselector">{{langene.GNLABEL50}}</a></li>
+        <li class="search"><a href="?module=phpselector">{{langene.GNLABEL50}}</a></li>
         {% endif %}
         <!--{% if menu.cloudlinux ==1 %}
             <li class="search"><a href="?module=php_selector">{{langene.PHPSELECTOR}}</a></li>
         {% endif %}-->
         {% if ("notification_center" in rmenu )or(swmenu==1) %}
-            <li class="search"><a href="?module=notification_center">{{langene.BTNOTITITLE}}</a></li>
+        <li class="search"><a href="?module=notification_center">{{langene.BTNOTITITLE}}</a></li>
         {% endif %}
         {% if ("mod_security" in rmenu )or(swmenu==1) %}
-          <li class="search"><a href="?module=mod_security">Mod Security</a></li>
+        <li class="search"><a href="?module=mod_security">{{langene.MODSECURITY}}</a></li>
         {% endif %}
         {% if ("statistics" in rmenu )or(swmenu==1) %}
-            <li class="search"><a href="?module=statistics">{{langene.GNLABEL51}}</a></li>
+        <li class="search"><a href="?module=statistics">{{langene.GNLABEL51}}</a></li>
         {% endif %}
     </ul>
 </li>
@@ -70,25 +70,25 @@
         <!--<li class="search"><a href="?module=files_system_lock">{{langene.FILESYST}}</a></li>-->
         {% endif %}
         {% if ("clam" in rmenu )or(swmenu==1) %}
-            <li class="search"><a href="?module=clam" >{{langene.ANTIVI}}</a></li>
+        <li class="search"><a href="?module=clam" >{{langene.ANTIVI}}</a></li>
         {% endif %}
         {% if ("file_manager" in rmenu )or("filemanager" in rmenu )or(swmenu==1) %}
-            <li class="search"><a href="fileManager_v2.php" target="_blank">{{langene.FTPFILE}}</a></li>
+        <li class="search"><a href="fileManager_v2.php" target="_blank">{{langene.FTPFILE}}</a></li>
         {% endif %}
         {% if ("ftp_accounts" in rmenu )or(swmenu==1) %}
-            <li class="search"><a href="?module=ftp_accounts">{{langene.FTPACC}}</a></li>
+        <li class="search"><a href="?module=ftp_accounts">{{langene.FTPACC}}</a></li>
         {% endif %}
         {% if ("backups" in rmenu )or(swmenu==1) %}
-            <li class="search"><a href="?module=backups">{{langene.BACKUP}}</a></li>
+        <li class="search"><a href="?module=backups">{{langene.BACKUP}}</a></li>
         {% endif %}
         {% if ("disk_usage" in rmenu )or(swmenu==1) %}
-            <li class="search"><a href="?module=disk_usage">{{langene.MENUDISKUSAGE}}</a></li>
+        <li class="search"><a href="?module=disk_usage">{{langene.MENUDISKUSAGE}}</a></li>
         {% endif %}
 
         {% if (mod.apache==1)%}
-            {% if ("protected_directory" in rmenu )or(swmenu==1) %}
-                <li class="search"><a href="?module=protected_directory">{{langene.DIRPROTE}}</a></li>
-            {% endif %}
+        {% if ("protected_directory" in rmenu )or(swmenu==1) %}
+        <li class="search"><a href="?module=protected_directory">{{langene.DIRPROTE}}</a></li>
+        {% endif %}
         {% endif %}
         {% if ("error_log" in rmenu )or(swmenu==1) %}
         <li class="search"><a href="?module=error_log">{{langene.GNLABEL52}}</a></li>
@@ -115,23 +115,23 @@
         <li class="search"><a href="?module=sslwizard">{{langene.GEN002}}</a></li>
         {% endif %}
         {% if ("cloudflare" in rmenu )or(swmenu==1) %}
-        <li class="search"><a href="?module=cloudflare">Cloudflare</a></li>
+        <li class="search"><a href="?module=cloudflare">{{langene.CLOUDFLARE}}</a></li>
         {% endif %}
         {% if ("nodejs" in extra_rmenu )or(swmenu==1) %}
-        <li class="search"><a href="?module=nodejs_manager">Node.JS Apps</a></li>
+        <li class="search"><a href="?module=nodejs_manager">{{langene.NODEJSAPPS}}</a></li>
         {% endif %}
         {% if mod.varnish==1 %}
-            {% if ("vdomaincache" in rmenu )or(swmenu==1) %}
-            <li class="search"><a href="?module=vdomaincache">{{langene.CACHE1}}</a></li>
-            {% endif %}
+        {% if ("vdomaincache" in rmenu )or(swmenu==1) %}
+        <li class="search"><a href="?module=vdomaincache">{{langene.CACHE1}}</a></li>
+        {% endif %}
         {% endif %}
         {% if mod.apache==1 and  mod.nginx==0  %}
-            {% if ("redirect" in rmenu )or(swmenu==1) %}
-            <li class="search"><a href="?module=redirect">{{langene.GNLABEL53}}</a></li>
-            {% endif %}
+        {% if ("redirect" in rmenu )or(swmenu==1) %}
+        <li class="search"><a href="?module=redirect">{{langene.GNLABEL53}}</a></li>
+        {% endif %}
         {% endif %}
         {% if ("tomcat_manager" in extra_rmenu )or(swmenu==1) %}
-        <li class="search"><a href="?module=tomcat_manager">Tomcat Manager</a></li>
+        <li class="search"><a href="?module=tomcat_manager">{{langene.TOMCATMANAGER}}</a></li>
         {% endif %}
     </ul>
 </li>
@@ -143,19 +143,19 @@
     <ul class="nav nav-second-level collapse">
         <!--li class="search"><a  href="{{mod.pma}}" target="_blank">{{langene.PHPMYADMIN}}</a></li-->
         {% if ("pma" in rmenu )or(swmenu==1) %}
-            <li class="search"><a  href="?module=pma" target="_blank">{{langene.PHPMYADMIN}}</a></li>
+        <li class="search"><a  href="?module=pma" target="_blank">{{langene.PHPMYADMIN}}</a></li>
         {% endif %}
         {% if ("mysql_manager" in rmenu )or(swmenu==1) %}
-            <li class="search"><a href="?module=mysql_manager">{{langene.MANAGERMYSQL}}</a></li>
+        <li class="search"><a href="?module=mysql_manager">{{langene.MANAGERMYSQL}}</a></li>
         {% endif %}
         {% if ("process_list_my" in rmenu )or(swmenu==1) %}
-            <li class="search"><a href="#" id="mysql_processes" class="mysql_processes">{{langene.SHOWMYSQL}}</a></li>
+        <li class="search"><a href="#" id="mysql_processes" class="mysql_processes">{{langene.SHOWMYSQL}}</a></li>
         {% endif %}
         {% if ("postgresql_manager" in extra_rmenu ) or ("postgresql_manager" in rmenu )or(swmenu==1) %}
-            <li><a href="?module=postgresql_manager">{{langene.MANAGERPOSGRE}}</a></li>
+        <li><a href="?module=postgresql_manager">{{langene.MANAGERPOSGRE}}</a></li>
         {% endif %}
         {% if ("mongodb_manager" in extra_rmenu ) or ("mongodb_manager" in rmenu )or(swmenu==1) %}
-            <li class="search"><a href="?module=mongodb_manager">Mongo Database</a></li>
+        <li class="search"><a href="?module=mongodb_manager">{{langene.MONGODB}}</a></li>
         {% endif %}
     </ul>
 </li>
@@ -190,6 +190,9 @@
         {% if ("email_importer" in rmenu )or(swmenu==1) %}
         <li class="search"><a href="?module=email_importer">{{langene.GEN001}}</a></li>
         {% endif %}
+        {% if ("spam_annihilator" in rmenu )or(swmenu==1) %}
+        <li class="search"><a href="?module=spam_annihilator">{{langene.SPAMANNIHILATOR}}</a></li>
+        {% endif %}
 
     </ul>
 </li>
@@ -212,10 +215,13 @@
         <li class="search"><a href="?module=addons&acc=installed">{{langene.ADDEFMBTNON}}</a></li>
         {% endif %}
         {% if ("siteprobuilder" in rmenu )or(swmenu==1) %}
-        <li class="search"><a href="?module=siteprobuilder">Site.pro Website Builder</a></li>
+        <li class="search"><a href="?module=siteprobuilder">{{langene.SITEPROBUILDER}}</a></li>
+        {% endif %}
+        {% if ("wordpress_manager" in rmenu )or(swmenu==1) %}
+        <li class="search"><a href="?module=wordpress_manager">{{langene.WORDPRESSMANAGER}}</a></li>
         {% endif %}
         {% if ("git_manager" in rmenu )or(swmenu==1) %}
-        <li class="search"><a href="?module=git_manager">Git Manager</a></li>
+        <li class="search"><a href="?module=git_manager">{{langene.GITMANAGER}}</a></li>
         {% endif %}
     </ul>
 </li>
@@ -226,16 +232,16 @@
     <a href="#"><i class="fa fa-desktop"></i> <span class="nav-label">{{langene.SCRIPTINST}}</span></a>
     <ul class="nav nav-second-level collapse">
         {% if ("softaculous" in rmenu )or(swmenu==1) %}
-            <li class="search"><a href="?module=softaculous">{{langene.SOFTAC}}</a></li>
+        <li class="search"><a href="?module=softaculous">{{langene.SOFTAC}}</a></li>
         {% endif %}
 
 
         {% if ("sitepad" in rmenu )or(swmenu==1)or (sitepad==1) %}
-            <li class="search"><a href="?module=sitepad">{{langene.GNLABEL46}}</a></li>
+        <li class="search"><a href="?module=sitepad">{{langene.GNLABEL46}}</a></li>
         {% endif %}
 
         {% if(fant3menu==1) %}
-            <li class="search"><a href="?module=fantastico_f3&path=?/">{{langene.FANTASTICO}}</a></li>
+        <li class="search"><a href="?module=fantastico_f3&path=?/">{{langene.FANTASTICO}}</a></li>
         {% endif %}
     </ul>
 </li>
@@ -317,18 +323,18 @@
         <div class="ibox-content2">
             <h5 style="color: white">{{langene.GNLABEL47}}</h5>
             {% if mod.packquota == '-1'%}
-                <h3 class="info-left-item">0%</h3>
+                <h3 class="info-left-item" id="top-quota-percent">0%</h3>
             {% else %}
-                <h3 class="info-left-item">{{porhome|round}}%</h3>
+                <h3 class="info-left-item" id="top-quota-percent">{{portotal|round}}%</h3>
             {% endif %}
             <div class="progress progress-mini">
-                <div style="width: {{porhome|round}}%;" class="progress-bar"></div>
+                <div style="width: {{portotal|round}}%;" class="progress-bar {{bartotal}}" id="top-quota-bar"></div>
             </div>
             <div class="stat text-center"><h4></h4>
                 {% if mod.packquota == '-1'%}
-                    <small class="info-left-item">{{mod.sizehome|number_format(2, '.', ',')}} MB / &infin; MB</small></div>
+                    <small class="info-left-item" id="top-quota-text">{{mod.packquotaused|number_format(2, '.', ',')}} MB / &infin; MB</small></div>
                 {% else %}
-            <small class="info-left-item">{{mod.sizehome|number_format(2, '.', ',')}} MB / {{mod.packquota|round}} MB</small></div>
+            <small class="info-left-item" id="top-quota-text">{{mod.packquotaused|number_format(2, '.', ',')}} MB / {{mod.packquota|round}} MB</small></div>
                 {% endif %}
             <h5 style="color: white">{{langene.GNLABEL48}}</h5>
             {% if mod.pack_bandwidth == '-1'%}

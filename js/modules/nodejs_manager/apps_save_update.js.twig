@@ -32,10 +32,7 @@ function saveNewNodeJSApp() {
     console.log('valid', valid);
 }
 function calculateQuota(){
-
-    let apps_quota = {{mod.apps_quota|default(1)}};
-    //let apps_quota = {{mod.apps_quota}};
-
+    let apps_quota = {{mod.apps_quota}};
     $('#apps_used').text(app_list.length);
     if(apps_quota >= 0){
         if(app_list.length == apps_quota){

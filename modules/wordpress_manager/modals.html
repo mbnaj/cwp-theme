@@ -1,0 +1,705 @@
+<!-- Install WordPress Modal -->
+<div class="modal fade" id="wpm-modal-install" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><i class="fa fa-wordpress" style="color:#21759b"></i> Install WordPress</h4>
+            </div>
+            <div class="modal-body">
+                <form id="wpm-install-form">
+                    <div class="wpm-install-steps">
+                        <div class="wpm-step active" data-step="1"><span>1</span> Domain</div>
+                        <div class="wpm-step" data-step="2"><span>2</span> Settings</div>
+                        <div class="wpm-step" data-step="3"><span>3</span> Admin</div>
+                        <div class="wpm-step" data-step="4"><span>4</span> Advanced</div>
+                    </div>
+                    <div class="wpm-step-content active" id="wpm-step-1">
+                        <div class="form-group">
+                            <label>Protocol</label>
+                            <div class="radio-group">
+                                <label class="radio-inline"><input type="radio" name="protocol" value="http" checked> HTTP</label>
+                                <label class="radio-inline"><input type="radio" name="protocol" value="https"> HTTPS</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Domain</label>
+                            <select name="wpdomain" id="wpm-domain-select" class="form-control" required>
+                                <option value="">Select a domain...</option>
+                            </select>
+                            <span class="help-block">Please select a domain</span>
+                        </div>
+                        <div class="form-group">
+                            <label>Directory <small>(optional, leave empty for root)</small></label>
+                            <input type="text" name="wpdirectory" class="form-control" placeholder="e.g., blog">
+                        </div>
+                        <div class="form-group">
+                            <label>Language</label>
+                            <select name="wplang" class="form-control">
+                                <option value="en_US">English</option>
+                                <option value="es_ES">Español</option>
+                                <option value="fr_FR">Français</option>
+                                <option value="de_DE">Deutsch</option>
+                                <option value="it_IT">Italiano</option>
+                                <option value="pt_BR">Português (Brasil)</option>
+                                <option value="ru_RU">Русский</option>
+                                <option value="ja">日本語</option>
+                                <option value="zh_CN">中文 (简体)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="wpm-step-content" id="wpm-step-2">
+                        <div class="form-group">
+                            <label>Site Title</label>
+                            <input type="text" name="wpsitetitle" class="form-control" placeholder="My Awesome Site" required>
+                            <span class="help-block">Please enter a site title</span>
+                        </div>
+                    </div>
+                    <div class="wpm-step-content" id="wpm-step-3">
+                        <div class="form-group">
+                            <label>Admin Username</label>
+                            <input type="text" name="wpadminuser" class="form-control" value="admin" required>
+                            <span class="help-block">Please enter an admin username</span>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 control-label">Admin Password:</label>
+                            <div class="col-lg-5">
+                                <input type="password" name="wpadminpass" id="wpm-admin-pass" class="form-control" required>
+                                <span class="help-block">Please enter an admin password</span>
+                            </div>
+                            <div class="col-lg-4">
+                                <span class="btn btn-default" title="Generate random password" onclick="wpmGeneratePassword()"><i class="fa fa-key" aria-hidden="true"></i></span>
+                                <span class="btn btn-default" title="Show/Hide password" onclick="wpmTogglePassVisibility('wpm-admin-pass')"><i class="fa fa-eye" id="wpm-admin-pass-eye"></i></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Admin Email</label>
+                            <input type="email" name="wpadminemail" class="form-control" placeholder="admin@example.com" required>
+                            <span class="help-block">Please enter a valid email address</span>
+                        </div>
+                    </div>
+                    <div class="wpm-step-content" id="wpm-step-4">
+                        <div class="form-group">
+                            <label>Database Name <small>(auto-generated if empty)</small></label>
+                            <input type="text" name="wpbd" class="form-control" placeholder="Auto-generated">
+                        </div>
+                        <div class="form-group">
+                            <label>Database User <small>(auto-generated if empty)</small></label>
+                            <input type="text" name="wpuserdb" class="form-control" placeholder="Auto-generated">
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 control-label">Database Password <small>(auto-generated)</small>:</label>
+                            <div class="col-lg-5">
+                                <input type="password" name="wppassbd" id="wpm-db-pass" class="form-control" placeholder="Auto-generated">
+                            </div>
+                            <div class="col-lg-4">
+                                <span class="btn btn-default" title="Generate random password" onclick="wpmGenerateDbPassword()"><i class="fa fa-key" aria-hidden="true"></i></span>
+                                <span class="btn btn-default" title="Show/Hide password" onclick="wpmTogglePassVisibility('wpm-db-pass')"><i class="fa fa-eye" id="wpm-db-pass-eye"></i></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Table Prefix</label>
+                            <input type="text" name="wpdbprefix" class="form-control" value="wp_" pattern="[a-zA-Z0-9_]+">
+                        </div>
+                        <div class="checkbox">
+                            <label><input type="checkbox" name="wpmultisite" value="1"> Enable Multisite</label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" id="wpm-install-prev" style="display:none" onclick="wpmInstallPrev()">
+                    <i class="fa fa-chevron-left"></i> Previous
+                </button>
+                <button type="button" class="btn btn-primary" id="wpm-install-next" onclick="wpmInstallNext()">
+                    Next <i class="fa fa-chevron-right"></i>
+                </button>
+                <button type="button" class="btn btn-primary" id="wpm-install-submit" style="display:none" onclick="wpmDoInstall()">
+                    <i class="fa fa-download"></i> Install
+                </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Install Progress -->
+<div class="modal fade" id="wpm-modal-progress" tabindex="-1" data-backdrop="static">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content" style="text-align:center;padding:30px;">
+            <div class="wpm-spinner"></div>
+            <h5>{{langmod.WPM_LOGIN_OPENING|default("Opening WordPress admin...")}}</h5>
+            <p class="text-muted" style="font-size:12px;">This may take a few seconds.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Remove Confirmation -->
+<div class="modal fade" id="wpm-modal-remove" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><i class="fa fa-exclamation-triangle" style="color:#e74c3c"></i> Remove WordPress</h4>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to remove WordPress from <strong id="wpm-remove-domain"></strong>?</p>
+                <div class="alert alert-danger" style="margin-top:10px;">
+                    <i class="fa fa-exclamation-circle"></i> This will permanently delete all WordPress files.
+                </div>
+                <div class="checkbox" style="margin-top:15px;position:relative;z-index:1;padding-left:6px;">
+                    <input type="checkbox" id="wpm-remove-db" value="1" checked style="margin:0 6px 0 0;cursor:pointer;position:relative;z-index:2;vertical-align:middle;">
+                    <label for="wpm-remove-db" style="cursor:pointer;font-weight:normal;font-size:14px;display:inline;margin-bottom:0;">
+                        Also delete the database
+                    </label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger" onclick="wpmDoRemove()"><i class="fa fa-trash"></i> Remove</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Security -->
+<div class="modal fade" id="wpm-modal-security" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><i class="fa fa-shield"></i> Security Settings</h4>
+            </div>
+            <div class="modal-body" id="wpm-security-body"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="wpmApplyHardening()"><i class="fa fa-shield"></i> Apply All Hardening</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Plugins -->
+<div class="modal fade" id="wpm-modal-plugins" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><i class="fa fa-puzzle-piece"></i> {{langmod.WPM_PLUGINS_THEMES|default("Plugins & Themes")}}</h4>
+            </div>
+            <div class="modal-body">
+                <ul class="nav nav-tabs wpm-modal-tabs" style="margin-bottom: 15px;">
+                    <li class="active"><a href="#wpm-tab-plugins" data-toggle="tab"><i class="fa fa-plug"></i> {{langmod.WPM_PLUGINS|default("Plugins")}}</a></li>
+                    <li><a href="#wpm-tab-themes" data-toggle="tab"><i class="fa fa-paint-brush"></i> {{langmod.WPM_THEMES|default("Themes")}}</a></li>
+                </ul>
+                <div class="tab-content wpm-tab-content">
+                    <!-- Plugins Tab -->
+                    <div class="tab-pane active" id="wpm-tab-plugins">
+                        <div class="wpm-search-bar" style="margin-bottom: 12px; display: flex; gap: 8px;">
+                            <input type="text" class="form-control" id="wpm-plugin-search-input" placeholder="{{langmod.WPM_SEARCH_PLUGINS|default('Search plugins...')}}" onkeyup="if(event.keyCode===13) wpmSearchPlugins(this.value)" style="flex: 1; height: 36px;">
+                            <button class="btn btn-primary" onclick="wpmSearchPlugins($('#wpm-plugin-search-input').val())"><i class="fa fa-search"></i></button>
+                        </div>
+                        <div id="wpm-plugins-body"></div>
+                        <div id="wpm-plugin-search-results" style="display: none;"></div>
+                    </div>
+                    <!-- Themes Tab -->
+                    <div class="tab-pane" id="wpm-tab-themes">
+                        <div class="wpm-search-bar" style="margin-bottom: 12px; display: flex; gap: 8px;">
+                            <input type="text" class="form-control" id="wpm-theme-search-input" placeholder="{{langmod.WPM_SEARCH_THEMES|default('Search themes...')}}" onkeyup="if(event.keyCode===13) wpmSearchThemes(this.value)" style="flex: 1; height: 36px;">
+                            <button class="btn btn-primary" onclick="wpmSearchThemes($('#wpm-theme-search-input').val())"><i class="fa fa-search"></i></button>
+                        </div>
+                        <div id="wpm-themes-body"></div>
+                        <div id="wpm-theme-search-results" style="display: none;"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{langmod.WPM_CLOSE|default("Close")}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Plugin Details -->
+<div class="modal fade" id="wpm-modal-plugin-details" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><i class="fa fa-info-circle"></i> {{langmod.WPM_PLUGIN_DETAILS|default("Plugin Details")}}</h4>
+            </div>
+            <div class="modal-body" id="wpm-plugin-details-body"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Clone -->
+<div class="modal fade" id="wpm-modal-clone" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><i class="fa fa-copy"></i> {{langmod.WPM_CLONE_TITLE|default("Clone Installation")}}</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>{{langmod.WPM_CLONE_SOURCE|default("Source")}}</label>
+                    <input type="text" class="form-control" id="wpm-clone-source" readonly>
+                </div>
+                <div class="form-group">
+                    <label>{{langmod.WPM_CLONE_TARGET_DOMAIN|default("Target Domain")}}</label>
+                    <select name="clone_target_domain" id="wpm-clone-domain" class="form-control">
+                        <option value="">{{langmod.WPM_CLONE_SELECT_DOMAIN|default("Select domain...")}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>{{langmod.WPM_CLONE_TARGET_DIR|default("Target Directory")}} <small>({{langmod.WPM_CLONE_OPTIONAL|default("optional")}})</small></label>
+                    <input type="text" name="clone_target_dir" id="wpm-clone-dir" class="form-control" placeholder="{{langmod.WPM_CLONE_DIR_PLACEHOLDER|default("e.g., staging")}}">
+                </div>
+                <div class="alert alert-info" style="margin-top:10px;">
+                    <i class="fa fa-info-circle"></i> {{langmod.WPM_CLONE_INFO|default("A new database will be created automatically. URLs will be updated in the cloned installation.")}}
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{langmod.WPM_CANCEL|default("Cancel")}}</button>
+                <button type="button" class="btn btn-primary" onclick="wpmDoClone()"><i class="fa fa-copy"></i> {{langmod.WPM_CLONE|default("Clone")}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- Backup -->
+    <div class="modal fade" id="wpm-modal-backup" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">
+                        <i class="fa fa-cloud-download"></i> {{langmod.WPM_BACKUP_TITLE|default("Backup WordPress")}}
+                    </h4>
+                </div>
+
+                <div class="modal-body">
+                    <!-- Available Backups -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <i class="fa fa-history"></i> {{langmod.WPM_AVAILABLE_BACKUPS|default("Available Backups")}}
+                            </h4>
+                        </div>
+                        <div class="panel-body" style="padding: 15px;">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>{{langmod.WPM_DATE|default("Date")}}</th>
+                                        <th>{{langmod.WPM_TYPE|default("Type")}}</th>
+                                        <th>{{langmod.WPM_SIZE|default("Size")}}</th>
+                                        <th>{{langmod.WPM_ACTIONS|default("Actions")}}</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="wpm-backup-list">
+                                    <tr><td colspan="4" class="text-center text-muted">{{langmod.WPM_LOADING|default("Loading...")}}</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        <i class="fa fa-times"></i> {{langmod.WPM_CLOSE|default("Close")}}
+                    </button>
+                    <button type="button" class="btn btn-primary" id="wpm-backup-start-btn" onclick="wpmStartBackup()">
+                        <i class="fa fa-download"></i> {{langmod.WPM_START_BACKUP|default("Start Backup")}}
+                    </button>
+                </div>
+
+                <!-- Progress Section (Hidden by default) -->
+                <div id="wpm-backup-progress-section" style="display:none; padding: 15px; background: #f8f9fa; border-top: 1px solid #e2e8f0; margin-top: 0;">
+                    <div style="margin-bottom: 10px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                            <span id="wpm-backup-status" style="font-size: 13px; font-weight: 600; color: #2d3748;">Initializing...</span>
+                            <span id="wpm-backup-percent" style="font-size: 13px; font-weight: 700; color: #1ab394;">0%</span>
+                        </div>
+                        <div class="progress" style="height: 8px; margin: 0;">
+                            <div id="wpm-backup-progress-bar" class="progress-bar progress-bar-success" role="progressbar" style="width: 0%; transition: width 0.3s ease;"></div>
+                        </div>
+                        <div style="margin-top: 8px; font-size: 12px; color: #718096; text-align: center;">
+                            <i class="fa fa-circle-o-notch fa-spin"></i> <span id="wpm-backup-timestamp">Started: --</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- Backup Delete Confirmation -->
+<div class="modal fade" id="wpm-modal-backup-delete" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><i class="fa fa-exclamation-triangle" style="color:#e74c3c"></i> {{langmod.WPM_DELETE_BACKUP_CONFIRM|default("Delete Backup")}}</h4>
+            </div>
+            <div class="modal-body">
+                <p>{{langmod.WPM_DELETE_BACKUP_MSG|default("Are you sure you want to delete backup")}} <strong id="wpm-backup-delete-name"></strong>?</p>
+                <div class="alert alert-danger" style="margin-top:10px;">
+                    <i class="fa fa-exclamation-circle"></i> {{langmod.WPM_CANNOT_UNDO|default("This action cannot be undone.")}}
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{langmod.WPM_CANCEL|default("Cancel")}}</button>
+                <button type="button" class="btn btn-danger" id="wpm-delete-backup-confirm-btn" onclick="wpmConfirmDeleteBackup()"><i class="fa fa-trash"></i> {{langmod.WPM_REMOVE|default("Delete")}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Restore Backup Confirmation -->
+<div class="modal fade" id="wpm-modal-backup-restore" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><i class="fa fa-undo" style="color:#e67e22"></i> {{langmod.WPM_RESTORE_BACKUP_CONFIRM|default("Restore Backup")}}</h4>
+            </div>
+            <div class="modal-body">
+                <p>{{langmod.WPM_RESTORE_BACKUP_MSG|default("Are you sure you want to restore backup")}} <strong id="wpm-backup-restore-name"></strong>?</p>
+                <div class="alert alert-warning" style="margin-top:10px;">
+                    <i class="fa fa-exclamation-circle"></i> {{langmod.WPM_RESTORE_BACKUP_WARN|default("Current files and database will be overwritten with the backup contents.")}}
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{langmod.WPM_CANCEL|default("Cancel")}}</button>
+                <button type="button" class="btn btn-warning" id="wpm-restore-backup-confirm-btn" onclick="wpmConfirmRestoreBackup()"><i class="fa fa-undo"></i> {{langmod.WPM_RESTORE|default("Restore")}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Vulnerabilities Scan -->
+<div class="modal fade" id="wpm-modal-vulnerabilities" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><i class="fa fa-bug" style="color:#e74c3c"></i> Vulnerability Scan</h4>
+            </div>
+            <div class="modal-body" id="wpm-vulnerabilities-body"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Staging Sync -->
+<div class="modal fade" id="wpm-modal-sync" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><i class="fa fa-exchange"></i> <span id="wpm-sync-title">Sync</span></h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Source</label>
+                    <input type="text" class="form-control" id="wpm-sync-source" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Target</label>
+                    <input type="text" class="form-control" id="wpm-sync-target" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Sync Mode</label>
+                    <div class="wpm-sync-mode-group">
+                        <label class="radio-inline"><input type="radio" name="sync_mode" value="full" checked> Full (Files + DB)</label>
+                        <label class="radio-inline"><input type="radio" name="sync_mode" value="files"> Files Only</label>
+                        <label class="radio-inline"><input type="radio" name="sync_mode" value="database"> Database Only</label>
+                    </div>
+                </div>
+                <div class="alert alert-warning" style="margin-top:10px;">
+                    <i class="fa fa-exclamation-triangle"></i> A backup will be created before syncing to production.
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="wpm-sync-btn" onclick="wpmDoSync()"><i class="fa fa-exchange"></i> Sync</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Backup Schedule -->
+<div class="modal fade" id="wpm-modal-schedule" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><i class="fa fa-calendar"></i> {{langmod.WPM_SCHEDULE_BACKUP}}</h4>
+            </div>
+            <div class="modal-body" id="wpm-schedule-body">
+                <div style="text-align:center;padding:30px;"><i class="fa fa-circle-o-notch fa-spin"></i> Loading...</div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="wpm-schedule-save-btn" onclick="wpmSaveSchedule()" style="display:none"><i class="fa fa-save"></i> {{langmod.WPM_SAVE}}</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{langmod.WPM_CANCEL}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Schedule Logs -->
+<div class="modal fade" id="wpm-modal-schedule-logs" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><i class="fa fa-list-alt"></i> {{langmod.WPM_SCHEDULE_LOGS}}</h4>
+            </div>
+            <div class="modal-body" id="wpm-schedule-logs-body">
+                <div style="text-align: center; padding: 30px;">
+                    <i class="fa fa-circle-o-notch fa-spin" style="font-size: 36px; color: #cbd5e0;"></i>
+                    <p style="margin-top: 10px; color: #718096;">Loading logs...</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{langmod.WPM_CANCEL}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Dev / SEO -->
+<div class="modal fade" id="wpm-modal-devseo" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><i class="fa fa-code"></i> Dev & SEO Settings</h4>
+            </div>
+            <div class="modal-body">
+                <p>Toggle advanced developer and SEO settings for this installation.</p>
+                <div class="form-group" style="margin-top: 20px;">
+                    <div class="checkbox wpm-checkbox-row">
+                        <input type="checkbox" id="wpm-devseo-cron" style="margin: 5px 8px 0 0; cursor: pointer; position: relative; z-index: 2; float: left;">
+                        <label for="wpm-devseo-cron" style="cursor: pointer; font-weight: normal; display: block; margin-left: 24px; margin-bottom: 0;">
+                            <strong style="font-size: 14px;">Optimize WP-Cron (System Cron)</strong>
+                        </label>
+                        <p class="text-muted" style="margin-left: 24px; font-size: 12px; clear: both;">Disables the virtual WordPress cron and replaces it with a reliable server-side cron job running every 30 minutes. Significantly improves site performance.</p>
+                    </div>
+                </div>
+                <div class="form-group" style="margin-top: 20px;">
+                    <div class="checkbox wpm-checkbox-row">
+                        <input type="checkbox" id="wpm-devseo-debug" style="margin: 5px 8px 0 0; cursor: pointer; position: relative; z-index: 2; float: left;">
+                        <label for="wpm-devseo-debug" style="cursor: pointer; font-weight: normal; display: block; margin-left: 24px; margin-bottom: 0;">
+                            <strong style="font-size: 14px;">Enable Debug Mode</strong>
+                        </label>
+                        <p class="text-muted" style="margin-left: 24px; font-size: 12px; clear: both;">Turns on WP_DEBUG and logs errors to wp-content/debug.log. (Errors won't be displayed on screen to protect sensitive data).</p>
+                    </div>
+                </div>
+                <div class="form-group" style="margin-top: 20px;">
+                    <div class="checkbox wpm-checkbox-row">
+                        <input type="checkbox" id="wpm-devseo-seo" style="margin: 5px 8px 0 0; cursor: pointer; position: relative; z-index: 2; float: left;">
+                        <label for="wpm-devseo-seo" style="cursor: pointer; font-weight: normal; display: block; margin-left: 24px; margin-bottom: 0;">
+                            <strong style="font-size: 14px;">Allow Search Engine Indexing</strong>
+                        </label>
+                        <p class="text-muted" style="margin-left: 24px; font-size: 12px; clear: both;">If disabled, tells search engines not to index this site (blog_public = 0).</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Reset Admin Password -->
+<div class="modal fade" id="wpm-modal-reset-pass" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><i class="fa fa-lock" style="color:#e67e22"></i> {{langmod.WPM_RESET_ADMIN_PASS|default("Reset Admin Password")}}</h4>
+            </div>
+            <div class="modal-body">
+                <p style="margin-bottom:12px;">{{langmod.WPM_RESET_ADMIN_PASS_DESC|default("Enter a new password for the WordPress admin user.")}}</p>
+                <div class="form-group" style="margin-bottom:10px;">
+                    <label for="wpm-reset-pass-input" style="font-size:12px;font-weight:600;color:#2d3748;display:block;margin-bottom:4px;">{{langmod.WPM_ADMIN_PASSWORD|default("New Password")}}</label>
+                    <div style="display:flex;gap:6px;">
+                        <input type="password" class="form-control" id="wpm-reset-pass-input" placeholder="********" style="height:34px;border-radius:6px;">
+                        <button type="button" class="btn btn-default" id="wpm-reset-pass-toggle" style="height:34px;width:40px;padding:0;" title="Show/Hide"><i class="fa fa-eye"></i></button>
+                    </div>
+                </div>
+                <div class="alert alert-warning" style="margin-top:10px;margin-bottom:0;font-size:12px;">
+                    <i class="fa fa-exclamation-circle"></i> {{langmod.WPM_RESET_ADMIN_PASS_WARN|default("This will reset the password for the main admin account (user ID 1).")}}
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{langmod.WPM_CANCEL|default("Cancel")}}</button>
+                <button type="button" class="btn btn-warning" id="wpm-reset-pass-btn" onclick="wpmDoResetAdminPass()"><i class="fa fa-refresh"></i> {{langmod.WPM_RESET|default("Reset")}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ==================================================== -->
+<!--  CACHE MANAGEMENT                                    -->
+<!-- ==================================================== -->
+<div class="modal fade" id="wpm-modal-cache" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><i class="fa fa-bolt" style="color:#e67e22"></i> {{langmod.WPM_CACHE_TITLE|default("Cache Management")}}</h4>
+            </div>
+            <div class="modal-body">
+                <div id="wpm-cache-status" style="margin-bottom:15px;">
+                    <p class="text-muted"><i class="fa fa-circle-o-notch fa-spin"></i> {{langmod.WPM_LOADING|default("Loading...")}}</p>
+                </div>
+                <div class="wpm-modal-actions" style="display:flex;gap:8px;flex-wrap:wrap;">
+                    <button class="btn btn-warning" onclick="wpmFlushCache()"><i class="fa fa-eraser"></i> {{langmod.WPM_FLUSH_CACHE|default("Flush Cache")}}</button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{langmod.WPM_CLOSE|default("Close")}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ==================================================== -->
+<!--  DATABASE TOOLS                                      -->
+<!-- ==================================================== -->
+<div class="modal fade" id="wpm-modal-dbtools" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><i class="fa fa-database" style="color:#3498db"></i> {{langmod.WPM_DB_TOOLS_TITLE|default("Database Tools")}}</h4>
+            </div>
+            <div class="modal-body">
+                <div id="wpm-db-info" style="margin-bottom:15px;">
+                    <p class="text-muted"><i class="fa fa-circle-o-notch fa-spin"></i> {{langmod.WPM_LOADING|default("Loading...")}}</p>
+                </div>
+                <div class="wpm-modal-actions" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:15px;">
+                    <button class="btn btn-primary" onclick="wpmOptimizeDb()"><i class="fa fa-magic"></i> {{langmod.WPM_OPTIMIZE|default("Optimize")}}</button>
+                    <button class="btn btn-success" onclick="wpmRepairDb()"><i class="fa fa-wrench"></i> {{langmod.WPM_REPAIR|default("Repair")}}</button>
+                </div>
+                <hr>
+                <h5 style="margin-bottom:8px;"><i class="fa fa-exchange"></i> {{langmod.WPM_SEARCH_REPLACE|default("Search & Replace")}}</h5>
+                <p class="text-muted" style="font-size:12px;margin-bottom:10px;">{{langmod.WPM_SEARCH_REPLACE_DESC|default("Useful for migrations. Replaces URLs or text in the database.")}}</p>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="wpm-sr-from" placeholder="{{langmod.WPM_SEARCH_FROM|default('Find (e.g. old-domain.com)')}}" style="margin-bottom:8px;">
+                    <input type="text" class="form-control" id="wpm-sr-to" placeholder="{{langmod.WPM_SEARCH_TO|default('Replace with (e.g. new-domain.com)')}}" style="margin-bottom:8px;">
+                    <button class="btn btn-danger" onclick="wpmDoSearchReplace()"><i class="fa fa-exchange"></i> {{langmod.WPM_RUN|default("Run")}}</button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{langmod.WPM_CLOSE|default("Close")}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ==================================================== -->
+<!--  PASSWORD PROTECTION                                 -->
+<!-- ==================================================== -->
+<div class="modal fade" id="wpm-modal-protection" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><i class="fa fa-lock" style="color:#e74c3c"></i> {{langmod.WPM_PROTECTION_TITLE|default("Password Protection")}}</h4>
+            </div>
+            <div class="modal-body">
+                <div class="checkbox wpm-checkbox-row" style="margin-bottom:15px;">
+                    <input type="checkbox" id="wpm-protect-enabled" style="margin:5px 8px 0 0;cursor:pointer;position:relative;z-index:2;float:left;">
+                    <label for="wpm-protect-enabled" style="cursor:pointer;font-weight:normal;display:block;margin-left:24px;margin-bottom:0;">
+                        <strong>{{langmod.WPM_PROTECT_WPADMIN|default("Protect wp-login.php with HTTP Basic Auth")}}</strong>
+                    </label>
+                    <p class="text-muted" style="margin-left: 24px; font-size: 13px;clear:both;">{{langmod.WPM_PROTECT_DESC|default("Adds an extra login screen before the WordPress admin. Prevents brute force attacks.")}}</p>
+                </div>
+                <div id="wpm-protect-creds" style="display:none;">
+                    <hr>
+                    <h5 style="margin-bottom:8px;"><i class="fa fa-user"></i> {{langmod.WPM_CREDENTIALS|default("Credentials")}}</h5>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="wpm-protect-user" placeholder="{{langmod.WPM_USERNAME|default('Username')}}" style="margin-bottom:8px;">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" id="wpm-protect-pass" placeholder="{{langmod.WPM_PASSWORD|default('Password')}}">
+                    </div>
+                </div>
+                <hr>
+                <h5 style="margin-bottom:8px;"><i class="fa fa-users"></i> {{langmod.WPM_WP_USERS|default("WordPress Users")}}</h5>
+                <div id="wpm-users-list" style="font-size:12px;">
+                    <p class="text-muted"><i class="fa fa-circle-o-notch fa-spin"></i> {{langmod.WPM_LOADING|default("Loading...")}}</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{langmod.WPM_CLOSE|default("Close")}}</button>
+                <button type="button" class="btn btn-primary" onclick="wpmSaveProtection()"><i class="fa fa-save"></i> {{langmod.WPM_SAVE|default("Save")}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ==================================================== -->
+<!--  FILE MANAGER                                        -->
+<!-- ==================================================== -->
+<div class="modal fade" id="wpm-modal-files" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><i class="fa fa-file-code-o" style="color:#2f4050"></i> {{langmod.WPM_FILES_TITLE|default("File Manager")}}</h4>
+            </div>
+            <div class="modal-body">
+                <ul class="nav nav-tabs" style="margin-bottom:15px;">
+                    <li class="active"><a href="#wpm-tab-config" data-toggle="tab"><i class="fa fa-cog"></i> wp-config.php</a></li>
+                    <li><a href="#wpm-tab-htaccess" data-toggle="tab"><i class="fa fa-globe"></i> .htaccess</a></li>
+                    <li><a href="#wpm-tab-logs" data-toggle="tab"><i class="fa fa-list-alt"></i> {{langmod.WPM_ERROR_LOG|default("Error Log")}}</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="wpm-tab-config">
+                        <textarea class="form-control" id="wpm-config-editor" rows="14" style="font-family:monospace;font-size:12px;"></textarea>
+                        <button class="btn btn-primary" style="margin-top:8px;" onclick="wpmSaveConfig()"><i class="fa fa-save"></i> {{langmod.WPM_SAVE_CONFIG|default("Save wp-config.php")}}</button>
+                    </div>
+                    <div class="tab-pane" id="wpm-tab-htaccess">
+                        <textarea class="form-control" id="wpm-htaccess-editor" rows="14" style="font-family:monospace;font-size:12px;"></textarea>
+                        <button class="btn btn-primary" style="margin-top:8px;" onclick="wpmSaveHtaccess()"><i class="fa fa-save"></i> {{langmod.WPM_SAVE_HTACCESS|default("Save .htaccess")}}</button>
+                    </div>
+                    <div class="tab-pane" id="wpm-tab-logs">
+                        <button class="btn btn-danger btn-sm" style="margin-bottom:10px;" onclick="wpmClearErrorLog()"><i class="fa fa-trash"></i> {{langmod.WPM_CLEAR_LOG|default("Clear Log")}}</button>
+                        <pre id="wpm-error-log" style="max-height:400px;overflow:auto;background:#1e1e1e;color:#0f0;padding:12px;border-radius:6px;font-size:11px;"></pre>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{langmod.WPM_CLOSE|default("Close")}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ==================================================== -->
+<!--  GENERIC CONFIRMATION MODAL                          -->
+<!-- ==================================================== -->
+<div class="modal fade" id="wpm-modal-confirm" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><i class="fa fa-exclamation-triangle" style="color:#e74c3c" id="wpm-confirm-icon"></i> <span id="wpm-confirm-title">{{langmod.WPM_CONFIRM|default("Confirm")}}</span></h4>
+            </div>
+            <div class="modal-body">
+                <p id="wpm-confirm-message" style="margin-bottom:0;"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="wpm-confirm-cancel">{{langmod.WPM_CANCEL|default("Cancel")}}</button>
+                <button type="button" class="btn btn-danger" id="wpm-confirm-ok">{{langmod.WPM_CONFIRM|default("Confirm")}}</button>
+            </div>
+        </div>
+    </div>
+</div>
