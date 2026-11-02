@@ -193,7 +193,7 @@ server changed there. Before each page below, diff it against `original/` and bu
       backup list with download / restore / delete; wizard-style restore (choose what: files, databases, email);
       auto-backup settings as a switch + schedule + retention form.
 - [ ] `mod_backups_auto.html` (187): automatic backup settings tab (see above).
-- [ ] `mod_disk_usage.html` (157, style block): disk usage per folder. Plan: treemap or bar breakdown (home, mail,
+- [x] `mod_disk_usage.html`: done (shared page header, two-column layout, inline style moved to CSS, duplicate `list_wrapper` id renamed to `total_wrapper`, JS untouched; list is AJAX-filled so not checked visually). Original plan: disk usage per folder. Plan: treemap or bar breakdown (home, mail,
       MySQL, backups) plus top folders table.
 - [ ] `mod_protected_directory.html` (223, ibox, 3 tables): password-protect directories (Apache only). Plan: directory
       picker, protected list, users list per directory, add-user form.
