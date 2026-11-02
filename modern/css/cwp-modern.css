@@ -659,3 +659,7 @@ label { font-weight: 600; color: #4b556b; }
 
 /* Tables scroll horizontally inside their card on narrow screens */
 .cwp-table-scroll { overflow-x: auto; }
+
+/* Reseller firewall: IP field + button */
+.cwp-fw-row { grid-template-columns: minmax(0, 1fr) auto; max-width: 640px; }
+.cwp-fw-row .help-block { margin-bottom: 0; }

@@ -294,7 +294,7 @@ dropzone).
 - [ ] `mod_reseller_apimanager.html` (698, 5 tables): API keys and allowed IPs. Plan: split into sections with
       copy-key buttons and an access log table.
 - [ ] `mod_reseller_modsecurity.html` (161, 2 iboxes, table): ModSecurity rules for the reseller.
-- [ ] `mod_reseller_firewall.html` (30): firewall. Plan: rule table + add-rule form.
+- [x] `mod_reseller_firewall.html` (30): firewall. Plan: rule table + add-rule form.
 
 ### 4.8 Streaming and misc
 - [ ] `mod_servercast.html` (29) + `modules/servercast/` (18 files: `Conf_autodj`, `Conf_general`, `Conf_limites`,
