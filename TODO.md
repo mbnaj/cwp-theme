@@ -219,7 +219,7 @@ server changed there. Before each page below, diff it against `original/` and bu
       select, DNS record table, purge-cache action.
 - [ ] `mod_redirect.html` (325, form, table): redirects (Apache without Nginx). Plan: form row (from, to, type
       301/302, wildcard) plus table with test link.
-- [ ] `mod_vdomaincache.html` (81, table): Varnish cache per domain. Plan: table with on/off switch per domain and
+- [x] `mod_vdomaincache.html` (81, table): Varnish cache per domain. Plan: table with on/off switch per domain and
       "purge" action.
 - [ ] `mod_nodejs_manager.html` (738, 3 iboxes, 4 modals, select2, DataTable): Node.js apps. Plan: app cards with
       status, start/stop/restart, logs, env variables, quota bar; create-app wizard.
