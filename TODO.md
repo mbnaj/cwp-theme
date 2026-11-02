@@ -197,7 +197,7 @@ server changed there. Before each page below, diff it against `original/` and bu
       MySQL, backups) plus top folders table.
 - [ ] `mod_protected_directory.html` (223, ibox, 3 tables): password-protect directories (Apache only). Plan: directory
       picker, protected list, users list per directory, add-user form.
-- [ ] `mod_error_log.html` (90, ibox): error log viewer. Plan: log viewer with monospace, line numbers, level colouring,
+- [x] `mod_error_log.html` (90, ibox): error log viewer. Plan: log viewer with monospace, line numbers, level colouring,
       filter, tail/refresh, download.
 - [ ] `mod_fix_acc_perm.html` (186, 15 switches): fix permissions. Plan: warning card explaining the effect, options
       as switch rows, big "Run" button with confirmation, result log.
