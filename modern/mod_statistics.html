@@ -1,152 +1,131 @@
-<div class="row  border-bottom white-bg dashboard-header">
+<div class="cwp-page">
     {% if mod.fsl == 1 %}
     {% set stflalert ='block' %}
     {% else %}
     {% set stflalert ='none' %}
     {% endif %}
-    <div class="row  alert alert-warning col-lg-12" style="margin-left: 5px; padding-right: 5px;display:{{stflalert}}" id="alertfl">
+    <div class="alert alert-warning" style="display:{{stflalert}}" id="alertfl">
         <strong>{{langene.GALARTFILEBLOCK}}</strong>
     </div>
-    <div class="col-lg-10">
-        <h2>{{langmod.SLABEL1}} ({{users}})</h2>
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="?">Home</a></li>
-            <li class="breadcrumb-item active"><strong>{{langmod.SLABEL2}}</strong></li>
-        </ol>
+    <div class="cwp-page-head">
+        <div>
+            <h2>{{langmod.SLABEL1}} <small>({{users}})</small></h2>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="?">{{langene.GENLABLANG1}}</a></li>
+                <li class="breadcrumb-item active"><strong>{{langmod.SLABEL2}}</strong></li>
+            </ol>
+        </div>
     </div>
-</div>
-<div class="row">
+
     {% if mod.license == 0%}
-    <div class="alert alert-danger" style="margin: 15px">
+    <div class="alert alert-danger">
         <b>{{langmod.SLABEL16}}</b>
     </div>
     {% set license = 'disabled'%}
     {% else %}
     {% set license = ''%}
     {% endif %}
-    <div class="col-lg-12">
-        <br>
-        <div class="row">
-            <div class="col-lg-8">
-                <div>
-                    <div class="ibox">
-                        <div class="ibox-title">
-                            <h5>{{langmod.SLABEL1}}</h5>
-                        </div>
-                        <div class="ibox-content">
-                            <div class="row">
-                                <div class="col-sm  col-lg-4">
-                                    <div class="col-sm">
-                                        {{langmod.SLABEL3}}
-                                    </div>
-                                    <select class="form-control" id="domain_stats" {{license}}>
-                                        <option value="">{{langmod.SLABEL5}}</option>
-                                        {% for domains in mod.domains %}
-                                        <option value="{{domains.domain}}">{{domains.domain}}</option>
-                                        {% endfor %}
-                                    </select>
-                                </div>
-                                <div class="col-sm  col-lg-4">
-                                    <div class="col-sm">
-                                        {{langmod.SLABEL4}}
-                                    </div>
-                                    <select class="form-control disabled" id="frecuen" disabled>
-                                        <option value="">{{langmod.SLABEL5}}</option>
-                                        <option value="daily">{{langmod.SLABEL6}}</option>
-                                        <option value="weekly">{{langmod.SLABEL7}}</option>
-                                        <option value="monthly">{{langmod.SLABEL8}}</option>
-                                    </select>
-                                </div>
-                                <div class="col-sm  col-lg-4">
-                                    <div class="col-sm">
-                                        {{langmod.SLABEL10}}
-                                    </div>
-                                    <select class="form-control disabled" id="file" disabled>
 
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="row" style="margin-top: 15px">
-                                <div class="col-sm col-12">
-                                    <!--<button class="btn btn-success btn-sm disabled btn-block" id="btn-generate" style="width: 150px" disabled>{{langmod.SLABEL9}}</button>-->
-                                    <button type="button" class="btn btn-success btn-block " id="btn-generate" disabled>{{langmod.SLABEL9}}</button>
-                                </div>
-                            </div>
+    <div class="cwp-two-col">
+        <div>
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5><i class="fa fa-bar-chart"></i> {{langmod.SLABEL1}}</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="cwp-stat-form">
+                        <div class="form-group">
+                            <label class="control-label" for="domain_stats">{{langmod.SLABEL3}}</label>
+                            <select class="form-control" id="domain_stats" {{license}}>
+                                <option value="">{{langmod.SLABEL5}}</option>
+                                {% for domains in mod.domains %}
+                                <option value="{{domains.domain}}">{{domains.domain}}</option>
+                                {% endfor %}
+                            </select>
                         </div>
+                        <div class="form-group">
+                            <label class="control-label" for="frecuen">{{langmod.SLABEL4}}</label>
+                            <select class="form-control disabled" id="frecuen" disabled>
+                                <option value="">{{langmod.SLABEL5}}</option>
+                                <option value="daily">{{langmod.SLABEL6}}</option>
+                                <option value="weekly">{{langmod.SLABEL7}}</option>
+                                <option value="monthly">{{langmod.SLABEL8}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="file">{{langmod.SLABEL10}}</label>
+                            <select class="form-control disabled" id="file" disabled>
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="cwp-form-actions">
+                        <button type="button" class="btn btn-success" id="btn-generate" disabled><i class="fa fa-line-chart"></i> {{langmod.SLABEL9}}</button>
                     </div>
                 </div>
-
-
-
-
             </div>
-            <div class="col-lg-4">
+
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>{{ langmod.SLIVE1|default('Live Access Log') }} <span id="stat_live_dot" class="stat-live-dot" style="display:none"></span></h5>
+                    <span id="stat_live_status" class="text-muted small"></span>
+                </div>
                 <div class="ibox-content">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="jumbotron">
-                                <h3 class="list-group-item"><b>{{langmod.SLABEL13}}</b></h3>
-                                <small class="list-group-item-text">{{langmod.SLABEL14}}</small>
-                                <br>
-                                <br>
-                                <p style="font-size: 14px">{{langmod.SLABEL15}}</p>
-                            </div>
-                        </div>
+                    <div class="cwp-live-bar">
+                        <select class="form-control" id="stat_live_domain" aria-label="{{langmod.SLABEL3}}" {{license}}>
+                            <option value="">{{langmod.SLABEL5}}</option>
+                            {% for domains in mod.domains %}<option value="{{domains.domain}}">{{domains.domain}}</option>{% endfor %}
+                        </select>
+                        <select class="form-control" id="stat_live_tipe" aria-label="Log type">
+                            <option value="access">{{ langene.LIVELOGACCESS|default('Access log') }}</option>
+                            <option value="error">{{ langene.LIVELOGERROR|default('Error log') }}</option>
+                        </select>
+                        <label class="cwp-live-check"><input type="checkbox" id="stat_live_auto" checked> {{ langene.LIVELOGLIVE|default('Live') }}</label>
+                        <button type="button" class="btn btn-default" id="stat_live_refresh" title="{{ langene.LIVELOGPICK|default('Refresh') }}" aria-label="{{ langene.LIVELOGPICK|default('Refresh') }}"><i class="fa fa-refresh"></i></button>
                     </div>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="ibox">
-                                <div class="ibox-title">
-                                    <h5>{{langmod.SLABEL19}}</h5>
-                                </div>
-                                <div class="ibox-content">
-                                    <small class="list-group-item-text">{{langmod.SLABEL20}}</small>
-                                    <br>
-                                    <div class="row" style="margin-top:5px">
-                                        <div class="col-lg-12">
-                                            <select class="form-control" id="mdomains">
-                                                <option value="">{{langmod.SLABEL21}}</option>
-                                                {% for domains in mod.domains %}
-                                                <option value="{{domains.domain}}">{{domains.domain}}</option>
-                                                {% endfor %}
-                                                <option value="*">All</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="row" style="margin-top:5px">
-                                        <div class="col-lg-12">
-                                            <select class="form-control" disabled id="mfrequancy">
-                                                <option value="">{{langmod.SLABEL22}}</option>
-                                                <option value="daily">{{langmod.SLABEL6}}</option>
-                                                <option value="weekly">{{langmod.SLABEL7}}</option>
-                                                <option value="monthly">{{langmod.SLABEL8}}</option>
-                                                <option value="ALL">{{langmod.SLABEL23}}</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="row" style="margin-top:5px">
-                                        <div class="col-lg-12">
-                                            <select class="form-control" disabled id="mdate">
-                                                <option value="">{{langmod.SLABEL24}}</option>
-                                                <option value="ALL">{{langmod.SLABEL23}}</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="row" style="margin-top:5px">
-                                        <div class="col-lg-12">
-                                            <button class="btn btn-danger" disabled id="btndelete">{{langmod.SLABEL25}}</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <pre id="stat_live_out" class="cwp-live-out"></pre>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <div class="ibox">
+                <div class="ibox-content">
+                    <h4>{{langmod.SLABEL13}}</h4>
+                    <p class="text-muted"><small>{{langmod.SLABEL14}}</small></p>
+                    <p>{{langmod.SLABEL15}}</p>
+                </div>
+            </div>
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5><i class="fa fa-trash"></i> {{langmod.SLABEL19}}</h5>
+                </div>
+                <div class="ibox-content">
+                    <p class="text-muted"><small>{{langmod.SLABEL20}}</small></p>
+                    <div class="cwp-stack">
+                        <select class="form-control" id="mdomains" aria-label="{{langmod.SLABEL21}}">
+                            <option value="">{{langmod.SLABEL21}}</option>
+                            {% for domains in mod.domains %}
+                            <option value="{{domains.domain}}">{{domains.domain}}</option>
+                            {% endfor %}
+                            <option value="*">All</option>
+                        </select>
+                        <select class="form-control" disabled id="mfrequancy" aria-label="{{langmod.SLABEL22}}">
+                            <option value="">{{langmod.SLABEL22}}</option>
+                            <option value="daily">{{langmod.SLABEL6}}</option>
+                            <option value="weekly">{{langmod.SLABEL7}}</option>
+                            <option value="monthly">{{langmod.SLABEL8}}</option>
+                            <option value="ALL">{{langmod.SLABEL23}}</option>
+                        </select>
+                        <select class="form-control" disabled id="mdate" aria-label="{{langmod.SLABEL24}}">
+                            <option value="">{{langmod.SLABEL24}}</option>
+                            <option value="ALL">{{langmod.SLABEL23}}</option>
+                        </select>
+                        <button type="button" class="btn btn-danger" disabled id="btndelete"><i class="fa fa-trash"></i> {{langmod.SLABEL25}}</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<div class="wrapper wrapper-content" style="margin-top: 35px">
     {% include 'footer.html' %}
-</div>
 </div>

@@ -176,7 +176,7 @@ server changed there. Before each page below, diff it against `original/` and bu
       JS-toggled panels (`.mod-security-wrapper/-logs/-ipchecker/-rules`) and all ids are unchanged. Not done: the domain
       table, log and rules views are filled by AJAX so they are not yet checked visually (needs mock data); rules
       editor/CodeMirror tab was already disabled in the original. Not tested on a real server.
-- [ ] `mod_statistics.html` (151): usage / traffic stats. Plan: summary stat tiles, charts (Chart.js already loaded),
+- [x] `mod_statistics.html` (151): usage / traffic stats. Done: rebuilt on the server version (with the live log card), shared page header, form row with labels, live-log toolbar and viewer styled in CSS, inline styles and the `<style>` block moved out, ids unchanged; not done: stat tiles/charts (need JS), not tested on a real server. Original plan: Plan: summary stat tiles, charts (Chart.js already loaded),
       date range, export.
 - [ ] `mod_themely.html` (153, style block): theme chooser used by the WordPress addon. Plan: theme cards grid with
       preview image and Install button.
@@ -293,7 +293,9 @@ dropzone).
 - [ ] `mod_reseller_branding.html` (59, form): logo / name branding. Plan: preview of the logo with upload.
 - [ ] `mod_reseller_apimanager.html` (698, 5 tables): API keys and allowed IPs. Plan: split into sections with
       copy-key buttons and an access log table.
-- [ ] `mod_reseller_modsecurity.html` (161, 2 iboxes, table): ModSecurity rules for the reseller.
+- [x] `mod_reseller_modsecurity.html` (161, 2 iboxes, table): ModSecurity rules for the reseller. Done: inline styles and
+      dead commented block removed, label typos fixed (Domian, Tipo); reuses the ModSecurity page CSS, ids and handlers
+      unchanged. Not checked visually (AJAX-filled).
 - [x] `mod_reseller_firewall.html` (30): firewall. Plan: rule table + add-rule form.
 
 ### 4.8 Streaming and misc

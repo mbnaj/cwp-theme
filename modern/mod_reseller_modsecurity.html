@@ -16,8 +16,8 @@
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Domian</th>
-                            <th scope="col">Tipo</th>
+                            <th scope="col">Domain</th>
+                            <th scope="col">Type</th>
                             <th scope="col">Username</th>
                             <th scope="col">Actions</th>
                         </tr>
@@ -58,11 +58,11 @@
                                     <div class="">
                                         <div class="">
                                             <input type="hidden" id="usernameregla">
-                                            <input type="text" style="margin-top:10px;" class="form-control"
+                                            <input type="text" class="form-control"
                                                 data-required="true" id="addID" maxlength="6" placeholder="Rule ID to Add"
                                                 name="addID">
                                         </div>
-                                        <button type="button" style="margin:10px 0px;" onclick="addNeRuleID(this)"
+                                        <button type="button" onclick="addNeRuleID(this)"
                                             class="btn btn-success btn-block" name="button" id="bt_add_rule"><i
                                                 class="fa fa-floppy-o"></i> {{langmod.SECLABEL42}}</button>
                                         <div class="alert alert-info">
@@ -108,8 +108,7 @@
                         <div class="col-md-4">
                             <div class="input-group input-icon">
                                 <span class="input-group-addon"><i class="fa fa-search s16"></i></span>
-                                <input type="text" class="form-control" id="check_ip_field" size="30"
-                                    style="top: 0px!important">
+                                <input type="text" class="form-control" id="check_ip_field" size="30">
                             </div>
                         </div>
                         <!--<div class="col-md-4">
@@ -122,7 +121,7 @@
                         </div>
                     </div>
                     <input type="hidden" id="domainhidd">
-                    <pre id="IPlog_area_viewer" class="mod-security-log-display" style="margin-top: 10px"></pre>
+                    <pre id="IPlog_area_viewer" class="mod-security-log-display"></pre>
                 </div>
                 <div class="Iplogs-wrapper-error">
                     <div class="IPlogs-wrapper-error-content">
@@ -141,16 +140,16 @@
 </div>
 
 <div class="modal" id="deleterule" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-sm" style="width:300px">
+    <div class="modal-dialog modal-sm">
         <div class="modal-content animated fadeIn">
-            <div class="modal-header" style="padding: 10px;">
+            <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">
                     <span aria-hidden="true">×</span>
                     <span class="sr-only">Close</span>
                 </button>
-                <h4 class="modal-title" style="font-size:2rem">Confirm  Delete</h4>
+                <h4 class="modal-title">Confirm Delete</h4>
             </div>
-            <div class="modal-body" style="padding: 20px;">
+            <div class="modal-body">
 
             </div>
             <div class="modal-footer">

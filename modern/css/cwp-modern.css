@@ -663,3 +663,15 @@ label { font-weight: 600; color: #4b556b; }
 /* Reseller firewall: IP field + button */
 .cwp-fw-row { grid-template-columns: minmax(0, 1fr) auto; max-width: 640px; }
 .cwp-fw-row .help-block { margin-bottom: 0; }
+
+/* Statistics page */
+.cwp-stat-form { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px 16px; margin-bottom: 12px; }
+.cwp-stat-form .form-group { margin-bottom: 0; }
+@media (max-width: 767px) { .cwp-stat-form { grid-template-columns: 1fr; } }
+.cwp-stack { display: grid; gap: 10px; }
+.cwp-live-bar { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 3fr) auto auto; gap: 10px; align-items: center; margin-bottom: 10px; }
+@media (max-width: 767px) { .cwp-live-bar { grid-template-columns: 1fr auto; } .cwp-live-bar select { grid-column: 1 / -1; } }
+.cwp-live-check { margin: 0; font-weight: 600; white-space: nowrap; }
+.cwp-live-out { height: 360px; overflow: auto; background: #1b1e24; color: #cfd3d8; font-size: 12px; padding: 10px; margin: 0; white-space: pre-wrap; word-break: break-all; border: 0; border-radius: 4px; }
+@keyframes statLivePulse { 0%, 100% { opacity: 1; } 50% { opacity: .25; } }
+.stat-live-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #1c84c6; margin-left: 6px; animation: statLivePulse 1.6s ease-in-out infinite; }
