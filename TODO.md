@@ -169,8 +169,13 @@ server changed there. Before each page below, diff it against `original/` and bu
       inline `<style>` moved to CSS, `Home` uses `langene.GENLABLANG1`. `notification_center.js.twig` untouched.
       Not done: "select all", save bar, per-type email / panel / sound columns (needs JS and server data). Rendered in
       preview (HTTP 200, no Twig errors); not yet checked visually at 375px; not tested on a real server.
-- [ ] `mod_mod_security.html` (438, 4 iboxes, tabs, CodeMirror, switch): ModSecurity for the user. Plan: status card with
+- [x] `mod_mod_security.html` (done, see notes below). Original plan: status card with
       on/off, rules editor in CodeMirror, whitelist table, explanatory help.
+      Done: shared page header and two-column layout, inline `<style>` (about 170 lines) moved to CSS, `Home` uses
+      `langene.GENLABLANG1`, undefined `stflalert` use removed, dead commented tabs block removed, footer added. The
+      JS-toggled panels (`.mod-security-wrapper/-logs/-ipchecker/-rules`) and all ids are unchanged. Not done: the domain
+      table, log and rules views are filled by AJAX so they are not yet checked visually (needs mock data); rules
+      editor/CodeMirror tab was already disabled in the original. Not tested on a real server.
 - [ ] `mod_statistics.html` (151): usage / traffic stats. Plan: summary stat tiles, charts (Chart.js already loaded),
       date range, export.
 - [ ] `mod_themely.html` (153, style block): theme chooser used by the WordPress addon. Plan: theme cards grid with
