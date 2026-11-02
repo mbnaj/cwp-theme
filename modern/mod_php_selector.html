@@ -1,0 +1,25 @@
+<div class="cwp-page">
+    {% if mod.fsl == 1 %}
+    {% set stflalert ='block' %}
+    {% else %}
+    {% set stflalert ='none' %}
+    {% endif %}
+    <div class="alert alert-warning" style="display:{{stflalert}}" id="alertfl">
+        <strong>{{langene.GALARTFILEBLOCK}}</strong>
+    </div>
+    <div class="cwp-page-head">
+        <div>
+            <h2>{{langmod.TITLE}} <small>({{users}})</small></h2>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="?">{{langene.GENLABLANG1}}</a></li>
+                <li class="breadcrumb-item active"><strong>{{langmod.TITLE}}</strong></li>
+            </ol>
+        </div>
+    </div>
+    {% if cloudlinux.st == 0 %}
+    <div class="alert alert-warning">
+        <strong>{{langene.WAR1}}!</strong> {{langene.ERRORCLOUD}}
+    </div>
+    {% endif %}
+    {% include 'footer.html' %}
+</div>

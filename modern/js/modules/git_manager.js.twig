@@ -1,0 +1,382 @@
+/* Git Manager Module JS - v1.1 */
+var git_repos = [];
+var git_features = {};
+try {
+    git_repos = JSON.parse('{{ mod.repos|default([])|json_encode|raw|escape("js") }}');
+    git_features = JSON.parse('{{ mod.features|default({})|json_encode|raw|escape("js") }}');
+} catch(e) {
+    console.error("JSON parsing error", e);
+}
+var git_mod_enabled = {{ mod.mod_enabled|default(false) ? 'true' : 'false' }};
+var uchip = null;
+var git_table = null;
+var currentRepoId = null;
+
+$(document).ready(function () {
+    {% if mod.isie == 1 %}
+    uchip = new $.Uchip();
+    {% else %}
+    uchip = new Uchip();
+    {% endif %}
+    table_git_repos(git_repos);
+    $('[data-toggle="tooltip"]').tooltip();
+});
+
+function openConsole(title) {
+    $('.modal').not('#gitmgrConsoleModal').modal('hide');
+    $('#gitmgrConsoleTitleText').text(title);
+    $('#gitmgrConsoleOutput').text('Executing...');
+    $('#gitmgrConsoleModal').modal('show');
+}
+function setConsoleOutput(text) {
+    $('#gitmgrConsoleOutput').text(text);
+}
+
+function copyGitKey() {
+    var text = $('#gitmgrKeyOutput').text();
+    if (!text) return;
+    
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(function() {
+            uchip.success('Key copied to clipboard');
+        }, function(err) {
+            fallbackCopyTextToClipboard(text);
+        });
+    } else {
+        fallbackCopyTextToClipboard(text);
+    }
+}
+
+function fallbackCopyTextToClipboard(text) {
+    var textArea = document.createElement("textarea");
+    textArea.value = text;
+    textArea.style.position = "fixed";
+    textArea.style.left = "-999999px";
+    textArea.style.top = "-999999px";
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    try {
+        var successful = document.execCommand('copy');
+        if (successful) {
+            noti_bubble('Key copied to clipboard', 'Success', 'success', true, false, '3000', true);
+        } else {
+            console.error('Fallback: Copying text command was unsuccessful');
+        }
+    } catch (err) {
+        console.error('Fallback: Oops, unable to copy', err);
+    }
+    document.body.removeChild(textArea);
+}
+
+function showAddForm() {
+    uchip.slideToggle('#_git_add_form_view_', '#list_wrapper');
+}
+function cancelAddForm() {
+    uchip.slideToggle('#list_wrapper', '#_git_add_form_view_', function() {
+        $('#gitmgr-add-form')[0].reset();
+    });
+}
+
+function gitAjax(action, data, success, cleaner) {
+    uchip.call('module=git_manager&acc=' + action, {
+        data: $.param(data),
+        callback: function(resp_data) {
+            if (resp_data.hasOwnProperty('result') && resp_data.result === 'success') {
+                success(resp_data);
+            } else {
+                if (resp_data.code === 8) {
+                    openConsole('Duplicate Repository');
+                    setConsoleOutput(resp_data.output);
+                    if (cleaner) cleaner();
+                    return;
+                }
+                if (resp_data.code === 7 && resp_data.public_key) {
+                    $('#gitmgrConsoleModal').modal('hide');
+                    currentRepoId = resp_data.repo_id;
+                    $('#gitmgrKeyOutput').text(resp_data.public_key);
+                    $('#gitmgrCloneRetryArea').show();
+                    $('#btn_retry_pull').show();
+                    $('#gitmgrKeyModal').modal('show');
+                    $('#gitmgrKeyModal').on('hidden.bs.modal', function () {
+                        // Refresh to see the partial repo in list
+                        location.reload();
+                    });
+                } else if (resp_data.hasOwnProperty('output')) {
+                    openConsole('Error - Failed');
+                    setConsoleOutput(resp_data.output);
+                }
+                if (cleaner) cleaner();
+            }
+        }
+    });
+}
+
+
+
+function retryPullFromModal() {
+    if (!currentRepoId) {
+        location.reload();
+        return;
+    }
+    $('#gitmgrKeyModal').off('hidden.bs.modal'); // Prevent the reload on hide
+    $('#gitmgrKeyModal').modal('hide');
+    
+    openConsole('Setup Repository');
+    gitAjax('pull_repo', {repo_id: currentRepoId}, function(res) {
+        noti_bubble('Repository setup completed successfully.', 'Success', 'success', true, false, '3000', true);
+        $('#gitmgrConsoleTitleText').append(' - Finished');
+        setConsoleOutput(res.output || 'Setup completed successfully.');
+        $('#gitmgrConsoleModal').on('hidden.bs.modal', function () {
+            location.reload();
+        });
+    }, function() {
+        // If it fails again, we might want to reload to show the repo in list
+        $('#gitmgrConsoleModal').on('hidden.bs.modal', function () {
+            location.reload();
+        });
+    });
+}
+
+function table_git_repos(list) {
+    git_repos = list;
+    if (git_repos.length > 0) {
+        let html_content = '';
+        let index = 0;
+        git_repos.forEach(function(repo) {
+            let authIcon = '<i class="fa fa-lock" style="color:#f0ad4e;" title="HTTPS" data-toggle="tooltip" data-placement="top"></i>';
+            if (repo.has_key) {
+                authIcon = '<i class="fa fa-key" style="color:#5cb85c;" title="SSH" data-toggle="tooltip" data-placement="top"></i>';
+            }
+
+            let actionBtns = '';
+            {% if (mod.features.pull_deploy is defined and mod.features.pull_deploy != false) or (mod.features is not defined) %}
+            actionBtns += '<button type="button" class="btn btn-success btn-xs mr5 mb10 gitmgr-pull-btn" title="{{langmod.GITMGRPULL}}" data-toggle="tooltip" data-placement="top">' +
+                '<i class="fa fa-download"></i></button>';
+            {% endif %}
+            {% if (mod.features.git_log is defined and mod.features.git_log != false) or (mod.features is not defined) %}
+            actionBtns += '<button type="button" class="btn btn-primary btn-xs mr5 mb10 gitmgr-log-btn" title="{{langmod.GITMGRLOG}}" data-toggle="tooltip" data-placement="top" style="margin-left: 3px;">' +
+                '<i class="fa fa-clock-o"></i></button>';
+            {% endif %}
+            {% if (mod.features.deploy_keys is defined and mod.features.deploy_keys != false) or (mod.features is not defined) %}
+            actionBtns += '<button type="button" class="btn btn-info btn-xs mr5 mb10 gitmgr-key-btn" title="{{langmod.GITMGRKEY}}" data-toggle="tooltip" data-placement="top" style="margin-left: 3px;">' +
+                '<i class="fa fa-key"></i></button>';
+            {% endif %}
+            {% if (mod.features.webhooks is defined and mod.features.webhooks != false) or (mod.features is not defined) %}
+            actionBtns += '<button type="button" class="btn btn-warning btn-xs mr5 mb10 gitmgr-webhook-btn" title="{{langmod.GITMGRWEBHOOK}}" data-toggle="tooltip" data-placement="top" style="margin-left: 3px;">' +
+                '<i class="fa fa-bolt"></i></button>';
+            {% endif %}
+            actionBtns += '<button type="button" class="btn btn-info btn-xs mr5 mb10 gitmgr-branch-btn" title="{{langmod.GITMGRBRANCH}}" data-toggle="tooltip" data-placement="top" style="margin-left: 3px;">' +
+                '<i class="fa fa-code-fork"></i></button>';
+            actionBtns += '<button type="button" class="btn btn-danger btn-xs mr5 mb10 gitmgr-delete-btn" title="{{langmod.GITMGRREMOVE}}" data-toggle="tooltip" data-placement="top" style="margin-left: 3px;">' +
+                '<i class="fa fa-trash"></i></button>';
+
+            html_content += '<tr id="trgitrepo_' + index + '" class="gradeA odd" role="row" data-repo-id="' + repo.id + '">' +
+                '<td class="td-table-gitrepo"><i class="fa fa-code-fork" style="color:#3399cc;margin-right:5px;"></i> ' + repo.name + '</td>' +
+                '<td align="center" class="td-table-gitrepo-icon"><code>' + repo.branch + '</code></td>' +
+                '<td class="td-table-gitrepo"><i class="fa fa-folder" style="color:#999;margin-right:5px;"></i> ' + repo.target_dir + '</td>' +
+                '<td align="center" class="td-table-gitrepo-icon">' + authIcon + '</td>' +
+                '<td align="center" class="td-table-gitrepo">' + repo.added_at + '</td>' +
+                '<td align="center" class="td-table-gitrepo-btn">' + actionBtns + '</td>' +
+                '</tr>';
+            index++;
+        });
+
+        let table_html = '<table class="table gitrepo_table table-striped table-bordered table-hover">' +
+            '<thead>' +
+            '<tr role="row">' +
+            '<th>{{langmod.GITMGRNAME}}</th>' +
+            '<th>{{langmod.GITMGRBRANCH}}</th>' +
+            '<th>{{langmod.GITMGRTARGET}}</th>' +
+            '<th>{{langmod.GITMGRAUTH}}</th>' +
+            '<th>{{langmod.GITMGRDATE}}</th>' +
+            '<th>{{langmod.GITMGRACTIONS}}</th>' +
+            '</tr>' +
+            '</thead>' +
+            '<tbody id="contenttr">' +
+            html_content +
+            '</tbody>' +
+            '</table>';
+
+        $('#table_repos_wrapper').html(table_html);
+        $('.gitrepo_table').DataTable().destroy();
+        git_table = $('.gitrepo_table').DataTable();
+        $('[data-toggle="tooltip"]').tooltip();
+    } else {
+        $('#table_repos_wrapper').html('<div class="empty_list"><h4 class="text-success">{{langmod.GITMGREMPTY}}</h4></div>');
+    }
+}
+
+function gitCloneRepo() {
+    var $form = $('#gitmgr-add-form');
+    if (!$form[0].checkValidity()) { $form[0].reportValidity(); return; }
+
+    uchip.handleButton('.btn-save-gitrepo', 'fa-floppy-o');
+    uchip.handleButton('#gitmgr-clone-btn', 'fa-floppy-o');
+    openConsole('Clone Repository');
+
+    gitAjax('clone_repo', {
+        repo_url: $('[name=repo_url]').val(),
+        branch: $('[name=branch]').val(),
+        target_dir: $('[name=target_dir]').val(),
+        repo_name: $('[name=repo_name]').val()
+    }, function(res) {
+        uchip.handleButton('.btn-save-gitrepo', 'fa-floppy-o', true);
+        uchip.handleButton('#gitmgr-clone-btn', 'fa-floppy-o', true);
+        noti_bubble('Repository cloned successfully.', 'Success', 'success', true, false, '3000', true);
+        $('#gitmgrConsoleTitleText').append(' - Finished');
+        setConsoleOutput(res.output || 'Clone completed successfully.');
+        $('#gitmgrConsoleModal').on('hidden.bs.modal', function () {
+            location.reload();
+        });
+    }, function() {
+        uchip.handleButton('.btn-save-gitrepo', 'fa-floppy-o', true);
+        uchip.handleButton('#gitmgr-clone-btn', 'fa-floppy-o', true);
+    });
+}
+
+$(document).on('click', '.gitmgr-pull-btn', function() {
+    var $tr = $(this).closest('tr');
+    currentRepoId = $tr.data('repo-id');
+    var $btn = $(this);
+    uchip.handleButton($btn, 'fa-download');
+    openConsole('Pull & Deploy');
+
+    gitAjax('pull_repo', {repo_id: currentRepoId}, function(res) {
+        uchip.handleButton($btn, 'fa-download', true);
+        noti_bubble('Pull & Deploy completed successfully.', 'Success', 'success', true, false, '3000', true);
+        $('#gitmgrConsoleTitleText').append(' - Finished');
+        setConsoleOutput(res.output || 'Pull completed successfully.');
+        $('#gitmgrConsoleModal').on('hidden.bs.modal', function () {
+            location.reload();
+        });
+    }, function() {
+        uchip.handleButton($btn, 'fa-download', true);
+    });
+});
+
+$(document).on('click', '.gitmgr-log-btn', function() {
+    var $tr = $(this).closest('tr');
+    currentRepoId = $tr.data('repo-id');
+    
+    $('#gitmgrLogTableBody').html('<tr><td colspan="4" align="center"><i class="fa fa-circle-o-notch fa-spin"></i> Loading logs...</td></tr>');
+    $('#gitmgrLogModal').modal('show');
+
+    gitAjax('git_log', {repo_id: currentRepoId}, function(res) {
+        if (!res.commits || res.commits.length === 0) {
+            $('#gitmgrLogTableBody').html('<tr><td colspan="4" align="center">No commits found.</td></tr>');
+            return;
+        }
+        var html = '';
+        res.commits.forEach(function(c) {
+            html += '<tr>' +
+                '<td><code style="font-size:11px">' + c.hash + '</code></td>' +
+                '<td>' + c.author + '</td>' +
+                '<td><small>' + c.date + '</small></td>' +
+                '<td>' + c.message + '</td>' +
+                '</tr>';
+        });
+        $('#gitmgrLogTableBody').html(html);
+    });
+});
+
+$(document).on('click', '.gitmgr-key-btn', function() {
+    var $tr = $(this).closest('tr');
+    currentRepoId = $tr.data('repo-id');
+
+    gitAjax('get_public_key', {repo_id: currentRepoId}, function(res) {
+        $('#gitmgrKeyOutput').text(res.public_key || 'No deploy key found.');
+        $('#gitmgrKeyModal').modal('show');
+    });
+});
+
+$(document).on('click', '.gitmgr-webhook-btn', function() {
+    var $tr = $(this).closest('tr');
+    currentRepoId = $tr.data('repo-id');
+    $('#gitmgr-webhook-secret').val('');
+    $('#gitmgr-webhook-result').hide();
+    $('#gitmgrWebhookModal').modal('show');
+});
+
+$(document).on('click', '.gitmgr-branch-btn', function() {
+    var $tr = $(this).closest('tr');
+    currentRepoId = $tr.data('repo-id');
+    
+    $('#gitmgrBranchListLoader').show();
+    $('#gitmgrBranchListArea').hide();
+    $('#gitmgrBranchModal').modal('show');
+
+    gitAjax('get_branches', {repo_id: currentRepoId}, function(res) {
+        $('#gitmgrBranchListLoader').hide();
+        $('#gitmgrBranchListArea').show();
+        var html = '';
+        res.branches.forEach(function(b) {
+            var activeClass = b.current ? 'active' : '';
+            var icon = b.current ? '<i class="fa fa-check-circle"></i> ' : '<i class="fa fa-circle-o"></i> ';
+            html += '<a href="#" class="list-group-item ' + activeClass + '" onclick="switchGitBranch(\'' + b.name + '\')">' +
+                icon + b.name + '</a>';
+        });
+        $('#gitmgrBranchListItems').html(html);
+    });
+});
+
+function switchGitBranch(branch) {
+    $('#gitmgrBranchListArea').hide();
+    $('#gitmgrBranchListLoader').show().find('p').text('Switching to ' + branch + '...');
+    
+    gitAjax('switch_branch', {repo_id: currentRepoId, branch: branch}, function(res) {
+        noti_bubble('Switched to ' + branch + ' successfully.', 'Success', 'success', true, false, '3000', true);
+        $('#gitmgrBranchModal').modal('hide');
+        location.reload();
+    }, function() {
+        $('#gitmgrBranchListLoader').hide();
+        $('#gitmgrBranchListArea').show();
+    });
+}
+
+$('#gitmgr-generate-webhook-btn').on('click', function() {
+    var secret = $('#gitmgr-webhook-secret').val();
+    if (secret.length < 16) {
+        $('#gitmgr-webhook-secret').css('border-color', 'lightcoral');
+        return;
+    }
+    $('#gitmgr-webhook-secret').css('border-color', '');
+    var $btn = $(this);
+    uchip.handleButton($btn, 'fa-bolt');
+
+    gitAjax('generate_webhook', {repo_id: currentRepoId, webhook_secret: secret}, function(res) {
+        uchip.handleButton($btn, 'fa-bolt', true);
+        $('#gitmgr-webhook-file').text(res.file + '\n\nAccess: ' + res.url);
+        $('#gitmgr-webhook-alert').removeClass('alert-danger').addClass('alert-success')
+            .html('<i class="fa fa-check-circle"></i> Webhook endpoint generated.');
+        $('#gitmgr-webhook-result').show();
+    }, function() {
+        uchip.handleButton($btn, 'fa-bolt', true);
+    });
+});
+
+$(document).on('click', '.gitmgr-delete-btn', function() {
+    var $tr = $(this).closest('tr');
+    var index = $tr.index();
+    currentRepoId = $tr.data('repo-id');
+    var $btn = $(this);
+
+    $('#gitmgrDeleteModal').modal('show');
+    
+    $('#gitmgr-confirm-delete-btn').off('click').on('click', function() {
+        $('#gitmgrDeleteModal').modal('hide');
+        uchip.handleButton($btn, 'fa-trash');
+        $tr.addClass('deleting_tr');
+
+        gitAjax('delete_repo', {repo_id: currentRepoId}, function(res) {
+            $tr.slideUp('fast', function() {
+                git_table.row(this).remove().draw();
+            });
+            git_repos.splice(index, 1);
+            $('#git_repos_count').text(git_repos.length);
+        }, function() {
+            $tr.removeClass('deleting_tr');
+            uchip.handleButton($btn, 'fa-trash', true);
+        });
+    });
+});

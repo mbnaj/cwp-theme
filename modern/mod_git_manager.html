@@ -1,0 +1,9 @@
+<style>
+    {% include 'modules/git_manager/styles.css' %}
+</style>
+{% if mod.mod_installed == 1 and mod.usr_config.user_enabled == 1 %}
+    {% include 'modules/git_manager/dashboard.html' %}
+{% else %}
+    {% include 'modules/git_manager/not_available.html' %}
+{% endif %}
+{% include 'modules/git_manager/modals.html' %}
