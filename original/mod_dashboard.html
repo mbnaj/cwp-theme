@@ -1,0 +1,836 @@
+<style media="screen">
+  #legend {
+    display:flex;
+  }
+  .color_box{
+    height: 10px;
+    width: 10px;
+    position: relative;
+    display: inline-block;
+    top: 0.5rem;
+  }
+  .legendera{
+    margin-right: 10px;
+    margin-left: 5px;
+  }
+  #bandwidth-line-chart, .graph-nodata{
+    height:220px;
+  }
+  .graph-nodata{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: 600;
+  }
+  .band-graph-title{
+    display:flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .band-graph-select{
+    width: 30%;
+    margin-left: 10px;
+  }
+  .band-view-select{
+    width: auto;
+    min-width: 140px;
+    margin-left: 10px;
+  }
+  #band_month_wrap{ display:inline-block; margin-left:10px; }
+  #band_month_wrap .band-graph-select{ width:auto; min-width:150px; margin-left:0; }
+  .cwp-live-controls{
+    display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin-bottom:10px;
+  }
+  .cwp-live-controls select{ width:auto; min-width:140px; }
+  .cwp-live-controls #cwp_live_domain{ min-width:220px; max-width:100%; }
+  .cwp-live-auto{ margin:0; font-weight:600; color:#5e6b77; display:flex; align-items:center; gap:5px; }
+  .cwp-live-status{ font-size:12px; color:#9aa6b1; }
+  .cwp-live-out{
+    margin:0; height:420px; overflow:auto; white-space:pre-wrap; word-break:break-all;
+    background:#0b0b0b; color:#d7e2c8; border:1px solid #1f2a22; border-radius:4px;
+    padding:12px 14px; font:12px/1.5 Menlo,Consolas,"DejaVu Sans Mono",monospace;
+  }
+  .footer{
+    position: relative;
+    margin: auto -15px;
+  }
+  .dashboard-wrapper{
+    margin-top:2rem;
+  }
+  .cwp-kpi-row { margin-bottom: 4px; }
+  .cwp-kpi-link, .cwp-kpi-link:hover, .cwp-kpi-link:focus { text-decoration:none; display:block; color:#fff; }
+  .cwp-kpi-row .widget { border-radius:8px; transition: transform .15s ease, box-shadow .15s ease; }
+  .cwp-kpi-link:hover .widget { transform: translateY(-3px); box-shadow: 0 10px 22px rgba(0,0,0,.18); }
+  .cwp-kpi-row .widget h2 { color:#fff; margin:4px 0 0; }
+  .cwp-kpi-row .widget h2 small { color:rgba(255,255,255,.75); font-size:14px; }
+  .cwp-kpi-row .widget span { color:rgba(255,255,255,.85); }
+  .cwp-kpi-row .widget .fa { opacity:.5; }
+  .cwp-kpi-grid { display:flex; flex-wrap:wrap; gap:12px; margin-bottom:12px; }
+  .cwp-kpi-grid .cwp-kpi-link { flex:1 1 140px; min-width:132px; text-decoration:none; display:block; }
+  .cwp-kpi { position:relative; overflow:hidden; border-radius:8px; padding:14px 16px; color:#fff; transition:transform .15s ease, box-shadow .15s ease; }
+  .cwp-kpi-link:hover .cwp-kpi { transform:translateY(-3px); box-shadow:0 10px 22px rgba(0,0,0,.18); }
+  .cwp-kpi .fa { position:absolute; top:12px; right:14px; font-size:22px; opacity:.45; }
+  .cwp-kpi-lbl { font-size:11.5px; opacity:.9; text-transform:uppercase; letter-spacing:.3px; }
+  .cwp-kpi-num { font-size:23px; font-weight:700; line-height:1.15; margin-top:4px; }
+  .cwp-kpi-num small { font-size:12.5px; opacity:.75; font-weight:400; }
+  .cwp-kpi-bar { height:4px; border-radius:3px; background:rgba(255,255,255,.22); margin-top:10px; overflow:hidden; }
+  .cwp-kpi-bar span { display:block; height:100%; border-radius:3px; background:rgba(255,255,255,.9); animation:cwpBarGrow 1s ease; }
+  @keyframes cwpBarGrow { from { width:0; } }
+  .cwp-disk-wrap { display:flex; align-items:center; gap:16px; flex-wrap:wrap; }
+  .cwp-disk-chart { position:relative; width:150px; height:150px; flex:none; margin:4px auto; }
+  .cwp-disk-center { position:absolute; top:0; left:0; right:0; bottom:0; display:flex; flex-direction:column; align-items:center; justify-content:center; pointer-events:none; }
+  .cwp-disk-center b { font-size:19px; color:#2b3340; line-height:1; }
+  .cwp-disk-center span { font-size:11px; color:#9aa4ae; margin-top:2px; }
+  .cwp-disk-legend { list-style:none; margin:0; padding:0; flex:1 1 150px; min-width:140px; }
+  .cwp-disk-legend li { display:flex; align-items:center; gap:9px; padding:7px 0; font-size:13px; color:#5e6b77; border-bottom:1px solid #f3f5f7; }
+  .cwp-disk-legend li:last-child { border-bottom:0; }
+  .cwp-disk-legend .dot { width:10px; height:10px; border-radius:50%; flex:none; }
+  .cwp-disk-legend .lg-val { margin-left:auto; font-weight:600; color:#2b3340; }
+  .cwp-kpi { animation: cwpFadeUp .45s ease both; }
+  .cwp-kpi-grid .cwp-kpi-link:nth-child(2) .cwp-kpi { animation-delay:.05s; }
+  .cwp-kpi-grid .cwp-kpi-link:nth-child(3) .cwp-kpi { animation-delay:.10s; }
+  .cwp-kpi-grid .cwp-kpi-link:nth-child(4) .cwp-kpi { animation-delay:.15s; }
+  .cwp-kpi-grid .cwp-kpi-link:nth-child(5) .cwp-kpi { animation-delay:.20s; }
+  .cwp-kpi-grid .cwp-kpi-link:nth-child(6) .cwp-kpi { animation-delay:.25s; }
+  .cwp-kpi-grid .cwp-kpi-link:nth-child(7) .cwp-kpi { animation-delay:.30s; }
+  @keyframes cwpFadeUp { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+  .cwp-acc-info { margin:0; }
+  .cwp-acc-info .list-group-item { display:flex; align-items:center; gap:10px; justify-content:flex-start; border:0; border-bottom:1px solid #f0f2f4; padding:11px 2px; background:transparent; }
+  .cwp-acc-info .list-group-item:last-child { border-bottom:0; }
+  .cwp-acc-info .fa { width:30px; height:30px; line-height:30px; text-align:center; border-radius:7px; background:#eaf3fb; color:#1c84c6; flex:none; font-size:14px; }
+  .cwp-acc-info .lbl { color:#9aa4ae; font-size:13px; }
+  .cwp-acc-info .val { margin-left:auto; font-weight:600; color:#3a4350; text-align:right; word-break:break-word; }
+  .cwp-acc-info .cwp-ns b { color:#1c84c6; }
+  .cwp-live-dot { display:inline-block; width:8px; height:8px; border-radius:50%; background:#1c84c6; margin-left:6px; vertical-align:middle; animation:cwpLivePulse 1.6s ease-in-out infinite; }
+  @keyframes cwpLivePulse { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:.3;transform:scale(.55);} }
+  .dashboard-wrapper .ibox{
+    margin-bottom:15px;
+  }
+  .dashboard-wrapper .ibox .ibox-content{
+    padding-bottom:35px;
+  }
+  .dashboard-wrapper .ibox .ibox-content .row{
+    margin-top: 15px;
+  }
+  .dashboard-item { margin-bottom: 12px; }
+  .dashboard-item a{
+    display:flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    border: 1px solid #e7eaec;
+    border-radius: 10px;
+    background: #fff;
+    color: #5e5e5e;
+    transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+  }
+  .dashboard-item a:hover{
+    transform: translateY(-3px);
+    box-shadow: 0 10px 22px rgba(0,0,0,.10);
+    border-color: #1c84c6;
+    text-decoration: none;
+  }
+  .dashboard-item a i{
+    margin: 0;
+    border-radius: 10px;
+    padding: 0;
+    width: 52px; height: 52px; line-height: 52px;
+    font-size: 1.9rem;
+    text-align: center;
+    flex: none;
+    color: #1c84c6;
+    background: #eaf3fb;
+    box-shadow: none;
+    transition: background .15s ease, color .15s ease;
+  }
+  .dashboard-item a:hover i{
+    background-color: #1c84c6;
+    color: #fff;
+    border-color: transparent;
+  }
+  .dashboard-item a span{
+    font-weight: 600;
+  }
+  .dashboard-item a:hover span{
+    text-decoration: none;
+    color: #1c84c6;
+  }
+  .statistic-box{
+    margin-top: 0px !important;
+  }
+  .graph-stats-wrapper{
+    padding-top: 0px;
+    padding-bottom: 15px !important;
+  }
+  .list-group-item{
+    display:flex;
+    justify-content: space-around;
+  }
+  .list-group-item .label.label-success{
+    width: 11rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+  .last-access-date{
+    font-size:1.2rem;
+  }
+  .infinite-sign{
+    font-size: 2.2rem;
+    position: absolute;
+    margin-top: -6px;
+    font-weight: 500;
+  }
+  .list-group .list-group-item:last-child{
+    border-bottom: 1px solid #e7eaec;
+  }
+  .server-status small{
+    font-size: 80%;
+    padding-top: 8px;
+    display: block;
+  }
+</style>
+{% if mod.view_band_graph == 'true' %}
+{% set icon ='fa-chevron-up' %}
+{% set display_graph ='normal' %}
+{% else %}
+{% set icon ='fa-chevron-down' %}
+{% set display_graph ='none' %}
+{% endif %}
+<div class="dashboard-wrapper">
+    {# ===== Compact KPI tiles (narrow, colored) ===== #}
+    <div class="cwp-kpi-grid">
+      <a href="?module=disk_usage" class="cwp-kpi-link">
+        <div class="cwp-kpi navy-bg"><i class="fa fa-hdd-o"></i>
+          <div class="cwp-kpi-lbl">Disk</div>
+          <div class="cwp-kpi-num">{{ mod.disk_used_h }}<small> / {{ mod.disk_limit_h }}</small></div>
+          <div class="cwp-kpi-bar"><span style="width:{{mod.disk_pct}}%"></span></div>
+        </div>
+      </a>
+      <a href="#" class="cwp-kpi-link">
+        <div class="cwp-kpi lazur-bg"><i class="fa fa-exchange"></i>
+          <div class="cwp-kpi-lbl">Bandwidth</div>
+          <div class="cwp-kpi-num">{{ mod.bw_used_h }}<small> / {{ mod.bw_limit_h }}</small></div>
+          <div class="cwp-kpi-bar"><span style="width:{{mod.bw_pct}}%"></span></div>
+        </div>
+      </a>
+      <a href="?module=email_accounts" class="cwp-kpi-link">
+        <div class="cwp-kpi blue-bg"><i class="fa fa-envelope"></i>
+          <div class="cwp-kpi-lbl">{{langene.PGEMAIL}}</div>
+          <div class="cwp-kpi-num"><span class="cwp-count">{{mod.email_accounts}}</span><small> / {% if mod.email_pack != '-1' %}{{mod.email_pack}}{% else %}&infin;{% endif %}</small></div>
+          <div class="cwp-kpi-bar"><span style="width:{{mod.email_pct}}%"></span></div>
+        </div>
+      </a>
+      <a href="?module=mysql_manager" class="cwp-kpi-link">
+        <div class="cwp-kpi yellow-bg"><i class="fa fa-database"></i>
+          <div class="cwp-kpi-lbl">{{langene.PGMYSQL}}</div>
+          <div class="cwp-kpi-num"><span class="cwp-count">{{mod.mysqlpack.used}}</span><small> / {% if mod.mysqlpack.package != '-1' %}{{mod.mysqlpack.package}}{% else %}&infin;{% endif %}</small></div>
+          <div class="cwp-kpi-bar"><span style="width:{{mod.mysql_pct}}%"></span></div>
+        </div>
+      </a>
+      <a href="?module=domains" class="cwp-kpi-link">
+        <div class="cwp-kpi navy-bg"><i class="fa fa-globe"></i>
+          <div class="cwp-kpi-lbl">{{langene.PGDOMAINS}}</div>
+          <div class="cwp-kpi-num"><span class="cwp-count">{{mod.domain_accounts}}</span><small> / {% if mod.domain_pack != '-1' %}{{mod.domain_pack}}{% else %}&infin;{% endif %}</small></div>
+          <div class="cwp-kpi-bar"><span style="width:{{mod.domain_pct}}%"></span></div>
+        </div>
+      </a>
+      <a href="?module=subdomains" class="cwp-kpi-link">
+        <div class="cwp-kpi lazur-bg"><i class="fa fa-sitemap"></i>
+          <div class="cwp-kpi-lbl">{{langene.SUBDOMAIN}}</div>
+          <div class="cwp-kpi-num"><span class="cwp-count">{{mod.subdomain_accounts}}</span><small> / {% if mod.subdomain_pack != '-1' %}{{mod.subdomain_pack}}{% else %}&infin;{% endif %}</small></div>
+          <div class="cwp-kpi-bar"><span style="width:{{mod.subdomain_pct}}%"></span></div>
+        </div>
+      </a>
+      <a href="?module=ftp_accounts" class="cwp-kpi-link">
+        <div class="cwp-kpi blue-bg"><i class="fa fa-folder-open"></i>
+          <div class="cwp-kpi-lbl">{{langene.PGFTP}}</div>
+          <div class="cwp-kpi-num"><span class="cwp-count">{{mod.ftp_accounts}}</span><small> / {% if mod.ftp_pack != '-1' %}{{mod.ftp_pack}}{% else %}&infin;{% endif %}</small></div>
+          <div class="cwp-kpi-bar"><span style="width:{{mod.ftp_pct}}%"></span></div>
+        </div>
+      </a>
+    </div>
+    {% if mod.compbandw == 0 %}
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="ibox">
+        <div class="ibox-title">
+            <div class="band-graph-title">
+              <h5><i class="fa fa-bar-chart-o"></i> {{langene.GRAPHTITLE}}</h5>
+              <select class="form-control band-view-select" id="band_view_select" onchange="switchBandView(this)" name="">
+                <option value="stats" selected>{{ langene.GRAPHVIEWSTATS|default('Statistics') }}</option>
+                <option value="live">{{ langene.GRAPHVIEWLIVE|default('Live access log') }}</option>
+              </select>
+              <span id="band_month_wrap">
+                <select class="form-control band-graph-select" onchange="changeGraph(this)" name="">
+                  <option value="c" selected>{{langene.GRAPHCMONTH}}</option>
+                  <option value="l">{{langene.GRAPHLMONTH}}</option>
+                </select>
+              </span>
+            </div>
+            <div class="ibox-tools">
+                <a class="collapse-link" id="toggle_graph">
+                    <i class="fa {{icon}}"></i>
+                </a>
+            </div>
+        </div>
+        <div class="ibox-content" id="graph_content" style="padding-bottom: 15px; display:{{display_graph}}">
+          <div class="row">
+            <div class="col-md-12" id="bandwidth-graph">
+              <div id="bandwidth-line-chart"></div>
+              <div id="legend"></div>
+            </div>
+          </div>
+        </div>
+        <div class="ibox-content" id="live_log_content" style="padding-bottom: 15px; display:none">
+          <div class="cwp-live-controls">
+            <select class="form-control" id="cwp_live_domain" title="{{ langene.LIVELOGDOMAIN|default('Domain') }}"></select>
+            <select class="form-control" id="cwp_live_tipe">
+              <option value="access">{{ langene.LIVELOGACCESS|default('Access log') }}</option>
+              <option value="error">{{ langene.LIVELOGERROR|default('Error log') }}</option>
+            </select>
+            <label class="cwp-live-auto"><input type="checkbox" id="cwp_live_auto" checked> {{ langene.LIVELOGLIVE|default('Live') }}</label>
+            <button class="btn btn-xs btn-default" id="cwp_live_refresh" type="button"><i class="fa fa-refresh"></i></button>
+            <span id="cwp_live_status" class="cwp-live-status"></span>
+          </div>
+          <pre id="cwp_live_out" class="cwp-live-out">{{ langene.LIVELOGPICK|default('Select a domain to start monitoring.') }}</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+    {% endif %}
+  <div class="row">
+    <div class="col-md-4">
+      <div class="ibox">
+        <div class="ibox-title">
+          <h5>
+              <i class="fa fa-users" aria-hidden="true"></i> {{langene.GNLABLE7}}
+          </h5>
+        </div>
+        <div class="ibox-content">
+          <ul class="list-group clear-list m-t">
+              {% for var in mod.lastaccess %}
+              <li class="list-group-item">
+                  <div class="label label-success">
+                    <span>{{var.ip}}</span>
+                    {% if var.flag!='' %}
+                      <img src="{{url}}/img/flags/16/{{var.flag}}.png" class="pull-right" alt="{{var.city}}/{{var.country}}" title="{{var.city}}/{{var.flag}}">
+                    {% endif %}
+                  </div>
+                  <span class="fab fa-{{var.os}}"></span>
+                  <span class="last-access-date">{{var.date|date("d/m/Y H:i")}}</span>
+              </li>
+              {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="ibox">
+        <div class="ibox-title">
+          <h5><i class="fa fa-pie-chart"></i> Disk usage</h5>
+        </div>
+        <div class="ibox-content">
+          <div class="cwp-disk-wrap">
+            <div class="cwp-disk-chart">
+              <canvas id="cwpDiskChart" width="150" height="150"
+                      data-files="{{mod.bd_files_pct}}" data-mail="{{mod.bd_mail_pct}}"
+                      data-db="{{mod.bd_db_pct}}" data-backup="{{mod.bd_backup_pct}}"></canvas>
+              <div class="cwp-disk-center"><b>{{mod.bd_total_h}}</b><span>used</span></div>
+            </div>
+            <ul class="cwp-disk-legend">
+              <li><span class="dot" style="background:#1c84c6"></span><span class="lg-lbl">Files</span><span class="lg-val">{{mod.bd_files_h}}</span></li>
+              <li><span class="dot" style="background:#23c6c8"></span><span class="lg-lbl">{{langene.PGEMAIL}}</span><span class="lg-val">{{mod.bd_mail_h}}</span></li>
+              <li><span class="dot" style="background:#f8ac59"></span><span class="lg-lbl">{{langene.PGMYSQL}}</span><span class="lg-val">{{mod.bd_db_h}}</span></li>
+              <li><span class="dot" style="background:#ed5565"></span><span class="lg-lbl">Backups</span><span class="lg-val">{{mod.bd_backup_h}}</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="ibox">
+          <div class="ibox-title">
+            <h5><i class="fa fa-info" aria-hidden="true"></i> {{langmod.SERVERSTATUS}}</h5>
+          </div>
+          <div class="ibox-content" style="padding-bottom: 15px;padding-top:5px;">
+            <div class="row" style="margin-top: 0px;">
+              <div class="col-md-12 server-status">
+                  <ul class="list-group cwp-acc-info">
+                      <li class="list-group-item"><i class="fa fa-clock-o"></i><span class="lbl">{{langmod.GNLABEL21}}</span><span class="val"><span id="cwp-srv-clock">{{ "now"|date("Y-m-d H:i:s") }}</span> <span class="cwp-live-dot" title="live"></span></span></li>
+                      <li class="list-group-item"><i class="fa fa-cube"></i><span class="lbl">{{langmod.GNLABEL22}}</span><span class="val">{{mod.package_username}}</span></li>
+                      <li class="list-group-item"><i class="fa fa-user"></i><span class="lbl">{{langene.GNLABEL27}}</span><span class="val">{{mod.domain_username}}</span></li>
+                      <li class="list-group-item"><i class="fa fa-desktop"></i><span class="lbl">{{ langene.SERVERNAME|default('Server name') }}</span><span class="val">{{mod.infoserver.name}}</span></li>
+                      <li class="list-group-item"><i class="fa fa-server"></i><span class="lbl">{{langmod.GNLABEL23}}</span><span class="val">{{settings.ipserver}}</span></li>
+                      <li class="list-group-item"><i class="fa fa-globe"></i><span class="lbl">{{langmod.GNLABEL24}}</span><span class="val cwp-ns">{{dnsname.ns1}}<br>{{dnsname.ns2}}</span></li>
+                  </ul>
+             </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+  {% if (("crontab" in rmenu )or("process_list" in rmenu )or("phpini_editor" in rmenu )or("phpselector" in rmenu )or("notification_center" in rmenu )or(menu.cloudlinux ==1 )or(menu.cloudlinux ==1 ))or(swmenu==1) %}
+  <div class="row">
+      <div class="col-lg-12">
+          <div class="ibox float-e-margins">
+              <div class="ibox-title">
+                  <h5><i class="fa fa-bar-chart-o"></i> {{langmod.CWPSETTING}}</h5>
+                  <div class="ibox-tools">
+                      <a class="collapse-link">
+                          <i class="fa fa-chevron-up"></i>
+                      </a>
+                  </div>
+              </div>
+              <div class="ibox-content">
+                  <div class="row">
+                      {% if ("crontab" in rmenu )or(swmenu==1) %}
+                      <div class="col-md-3 dashboard-item">
+                        <a href="?module=crontab"><i class="fab fa-linode fa-3x"></i>   <span>{{langene.CRON}}</span>
+                        </a>
+                      </div>
+                      {% endif %}
+                      {% if ("process_list" in rmenu )or(swmenu==1) %}
+                      <div class="col-md-3 dashboard-item">
+                        <a href="#" data-toggle="modal" data-target="#modalprocesslist"  class="mod_process_list">
+                        <i class="fab fa-free-code-camp fa-3x"></i>   <span>{{langene.PROCESSLIST}}</span>
+                      </a>
+                    </div>
+                      {% endif %}
+                      {% if ("phpini_editor" in rmenu )or(swmenu==1) %}
+                      <div class="col-md-3 dashboard-item">
+                        <a href="?module=phpini_editor"><i class="fa fa-edit fa-3x"></i>   <span>{{langene.PHPINI}}</span>
+                        </a>
+                      </div>
+                      {% endif %}
+                      <!--{% if menu.cloudlinux ==1 %}
+                      <div class="col-md-3 dashboard-item">
+                        <a href="?module=php_selector"><i class="fa fa-cubes fa-3x"></i>   <span>{{langene.PHPSELECTOR}}</span>
+                        </a>
+                      </div>
+                      {% endif %}-->
+                      {% if ("notification_center" in rmenu )or(swmenu==1) %}
+                      <div class="col-md-3 dashboard-item">
+                        <a href="?module=notification_center"><i class="fa fa-bell fa-3x"></i>   <span>{{langene.BTNOTITITLE}}</span>
+                        </a>
+                      </div>
+                      {% endif %}
+                  </div>
+                  <div class="row">
+                      {% if ("phpselector" in rmenu )or(swmenu==1) %}
+                      <div class="col-md-3 dashboard-item">
+                        <a href="?module=phpselector"><i class="fab fa-php fa-3x"></i>   <span>{{langene.GNLABEL50}}</span>
+                        </a>
+                      </div>
+                      {% endif %}
+                      {% if ("statistics" in rmenu )or(swmenu==1) %}
+                      <div class="col-md-3 dashboard-item">
+                          <a href="?module=mod_security"><i class="fa fa-lock fa-3x"></i>   <span>{{langene.MODSECURITY}}</span>
+                          </a>
+                      </div>
+                      {% endif %}
+                      {% if ("statistics" in rmenu )or(swmenu==1) %}
+                      <div class="col-md-3 dashboard-item">
+                        <a href="?module=statistics"><i class="fab fa-stack-overflow fa-3x"></i>   <span>{{langene.GNLABEL51}}</span>
+                        </a>
+                      </div>
+                      {% endif %}
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  {% endif %}
+  {% if (("files_system_lock" in rmenu )or("clam" in rmenu )or("file_manager" in rmenu )or("ftp_accounts" in rmenu )or("backups" in rmenu )or ("protected_directory" in rmenu ))or(swmenu==1) %}
+  <div class="row">
+      <div class="col-lg-12">
+          <div class="ibox float-e-margins">
+              <div class="ibox-title">
+                  <h5><i class="fa fa-edit"></i> {{langmod.FILEM}}</h5>
+                  <div class="ibox-tools">
+                      <a class="collapse-link">
+                          <i class="fa fa-chevron-up"></i>
+                      </a>
+                  </div>
+              </div>
+              <div class="ibox-content">
+                  <div class="row">
+                      {% if ("files_system_lock" in rmenu )or(swmenu==1) %}
+                          <div class="col-md-3 dashboard-item">
+                            <a href="#" class="files_system_lock"><i class="fa fa-lock fa-3x"></i>   <span>{{langene.FILESYST}}</span></a>
+                          </div>
+                      {% endif %}
+                      {% if ("clam" in rmenu )or(swmenu==1) %}
+                          <!--<div class="col-md-3 dashboard-item">
+                            <a href="?module=clam"  class="clam22"><i class="fa fa-bug fa-3x"></i>   <span>{{langene.ANTIVI}}</span></a>
+                          </div>-->
+                          <div class="col-md-3 dashboard-item">
+                              <a href="?module=clam"><i class="fa fa-bug fa-3x"></i>   <span>{{langene.ANTIVI}}</span></a>
+                          </div>
+                      {% endif %}
+                      {% if ("file_manager" in rmenu )or("filemanager" in rmenu )or(swmenu==1) %}
+                          <div class="col-md-3 dashboard-item">
+                            <a href="fileManager_v2.php" target="_blank"><i class="fa fa-file-archive-o fa-3x"></i>   <span>{{langene.FTPFILE}}</span></a>
+                          </div>
+                      {% endif %}
+                      {% if ("ftp_accounts" in rmenu )or(swmenu==1) %}
+                          <div class="col-md-3 dashboard-item">
+                            <a href="?module=ftp_accounts"><i class="fa fa-file-code-o fa-3x"></i>   <span>{{langene.FTPACC}}</span></a>
+                          </div>
+                      {% endif %}
+                  </div>
+                  <div class="row">
+                    {% if ("backups" in rmenu )or(swmenu==1) %}
+                        <div class="col-md-3 dashboard-item">
+                          <a href="?module=backups"><i class="fa fa-cloud fa-3x"></i>   <span>{{langene.BACKUP}}</span></a>
+                        </div>
+                    {% endif %}
+                    {% if (mod.apache==1)%}
+                        {% if ("protected_directory" in rmenu )or(swmenu==1) %}
+                            <div class="col-md-3 dashboard-item">
+                              <a href="?module=protected_directory"><i class="fa fa-unlock-alt fa-3x"></i>   <span>{{langene.DIRPROTE}}</span></a>
+                            </div>
+                        {% endif %}
+                    {% endif %}
+
+                      {% if ("disk_usage" in rmenu )or(swmenu==1) %}
+                      <div class="col-md-3 dashboard-item">
+                          <a href="?module=disk_usage"><i class="fa fa-hdd-o fa-3x"></i>   <span>{{langene.MENUDISKUSAGE}}</span>
+                          </a>
+                      </div>
+                      {% endif %}
+                      {% if ("error_log" in rmenu )or(swmenu==1) %}
+                      <div class="col-md-3 dashboard-item">
+                          <a href="?module=error_log"><i class="fa fa-search fa-3x"></i>   <span>{{langene.GNLABEL52}}</span></a>
+                      </div>
+                      {% endif %}
+                      {% if ("fix_acc_perm" in rmenu )or(swmenu==1) %}
+                      <div class="col-md-3 dashboard-item">
+                          <a href="?module=fix_acc_perm"><i class="fa fa-ambulance fa-3x"></i>   <span>{{langene.ADDFIXPERM}}</span></a>
+                      </div>
+                      {% endif %}
+
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  {% endif %}
+  {% if ("domains" in rmenu )or("subdomains" in rmenu )or("letsencrypt" in rmenu )or("vdomaincache" in rmenu )or(swmenu==1) %}
+  <div class="row">
+      <div class="col-lg-12">
+          <div class="ibox float-e-margins">
+              <div class="ibox-title">
+                  <h5><i class="fa fa-globe"></i> {{langmod.DOMAINS}}</h5>
+                  <div class="ibox-tools">
+                      <a class="collapse-link">
+                          <i class="fa fa-chevron-up"></i>
+                      </a>
+                  </div>
+              </div>
+              <div class="ibox-content">
+                  <div class="row">
+                      {% if ("domains" in rmenu )or(swmenu==1) %}
+                      <div class="col-md-3 dashboard-item"><a href="?module=domains"><i class="fa fa-globe fa-3x"></i>   <span>{{langene.DOMAINS}}</span></a></div>
+                      {% endif %}
+                      {% if ("subdomains" in rmenu )or(swmenu==1) %}
+                          <div class="col-md-3 dashboard-item"><a href="?module=subdomains"><i class="fa fa-umbrella fa-3x"></i>   <span>{{langene.SUBDOMAIN}}</span></a></div>
+                      {% endif %}
+                      {% if ("letsencrypt" in rmenu )or(swmenu==1) %}
+                          <div class="col-md-3 dashboard-item"><a href="?module=letsencrypt"><i class="fa fa-dollar fa-3x"></i>   <span>{{langene.AUTOSSL}}</span></a></div>
+                      {% endif %}
+                      {% if ("sslwizard" in rmenu )or(swmenu==1) %}
+                          <div class="col-md-3 dashboard-item"><a href="?module=sslwizard"><i class="fa fa-dollar fa-3x"></i>   <span>{{langene.GEN002}}</span></a></div>
+                      {% endif %}
+                      {% if mod.apache==1 and  mod.nginx==0  %}
+                          {% if ("redirect" in rmenu )or(swmenu==1) %}
+                              <div class="col-md-3 dashboard-item">
+                                  <a href="?module=redirect"><i class="fa fa-recycle fa-3x"></i>   <span>{{langene.GNLABEL53}}</span></a>
+                              </div>
+                          {% endif %}
+                      {% endif %}
+                  </div>
+                  <div class="row">
+                    {% if mod.varnish==1 %}
+                        {% if ("vdomaincache" in rmenu )or(swmenu==1) %}
+                        <div class="col-md-3 dashboard-item"><a href="?module=vdomaincache"><i class="fa fa-space-shuttle fa-3x"></i>  <span>{{langene.CACHE1}}</span></a></div>
+                        {% endif %}
+                    {% endif %}
+                       {# Cloudflare tile removed: there is no cloudflare user panel module #}
+                     {% if ("nodejs" in extra_rmenu )or(swmenu==1) %}
+                     <div class="col-md-3 dashboard-item"><a href="?module=nodejs_manager"><i class="fa fa-server fa-3x"></i>
+                         <span>{{langene.NODEJSAPPS}}</span></a></div>
+                     {% endif %}
+
+                       {% if ("tomcat_manager" in extra_rmenu )or(swmenu==1) %}
+                       <div class="col-md-3 dashboard-item"><a href="?module=tomcat_manager"><i class="fa fa-server fa-3x"></i>
+                           <span>{{langene.TOMCATMANAGER}}</span></a></div>
+                       {% endif %}
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  {% endif %}
+  {% if ("mysql_manager" in rmenu ) or ("posgresql_manager" in rmenu) or (swmenu==1) %}
+  <div class="row">
+      <div class="col-lg-12">
+          <div class="ibox float-e-margins">
+              <div class="ibox-title">
+                  <h5><i class="fa fa-database"></i> {{langmod.SQLSERV}}</h5>
+                  <div class="ibox-tools">
+                      <a class="collapse-link">
+                          <i class="fa fa-chevron-up"></i>
+                      </a>
+                  </div>
+              </div>
+              <div class="ibox-content">
+                  <div class="row">
+                      {%  if ("mysql_manager" in rmenu )or("pma" in rmenu)or(swmenu==1) %}
+                          {% if ("pma" in rmenu )or(swmenu==1) %}
+                              <div class="col-md-3 dashboard-item"><a href="?module=pma" target="_blank"><i class="fa fa-database fa-3x"></i> <span>{{langene.PHPMYADMIN}}</span></a></div>
+                          {% endif %}
+                          {% if ("mysql_manager" in rmenu )or(swmenu==1) %}
+                            <div class="col-md-3 dashboard-item"><a href="?module=mysql_manager"><i class="fa fa-graduation-cap fa-3x"></i> <span>{{langene.MANAGERMYSQL}}</span></a></div>
+                          {% endif %}
+                          {% if ("process_list_my" in rmenu )or(swmenu==1) %}
+                            <div class="col-md-3 dashboard-item"><a href="#" id="mysql_processes" class="mysql_processes"><i class="fa fa-database fa-3x"></i> <span>{{langene.SHOWMYSQL}}</span></a></div>
+                          {% endif %}
+                          {% if ("postgresql_manager" in extra_rmenu ) or ("postgresql_manager" in rmenu )or(swmenu==1) %}
+                                  <div class="col-md-3 dashboard-item"><a href="?module=postgresql_manager"><i class="fa fa-graduation-cap fa-3x"></i> <span>{{langene.MANAGERPOSGRE}}</span></a></div>
+                          {% endif %}
+                      {% endif %}
+                  </div>
+                  <div class="row">
+                      {% if ("mongodb_manager" in extra_rmenu ) or ("mongodb_manager" in rmenu )or(swmenu==1) %}
+                       <div class="col-md-3 dashboard-item">
+                         <a href="?module=nodejs_manager">
+                           <i class="fa fa-database fa-3x"></i>
+                           <span>{{langene.MONGODB}}</span>
+                         </a>
+                       </div>
+                    {% endif %}
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  {% endif %}
+  {% if ("email_accounts" in rmenu )or("mail_autoreply" in rmenu ) or("roundcube" in rmenu ) or (swmenu==1) %}
+  <div class="row">
+      <div class="col-lg-12">
+          <div class="ibox float-e-margins">
+              <div class="ibox-title">
+                  <h5><i class="fa fa-envelope"></i> {{langmod.MAILACCOUNT}}</h5>
+                  <div class="ibox-tools">
+                      <a class="collapse-link">
+                          <i class="fa fa-chevron-up"></i>
+                      </a>
+                  </div>
+              </div>
+              <div class="ibox-content">
+                <div class="row">
+                    {% if ("email_accounts" in rmenu )or(swmenu==1) %}
+                        <div class="col-md-3 dashboard-item"><a href="?module=email_accounts"><i class="fa fa-at fa-3x"></i> <span>{{langene.MAILACCOUNT}}</span></a></div>
+                    {% endif %}
+                    {% if ("forwarders_email" in rmenu )or(swmenu==1) %}
+                        <div class="col-md-3 dashboard-item"><a href="?module=forwarders_email"><i class="fa fa-share fa-3x"></i> <span>{{langene.MENUEMFOR}}</span></a></div>
+                    {% endif %}
+                    {% if ("mail_autoreply" in rmenu ) or (swmenu==1) %}
+                        <div class="col-md-3 dashboard-item"><a href="?module=mail_autoreply"><i class="fa fa-envelope fa-3x"></i> <span>{{langene.AUTORESPONDER}}</span></a></div>
+                    {% endif %}
+                    {% if ("email_filters" in rmenu ) or (swmenu==1) %}
+                        <div class="col-md-3 dashboard-item"><a href="?module=email_filters" target="_blank"><i class="fa fa-filter fa-3x"></i> <span>{{langene.MENUEMFILTERS}}</span></a></div>
+                    {% endif %}
+                </div>
+                <div class="row">
+                    {% if ("roundcube" in rmenu ) or (swmenu==1) %}
+                        <div class="col-md-3 dashboard-item"><a href="{{mod.roundcube}}" target="_blank"><i class="fa fa-compass fa-3x"></i> <span>{{langene.ROUNDCUBE}}</span></a></div>
+                    {% endif %}
+                    {% if ("mail_routing" in rmenu ) or (swmenu==1) %}
+                        <div class="col-md-3 dashboard-item"><a href="?module=mail_routing"><i class="fa fa-envelope fa-3x"></i> <span>{{langene.DASWER}}</span></a></div>
+                    {% endif %}
+                    {% if ("email_importer" in rmenu ) or (swmenu==1) %}
+                        <div class="col-md-3 dashboard-item"><a href="?module=email_importer"><i class="fa fa-download fa-3x"></i> <span>{{langene.GEN001}}</span></a></div>
+                    {% endif %}
+                    {% if ("spam_annihilator" in rmenu ) or (swmenu==1) %}
+                    <div class="col-md-3 dashboard-item"><a href="?module=spam_annihilator"><i class="fa fa-filter fa-3x"></i> <span>{{langene.SPAMANNIHILATOR}}</span></a></div>
+                    {% endif %}
+                </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  {% endif %}
+  {% if ("dns_zone_editor" in rmenu )or(swmenu==1) %}
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="ibox float-e-margins">
+          <div class="ibox-title">
+              <h5><i class="fa fa-envelope"></i> {{langmod.DNS}}</h5>
+              <div class="ibox-tools">
+                  <a class="collapse-link">
+                      <i class="fa fa-chevron-up"></i>
+                  </a>
+              </div>
+          </div>
+          <div class="ibox-content">
+              <div class="row">
+                  <div class="col-md-3 dashboard-item"><a href="?module=dns_zone_editor"><i class="fa fa-cogs fa-3x"></i> <span>{{langene.DNSZONEEDITOR}}</span></a></div>
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+  {% if ("scripts" in rmenu )or(swmenu==1)or("siteprobuilder" in rmenu ) %}
+  <div class="row">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5><i class="fa fa-download"></i> {{langmod.ADDONS}}</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <div class="row">
+                    {% if ("scripts" in rmenu )or(swmenu==1) %}
+                    <div class="col-md-3 dashboard-item"><a href="?module=addons"><i class="fab fa-scribd fa-3x"></i> <span>{{langene.ADDSCRIPTS}}</span></a></div>
+                    <div class="col-md-3 dashboard-item"><a href="?module=addons&acc=installed"><i class="fa fa-asterisk fa-3x"></i> <span>{{langene.ADDEFMBTNON}}</span></a></div>
+                    {% endif %}
+                    {% if ("siteprobuilder" in rmenu )or(swmenu==1) %}
+                    <div class="col-md-3 dashboard-item"><a href="?module=siteprobuilder"><i class="fa fa-asterisk fa-3x"></i> <span>{{langene.SITEPROBUILDER}}</span></a></div>
+                    {% endif %}
+                    {% if ("wordpress_manager" in rmenu )or(swmenu==1) %}
+                    <div class="col-md-3 dashboard-item"><a href="?module=wordpress_manager"><i class="fa fa-wordpress fa-3x"></i> <span>{{langene.WORDPRESSMANAGER}}</span></a></div>
+                    {% endif %}
+                    {% if ("git_manager" in rmenu )or(swmenu==1) %}
+                    <div class="col-md-3 dashboard-item"><a href="?module=git_manager"><i class="fa fa-github fa-3x"></i> <span>{{langene.GITMANAGER}}</span></a></div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  {% endif %}
+  {% if (("softaculous" in rmenu )or (sitepad in rmenu )) or ((softmenu==1) or (fant3menu==1))%}
+  <div class="row">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5><i class="fa fa-download"></i> {{langmod.SCRIPTINST}}</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <div class="row">
+
+                    {% if ("softaculous" in rmenu )or(swmenu==1) %}
+                        <div class="col-md-3 dashboard-item"><a href="?module=softaculous"><img src="{{url}}/img/softaculous.png" class="blue" width="48" style="margin-right: 15px"> <span>{{langene.SOFTAC}}</span></a></div>
+                    {% endif %}
+
+
+                    {% if (("sitepad" in rmenu ))or(swmenu==1) %}
+                        <div class="col-md-3 dashboard-item"><a href="?module=sitepad"><img src="{{url}}/img/sitepad.png" width="48" style="margin-right: 15px"> <span>{{langene.GNLABEL46}}</span></a></div>
+                    {% endif %}
+
+                    {% if(fant3menu==1)or(swmenu==1) %}
+                        <div class="col-md-3 dashboard-item"><a href="#"><i class="fa fa-window-restore fa-3x"></i> <span>{{langene.FANTASTICO}}</span></a></div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  {% endif %}
+  {% if mod.reseller ==1%}
+  <div class="row">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5><i class="fa fa-recycle"></i> {{langmod.GNLABEL37}}</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <div class="row">
+                    <div class="col-md-3 dashboard-item"><a href="?module=reseller"><i class="fa fa-user fa-3x"></i> <span>{{langene.GNLABEL43}}</span></a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  {% endif %}
+
+    {% if ("servercast" in rmenu )or(swmenu==1) and (streaming==1) %}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5><i class="fa fa-recycle"></i> {{langmod.STREAMING}}</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <div class="row">
+                    <div class="col-md-3 dashboard-item"><a href="?module=servercast"><i class="fa fa-microphone fa-3x"></i> <span>{{langene.GNLABEL43}}</span></a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+  <div class="row">
+      <div class="col-lg-12">
+          <div class="ibox float-e-margins">
+              <div class="ibox-title">
+                  <h5><i class="fa fa-cog"></i> {{langmod.PNSETTING}}</h5>
+              </div>
+              <div class="ibox-content">
+                  <div class="row">
+                      <div class="col-md-3 dashboard-item"><a href="#" data-toggle="modal" data-target="#modal-settings"><i class="fa fa-wrench fa-3x"></i> <span>{{langene.PNSETTING}}</span></a></div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+{% include 'footer.html' %}
+
+<script>
+(function(){
+  var el=document.getElementById("cwp-srv-clock"); if(!el) return;
+  function cwpSrvClockTick(){}
+  function p2(n){return (n<10?"0":"")+n;}
+  var t=el.textContent.trim().split(/[-: ]/);
+  var d=new Date(+t[0],(+t[1])-1,+t[2],+t[3],+t[4],(+t[5]||0));
+  if(isNaN(d.getTime())) return;
+  setInterval(function(){ d=new Date(d.getTime()+1000); el.textContent=d.getFullYear()+"-"+p2(d.getMonth()+1)+"-"+p2(d.getDate())+" "+p2(d.getHours())+":"+p2(d.getMinutes())+":"+p2(d.getSeconds()); },1000);
+})();
+</script>
+
+<script>
+(function cwpCountUp(){
+  var els=document.querySelectorAll(".cwp-count");
+  for(var i=0;i<els.length;i++){ (function(el){
+    var to=parseInt((el.textContent||"").replace(/[^0-9]/g,""),10);
+    if(isNaN(to)||to<=0){ return; }
+    var dur=900,s=null; el.textContent="0";
+    function step(t){ if(!s)s=t; var pr=Math.min(1,(t-s)/dur); el.textContent=Math.round(to*pr); if(pr<1){requestAnimationFrame(step);}else{el.textContent=to;} }
+    requestAnimationFrame(step);
+  })(els[i]); }
+})();
+</script>
