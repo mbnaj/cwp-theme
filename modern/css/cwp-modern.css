@@ -765,3 +765,9 @@ label { font-weight: 600; color: #4b556b; }
 .routing_type .caret { margin-top: 0.8rem; }
 .routing_type .btn-default { width: 14rem; max-width: 100%; text-align: left; }
 @media (max-width: 575px) { .mail_routing_wrapper .ibox-content { overflow-x: auto; } }
+
+/* Protected directories */
+.cwp-pd-path { margin-bottom: 6px; font-family: monospace; color: var(--cwp-muted); }
+#divconte td { padding: 3px 0; }
+.cwp-pd-user { display: flex; align-items: center; justify-content: space-between; gap: 10px; max-width: 320px; padding: 2px 0; }
+.cwp-pd-table td { vertical-align: middle; }
