@@ -914,3 +914,9 @@ label { font-weight: 600; color: #4b556b; }
 		width: 8.33333333%;
 	}
 }
+
+/* Reseller branding tab */
+.cwp-brand-save { margin-top: 12px; }
+#branding_wrapper h5 { margin: 14px 0 6px; font-weight: 600; }
+#branding_wrapper .col-lg-4 > h5:first-child { margin-top: 0; }
+#imgreseller { max-width: 100%; height: auto; }

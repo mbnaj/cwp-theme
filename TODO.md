@@ -290,7 +290,7 @@ dropzone).
       grouped sections (disk, bandwidth, email, domains, DB, FTP, features).
 - [ ] `mod_reseller_features.html` (80, steps): feature sets. Plan: switch matrix per feature.
 - [x] `mod_reseller_nameservers.html`: light cleanup only (it is a tab partial): save button in the shared form-actions row, inline modal styles removed, ids and handlers untouched; not tested on a real server. Original plan: nameserver defaults. Plan: simple form card.
-- [ ] `mod_reseller_branding.html` (59, form): logo / name branding. Plan: preview of the logo with upload.
+- [x] `mod_reseller_branding.html`: light cleanup only (tab partial): dead commented column removed, save button inline style moved to CSS, logo scales on phones, ids and handlers untouched; not tested on a real server. Original plan: logo / name branding. Plan: preview of the logo with upload.
 - [ ] `mod_reseller_apimanager.html` (698, 5 tables): API keys and allowed IPs. Plan: split into sections with
       copy-key buttons and an access log table.
 - [x] `mod_reseller_modsecurity.html` (161, 2 iboxes, table): ModSecurity rules for the reseller. Done: inline styles and
