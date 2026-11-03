@@ -27,19 +27,21 @@ TODO.md     page-by-page progress and rules
 
 ## Install
 
-The exact theme directory depends on your CWP7 version, so confirm it on your server first (look for the folder that
-contains `index.html`, `menu_left.html` and `mod_dashboard.html`; the login pages reference
-`/login/cwp_theme/original/...`).
+User-panel themes live in `/usr/local/cwpsrv/var/services/users/cwp_theme/`, one folder per theme. The stock theme is
+`original/`; the new one goes next to it as `modern/`. Confirm on your server that `original/` there contains
+`index.html`, `menu_left.html` and `mod_dashboard.html`.
 
 ```bash
-# 1. back up (replace THEME_DIR with the folder you found)
-cp -a THEME_DIR THEME_DIR.bak-$(date +%F)
+THEMES=/usr/local/cwpsrv/var/services/users/cwp_theme
 
-# 2. upload the new theme next to the original
-rsync -av modern/ root@your-server:THEME_DIR/modern/    # or scp -r / SFTP
+# 1. back up the whole themes folder
+cp -a $THEMES $THEMES.bak-$(date +%F)
 
-# 3. keep the original folder in place: login, 404 and locked pages load their images from /original/
+# 2. upload the new theme next to the original (do NOT replace original/)
+rsync -av modern/ root@your-server:$THEMES/modern/    # or scp -r / SFTP
 ```
+
+Keep `original/` in place: the login, 404 and locked pages load their images from it.
 
 Then select the theme the way your CWP7 version does it (user panel theme setting, or the theme name in the panel
 config). If you cannot find the setting, check the CWP forum for your version before editing panel files by hand.
