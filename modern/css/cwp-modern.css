@@ -920,3 +920,8 @@ label { font-weight: 600; color: #4b556b; }
 #branding_wrapper h5 { margin: 14px 0 6px; font-weight: 600; }
 #branding_wrapper .col-lg-4 > h5:first-child { margin-top: 0; }
 #imgreseller { max-width: 100%; height: auto; }
+
+/* Reseller stats tab: tiles in a responsive grid */
+.cwp-stat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 20px 16px; text-align: center; }
+.cwp-stat-grid .mini-dashboard-graph canvas { width: 70%; height: auto; max-width: 140px; }
+.cwp-stat-grid .mini-dashboard-graph h5 { margin: 8px 0 4px; }
