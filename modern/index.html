@@ -64,7 +64,7 @@
 
     <!-- CWP7 modern look (loaded after every base/plugin stylesheet; disabled for the dark style) -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&amp;display=swap">
-    <link id="cwplook" href="{{url}}/css/cwp-modern.css?v=5" rel="stylesheet" {% if mod.style == 'dark' %}disabled{% endif %}>
+    <link id="cwplook" href="{{url}}/css/cwp-modern.css?v=6" rel="stylesheet" {% if mod.style == 'dark' %}disabled{% endif %}>
     <cwp-styles></cwp-styles>
     <style media="screen">
       .radio label::after {
@@ -443,6 +443,31 @@
         $link.parent('li').addClass('active');
         $link.parents('ul.nav-second-level, ul.nav-third-level').addClass('in').attr('aria-expanded', 'true').css('height', '');
         $link.parents('#side-menu li').addClass('active');
+    });
+    </script>
+    <script>
+    // Keep the footer at the bottom of the screen when the page content is short
+    $(function () {
+        var pw = document.getElementById('page-wrapper'), queued = false;
+        if (!pw) { return; }
+        function fit() {
+            queued = false;
+            var f = pw.querySelector('.footer:not(.fixed):not(.fixed_full)');
+            if (!f) { return; }
+            f.style.marginTop = '';
+            var scroller = pw.scrollHeight > pw.clientHeight + 1 || getComputedStyle(pw).overflowY === 'auto';
+            var floor = scroller ? pw.getBoundingClientRect().bottom : window.innerHeight;
+            var gap = Math.floor(floor - f.getBoundingClientRect().bottom);
+            if (gap > 0) { f.style.marginTop = (parseInt(getComputedStyle(f).marginTop, 10) || 0) + gap + 'px'; }
+        }
+        function queue() { if (!queued) { queued = true; window.requestAnimationFrame(fit); } }
+        $(window).on('load resize', queue);
+        $('.navbar-minimalize, .collapse-link').on('click', function () { setTimeout(queue, 450); });
+        $(document).on('shown.bs.tab', queue);
+        if (window.MutationObserver) {
+            new MutationObserver(queue).observe(pw, { childList: true, subtree: true });
+        }
+        queue();
     });
     </script>
     <script src="{{url}}/js/plugins/pace/pace.min.js"></script>
