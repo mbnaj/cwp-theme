@@ -215,7 +215,7 @@ server changed there. Before each page below, diff it against `original/` and bu
 - [ ] `mod_sslwizard.html` (796, 2 modals, steps wizard, select2, tagsinput): SSL generator (CSR / certificate).
       Plan: proper stepper (Details, Domains, Review, Result), validation per step, copy / download buttons for the
       outputs, keep the wizard JS hooks.
-- [ ] `mod_cloudflare.html` (146, select2): Cloudflare integration. Plan: connection card (API key / email), domain
+- [x] `mod_cloudflare.html`: done (shared page header, token card and sync card, labels linked to inputs, accessible show/hide button, inline style moved to CSS, ids and handlers unchanged; Spanish strings still hard-coded and need keys; no DNS record table or purge action; not tested on a real server). Original plan: Cloudflare integration. Plan: connection card (API key / email), domain
       select, DNS record table, purge-cache action.
 - [x] `mod_redirect.html`: done (shared page header, labels above inputs, two-column form with help alerts, responsive table, inline style moved to CSS, ids and handlers unchanged; not tested on a real server). Original plan: redirects (Apache without Nginx). Plan: form row (from, to, type
       301/302, wildcard) plus table with test link.

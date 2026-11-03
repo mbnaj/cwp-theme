@@ -771,3 +771,22 @@ label { font-weight: 600; color: #4b556b; }
 #divconte td { padding: 3px 0; }
 .cwp-pd-user { display: flex; align-items: center; justify-content: space-between; gap: 10px; max-width: 320px; padding: 2px 0; }
 .cwp-pd-table td { vertical-align: middle; }
+
+/* Cloudflare */
+.cf-token-status { padding: 12px; border-radius: 4px; display: flex; align-items: center; margin-bottom: 15px; }
+.cf-token-status > i { margin-right: 10px; }
+.cf-token-status small { color: inherit; opacity: .75; }
+.cf-token-status.valid { background-color: #dff0d8; color: #3c763d; border: 1px solid #d6e9c6; }
+.cf-token-status.invalid { background-color: #f2dede; color: #a94442; border: 1px solid #ebccd1; }
+.cf-zones-container { max-height: 150px; overflow-y: auto; background: #fff; border: 1px solid #ddd; padding: 8px; border-radius: 4px; }
+.cf-zone-item { padding: 4px 0; border-bottom: 1px solid #eee; }
+.cf-zone-item:last-child { border-bottom: none; }
+.cf-zone-status { font-size: 0.85em; color: #999; }
+.cf-zone-status.active { color: #5cb85c; font-weight: bold; }
+.cf-token-field { position: relative; }
+.cf-token-field .form-control { padding-right: 45px; }
+.cf-token-field button { position: absolute; right: 4px; top: 0; height: 38px; width: 36px; background: none; border: 0; color: var(--cwp-muted); }
+.cf-actions { padding: 0; }
+.cf-actions .cf-delete { margin-right: auto; }
+.cf-perm-title { display: block; margin-bottom: 5px; font-size: 1.1em; }
+.alert-info ul { margin: 10px 0 0; padding-left: 20px; }
