@@ -199,7 +199,7 @@ server changed there. Before each page below, diff it against `original/` and bu
       picker, protected list, users list per directory, add-user form.
 - [x] `mod_error_log.html` (90, ibox): error log viewer. Plan: log viewer with monospace, line numbers, level colouring,
       filter, tail/refresh, download.
-- [ ] `mod_fix_acc_perm.html` (186, 15 switches): fix permissions. Plan: warning card explaining the effect, options
+- [x] `mod_fix_acc_perm.html`: done (shared page header, switch rows with descriptions, one card with the Run button, inline style removed, built on the server version with the `{{users}}` substitution in FIXACCPERM3; ids and JS untouched; no confirmation or result log yet). Original plan: fix permissions. Plan: warning card explaining the effect, options
       as switch rows, big "Run" button with confirmation, result log.
 - [ ] `mod_filemanager.html` (0 lines): opens `fileManager_v2.php` (separate page, `css/filemanager.css`,
       `js/filemanager.php`). Decide separately: restyle `filemanager.css` to match.
