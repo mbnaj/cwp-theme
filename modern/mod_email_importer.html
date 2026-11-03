@@ -1,0 +1,263 @@
+<div class="cwp-page cwp-page-importer">
+  {% if mod.fsl == 1 %}
+    {% set stflalert ='block' %}
+  {% else %}
+    {% set stflalert ='none' %}
+  {% endif %}
+  <div class="alert alert-warning" style="display:{{stflalert}}" id="alertfl">
+    <strong>{{langene.GALARTFILEBLOCK}}</strong>
+  </div>
+  <div class="cwp-page-head">
+    <div>
+      <h2>User ({{users}})</h2>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="?">{{langene.GENLABLANG1}}</a></li>
+        <li class="breadcrumb-item active"><strong>{{langmod.LABIMP1}}</strong></li>
+      </ol>
+    </div>
+  </div>
+<div class="row importer-main-container cwp-mt-2r">
+    <div class="importer-main-flex">
+        <div class="ibox" style="margin: 0px;">
+            <div class="ibox-title">
+                <div id="_step_title_container"><h4>{{langmod.LABIMP2}}: <span class="text-mutted">{{langmod.LABIMP3}}</span></h4></div>
+            </div>
+            <div class="ibox-content importer-step1 importer-step-ibox active-step">
+                <div class="importer-step1-container">
+                    <div class="importer-step1-option-wrapper" style="border-right: 1px solid #ddd;">
+                        <div class="importer-step1-option" title="Import email accounts from file" data-toggle="tooltip" data-placement="top" onclick="gtoStep2('accounts')">
+                            <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                            <h4>{{langmod.LABIMP4}}</h4>
+                        </div>
+                        <span title="{{langmod.LABIMP5}}" data-toggle="tooltip" onclick="openPGOPT('#_accounts_samples_', this)" data-placement="top" class="btn btn-xs btn-primary importer-btn-download">
+                            <i class="fa fa-download"></i> {{langmod.LABIMP5}}</span>
+                        <div style="position: absolute;">
+                            <div class="general-password-generator-options sample-file-container" id="_accounts_samples_" style="z-index: 20;">
+                                <ul>
+                                    <li>
+                                        <a href="?module=email_importer&acc=samplefile&type=accounts&file=csv"><i class="fa fa-file"></i> CSV</a>
+                                    </li>
+                                    <li>
+                                        <a href="?module=email_importer&acc=samplefile&type=accounts&file=xls"><i class="fa fa-file-excel-o"></i> Excel</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="importer-step1-option-wrapper">
+                        <div class="importer-step1-option" title="Import email forwarders/alias from file" data-toggle="tooltip" data-placement="top" onclick="gtoStep2('forwarders')">
+                            <i class="fa fa-share" aria-hidden="true"></i>
+                            <h4>{{langmod.LABIMP6}}</h4>
+                        </div>
+                        <span title="{{langmod.LABIMP5}}" data-toggle="tooltip" data-placement="top" onclick="openPGOPT('#_alias_samples_', this)" class="btn btn-xs btn-primary importer-btn-download">
+                            <i class="fa fa-download"></i> {{langmod.LABIMP5}}</span>
+                        <div style="position: absolute;">
+                            <div class="general-password-generator-options sample-file-container" id="_alias_samples_" style="z-index: 20;">
+                                <ul>
+                                    <li>
+                                        <a href="?module=email_importer&acc=samplefile&type=forwarders&file=csv"><i class="fa fa-file"></i> CSV</a>
+                                    </li>
+                                    <li>
+                                        <a href="?module=email_importer&acc=samplefile&type=forwarders&file=xls"><i class="fa fa-file-excel-o"></i> Excel</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ibox-content importer-step2 importer-step-ibox">
+                <!-- <h3 style="margin-top:0px">Importing email <span id="_importer_type_file"></span>.</h3> -->
+                <div class="row">
+                    <div class="col-md-5" style="border-right: 1px solid #e7eaec;">
+                        <h4 class="title-step-2">{{langmod.LABIMP7}} <a href="#" onclick="browseFile()">{{langmod.LABIMP8}}</a> {{langmod.LABIMP9}}</h4>
+                        <form action="?module=email_importer&acc=uploadfile" class="dropzone" id="importer-drop-zone">
+                            <div class="fallback">
+                                <input name="importer-file" id="_importer_file" type="file" multiple />
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-7">
+                        <h4 class="title-step-2">{{langmod.LABIMP10}}</h4>
+                        <div class="importer-file-option">
+                            <label class="importer-file-option-title" for="">{{langmod.LABIMP11}}</label>
+                            <div class="importer-file-option-input">
+                                <div class="radio">
+                                    <input type="radio" class="san-radio" onchange="changeFirstCol(this)" name="fr-radio" checked id="_fr_ch_no"
+                                        value="no">
+                                    <label for="_fr_ch_no">{{langmod.LABIMP12}}</label>
+                                </div>
+                                <div class="radio">
+                                    <input type="radio" class="san-radio" onchange="changeFirstCol(this)" name="fr-radio" id="_fr_ch_yes"
+                                        value="yes">
+                                    <label for="_fr_ch_yes">{{langmod.LABIMP13}}</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="just-aliases">
+                            <label class="importer-file-option-title" for="">{{langmod.LABIMP109}}
+                                <i class="fa fa-question-circle promote-info-ico" aria-hidden="true" title="{{langmod.LABIMP108}}" data-toggle="tooltip"
+                                    data-placement="top"></i>
+                            </label>
+                            <div class="importer-file-option-input">
+                                <div class="radio">
+                                    <input type="radio" class="san-radio" onchange="changeAppendAlias(this)" name="ar-radio" checked id="_ar_ch_no"
+                                        value="no">
+                                    <label for="_ar_ch_no">{{langmod.LABIMP12}}</label>
+                                </div>
+                                <div class="radio">
+                                    <input type="radio" class="san-radio" onchange="changeAppendAlias(this)" name="ar-radio" id="_ar_ch_yes"
+                                        value="yes">
+                                    <label for="_ar_ch_yes">{{langmod.LABIMP13}}</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="just-account">
+                            <div class="importer-file-option">
+                                <label class="importer-file-option-title" for="">{{langmod.LABIMP14}}
+                                    <i class="fa fa-question-circle promote-info-ico" aria-hidden="true"
+                                        title="{{langmod.LABIMP15}}"
+                                        data-toggle="tooltip" data-placement="top"></i>
+                                </label>
+                                <div class="importer-file-option-input">
+                                    <select id="_importer_gen_pass_" onchange="autoPassCheck(this)" style="margin-left:1rem;" class="form-control" id="">
+                                        <option value="no" selected>{{langmod.LABIMP12}}</option>
+                                        <option value="empty">{{langmod.LABIMP16}}</option>
+                                        <option value="*">{{langmod.LABIMP17}}</option>
+                                    </select>
+                                    <button class="btn btn-primary btn-xs btn-import-pass" title="{{langmod.LABIMP18}}"
+                                        data-toggle="tooltip" data-placement="top" onclick="openPGOPT('#_importer_pass_config_', this)">
+                                        <i class="fa fa-key"></i>
+                                        <span class="caret"></span>
+                                    </button>
+                                    <div>
+                                        <div class="general-password-generator-options mysql_generator" id="_importer_pass_config_"
+                                            style="z-index: 20;">
+                                            <label for="">{{langmod.LABIMP19}}</label>
+                                            <!-- <span class="general-password-generator-options-title"><b>Options</b></span>
+                                                                                                                                                <span class="general-password-generator-options-close cwp-pointer" onclick="closePGOPT()">s<i class="fa fa-window-close"></i></span> -->
+                                            <ul class="right animated fadeIn">
+                                                <li>
+                                                    <select class="form-control pwlength cwp-mb-5" id="_importer_pass_length_" title="{{langmod.LABIMP20}}"
+                                                       >
+                                                        <option value="7"> {{langmod.LABIMP20}} 7</option>
+                                                        <option value="8"> {{langmod.LABIMP20}} 8</option>
+                                                        <option value="9"> {{langmod.LABIMP20}} 9</option>
+                                                        <option value="10"> {{langmod.LABIMP20}} 10</option>
+                                                        <option value="11"> {{langmod.LABIMP20}} 11</option>
+                                                        <option value="12" selected=""> {{langmod.LABIMP20}} 12</option>
+                                                        <option value="13"> {{langmod.LABIMP20}} 13</option>
+                                                        <option value="14"> {{langmod.LABIMP20}} 14</option>
+                                                        <option value="15"> {{langmod.LABIMP20}} 15</option>
+                                                    </select>
+                                                </li>
+                                                <li>
+                                                    <select class="form-control pwtype" id="_importer_pass_type" title="Type">
+                                                        <option value="alf">{{langmod.LABIMP21}}</option>
+                                                        <option value="num" selected="">{{langmod.LABIMP22}}</option>
+                                                        <option value="def">{{langmod.LABIMP23}}</option>
+                                                    </select>
+                                                </li>
+                                            </ul>
+                                            <button class="btn btn-success btn-block btn-sm btn-close-pass"><i class="fa fa-check"></i>
+                                                {{langmod.LABIMP24}}</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="importer-file-option for-csv">
+                            <div class="for-csv-inner">
+                                <label class="importer-file-option-title" for="">{{langmod.LABIMP25}}</label>
+                                <select name="" id="_sel_delim_column" onchange="changeDelimiter(this)" style="margin-left:1rem;" class="form-control">
+                                    <option value="," selected>{{langmod.LABIMP26}} (,)</option>
+                                    <option value=" ">{{langmod.LABIMP27}}</option>
+                                    <option value=";">{{langmod.LABIMP28}} (;)</option>
+                                    <option value="TAB">{{langmod.LABIMP29}}</option>
+                                    <option value="*">{{langmod.LABIMP30}} -></option>
+                                </select>
+                                <input type="text" class="form-control" id="_other_delimiter" maxlength="2">
+                            </div>
+                        </div>
+                        <div class="just-account">
+                            <div class="importer-file-option">
+                                <label class="importer-file-option-title" for="">{{langmod.LABIMP31}}
+                                    <i class="fa fa-question-circle promote-info-ico" aria-hidden="true"
+                                        title="{{langmod.LABIMP32}}"
+                                        data-toggle="tooltip" data-placement="top"></i>
+                                </label>
+                                <div class="importer-file-option-input">
+                                    <div class="radio">
+                                        <input type="radio" class="san-radio" onchange="promoteCheck(this)" name="promote-radio" checked
+                                            id="_promote_no" value="no">
+                                        <label for="_promote_no">{{langmod.LABIMP12}}</label>
+                                    </div>
+                                    <div class="radio">
+                                        <input type="radio" class="san-radio" onchange="promoteCheck(this)" name="promote-radio" id="_promote_yes"
+                                            value="yes">
+                                        <label for="_promote_yes">{{langmod.LABIMP13}}</label>
+                                    </div>
+                                </div>
+                                <div id="_promote_domain_selector_wrapper">
+                                    <select name="" id="_promote_domain_selector_">
+                                        <option value="">{{langmod.LABIMP33}}</option>
+                                        {% for domain in mod.domains %}
+                                        <option value="{{domain}}">{{domain}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ibox-content importer-step3 importer-step-ibox">
+                <div class="importer-loader" id="_loader_step_3">
+                    <span><i class="fa fa-circle-o-notch fa-spin"></i></span>
+                    <h5 id="_step_3_title">{{langmod.LABIMP34}}</h5>
+                </div>
+                <div id="_screen_step_3">
+                    <h5></h5>
+                </div>
+            </div>
+            <div class="ibox-footer step-footer">
+                <div class="text-right step-footer-content">
+                    
+                </div>
+            </div>
+        </div>
+        <div class="ibox" id="_how_to_use">
+            <div class="ibox-title">
+                <h4>{{langmod.LABIMP35}}</h4>
+            </div>
+            <div class="ibox-content">
+                <h4 class="title-how-to">{{langmod.LABIMP111}}</h4>
+                <ul class="ul-how-to">
+                    <li><i class="fa fa-check" aria-hidden="true"></i> {{langmod.LABIMP112}}</li>
+                    <li><i class="fa fa-check" aria-hidden="true"></i> {{langmod.LABIMP113}}</li>
+                    <li><i class="fa fa-check" aria-hidden="true"></i> {{langmod.LABIMP114}}</li>
+                    <li><i class="fa fa-check" aria-hidden="true"></i> {{langmod.LABIMP115}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="step-buttons">
+    <div id="_step_2_buttons">
+        <button class="btn btn-xs btn-warning cwp-mr-5" onclick="gtoStep1()"><i class="fa fa-chevron-left"></i>
+            {{langmod.LABIMP37}}</button>
+        <button class="btn btn-xs btn-success step2-next-btn" onclick="gtoStep3()" disabled id="">{{langmod.LABIMP36}} <i class="fa fa-chevron-right"></i></button>
+    </div>
+    <div id="_step_3_buttons">
+        <button class="btn btn-xs btn-warning step-3-btn-back cwp-mr-5" onclick="gtoStep2()" disabled><i class="fa fa-chevron-left"></i>
+            {{langmod.LABIMP37}}</button>
+        <button class="btn btn-xs btn-success step-3-btn" onclick="proccessFile()" disabled id=""><i class="fa fa-cogs"></i> {{langmod.LABIMP38}}</button>
+    </div>
+    <div id="_step_4_buttons">
+        <button class="btn btn-xs btn-primary step-3-btn-back cwp-mr-5" onclick="downloadLog()"><i class="fa fa-download"></i>
+            {{langmod.LABIMP39}}</button>
+        <button class="btn btn-xs btn-success step-3-btn" onclick="gtoStep1()" id=""><i class="fa fa-refresh"></i> {{langmod.LABIMP40}}</button>
+    </div>
+</div>
+  {% include 'footer.html' %}
+</div>

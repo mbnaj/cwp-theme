@@ -1,0 +1,395 @@
+<div class="cwp-page">
+  {% if mod.fsl == 1 %}
+    {% set stflalert ='block' %}
+  {% else %}
+    {% set stflalert ='none' %}
+  {% endif %}
+  <div class="alert alert-warning" style="display:{{stflalert}}" id="alertfl">
+    <strong>{{langene.GALARTFILEBLOCK}}</strong>
+  </div>
+  <div class="cwp-page-head">
+    <div>
+      <h2>{{langmod.DTITLE|default('Node JS Applications Manager')}}</h2>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="?">{{langene.GENLABLANG1}}</a></li>
+        <li class="breadcrumb-item active"><strong>Node JS Applications Manager</strong></li>
+      </ol>
+    </div>
+  </div>
+<div class="row nodde-js-wrapper">
+    <div class="col-lg-12">
+        <div class="row">
+            {% if mod.mod_installed == 1 and mod.usr_config.user_enabled == 1 and mod.version_count > 0%}
+                <div class="col-md-12">
+                    {% if mod.apps_quota > -1 %}
+                        {% set appsbar=100/mod.apps_quota*mod.apps_qty %}
+                        {% if appsbar >=26 and appsbar <=50 %} 
+                            {% set classbar='progress-bar progress-bar-success' %} 
+                        {% elseif appsbar>=51 and appsbar <=75 %} 
+                            {% set classbar='progress-bar progress-bar-warning' %} 
+                        {% elseif appsbar>75 %}
+                            {% set classbar = 'progress-bar progress-bar-danger' %}
+                        {% else %}
+                            {% set classbar = 'progress-bar' %}
+                        {% endif %}
+                        {% set label_dom = mod.apps_quota %}
+                    {% else %}
+                        {% set appsbar = 0 %}
+                        {% set classbar = 'progress-bar' %}
+                        {% set label_dom = '&infin;' %}
+                    {% endif %}
+                    <div class="mail-contracted">
+                        <div class="ibox-content">
+                            <ul class="stat-list">
+                                <li id="inddom">
+                                    <h2 class="no-margins" id="tldomind">NodeJS apps <span id="apps_used">{{mod.apps_qty}}</span> / {{label_dom|raw}}</h2>
+                                    <small>Available / Contracted</small>
+                                    <div class="stat-percent">{{appsbar|round}}%</div>
+                                    <div id="bardomind" class="progress progress-mini">
+                                        <div style="width: {{appsbar|round}}%;" class="{{classbar}}" id="barappspor"></div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="ibox nodde-js-apps-list" id="nodejs_app_list">
+                        <div class="ibox-title">
+                            <h4>Node JS application list</h4>
+                            {% if (mod.apps_qty < mod.apps_quota) or (mod.apps_quota==-1) %}
+                                {% set swver='' %}
+                            {% else %}
+                                {% set swver='disabled' %}
+                            {% endif %}
+                            <button onclick="showNodeJSForm()" id="_btn_add_app_" {{swver}} class="btn btn-success cwp-fs-90">
+                                <i class="fa fa-plus"></i>
+                                Add new applicatiom
+                            </button>
+                        </div>
+                        <div class="ibox-content" id="table_nodejs_apps_container">
+                            <div class="table_cron_loader"><span><i class="fa fa-circle-o-notch fa-spin"></i></span></div>
+                        </div>
+                    </div>
+                    <div class="ibox nodde-js-apps-list" id="nodejs_form_window">
+                        <div class="ibox-title">
+                            <h4 id="_nodejs_form_title"></h4>
+                            <div class="cwp-fs-90">
+                                <button class="btn btn-warning btn-cancel-app" onclick="cancelNodeJSForm()">
+                                    <i class="fa fa-ban"></i>
+                                    {{langmod.LABNODEJS11}}
+                                </button>
+                                <button class="btn-save-app btn btn-success" onclick="saveNewNodeJSApp()">
+                                    <i class="fa fa-floppy-o"></i>
+                                    {{langmod.LABNODEJS38}}
+                                </button>
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+                            <div id="nodejs_app_quick_actions_container">
+                                <button class="btn btn-sm btn-warning" id="_npm_install_btn_form" onclick="npmInstallNodeJSApp(this)"><i
+                                        class="fa fa-angle-right"></i>{{langmod.LABNODEJS39}}</button>
+                                <button class="btn btn-sm btn-danger" onclick="nodeJSAppStatusInForm(this,'stop')"><i
+                                        class="fa fa-stop"></i>{{langmod.LABNODEJS40}}</button>
+                                <button class="btn btn-sm btn-success" onclick="nodeJSAppStatusInForm(this,'start')"><i
+                                        class="fa fa-play"></i>{{langmod.LABNODEJS41}}</button>
+                                <button class="btn btn-sm btn-default" onclick="nodeJSAppStatusInForm(this,'restart')"><i
+                                        class="fa fa-refresh"></i>{{langmod.LABNODEJS42}}</button>
+                                <button class="btn btn-sm btn-info" onclick="nodeJSAppViewLogInForm(this,'restart')"><i
+                                        class="fa fa-file-text-o "></i>{{langmod.LABNODEJS43}}</button>
+                            </div>
+                            <div class="panel-group" id="_nodejs_accordion_apps">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a class="accordion-toggle" data-toggle="collapse" href="#collapse_gen_settins">{{langmod.LABNODEJS44}}</a>
+                                            <input type="hidden" id="_nodejs_app_form_type">
+                                        </h4>
+                                    </div>
+                                    <div id="collapse_gen_settins" class="panel-collapse collapse in">
+                                        <div class="row row-app-form">
+                                            <div class="col-md-4">
+                                                <label for="">{{langmod.LABNODEJS45}}: <small class="required-asterisk">*</small></label>
+                                            </div>
+                                            <div class="col-md-8" id="_nodejs_app_form_node">
+                                                <select class="form-control" name="" id="">
+                                                    <option value="" id=""></option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row row-app-form">
+                                            <div class="col-md-4">
+                                                <label for="">{{langmod.LABNODEJS46}}: <small class="required-asterisk">*</small></label>
+                                                <small>{{langmod.LABNODEJS47}}</small>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input type="text" class="form-control nodejs-req" data-required="true" name="" placeholder="{{langmod.LABNODEJS48}}"
+                                                    id="_nodejs_app_desc_name">
+                                            </div>
+                                        </div>
+                                        <div class="row row-app-form">
+                                            <div class="col-md-4">
+                                                <label for="">{{langmod.LABNODEJS49}}: <small class="required-asterisk">*</small></label>
+                                                <small>{{langmod.LABNODEJS50}}</small>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <select class="form-control" name="" id="_nodejs_app_mode">
+                                                    <option value="development">{{langmod.LABNODEJS51}}</option>
+                                                    <option value="production">{{langmod.LABNODEJS52}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row row-app-form">
+                                            <div class="col-md-4">
+                                                <label for="">{{langmod.LABNODEJS53}}: <small class="required-asterisk">*</small></label>
+                                                <small>{{langmod.LABNODEJS54}}:</small>
+                                            </div>
+                                            <div class="col-md-8 nodejs-app-path-selector" id="_nodejs_path_wrapper">
+                                                <div id="_nodejs_path_selector_wrapper">
+                                                    <span class="btn btn-white dir-sel-btn" data-toggle="tooltip" data-placement="bottom" title=""
+                                                        onclick="showExplorer()" data-original-title="{{langmod.LABNODEJS55}}">
+                                                        <i class="fa fa-home" aria-hidden="true"></i>
+                                                        <div id="dirsel-container">/home/{{users}}<span id="dirsel">/</span></div>
+                                                    </span>
+                                                </div>
+                                                <!-- <input type="text" class="form-control" name="" id="dirdel_extra_path"> -->
+                                            </div>
+                                        </div>
+                                        <div class="row row-app-form">
+                                            <div class="col-md-4">
+                                                <label for="">{{langmod.LABNODEJS56}}: <small class="required-asterisk">*</small></label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input type="text" class="form-control nodejs-req" data-required="true" name="" placeholder="index.js"
+                                                    id="_nodejs_app_start_file">
+                                            </div>
+                                        </div>
+                                        <div class="row row-app-form">
+                                            <div class="col-md-4">
+                                                <label for="">URL:</label>
+                                                <small>{{langmod.LABNODEJS59}}</small>
+                                            </div>
+                                            <div class="col-md-8 nodejs-url-selector">
+                                                <div id="nodejs_url_selector_select">
+                            
+                                                </div>
+                                                <input type="hidden" id="_nodejs_form_domain_selected_" value="">
+                                                <!-- <span class="nodejs-url-selector-separator">/</span>
+                                                                <input type="text" class="form-control" style="width: 38%;" placeholder="myawesomeapp" name="" id="_nodejs_app_uri">
+                                                                <span class="nodejs-url-selector-separator">:</span> -->
+                                                <!-- <div class="nodejs-app-port-info">
+                                                    <span class="fa-stack" data-placement="top" data-toggle="tooltip" title="{{langmod.LABNODEJS57}}">
+                                                        <i class="fa fa-circle fa-stack-2x"></i>
+                                                        <i class="fa fa-info fa-stack-1x fa-inverse"></i>
+                                                    </span>
+                                                    <label for="">{{langmod.LABNODEJS58}}</label>
+                                                </div> -->
+                                                <!-- <div class="nodejs-url-selector-input">
+                                                    <input type="text" maxlength="5" onkeypress="return isNumber(event)" class="form-control"
+                                                        placeholder="4200" name="" id="_nodejs_app_port">
+                                                </div> -->
+                                            </div>
+                                        </div>
+                                        <div class="row row-app-form">
+                                            <div class="col-md-12">
+                                                <label for=""><small class="required-asterisk">*</small> {{langmod.LABNODEJS60}}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a class="accordion-toggle" id="_nodejs_envvars_collapse" data-toggle="collapse"
+                                                href="#_nodejs_collapse_env_settings">{{langmod.LABNODEJS61}}</a>
+                                        </h4>
+                                    </div>
+                                    <div id="_nodejs_collapse_env_settings" class="panel-collapse collapse">
+                                        <div id="_filled_envars_nodejs_form">
+                                            <div class="row row-app-form" id="_nodejs_envars_list_header">
+                                                <div class="col-md-5">
+                                                    <label for="">{{langmod.LABNODEJS62}}</label>
+                                                </div>
+                                                <div class="col-md-5">
+                                                    <label for="">{{langmod.LABNODEJS63}}</label>
+                                                </div>
+                                                <div class="col-md-2">
+                                            
+                                                </div>
+                                            </div>
+                                            <div id="_nodejs_envars_list_container">
+                                            
+                                            </div>
+                                        </div>
+                                        <div id="_nofilled_envars_nodejs_form" class="nodejs-empty-env-vars">
+                                            <button onclick="addInitialEnvVar()" class="btn btn-success">{{langmod.LABNODEJS91}}</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ibox-footer">
+                            <div class="text-right">
+                                <button type="button" class="btn btn-warning btn-cancel-app" onclick="cancelNodeJSForm()"><i
+                                        class="fa fa-ban" aria-hidden="true"></i> {{langmod.LABNODEJS11}}</button>
+                                <button type="button" class="btn-save-app btn btn-success" onclick="saveNewNodeJSApp()"><i class="fa fa-floppy-o" aria-hidden="true"></i>
+                                    <span class="btn-cwp-tag"></span>{{langmod.LABNODEJS38}}</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="nodejs_loader_window">
+                        <div class="table_cron_loader"><span><i class="fa fa-circle-o-notch fa-spin"></i></span>
+                        <h4>Loading application information.</h4>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <div class="col-md-12">
+                    <div class="ibox nodde-js-apps-list" id="">
+                        <!-- <div class="ibox-title">
+                            <h4>Node JS application list</h4>
+                            <button onclick="showNodeJSForm()" class="btn btn-success cwp-fs-90">
+                                <i class="fa fa-plus"></i>
+                                Add new applicatiom
+                            </button>
+                        </div> -->
+                        <div class="ibox-content">
+                            <div class="nodejs-not-available">
+                                <i class="fa fa-ban text-danger"></i>
+                                <h4>Node Js not available, please contact admin for more information.</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+  {% include 'footer.html' %}
+</div>
+<div class="modal fade" id="modal_nodejs_app_log" tabindex="-1" role="dialog" aria-labelledby="videoModal"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 id="modal_nodejs_app_log_title" class="nodejs-modal-title modal-title text-center">
+                    {{langmod.LABNODEJS13}}
+                </h5>
+            </div>
+            <div class="modal-body">
+                <div class="action-loader" id="nodejs_app_log_loader">
+                    <span><i class="fa fa-circle-o-notch fa-spin"></i></span>
+                    <h5>{{langmod.LABNODEJS14}}</h5>
+                </div>
+
+                <div id="nodejs_app_log_wrapper">
+                    <div>
+                        <h5 class="nodejs-app-loger-controls">{{langmod.LABNODEJS15}}
+                            <select name="" class="form-control" id="_nodejs_app_logger_lines_qty">
+                                <option value="20">20</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                                <option value="200">200</option>
+                            </select>
+                            {{langmod.LABNODEJS16}}
+                            <button id="_nodejs_app_logger_refresh_btn" onclick="refeshNodeJSAppLog(this)"
+                                class="btn btn-default btn-md"><i class="fa fa-refresh"></i>
+                                {{langmod.LABNODEJS132}}</button>
+                        </h5>
+                    </div>
+                    <div id="nodejs_app_log_container">
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" data-dismiss="modal" id="">
+                    <i class="fa fa-ban" aria-hidden="true"></i>
+                    {{langmod.LABNODEJS17}}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modal_file_explorer" tabindex="-1" role="dialog" aria-labelledby="videoModal"
+    aria-hidden="true">
+    <div class="modal-dialog cwp-modal-w500">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="nodejs-modal-title modal-title text-center">
+                    {{langmod.LABNODEJS26}}
+                </h5>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" disabled class="btn btn-success btn-block disabled" id="sel_path_btn"
+                    onclick="selCurrentPath()">
+                    <i class="fa fa-thumb-tack" aria-hidden="true"></i> {{langmod.LABNODEJS27}}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modal_app_delete_confirm" tabindex="-1" role="dialog" aria-labelledby="videoModal" aria-hidden="true">
+    <div class="modal-dialog cwp-modal-w500">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="nodejs-modal-title modal-title text-center">
+                    {{langmod.LABNODEJS28}}
+                </h5>
+            </div>
+            <div class="modal-body">
+                <h5>{{langmod.LABNODEJS29}}</h5>
+                <p id="confirm_app_delete_name"></p>
+                <h5>{{langmod.LABNODEJS24}}</h5>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" data-dismiss="modal" id="">
+                    <i class="fa fa-ban" aria-hidden="true"></i> 
+                    {{langmod.LABNODEJS17}}
+                </button>
+                <button id="_nodejs_app_confirm_del_btn" class="btn btn-success">
+                    <i class="fa fa-check-circle" aria-hidden="true"></i> 
+                    {{langmod.LABNODEJS25}}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modal_npm_install_log" tabindex="-1" role="dialog" aria-labelledby="videoModal"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="nodejs-modal-title modal-title text-center">
+                    {{langmod.LABNODEJS13}}
+                </h5>
+            </div>
+            <div class="modal-body">
+                <div class="action-loader" id="_npm_install_log_loader">
+                    <span><i class="fa fa-circle-o-notch fa-spin"></i></span>
+                    <h5>{{langmod.LABNODEJS18}}</h5>
+                </div>
+                <div id="_npm_install_log_container">
+                    <div id="_npm_install_log_loading">
+                        <div class="nodejs-loader">
+                            <div class="nodejs-loader-bar"></div>
+                            <div class="nodejs-loader-bar"></div>
+                            <div class="nodejs-loader-bar"></div>
+                        </div>
+                    </div>
+                    <div id="_npm_install_log_container_log">
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" data-dismiss="modal" id="">
+                    <i class="fa fa-ban" aria-hidden="true"></i>
+                    {{langmod.LABNODEJS17}}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

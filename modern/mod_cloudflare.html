@@ -1,0 +1,90 @@
+<div class="cwp-page">
+  <div class="cwp-page-head">
+    <div>
+      <h2>{{langmod.CF_TITLE}}</h2>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="?">{{langene.GENLABLANG1}}</a></li>
+        <li class="breadcrumb-item active"><strong>Cloudflare</strong></li>
+      </ol>
+    </div>
+  </div>
+  <p class="text-muted">Gestiona tu conexión con Cloudflare y sincroniza tus registros DNS de forma automática.</p>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="ibox">
+        <div class="ibox-title"><h5>{{langmod.CF_SETTINGS}}</h5></div>
+        <div class="ibox-content">
+          {% if mod.cf_configured %}
+          <div class="cf-token-status {% if mod.cf_settings.is_valid %}valid{% else %}invalid{% endif %}">
+            <i class="fa {% if mod.cf_settings.is_valid %}fa-check-circle{% else %}fa-exclamation-circle{% endif %}" aria-hidden="true"></i>
+            <span>
+              {{langmod.CF_CURRENT_TOKEN}}: <code>{{mod.cf_settings.token_masked}}</code>
+              {% if mod.cf_settings.validated_at %}
+              <br><small>Última validación: {{mod.cf_settings.validated_at}}</small>
+              {% endif %}
+            </span>
+          </div>
+          {% else %}
+          <p class="text-muted"><small>{{langmod.CF_NO_TOKEN_CONFIGURED}}</small></p>
+          {% endif %}
+
+          <div class="form-group">
+            <label class="control-label" for="cf_token_input">{{langmod.CF_API_TOKEN}}</label>
+            <div class="cf-token-field">
+              <input type="password" id="cf_token_input" class="form-control" placeholder="{{langmod.CF_TOKEN_PLACEHOLDER}}">
+              <button type="button" id="cf_toggle_token_vis" onclick="toggleCfTokenVis()" aria-label="Show / hide token"><i class="fa fa-eye" aria-hidden="true"></i></button>
+            </div>
+          </div>
+
+          <div class="cwp-form-actions cf-actions">
+            {% if mod.cf_configured %}
+            <button type="button" class="btn btn-danger cf-delete" onclick="deleteCfToken()">{{langmod.CF_DELETE_TOKEN}}</button>
+            {% endif %}
+            <button type="button" class="btn btn-default" onclick="validateCfToken()">{{langmod.CF_VALIDATE}}</button>
+            <button type="button" class="btn btn-primary" onclick="saveCfToken()">{{langmod.DOMSAVEBTN}}</button>
+          </div>
+
+          <div id="cf_validation_msg" style="margin-top:15px; display:none;"></div>
+
+          <div id="cf_zones_list" style="margin-top:15px; display:none;">
+            <label class="control-label">{{langmod.CF_ZONES}}</label>
+            <div id="cf_zones_container" class="cf-zones-container"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="ibox">
+        <div class="ibox-title"><h5>{{langmod.CF_SYNC_LABEL}}</h5></div>
+        <div class="ibox-content">
+          <p>Sincroniza los registros DNS de tus dominios con Cloudflare.</p>
+          <div class="form-group">
+            <label class="control-label" for="cf_domain_select">Seleccionar dominio</label>
+            <select id="cf_domain_select" class="form-control select2">
+              {% for domain in mod.user_domains %}
+                <option value="{{ domain }}" {% if domain == mod.main_domain %}selected{% endif %}>{{ domain }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <p id="cf_sync_desc">{{ langmod.CF_SYNC_MAIN_DESC|format(mod.main_domain)|raw }}</p>
+          <button id="btn_sync_main" class="btn btn-warning btn-block" onclick="syncMainDomain()" {% if not mod.cf_configured %}disabled{% endif %}>
+            <i class="fa fa-refresh" aria-hidden="true"></i> {{langmod.CF_SYNC_BUTTON}}
+          </button>
+          <div id="cf_sync_result" style="margin-top:15px; display:none;"></div>
+        </div>
+      </div>
+
+      <div class="alert alert-info">
+        <strong class="cf-perm-title">{{langmod.CF_PERMISSIONS_TITLE}}</strong>
+        {{langmod.CF_PERMISSIONS_DESC|raw}}
+        <ul>
+          <li>Zone - DNS: {{langmod.CF_PERMISSIONS_EDIT}}</li>
+          <li>Zone - Zone: {{langmod.CF_PERMISSIONS_READ}}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  {% include 'footer.html' %}
+</div>

@@ -1,0 +1,104 @@
+/*
+ * CWP7 Modern - standalone pages (login, lost password, locked, 404).
+ * Loaded after style.css; markup and element IDs are unchanged.
+ */
+body.gray-bg {
+  background: #f4f5f7;
+  font-family: "Open Sans", "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+  color: #2b3040;
+  min-height: 100vh;
+}
+body.gray-bg a { color: #2a5db0; }
+
+/* ---- Login: brand panel + form card ---- */
+.loginColumns, .cwp-login {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 7vh 16px 24px;
+}
+.loginColumns > .row:first-child {
+  display: flex;
+  margin: 0;
+  background: #fff;
+  border: 1px solid #e3e6ec;
+  border-radius: 10px;
+  box-shadow: 0 8px 30px rgba(20, 30, 60, .10);
+  overflow: hidden;
+}
+.loginColumns > .row:first-child > [class*="col-"] { float: none; width: auto; flex: 1 1 50%; padding: 0; }
+.loginColumns > .row:first-child > .col-md-6:first-child {
+  background: #1a2260;
+  color: #e4e7f5;
+  padding: 40px 36px;
+  font-size: 14px;
+  line-height: 1.7;
+}
+.loginColumns > .row:first-child > .col-md-6:first-child .col-md-12 { margin-top: 0 !important; padding: 0; }
+.loginColumns > .row:first-child > .col-md-6:first-child img {
+  background: #fff;
+  border-radius: 8px;
+  padding: 10px 14px;
+  max-width: 100%;
+  height: auto;
+}
+.loginColumns > .row:first-child > .col-md-6:first-child p { margin: 18px 0 0 !important; }
+.loginColumns > .row:first-child > .col-md-6:last-child { padding: 40px 36px; }
+.loginColumns .ibox-content {
+  border: 0;
+  padding: 0;
+  background: transparent;
+}
+.loginColumns .form-control {
+  height: 44px;
+  border: 1px solid #cfd5e2;
+  border-radius: 4px;
+  box-shadow: none;
+  font-size: 14px;
+}
+.loginColumns .form-control:focus { border-color: #2a5db0; box-shadow: 0 0 0 3px rgba(42, 93, 176, .15); }
+.loginColumns .btn-primary {
+  min-height: 44px;
+  background: #d9480f;
+  border-color: #d9480f;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 14px;
+}
+.loginColumns .btn-primary:hover,
+.loginColumns .btn-primary:focus { background: #b83c0a; border-color: #b83c0a; }
+.loginColumns .btn-white { min-height: 40px; border: 1px solid #cfd5e2; border-radius: 4px; color: #33405c; background: #fff; }
+.loginColumns .btn-white:hover { background: #f1f4fb; }
+.loginColumns hr { border-top: 1px solid #e3e6ec; margin: 22px 0 14px; }
+.loginColumns > .row:last-child { color: #5f6b82; font-size: 12px; }
+
+/* ---- Centered cards: lost password, locked, 404, post-login messages ---- */
+.middle-box { max-width: 420px; margin: 8vh auto 0; padding: 0 16px; }
+.middle-box .ibox-content {
+  background: #fff;
+  border: 1px solid #e3e6ec;
+  border-radius: 10px;
+  box-shadow: 0 8px 30px rgba(20, 30, 60, .10);
+  padding: 28px;
+}
+.middle-box .form-control { height: 44px; border: 1px solid #cfd5e2; border-radius: 4px; box-shadow: none; }
+.middle-box .btn-primary { min-height: 44px; background: #d9480f; border-color: #d9480f; border-radius: 4px; font-weight: 700; }
+.middle-box .btn-primary:hover { background: #b83c0a; border-color: #b83c0a; }
+.middle-box h1 { color: #1a2260; font-weight: 300; }
+.logged-message-wrapper { max-width: 820px; }
+.logged-message-wrapper .logged-message {
+  background: #fff;
+  border: 1px solid #e3e6ec;
+  border-radius: 10px;
+  box-shadow: 0 8px 30px rgba(20, 30, 60, .10);
+  padding: 30px 10px;
+  margin: 0;
+}
+.logged-message-alert { color: #2b3040; }
+
+@media (max-width: 767px) {
+  .loginColumns > .row:first-child { flex-direction: column; }
+  .loginColumns > .row:first-child > .col-md-6:first-child,
+  .loginColumns > .row:first-child > .col-md-6:last-child { padding: 26px 22px; }
+}
+body.gray-bg { border-top: 0; }
+.loginColumns .btn-white { display: flex; align-items: center; justify-content: center; }

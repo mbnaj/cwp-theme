@@ -1,0 +1,44 @@
+<div class="cwp-page">
+  {% if mod.fsl == 1 %}
+    {% set stflalert ='block' %}
+  {% else %}
+    {% set stflalert ='none' %}
+  {% endif %}
+  <div class="alert alert-warning" style="display:{{stflalert}}" id="alertfl">
+    <strong>{{langene.GALARTFILEBLOCK}}</strong>
+  </div>
+  <div class="cwp-page-head">
+    <div>
+      <h2>{{langmod.DTITLE|default('PostgreSQL Manager')}}</h2>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="?">{{langene.GENLABLANG1}}</a></li>
+        <li class="breadcrumb-item active"><strong>PostgreSQL Manager</strong></li>
+      </ol>
+    </div>
+  </div>
+<div class="row pgresql-main-wrapper">
+    <div class="col-lg-12">
+        <div class="row">
+            {% if mod.mod_error == 0 %}
+                {% if mod.mod_installed == 1 and mod.usr_config.user_enabled == 1 %}
+                    {% include 'modules/postgresql_manager/dashboard.html' %}
+                {% else %}
+                    {% include 'modules/postgresql_manager/not_available.html' %}
+                {% endif %}
+            {% else %}
+                <div class="col-md-12">
+                    <div class="ibox" id="">
+                        <div class="ibox-content error-ocurred-pgre">
+                            <i class="fa text-danger fa-ban"></i>
+                            <h4>An error ocurred.</h4>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+            
+        </div> 
+    </div> 
+</div> 
+  {% include 'footer.html' %}
+</div>
+{% include 'modules/postgresql_manager/modals.html' %}

@@ -1,0 +1,21 @@
+{% if mod.license != 0 %}
+<div class="ibox" id="firewall_container">
+    <div class="ibox-title">
+        <h4>{{langmod.RSJSLAB78}}</h4>
+    </div>
+    <div class="ibox-content">
+        <div id="firewall_wrapper">
+            <div class="cwp-form-row cwp-fw-row">
+                <div class="form-group">
+                    <label class="control-label" for="ipblock">IP</label>
+                    <input class="form-control" id="ipblock" maxlength="15" placeholder="{{langmod.RSJSLAB81}}">
+                    <span class="help-block">Remove IP address from the firewall (temp and perm blocks)</span>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-danger" id="bntipblock"><i class="fa fa-unlock"></i> {{langmod.RSJSLAB80}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}

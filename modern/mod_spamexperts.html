@@ -1,0 +1,58 @@
+<div class="cwp-page">
+  {% if mod.fsl == 1 %}
+    {% set stflalert ='block' %}
+  {% else %}
+    {% set stflalert ='none' %}
+  {% endif %}
+  <div class="alert alert-warning" style="display:{{stflalert}}" id="alertfl">
+    <strong>{{langene.GALARTFILEBLOCK}}</strong>
+  </div>
+  <div class="cwp-page-head">
+    <div>
+      <h2>{{langmod.LABEL6}}</h2>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="?">{{langene.GENLABLANG1}}</a></li>
+        <li class="breadcrumb-item active"><strong>{{langmod.LABEL6}}</strong></li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="ibox">
+    <div class="ibox-content">
+      <div class="cwp-table-scroll">
+        <table class="table table-hover" id="DataTables_Table_0">
+          <thead>
+            <tr>
+              <th>{{langmod.LABEL1}}</th>
+              {% if mod.reseller ==1 %}
+                <th>{{langmod.LABEL5}}</th>
+              {% endif %}
+              <th>{{langmod.LABEL2}}</th>
+              <th>{{langmod.LABEL3}}</th>
+            </tr>
+          </thead>
+          <tbody id="contenttr">
+            {% if mod.domains|length>0 %}
+              {% for domains in mod.domains %}
+                <tr>
+                  <td>{{domains.domain}}</td>
+                  {% if mod.reseller ==1 %}
+                    <td>{{domains.user}}</td>
+                  {% endif %}
+                  <td>{{domains.type}}</td>
+                  <td>
+                    <i class="fa fa-spinner fa-spin" id="loadin{{domains.id}}" style="display: none" aria-hidden="true"></i>
+                    <a href="#" onclick="return loginspamexpert('{{domains.code}}','{{domains.id}}')" id="{{domains.id}}" class="classlogin">{{langmod.LABEL4}}</a>
+                  </td>
+                </tr>
+              {% endfor %}
+            {% endif %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  {% include 'footer.html' %}
+</div>
+<form id="autoLogin" action="" method="POST" target="_blank"></form>

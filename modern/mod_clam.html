@@ -1,0 +1,449 @@
+<div class="modal clam-config-modal" id="modal_config_email" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content animated fadeIn">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">×</span>
+                    <span class="sr-only">{{langene.MDCLOSE}}</span>
+                </button>
+                <h5 class="modal-title text-center">{{langmod.LABCLAM01}}</h5>
+            </div>
+            <div class="modal-body" style="padding: 0px 10px 15px;">
+                <div class="ibox">
+                    <div class="ibox-title" style="border:none;padding: 15px;">
+                        <h4>{{langmod.LABCLAM02}}</h4>
+                    </div>
+                    <div class="ibox-content" id="">
+                        <!-- <h4>Choose domains where email accounts will be scaned for malware.</h4> -->
+                        <div id="_mail_scan_domains_list">
+                            <div class="clam-loader">
+                                <span><i class="fa fa-circle-o-notch fa-spin"></i></span>
+                                <h5>{{langmod.LABCLAM03}}</h5>
+                            </div>
+                        </div>  
+                        <div class="container-fluid" id="_mail_scan_domains_control">
+                            <div class="col-md-4">
+                                <button onclick="selUnselDomMail(this)" data-type="1" class="btn btn-primary">
+                                <i class="fa fa-square-o" aria-hidden="true"></i> <span id="_btn_sel_all_dom_m">{{langmod.LABCLAM04}}</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ibox collapsed">
+                    <div class="ibox-title clam-email-advanced-options">
+                        <h4>{{langmod.LABCLAM19}}</h4>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content" style="border-top: none;">
+                        <div class="container-fluid">
+                            <div class="row clam-config-item">
+                                <div class="col-md-8">
+                                    <span class="clam-config-item-title">phishing-sigs</span>
+                                    <span class="text-muted clam-config-item-description">{{langmod.LABCLAMPARAM33}}</span>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="radio radio-primary">
+                                        <input name="phishing_sigsmail" class="action-flag-item 'phishing_sigsmail'" data-itemdef="true" checked type="radio" id="phishing_sigsmail_yes" value="yes">
+                                        <label for="phishing_sigsmail_yes">{{langmod.LABCLAM05}}</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="radio radio-primary">
+                                        <input name="phishing_sigsmail" class="action-flag-item phishing_sigsmail" type="radio" id="phishing_sigsmail_no" value="no">
+                                        <label for="phishing_sigsmail_no">{{langmod.LABCLAM06}}</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row clam-config-item">
+                                <div class="col-md-8">
+                                    <span class="clam-config-item-title">alert-phishing-ssl</span>
+                                    <span class="text-muted clam-config-item-description">{{langmod.LABCLAMPARAM28}}</span>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="radio radio-primary">
+                                        <input name="alert_phishing_sslmail" class="action-flag-item alert_phishing_sslmail" type="radio" id="alert_phishing_sslmail_yes" value="yes">
+                                        <label for="alert_phishing_sslmail_yes">{{langmod.LABCLAM05}}</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="radio radio-primary">
+                                        <input name="alert_phishing_sslmail" class="action-flag-item alert_phishing_sslmail" data-itemdef="true" checked type="radio" id="alert_phishing_sslmail_no" value="no">
+                                        <label for="alert_phishing_sslmail_no">{{langmod.LABCLAM06}}</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row clam-config-item">
+                                <div class="col-md-8">
+                                    <span class="clam-config-item-title">alert-phishing-cloak</span>
+                                    <span class="text-muted clam-config-item-description">{{langmod.LABCLAMPARAM29}}</span>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="radio radio-primary">
+                                        <input name="alert_phishing_cloakmail" class="alert_phishing_cloakmail action-flag-item" type="radio" id="alert_phishing_cloakmail_yes" value="yes">
+                                        <label for="alert_phishing_cloakmail_yes">{{langmod.LABCLAM05}}</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="radio radio-primary"> 
+                                        <input name="alert_phishing_cloakmail" class="alert_phishing_cloakmail action-flag-item" data-itemdef="true" checked type="radio" id="alert_phishing_cloakmail_no" value="no">
+                                        <label for="alert_phishing_cloakmail_no">{{langmod.LABCLAM06}}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button data-dismiss="modal" class="btn btn-success">
+                    <i class="fa fa-check" aria-hidden="true"></i> {{langmod.LABCLAM07}}
+                </button>
+            </div>            <!-- <div class="modal-footer" id="conf_del_buttons">
+      </div> -->
+        </div>
+    </div>
+</div>
+<div class="modal clam-config-modal" id="modal_config_general" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content animated fadeIn">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">×</span>
+                    <span class="sr-only">{{langene.MDCLOSE}}</span>
+                </button>
+                <h5 class="modal-title text-center">{{langmod.LABCLAM08}}</h5>
+            </div>
+            <div class="modal-body" style="padding: 0px 10px 15px;">
+                <!-- <div class="ibox">
+                    <div class="ibox-title" style="border:none;padding: 15px;">
+                        <h4>{{langmod.LABCLAM09}}</h4>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="checkbox checkbox-primary">
+                                        <input name="notify_scan" onchange="notifyEmail(this)" type="checkbox" id="_notify_scan" value="1">
+                                        <label for="_notify_scan">{{langmod.LABCLAM10}}</label>
+                                    </div>
+                                    <div id="_email_to_notify_wrapper">
+                                        <label for="_email_to_notify">{{langmod.LABCLAM11}}</label>
+                                        <input type="text" value="{{mod.email_username}}" class="form-control" name="_email_to_notify"
+                                            id="_email_to_notify">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+                <div class="ibox">
+                    <div class="ibox-title clam-email-advanced-options">
+                        <h4>{{langmod.LABCLAM12}}</h4>
+                        <!-- <div class="ibox-tools">
+                            <a class="collapse-link" id="_show_adv_gen">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                        </div> -->
+                    </div>
+                    <div class="ibox-content" id="_gen_adv_content" style="border-top: none;">
+                        <div class="container-fluid clam-config-parameters-wrapper">
+                            {% for parameter in mod.available_parameters %}
+                                <div class="row clam-config-item gen-config-item" data-type="{{parameter.type}}" 
+                                    data-key="_general_{{parameter.title}}" data-parameter="{{parameter.title}}" data-default="{{parameter.default}}">
+                                    <div class="col-md-8">
+                                        <span class="clam-config-item-title">{{parameter.title|replace({'_': "-"})}}</span>
+                                        <span class="text-muted clam-config-item-description">{{parameter.description}}</span>
+                                    </div>
+                                    {% if parameter.type == 'yesno' or parameter.type == 'logic'%}
+                                        <div class="col-md-2">
+                                            <div class="radio radio-primary">
+                                                <input name="{{parameter.title}}" class="gen-opt-check-input" {{ parameter.default == 'yes' ? 'checked' : '' }} type="radio" id="_general_{{parameter.title}}_yes"
+                                                    value="yes">
+                                                <label for="_general_{{parameter.title}}_yes">{{langmod.LABCLAM05}}</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="radio radio-primary">
+                                                <input name="{{parameter.title}}" class="gen-opt-check-input"  {{ parameter.default == 'no' or parameter.default == 'false' ? 'checked'  : '' }} type="radio" id="_general_{{parameter.title}}_no" value="no">
+                                                <label for="_general_{{parameter.title}}_no">{{langmod.LABCLAM06}}</label>
+                                            </div>
+                                        </div>
+                                    {% elseif parameter.type == 'regex' or parameter.type == 'number'%}
+                                        <div class="col-md-4">
+                                            <input type="text" {{ parameter.type == 'number' ? 'data-number="true"' : 'data-regex="true"' }} class="form-control gen-opt-text-input" id="_general_{{parameter.title}}_value">
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button onclick="validGeneralConfiguration()" class="btn btn-primary">
+                    <i class="fa fa-check-circle" aria-hidden="true"></i> {{langmod.LABCLAM07}}
+                </button>
+                <button onclick="resetDefaultSettings()" class="btn btn-warning">
+                    <i class="fa fa-exchange" aria-hidden="true"></i> {{langmod.LABCLAM13}}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal clam-config-modal" id="modal_config_web" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content animated fadeIn">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">×</span>
+                    <span class="sr-only">{{langene.MDCLOSE}}</span>
+                </button>
+                <h5 class="modal-title text-center">{{langmod.LABCLAM14}}</h5>
+            </div>
+            <div class="modal-body" style="padding: 0px 10px 0px;">
+                <div class="ibox">
+                    <div class="ibox-title" style="border:none;padding: 15px;">
+                        <h4>{{langmod.LABCLAM15}}</h4>
+                    </div>
+                    <div class="ibox-content">
+                        <!-- <h4>Choose domains where email accounts will be scaned for malware.</h4> -->
+                        <div class="clam-loader" id="_loader_web_scan">
+                            <span><i class="fa fa-circle-o-notch fa-spin"></i></span>
+                            <h5>{{langmod.LABCLAM03}}</h5>
+                        </div>
+                        <div id="_web_scan_domains_list" style="display: none;">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" style="text-align: left;">
+                <button onclick="selUnselDomWeb(this)" data-type="1" class="btn btn-primary">
+                    <i class="fa fa-square-o" aria-hidden="true"></i> <span id="_btn_sel_all_dom_w">{{langmod.LABCLAM04}}</span>
+                </button>
+                <button data-dismiss="modal" class="btn btn-success">
+                    <i class="fa fa-check" aria-hidden="true"></i> {{langmod.LABCLAM07}}
+                </button>
+            </div>
+            <!-- <div class="modal-footer" id="conf_del_buttons">
+      </div> -->
+        </div>
+    </div>
+</div>
+<div class="modal clam-config-modal" id="modal_config_custom" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content animated fadeIn">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">×</span>
+                    <span class="sr-only">{{langene.MDCLOSE}}</span>
+                </button>
+                <h5 class="modal-title text-center">{{langmod.LABCLAM16}}</h5>
+            </div>
+            <div class="modal-body" style="padding: 0px 10px 0px;">
+                <div class="ibox">
+                    <div class="ibox-title" style="border:none;padding: 15px;">
+                        <h4>{{langmod.LABCLAM17}}</h4>
+                    </div>
+                    <div class="ibox-content" id="_custom_scan_selector">
+                        <!-- <h4>Choose domains where email accounts will be scaned for malware.</h4> -->
+                        <div class="clam-loader" id="_loader_custom_scan">
+                            <span><i class="fa fa-circle-o-notch fa-spin"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button onclick="selPathCustomScan(this)" data-type="1" class="btn btn-block btn-success">
+                    <i class="fa fa-thumb-tack" aria-hidden="true"></i> <span id="_btn_sel_all_dom_w">{{langmod.LABCLAM18}}</span>
+                </button>
+            </div>
+            <!-- <div class="modal-footer" id="conf_del_buttons">
+      </div> -->
+        </div>
+    </div>
+</div>
+<div class="modal clam-config-modal" id="modal_scan_results" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content animated fadeIn">
+            <div class="modal-header">
+                <h5 class="modal-title text-center">{{langmod.LABCLAM20}}</h5>
+            </div>
+            <div class="modal-body">
+                
+            </div>
+            <div class="modal-footer">
+                <button onclick="postScanActions()" id="_btn_post_actions" class="btn btn-success">
+                    <i class="fa fa-check-circle" aria-hidden="true"></i> {{langmod.LABCLAM07}}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="cwp-page">
+  {% if mod.fsl == 1 %}
+    {% set stflalert ='block' %}
+  {% else %}
+    {% set stflalert ='none' %}
+  {% endif %}
+  <div class="alert alert-warning" style="display:{{stflalert}}" id="alertfl">
+    <strong>{{langene.GALARTFILEBLOCK}}</strong>
+  </div>
+  <div class="cwp-page-head">
+    <div>
+      <h2>Antivirus</h2>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="?">{{langene.GENLABLANG1}}</a></li>
+        <li class="breadcrumb-item active"><strong>Antivirus</strong></li>
+      </ol>
+    </div>
+  </div>
+{% if mod.clam_info.result == 'success' %}
+<div class="row">
+    <div class="col-lg-8">
+        <div class="ibox" id="_clam_main_screen_">
+            <div class="ibox-title">
+                <h4>{{langmod.LABCLAM21}}</h4>
+                <button class="btn btn-success btn-sm btn-clam-screens" onclick="viewHistory()"><i class="fa fa-history" aria-hidden="true"></i> {{langmod.LABCLAM22}}</button>
+            </div>
+            <div class="ibox-content">
+                <div class="container-fluid">
+                    <div class="row clam-scan-options">
+                        {% if ("scan_home" in rmenu )or(swmenu==1) %}
+                        <div class="col-md-3 clam-scan-option-wrapper">
+                            <div  data-title="home" class="clam-scan-option optactive" title="{{langmod.LABCLAM24}} /home/{{users}}/" data-toggle="tooltip" data-placement="top">
+                                <div class="text-center">
+                                    <i class="fa fa-home fa-clam-icon"></i>
+                                    <h4>{{langmod.LABCLAM23}}</h4>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% if ("scan_web" in rmenu )or(swmenu==1) %}
+                        <div class="col-md-3 clam-scan-option-wrapper">
+                            <div  data-title="web" class="clam-scan-option" title="{{langmod.LABCLAM25}}" data-toggle="tooltip" data-placement="top">
+                                <div class="text-center">
+                                    <i class="fa fa-sitemap fa-clam-icon"></i>
+                                    <h4>{{langmod.LABCLAM26}}</h4>
+                                    <p class="text-muted-scan" id="_web_layer"><i class="fa fa-asterisk" aria-hidden="true"></i> <span>{{langmod.LABCLAM27}}</span><br />
+                                        <a href="#" onclick="configWebScan()"><i class="fa fa-cogs" aria-hidden="true"></i> {{langmod.LABCLAM28}}</a></p>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% if ("scan_email" in rmenu )or(swmenu==1) %}
+                        <div class="col-md-3 clam-scan-option-wrapper">
+                            <div  data-title="email" id="_clam_scan_email_option" title="{{langmod.LABCLAM29}}" data-toggle="tooltip" data-placement="top" class="clam-scan-option">
+                                <div class="text-center">
+                                    <i class="fa fa-envelope-o fa-clam-icon"></i>
+                                    <h4>{{langmod.LABCLAM30}}</h4>
+                                    <p class="text-muted-scan" id="_mail_layer"><i class="fa fa-asterisk" aria-hidden="true"></i> <span>{{langmod.LABCLAM31}}</span><br />
+                                        <a href="#" onclick="configEmailScan()"><i class="fa fa-cogs" aria-hidden="true"></i> {{langmod.LABCLAM28}}</a></p>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% if ("scan_custom" in rmenu )or(swmenu==1) %}
+                        <div class="col-md-3 clam-scan-option-wrapper">
+                            <div  data-title="custom" class="clam-scan-option" title="{{langmod.LABCLAM32}}" data-toggle="tooltip" data-placement="top">
+                                <div class="text-center">
+                                    <i class="fa fa-cog fa-clam-icon"></i> 
+                                    <h4>{{langmod.LABCLAM33}}</h4>
+                                    <p class="text-muted-scan" id="_custom_layer">
+                                        <i class="fa fa-asterisk" aria-hidden="true"></i> 
+                                        <div id="_flex_path_container" class="flex-path-container text-muted-scan">{{langmod.LABCLAM34}}</div>
+                                        <a href="#" onclick="configCustomScan()"><i class="fa fa-cogs" aria-hidden="true"></i> {{langmod.LABCLAM28}}</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="clam-scan-options-separator"></div>
+                        </div>
+                    </div>
+                    <div id="_files_scanning_status" class="row">
+                        <div class="col-md-12" id="_files_scanning_line"></div>
+                    </div> 
+                    <div class="row clam-scan-controllers">
+                        <div class="col-md-4" style="font-weight: 500;">
+                            {{langmod.LABCLAM35}}: <span class="clam-parse-date" data-seconds="true" data-date="{{mod.clam_info.info.last_scan}}" id="_last_scan_date_"></span>
+                        </div>
+                        <div class="col-md-4 cwp-p-0">
+                            <div id="_clam_scan_btn_wrapper" style="display:{{mod.clam_info.info.is_running == 1 ? 'none' : 'block'}}">
+                                <div class="clam-scan-btn-wrapper">
+                                    <div class="clam-scan-btn">
+                                        <button title="Run a new scan" data-toggle="tooltip" data-placement="top" class="btn btn-primary btn-block" {{mod.clam_info.info.pending_action != 0 ? 'disabled' : ''}} id="_run_scan_btn" onclick="runScan()">
+                                            <i class="fa fa-search" aria-hidden="true"></i>
+                                            <span id="_run_scan_btn_title">
+                                                {{langmod.LABCLAM36}} <span id="_btn_action_title_">home</span> {{langmod.LABCLAM37}}
+                                            </span>
+                                        </button>
+                                    </div>
+                                    <button title="General scan configuration" data-toggle="tooltip" data-placement="top" id="_config_scan_btn" onclick="configGeneralScan()" {{mod.clam_info.info.pending_action != 0 ? 'disabled' : ''}} class="btn btn-primary btn-config-clam clam-scan-btn">
+                                        <i class="fa fa-cogs" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div id="_scanning_loader" style="display:{{mod.clam_info.info.is_running == 1 ? 'block' : 'none'}}">
+                                <div class="scan-loader">
+                                    <div class="scan-loader-bar"></div>
+                                    <div class="scan-loader-bar"></div>
+                                    <div class="scan-loader-bar"></div>
+                                </div>
+                                <h5 class="scan-loader-title"><i class="fa fa-bug" aria-hidden="true"></i> {{langmod.LABCLAM38}}</h5>
+                            </div>
+                        </div>
+                        <div class="col-md-4 text-right" style="font-weight: 500;">
+                            {{langmod.LABCLAM39}}: <span class="clam-parse-date" data-date="{{mod.clam_info.info.virus_date}}"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ibox" id="_clam_history_screen_">
+            <div class="ibox-title">
+                <h4>{{langmod.LABCLAM42}}</h4>
+                <button class="btn btn-warning btn-sm btn-clam-screens" onclick="viewScanDashboard()"><i class="fa fa-list" aria-hidden="true"></i> {{langmod.LABCLAM40}}</button>
+            </div>
+            <div class="ibox-content" style="padding: 10px 15px;">
+                <div class="clam-loader" id="_loader_history_scan">
+                    <span><i class="fa fa-circle-o-notch fa-spin"></i></span>
+                    <h5>{{langmod.LABCLAM41}}</h5>
+                </div>
+                <div id="content_history_table">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="ibox">
+            <div class="ibox-title">
+                <h4>{{langmod.LABCLAM43}}</h4>
+            </div>
+            <div class="ibox-content">
+                <p>{{langmod.LABCLAM44}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="row">
+    <div class="col-lg-12 clam-not-installed">
+        <i class="fa fa-ban text-danger"></i>
+        <h3>{{langmod.LABCLAM45}}</h3>
+        <p>{{langmod.LABCLAM46}}</p>
+    </div>
+</div>
+{% endif %}
+  {% include 'footer.html' %}
+</div>

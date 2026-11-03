@@ -1,0 +1,73 @@
+<div class="cwp-page">
+  {% if mod.fsl == 1 %}
+    {% set stflalert ='block' %}
+  {% else %}
+    {% set stflalert ='none' %}
+  {% endif %}
+  <div class="alert alert-warning" style="display:{{stflalert}}" id="alertfl">
+    <strong>{{langene.GALARTFILEBLOCK}}</strong>
+  </div>
+  <div class="cwp-page-head">
+    <div>
+      <h2>{{langmod.FIXACCPERM1}}</h2>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="?">{{langene.GENLABLANG1}}</a></li>
+        <li class="breadcrumb-item active"><strong>{{langmod.FIXACCPERM1}}</strong></li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="ibox">
+    <div class="ibox-content">
+      <div class="notifications-type">
+        <div class="noti-item">
+          <div class="switch">
+            <div class="onoffswitch">
+              <input type="checkbox" checked="" class="onoffswitch-checkbox" id="fix_permissions" onclick="return changestnot(this, 'fix_permissions')">
+              <label class="onoffswitch-label" for="fix_permissions">
+                <span class="onoffswitch-inner"></span>
+                <span class="onoffswitch-switch"></span>
+              </label>
+              <input type="hidden" id="fix_permissions-h" value="">
+            </div>
+          </div>
+          <label class="noti-item-label" for="fix_permissions">{{langmod.FIXACCPERM2}}</label>
+          <div class="noti-desc">{{langmod.FIXACCPERM3|replace({'{{users}}': users})}}.</div>
+        </div>
+        <div class="noti-item">
+          <div class="switch">
+            <div class="onoffswitch">
+              <input type="checkbox" class="onoffswitch-checkbox" name="internalError" id="internalError" onclick="return changestnot(this, 'internalError')">
+              <label class="onoffswitch-label" for="internalError">
+                <span class="onoffswitch-inner"></span>
+                <span class="onoffswitch-switch"></span>
+              </label>
+              <input type="hidden" id="internalError-h" value="">
+            </div>
+          </div>
+          <label class="noti-item-label" for="internalError">{{langmod.FIXACCPERM4}}</label>
+          <div class="noti-desc">{{langmod.FIXACCPERM5}}</div>
+        </div>
+        <div class="noti-item">
+          <div class="switch">
+            <div class="onoffswitch">
+              <input type="checkbox" class="onoffswitch-checkbox" id="removeHandler" name="removeHandler" onclick="return changestnot(this, 'removeHandler')">
+              <label class="onoffswitch-label" for="removeHandler">
+                <span class="onoffswitch-inner"></span>
+                <span class="onoffswitch-switch"></span>
+              </label>
+              <input type="hidden" id="removeHandler-h" value="">
+            </div>
+          </div>
+          <label class="noti-item-label" for="removeHandler">{{langmod.FIXACCPERM6}}</label>
+          <div class="noti-desc">{{langmod.FIXACCPERM7}}</div>
+        </div>
+      </div>
+    </div>
+    <div class="cwp-form-actions">
+      <button class="btn btn-success" id="accFixIssues">{{langmod.FIXACCPERM8}}</button>
+    </div>
+  </div>
+
+  {% include 'footer.html' %}
+</div>

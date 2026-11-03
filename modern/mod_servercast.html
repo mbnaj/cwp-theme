@@ -1,0 +1,29 @@
+<div class="cwp-page cwp-page-servercast">
+  {% if mod.fsl == 1 %}
+    <div class="alert alert-warning" id="alertfl">
+      <strong>{{langene.GALARTFILEBLOCK}}</strong>
+    </div>
+  {% endif %}
+  <div class="cwp-page-head">
+    <div>
+      <h2>{{langmod.DTITLE|default('Server Cast')}}</h2>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="?">{{langene.GENLABLANG1}}</a></li>
+        <li class="breadcrumb-item active"><strong>Server Cast</strong></li>
+      </ol>
+    </div>
+  </div>
+<div class="row pgresql-main-wrapper">
+    <div class="col-lg-12">
+        <div class="row">
+            {% if mod.swcast == 1 %}
+                {% include 'modules/servercast/dashboard.html' %}
+            {% else %}
+                {% include 'modules/servercast/not_available.html' %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+  {% include 'footer.html' %}
+</div>
+{% include 'modules/servercast/modals.html' %}

@@ -1,0 +1,41 @@
+{% set stats = mod.init_info.dashboard %}
+{# key, canvas id, label; disk and bandwidth show formatted bytes (filled by JS) #}
+{% set tiles = [
+  ['quota', 'rs_dash_disk', langmod.RSLABEL16, true],
+  ['bandwidth', 'rs_dash_bw', langmod.RSLABEL25, true],
+  ['ftp_accounts', 'rs_dash_ftp', langmod.RSLABEL17, false],
+  ['email_accounts', 'rs_dash_email', langmod.RSLABEL18, false],
+  ['email_lists', 'rs_dash_emlist', langmod.RSLABEL19, false],
+  ['addons_domains', 'rs_dash_doms', langmod.RSLABEL22, false],
+  ['sub_domains', 'rs_dash_sdoms', langmod.RSLABEL20, false],
+  ['parked_domains', 'rs_dash_pdoms', langmod.RSLABEL21, false],
+  ['databases', 'rs_dash_db', langmod.RSLABEL24, false],
+  ['accounts', 'rs_dash_accounts', langmod.RSLABEL46, false]
+] %}
+<div class="ibox">
+  <div class="ibox-title">
+    <h4>{{langmod.RSLABEL15}}: {{stats.package_name}}</h4>
+  </div>
+  <div class="ibox-content">
+    <div class="mini-dashboard cwp-stat-grid">
+      {% for t in tiles %}
+        {% set pair = attribute(stats, t[0]) %}
+        <div class="mini-dashboard-graph" data-used="{{pair[0]}}" data-limit="{{pair[1]}}" data-donout="{{t[1]}}">
+          <canvas id="{{t[1]}}" width="100"></canvas>
+          {% if t[3] %}
+            <h5 class="mini-dashboard-bytes">{{t[2]}} <span class="used-bytes"></span> / <span class="limit-bytes"></span></h5>
+          {% else %}
+            <h5>{{t[2]}} {{pair[0]}} /
+              {% if pair[1] != '-1' %}
+                {{pair[1]}}
+              {% else %}
+                <span class="infinite-sign">&infin;</span>
+              {% endif %}
+            </h5>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+    <div class="table_cron_loader" id="mini_dashboard_loader"><span><i class="fa fa-circle-o-notch fa-spin"></i></span></div>
+  </div>
+</div>

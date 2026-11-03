@@ -1,0 +1,52 @@
+<div class="cwp-page">
+  <div class="alert alert-warning" id="alertfl" style="display:{% if mod.fsl == 1 %}block{% else %}none{% endif %}">
+    <strong>{{langene.GALARTFILEBLOCK}}</strong>
+  </div>
+  <div class="cwp-page-head">
+    <div>
+      <h2>{{langmod.VDLABEL1}}</h2>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="?">{{langene.GENLABLANG1}}</a></li>
+        <li class="breadcrumb-item active"><strong>{{langmod.VDLABEL1}}</strong></li>
+      </ol>
+    </div>
+    {% if mod.license == 1 %}
+    <div>
+      <button type="button" class="btn btn-success hide" id="btnallcahe">{{langmod.VDLABEL6}}</button>
+    </div>
+    {% endif %}
+  </div>
+
+  {% if mod.license == 0 %}
+  <div class="alert alert-danger">
+    <b>{{langmod.VDLABEL8}}</b>
+  </div>
+  {% set license = 'disabled'%}
+  {% else %}
+  {% set license = ''%}
+  {% endif %}
+
+  <div class="ibox">
+    <div class="ibox-title">
+      <h4>{{langmod.VDLABEL1}}</h4>
+    </div>
+    <div class="ibox-content cwp-table-scroll">
+      <table id="tabvdomain" class="table table-striped table-bordered table-hover display cwp-w-100">
+        <thead id="theadtabvdomain">
+          <tr>
+            <th>{{langmod.VDLABEL2}}</th>
+            <th>{{langmod.VDLABEL3}}</th>
+            <th>{{langmod.VDLABEL4}}</th>
+          </tr>
+        </thead>
+        <tfoot>
+          <tr>
+            <th>{{langmod.VDLABEL2}}</th>
+            <th>{{langmod.VDLABEL3}}</th>
+            <th>{{langmod.VDLABEL4}}</th>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</div>

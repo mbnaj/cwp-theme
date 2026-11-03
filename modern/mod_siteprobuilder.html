@@ -1,0 +1,50 @@
+<div class="cwp-page">
+  <div class="cwp-page-head">
+    <div>
+      <h2>SiteProBuilder</h2>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="?">{{langene.GENLABLANG1}}</a></li>
+        <li class="breadcrumb-item active"><strong>SiteProBuilder</strong></li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="ibox">
+        {% if not mod.siteprobuilder_configured %}
+          <div class="ibox-content">
+            <h3>{{langmod.IS_NOT_CONFIGURED}}</h3>
+          </div>
+        {% elseif mod.siteprobuilder_domains %}
+          <form>
+            <input type="hidden" name="module" value="{{mod.module}}">
+            <div class="ibox-title"><h5>{{langmod.SELECT_DOMAIN}}</h5></div>
+            <div class="ibox-content">
+              <div class="form-group">
+                <label for="domain" class="control-label">{{langmod.LABEL_FOR_DOMAINS}}</label>
+                <select id="domain" class="form-control" name="domain">
+                  {% for domain in mod.siteprobuilder_domains %}
+                    <option value="{{domain.domain}}">{{domain.domain}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              {% if mod.siteprobuilder_error %}
+                <div class="alert alert-danger">{{mod.siteprobuilder_error}}</div>
+              {% endif %}
+              <div class="cwp-form-actions">
+                <button type="submit" class="btn btn-primary">{{langmod.SUBMIT_BTN}}</button>
+              </div>
+            </div>
+          </form>
+        {% else %}
+          <div class="ibox-content">
+            <h3>{{langmod.DOMAINS_NOT_FOUND}}</h3>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  {% include 'footer.html' %}
+</div>

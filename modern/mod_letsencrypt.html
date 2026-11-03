@@ -1,0 +1,134 @@
+<div class="modal inmodal" id="modalinfo_twice" tabindex="-1" role="dialog" aria-labelledby="videoModal" aria-hidden="true">
+  <div class="modal-dialog" style="width:550px;">
+    <div class="modal-content animated fadeIn">
+      <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">
+              <span aria-hidden="true">&times;</span><span class="sr-only">{{langmod.SSLCLOSE}}</span>
+          </button>
+          <h4 class="modal-title">{{langmod.SSLINFOCERT}}</h4>
+      </div>
+      <div class="modal-body">
+
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal" id="deleteletsencrypt" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content animated fadeIn">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">
+                <span aria-hidden="true">×</span>
+                <span class="sr-only">{{langene.MDCLOSE}}</span>
+              </button>
+              <h4 class="modal-title text-center">{{ langmod.LMATENC }}</h4>
+            </div>
+            <div class="modal-body">
+              <!-- <p>You are about to delete the FTP user: <br>
+              <strong id="descron">sanitarios@testcecilio.com</strong>
+              <br>Are you sure you want to continue?</p> -->
+            </div>
+            <div class="modal-footer">
+              <!-- <button type="button" class="btn btn-white" data-dismiss="modal">NO</button>
+              <button type="button" class="btn btn-primary" onclick="ftpdelete(1,'sanitarios','testcecilio.com',0)">YES</button>-->
+            </div>
+        </div>
+    </div>
+</div>
+<div class="cwp-page">
+  {% if mod.fsl == 1 %}
+    {% set stflalert ='block' %}
+  {% else %}
+    {% set stflalert ='none' %}
+  {% endif %}
+  <div class="alert alert-warning" style="display:{{stflalert}}" id="alertfl">
+    <strong>{{langene.GALARTFILEBLOCK}}</strong>
+  </div>
+  <div class="cwp-page-head">
+    <div>
+      <h2>{{langmod.LMTITLE}}</h2>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="?">{{langene.GENLABLANG1}}</a></li>
+        <li class="breadcrumb-item active"><strong>{{langmod.LMTITLE}}</strong></li>
+      </ol>
+    </div>
+  </div>
+<div class="row letsencrypt-wrapper">
+    <div class="col-lg-12">
+        <div class="row">
+            <div class="col-lg-7">
+              <div class="ibox">
+                  <div class="ibox-title">
+                      <h5>{{langmod.LMTITLE2}}</h5>
+                  </div>
+                  <div class="ibox-content">
+                      <div class="row">
+                        <div class="col-sm-8">
+                            <label for="domain_lets" class="form-label">{{langmod.LMSUBTITLE}}</label>
+                            <div id="sel_domain_container">
+                              <select class="form-control" id="domain_lets" onchange="return validatevhost(this)">
+                                <option value="">{{langmod.LMCHOOSE}}</option>
+                                {% for domains in mod.domains %}
+                                <option data-is_subdomain="{{domains.is_subdomain}}" data-path="{{domains.path}}" data-subdomains='{{domains.subdomains|json_encode|raw}}' value="{{domains.domain}}">{{domains.domain}}</option>
+                                {% endfor %}
+                              </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 text-center">
+                          <label for="" class="form-label" style="display:block">&nbsp;</label>
+                          <button class="btn btn-success btn-block disabled" id="btn-lets-add" onclick="installDomain(this)" disabled><i class="fa fa-lock" aria-hidden="true"></i> <span id="btn_install_title">{{langmod.LMINSTALL}}</span></button>
+                        </div>
+                      </div>
+                      <div class="row" id="services_toinstall">
+                        <div class="col-sm-12">
+                          <span class="san_label">{{langmod.SSLSANLABEL}}</span>
+                          <div class="services-toinstall-items" id="services_toinstall_items">
+
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+            <div class="col-lg-5">
+              <div class="ibox">
+                <div class="ibox-title">
+                    <h5>{{langmod.LMDESC2}}</h5>
+                </div>
+                <div class="ibox-content">
+                  <small class="list-group-item-text">{{langmod.LMDESC3}}</small>
+                  <!-- <small class="list-group-item-text">{{langmod.LMDESC4}}</small> -->
+                  <!-- <p class="cwp-fs-14">{{langmod.LMDESC5}}</p>
+                  <p class="cwp-fs-14">{{langmod.LMDESC6}}</p>
+                  <p class="cwp-fs-14">{{langmod.LMDESC7}}</p>
+                  <p class="cwp-fs-14">{{langmod.LMDESC8}}</p>
+                  <p class="cwp-fs-14">{{langmod.LMDESC9}}</p> -->
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="ibox">
+              <div class="ibox-title">
+                  <h4 id="form_title">
+                    {{langmod.SSLLISTTITLE}}
+                    <!-- <div class="pull-right">
+                      <button id="forceallrenew" class="btn btn-xs btn-warning"><i class="fa fa-retweet" aria-hidden="true"></i> {{langmod.SSLBTNFORCE}}</button>
+                    </div> -->
+                  </h4>
+              </div>
+              <div class="ibox-content">
+                <div class="row">
+                    <div class="col-lg-12 text-left" id="ssl_list_wrapper">
+                      <div class="table_cron_loader"><span><i class="fa fa-circle-o-notch fa-spin"></i></span></div>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+    {% include 'footer.html' %}
+</div>
+</div>

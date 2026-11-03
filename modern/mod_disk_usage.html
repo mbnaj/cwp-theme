@@ -1,0 +1,45 @@
+<div class="cwp-page">
+  {% if mod.fsl == 1 %}
+    {% set stflalert ='block' %}
+  {% else %}
+    {% set stflalert ='none' %}
+  {% endif %}
+  <div class="alert alert-warning" style="display:{{stflalert}}" id="alertfl">
+    <strong>{{langene.GALARTFILEBLOCK}}</strong>
+  </div>
+  <div class="cwp-page-head">
+    <div>
+      <h2>{{langmod.DUSAGELAB1}}</h2>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="?">{{langene.GENLABLANG1}}</a></li>
+        <li class="breadcrumb-item active"><strong>{{langmod.DUSAGELAB1}}</strong></li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="cwp-two-col">
+    <div>
+      <div class="ibox" id="list_wrapper">
+        <div class="ibox-title">
+          <h4>{{langmod.DUSAGELAB8}}</h4>
+        </div>
+        <div class="ibox-content">
+          <div id="sort_controls"></div>
+          <div id="files_usage">
+            <div class="table_cron_loader"><span><i class="fa fa-circle-o-notch fa-spin"></i></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="ibox" id="total_wrapper">
+        <div class="ibox-title">
+          <h4>{{langmod.DUSAGELAB5}}</h4>
+        </div>
+        <div class="ibox-content" id="total_usage">
+          <div class="table_cron_loader"><span><i class="fa fa-circle-o-notch fa-spin"></i></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

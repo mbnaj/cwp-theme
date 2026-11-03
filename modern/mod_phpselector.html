@@ -1,0 +1,116 @@
+<div class="cwp-page">
+    {% if mod.fsl == 1 %}
+    {% set stflalert ='block' %}
+    {% else %}
+    {% set stflalert ='none' %}
+    {% endif %}
+    <div class="alert alert-warning" style="display:{{stflalert}}" id="alertfl">
+        <strong>{{langene.GALARTFILEBLOCK}}</strong>
+    </div>
+    <div class="cwp-page-head">
+        <div>
+            <h2>{{langmod.NAMEMOD}}</h2>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="?">{{langene.GENLABLANG1}}</a></li>
+                <li class="breadcrumb-item active"><strong>{{langmod.NAMEMOD}}</strong></li>
+            </ol>
+        </div>
+    </div>
+
+    {% if mod.license == 0%}
+    <div class="alert alert-danger">
+        {% if mod.api_error %}
+        <b>{{ langmod.SPHPLABEL_APIERR|default('The PHP settings of this domain could not be loaded. Reload the page or log in again; if it keeps happening, contact your server administrator.') }}</b>
+        {% else %}
+        <b>{{langmod.SPHPLABEL38}}</b>
+        {% endif %}
+    </div>
+    {% set license = 'disabled'%}
+    {% set license2 = 'disabled'%}
+    {% else %}
+        {% set license = ''%}
+        {% set license2 = 'disabled'%}
+    {% endif %}
+
+    <div class="cwp-two-col">
+        <div class="ibox">
+            <div class="ibox-title">
+                <h5><i class="fa fa-sliders"></i> {{langmod.SPHPLABELSELECT}}</h5>
+            </div>
+            <div class="ibox-content">
+                <div class="alert alert-info cwp-legend">
+                    <i class="fa fa-info-circle"></i>
+                    <div>
+                        <strong>Default</strong> = {{ langene.MAINPHP|default('Main PHP') }} ({{ langmod.SPHPLABEL27|default('Apache') }}) &middot;
+                        <strong>Selector CGI</strong> = {{ langmod.SPHPSELDIR|default('per-directory via .htaccess') }} &middot;
+                        <strong>Selector FPM</strong> = PHP-FPM
+                    </div>
+                </div>
+                <div class="cwp-form-row">
+                    <div class="form-group">
+                        <label class="control-label" for="domainphp">{{langmod.SPHPLABEL39}}</label>
+                        <select class="form-control" onchange="changeDomainSelect()" id="domainphp" {{license}}>
+                            <option value="">{{langmod.SPHPLABEL40}}</option>
+                            {% for domains in mod.domain %}
+                                <option value="{{domains}}">{{domains}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="verphp">{{langmod.SPHPLABEL22}}</label>
+                        <select class="form-control" id="verphp" {{license2}}>
+                            <option value="">{{langmod.SPHPLABEL40}}</option>
+                            {% for verphp in mod.phpver %}
+                                <option value="php{{verphp}}">{{verphp}} (Default)</option>
+                            {% endfor %}
+                            {% for verphpcgi in mod.phpcgi %}
+                                <option value="php{{verphpcgi}}">{{verphpcgi}} (Selector CGI)</option>
+                            {% endfor %}
+                            {% for verphpfpm in mod.phpfpm %}
+                                <option value="php-fpm{{verphpfpm}}">{{verphpfpm}} (Selector FPM)</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <button id="updateversionfpm" class="btn btn-success {{license}}" onclick="return updateVersionPHP(this)" {{license}}><i class="fa fa-refresh"></i> {{langmod.SPHPLABEL21}}</button>
+                    </div>
+                </div>
+
+                <div class="table_cron_loader" id="loader_domain" style="display:none;height: 20rem;"><span><i class="fa fa-circle-o-notch fa-spin"></i></span></div>
+                <div id="exploret" style="display: none"></div>
+            </div>
+        </div>
+
+        <div class="ibox">
+            <div class="ibox-title">
+                <h5><i class="fa fa-info-circle"></i> {{langmod.SPHPLABELDETAILS}}</h5>
+            </div>
+            <div class="ibox-content php-details">
+                <input type="hidden" value="" id="namemark">
+                <div class="cwp-version-hero">
+                    <div class="cwp-version-caption">{{langmod.SPHPLABEL26}}</div>
+                    <div class="cwp-version-number"><span id="verphpdiv"></span></div>
+                    <span class="label label-primary" id="labeltypephp"></span>
+                    <input type="hidden" id="phptypehidden" value="php-cgi">
+                </div>
+                <dl class="cwp-kv">
+                    <dt>{{langmod.SPHPLABEL27}}</dt>
+                    <dd>
+                        <span id="idapacdiv">
+                            {% if mod.apache == 1 %}
+                                {{langmod.SPHPLABEL1}}
+                            {% else %}
+                                {{langmod.SPHPLABEL35}}
+                            {% endif %}
+                        </span>
+                    </dd>
+                    {% if mod.nginx == 1 %}
+                    <dt>{{langmod.SPHPLABEL29}}</dt>
+                    <dd><span id="idnixdiv">{{langmod.SPHPLABEL1}}</span></dd>
+                    {% endif %}
+                </dl>
+            </div>
+        </div>
+    </div>
+    {% include 'footer.html' %}
+</div>

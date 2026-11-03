@@ -1,0 +1,153 @@
+<div class="cwp-page">
+  {% if mod.fsl == 1 %}
+    {% set stflalert ='block' %}
+  {% else %}
+    {% set stflalert ='none' %}
+  {% endif %}
+  <div class="alert alert-warning" style="display:{{stflalert}}" id="alertfl">
+    <strong>{{langene.GALARTFILEBLOCK}}</strong>
+  </div>
+  <div class="cwp-page-head">
+    <div>
+      <h2>{{langmod.PDTITLE}}</h2>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="?">{{langene.GENLABLANG1}}</a></li>
+        <li class="breadcrumb-item active"><strong>{{langmod.PDTITLE}}</strong></li>
+      </ol>
+    </div>
+    <div id="divbtn-add">
+      <button type="button" class="btn btn-success" onclick="return newdirprotec()"><i class="fa fa-plus" aria-hidden="true"></i> {{langmod.BTNADD}}</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-9">
+      <div class="ibox" id="divaddform" style="display: none;">
+        <div class="ibox-title">
+          <h5>{{langmod.NEWDP}}</h5>
+        </div>
+        <div class="ibox-content">
+          <div class="form-group">
+            <label class="control-label">{{langmod.DIRPD}}</label>
+            <div class="radio-custom radio-inline">
+              <input type="radio" name="radio1" id="radio4" value="0" checked="checked" onclick="return changeradio(0)">
+              <label for="radio4">{{langmod.MANUALDP}}</label>
+            </div>
+            <div class="radio-custom radio-inline">
+              <input type="radio" name="radio1" id="radio14" value="1" onclick="return changeradio(1)">
+              <label for="radio14">{{langmod.EXPLORET}}</label>
+            </div>
+          </div>
+          <div class="form-group" id="manual">
+            <div class="input-group">
+              <span class="input-group-addon">/home/{{users}}/</span>
+              <input type="text" class="form-control" id="path1">
+            </div>
+          </div>
+          <div class="form-group" style="display: none" id="exploret">
+            <div class="cwp-pd-path" id="pathview">/home/{{users}}/</div>
+            <div id="divconte">
+              {% if mod.dirs|length > 0 %}
+              <table>
+                {% for var in mod.dirs %}
+                <tr>
+                  <td>
+                    <i class="fa fa-folder" style="color:#f1cf54"></i>
+                    <a href="#" onclick="return searchdir('{{var.path}}/')">{{var.name}} </a>
+                  </td>
+                </tr>
+                {% endfor %}
+              </table>
+              {% endif %}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4 form-group">
+              <label class="control-label" for="useradd">{{langmod.USERDP}}</label>
+              <input class="form-control" type="text" id="useradd">
+              <input type="hidden" id="hiddenvalue" value="">
+            </div>
+            <div class="col-md-4 form-group">
+              <label class="control-label" for="pass1dp">{{langmod.PASSDP}}</label>
+              <input class="form-control" type="password" id="pass1dp" placeholder="Write your password">
+            </div>
+            <div class="col-md-4 form-group">
+              <label class="control-label" for="pass2dp">{{langmod.PASSDP}}</label>
+              <input class="form-control" type="password" id="pass2dp" placeholder="Confirm your password">
+            </div>
+          </div>
+          <div class="cwp-form-actions">
+            <button type="button" class="btn btn-default" id="btn-cancel" onclick="return newdirprotec()">{{langmod.CANCE}}</button>
+            <button type="button" class="btn btn-success" id="btn-protege" onclick="return savedp()">{{langmod.PROT}}</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="ibox" id="tableredg">
+        <div class="ibox-content">
+          <div class="table-responsive">
+            <table class="table table-hover cwp-pd-table">
+              <thead>
+                <tr>
+                  <th class="per5">#</th>
+                  <th>{{langmod.DIRECTOR}}</th>
+                  <th>{{langmod.USERDP}}</th>
+                  <th>{{langmod.ACCION}}</th>
+                </tr>
+              </thead>
+              <tbody id="tablebodydp">
+              {% if mod.dirprot|length > 0 %}
+                {% set array = 1 %}
+                {% for var1 in mod.dirprot %}
+                <tr>
+                  <td>{{array}}</td>
+                  <td>{{var1.dir}} </td>
+                  <td>
+                    {% for user in var1.users %}
+                    <div class="cwp-pd-user">
+                      <span>{{user}}</span>
+                      <button type="button" class="btn btn-danger btn-xs" title="Delete user" onclick="deleteUser(0,'{{var1.dir}}','{{user}}')"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                    </div>
+                    {% endfor %}
+                  </td>
+                  <td class="text-nowrap">
+                    <button type="button" class="btn btn-outline btn-primary btn-xs" onclick="addUToDP('{{var1.dir}}')"><i class="fa fa-plus"></i> Add New User</button>
+                    <button type="button" class="btn btn-danger btn-xs" title="Delete directory protection" onclick="deleteDP(0,'{{var1.dir}}')"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                  </td>
+                </tr>
+                {% set array = array+1 %}
+                {% endfor %}
+              {% else %}
+                <tr>
+                  <td colspan="6" class="text-center">No Records</td>
+                </tr>
+              {% endif %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3">
+      <div class="ibox">
+        <div class="ibox-title"><h5>{{langmod.PDTITLE1}}</h5></div>
+        <div class="ibox-content">
+          <p>{{langmod.DPDESCR1}}</p>
+          <p>{{langmod.DPDESCR2}}</p>
+          <p>{{langmod.DPDESCR3}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="dpModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content animated fadeIn">
+        <div class="modal-header"></div>
+        <div class="modal-body small-pad-modal"></div>
+        <div class="modal-footer"></div>
+      </div>
+    </div>
+  </div>
+  {% include 'footer.html' %}
+</div>

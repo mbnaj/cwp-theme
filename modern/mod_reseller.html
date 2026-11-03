@@ -1,0 +1,36 @@
+<div class="row  border-bottom white-bg dashboard-header">
+    {% if mod.fsl == 1 %}
+    {% set stflalert ='block' %}
+    {% else %}
+    {% set stflalert ='none' %}
+    {% endif %}
+    <div class="row  alert alert-warning col-lg-12" style="margin-left: 5px; padding-right: 5px;display:{{stflalert}}" id="alertfl">
+        <strong>{{langene.GALARTFILEBLOCK}}</strong>
+    </div>
+    <div class="col-lg-10">
+        <h2>{{langmod.RSLABEL4}}</h2>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="?">Home</a></li>
+            <li class="breadcrumb-item active"><strong>{{langmod.RSLABEL4}}</strong></li>
+        </ol>
+    </div>
+</div>
+<div class="row reseller-module">
+    {% if mod.licenseReseller == 0 %}
+        <div class="alert alert-danger" style="margin: 15px">
+            <b>{{langmod.RSLABEL83}}</b>
+        </div>
+        {% set license = 'disabled'%}
+    {% else %}
+        {% set license = ''%}
+    {% endif %}
+    <div class="col-lg-12">
+        <div class="row">
+            {% include 'mod_reseller_gentab.html' %}
+        </div>
+    </div>
+</div>
+<form id="autologinuser" name="autologinuser" action="" method="post" style="display: none" target="_blank">
+    <input type="hidden" name="tokenuser" id="tokenuser">
+    <input type="hidden" name="userRes" id="userRes">
+</form>
