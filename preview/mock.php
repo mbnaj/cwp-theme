@@ -17,7 +17,7 @@ class LangBag implements ArrayAccess
 function preview_lang(): array
 {
     return [
-        'TITLE' => 'Dashboard', 'TITLETAG' => ' - CWP', 'CWPSETTING' => 'CWP Settings', 'CRON' => 'Cron Jobs',
+        'TITLE' => 'Dashboard', 'TITLETAG' => ' - CWP', 'CWPSETTING' => 'Settings', 'CRON' => 'Cron Jobs',
         'PROCESSLIST' => 'Process List', 'PHPINI' => 'PHP.ini Editor', 'GNLABEL50' => 'PHP Selector',
         'BTNOTITITLE' => 'Notification Center', 'MODSECURITY' => 'ModSecurity', 'GNLABEL51' => 'Statistics',
         'FILEM' => 'File Management', 'FILESYST' => 'File System Lock', 'ANTIVI' => 'Antivirus (ClamAV)',

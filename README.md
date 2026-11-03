@@ -48,6 +48,22 @@ config). If you cannot find the setting, check the CWP forum for your version be
 
 Hard refresh the browser (Ctrl+F5) after switching; `css/cwp-modern.css` and `css/cwp-login.css` are cached hard.
 
+## Changing a label (translations)
+
+Most text in the theme is not in the templates: it comes from CWP language keys (`langene.KEY` for shared text,
+`langmod.KEY` for module text). To change a label, change the key's value, not the template.
+
+Example: the menu title "CWP Settings" is the key `CWPSETTING`. It is printed by `menu_left.html`, `menu_locked.html`
+and `mod_dashboard.html`.
+
+1. **Edit the language file on the server** (find the file that defines the key, for example
+   `grep -rl CWPSETTING /usr/local/cwpsrv/` and look in the language folder it finds) and set the value to
+   `Settings`. Do this for every language you use. A CWP update may overwrite the file, so keep a note of your changes.
+2. **Or hardcode the text in the theme**: replace `{{langene.CWPSETTING}}` with `Settings` in the three files above.
+   This survives CWP updates but is English only, so use it only on single-language servers.
+
+For the local preview, labels come from `preview/mock.php` (the preview prints the key name for unknown keys).
+
 ## Rollback
 
 Switch the theme setting back to the stock theme, or restore the backup from step 1. Because `original/` is never
