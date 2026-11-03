@@ -1,226 +1,22 @@
-<style media="screen">
-  .new-backup-btns{
-    display:flex;
-    margin-bottom:10px;
-  }
-  .new-backup-btns button{
-    margin-right:10px;
-  }
-  #gen_whole_window{
-    display:none;
-  }
-  #gen_whole_window h3{
-    border-bottom: 1px solid #e7eaec;
-    padding: 10px 0px;
-  }
-  #DataTables_Table_0_wrapper{
-    padding-bottom: 0px;
-  }
-  #backup_table_container{
-    padding:10px 0px;
-  }
-  .backup_title{
-    padding-left:0px;
-    border-top: 1px solid #e7eaec;
-  }
-  .backup-panel{
-    padding: 0px;
-    background-color:transparent;
-    border-top:none;
-  }
-  .info-backup{
-    display: flex;
-    align-items: center;
-    padding: 10px 10px;
-    margin-bottom: 10px;
-    margin-top: 10px;
-  }
-  .info-backup .fa-stack{
-    margin-right:10px;
-  }
-  .other-backup{
-    padding: 15px 0px;
-  }
-  .other-backup-options{
-    display:flex;
-  }
-  .other-backup-options .btn-wrapper{
-    margin-right:10px;
-  }
-  /* .autobackup-panel{
-    padding-bottom:15px !important;
-  } */
-  .autobackup-configurations-heading-location{
-    border-top: 1px solid #e7eaec;
-    padding-top: 10px;
-    margin-top: 10px;
-  }
-  .autobackup-configurations{
-    margin-top:15px;
-    padding-top:15px;
-    border-top:2px solid #e7eaec;
-  }
-  .autobackup-panel.not-pro::before{
-    content: "";
-    background-color: #ffffffad;
-    width: 99%;
-    height: 95%;
-    position: absolute;
-    margin-left: -1.5rem;
-    z-index: 100;
-  }
-  .notpro-message{
-    position: absolute;
-    top: 6rem;
-    z-index: 110;
-    right: 3rem;
-    padding: 0px 2rem;
-    border-radius: 5px;
-  }
-  .notpro-message h2{
-    font-weight: 500;
-    font-size: 2.1rem;
-    margin-bottom: 5px;
-  }
-  .autobackup-configurations::before {
-    content: "";
-    background-color: #ffffffad;
-    width: 99%;
-    height: 70%;
-    position: absolute;
-    z-index: 100;
-  }
-  .autobackup-configurations.max-height::before {
-    height: 75%;
-  }
-  .autobackup-configurations.active-autobackup::before {
-    display:none;
-  }
-  .autobackup-configurations-freq .checkbox-primary{
-    margin: 25px 0px !important;
-  }
-  .option-all-included{
-    border-bottom: 1px solid #e7eaec;
-    padding-bottom: 5px;
-  }
-  .option-all-included label{
-    font-weight: 600;
-  }
-  .autobackup-configurations-box{
-    border-right: 1px solid #e7eaec;
-  }
-
-  .autobackup-configurations-heading{
-    border-bottom: 1px solid #e7eaec;
-    padding-bottom: 10px;
-  }
-  .autobackup-configurations-notify .checkbox-primary{
-    margin: 5px 0px !important;
-  }
-  .autobackup-configurations-freq .checkbox-primary:last-child {
-    margin-bottom:10px !important;
-  }
-  .autobackup-configurations-options .checkbox-primary{
-    margin: 5px 0px !important;
-  }
-  .autobackup-with-info{
-    display:flex;
-    align-items:center;
-  }
-  .autobackup-with-info .fa-stack, .backup_title .fa-stack,.restore-with-info .fa-stack, .backup_title .fa-stack {
-    font-size: 10px;
-    margin-left: 10px;
-    color: #337ab7;
-    cursor:pointer;
-  }
-  #backup_table_files, #backup_mysql_files{
-      max-height: 300px;
-      overflow-y: auto;
-      padding: 3px 8px;
-  }
-
-  #backup_ftp_configuration .input-group-addon{
-    height:34px;
-  }
-  #backup_ftp_configuration .input-group-addon .fa{
-    color: #999999;
-  }
-  #backup_ftp_configuration .input-group input{
-    margin-top:-2rem;
-  }
-  #backup_ftp_configuration .form-group{
-    margin-bottom:0px
-  }
-  .ftpmb{
-    margin-bottom:10px;
-  }
-  #backup_ftp_configuration{
-    display:none;
-  }
-  .restore-with-info, .restore_files_mysql{
-      display: none;
-  }
-  .autobackup-configurations-footer{
-    border-top: 2px solid #e7eaec;
-    margin-top: 15px;
-    padding-top: 15px;
-  }
-  .backup-right-col{
-    padding-top: 4rem;
-  }
-  .backup-stat-separator{
-    margin: 10px 0px;
-  }
-  .error-field{
-    color: #ff0000;
-    margin-top: 5px;
-    font-size: 12px;
-    display: block;
-    margin-bottom: -10px;
-  }
-  .new-file{
-    display:none;
-  }
-  .deleting_tr{
-    background-color: #f5f5f566;
-    color: #e7eaec;
-  }
-  .deleting_tr .new-file{
-    background-color: #b4d5ea;
-    color: #efefef;
-  }
-  .deleting_tr .backup-link{
-    color: #e7eaec;
-  }
-  .tooltip.top .tooltip-inner {
-    max-width:200px;
-  }
-
-  .more-less {
-      float: right;
-      font-size: 20px;
-      font-weight: bold;
-      color:#337ab7;
-  }
-</style>
-<div class="row border-bottom white-bg dashboard-header">
-    {% if mod.fsl == 1 %}
+<div class="cwp-page">
+  {% if mod.fsl == 1 %}
     {% set stflalert ='block' %}
-    {% else %}
+  {% else %}
     {% set stflalert ='none' %}
-    {% endif %}
-    <div class="row  alert alert-warning col-lg-12" style="margin-left: 5px; padding-right: 5px;display:{{stflalert}}" id="alertfl">
-        <strong>{{langene.GALARTFILEBLOCK}}</strong>
+  {% endif %}
+  <div class="alert alert-warning" style="display:{{stflalert}}" id="alertfl">
+    <strong>{{langene.GALARTFILEBLOCK}}</strong>
+  </div>
+  <div class="cwp-page-head">
+    <div>
+      <h2>{{langmod.BCTITLE}}</h2>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="?">{{langene.GENLABLANG1}}</a></li>
+        <li class="breadcrumb-item active"><strong>{{langmod.BCTITLE}}</strong></li>
+      </ol>
     </div>
-    <div class="col-lg-10">
-        <h2>{{langmod.BCTITLE}}</h2>
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="?">Home</a></li>
-            <li class="breadcrumb-item active"><strong>{{langmod.BCTITLE}}</strong></li>
-        </ol>
-    </div>
-</div>
-<div class="row" style="margin-top:2rem;">
+  </div>
+<div class="row">
     <div class="col-lg-12">
         <div class="row">
             <div class="col-md-9">
@@ -467,7 +263,7 @@
 </div>
 
 
-    <div class="wrapper wrapper-content" style="margin-top: 35px">
-        {% include 'footer.html' %}
-    </div>
+    {% include 'footer.html' %}
+</div>
+
 </div>

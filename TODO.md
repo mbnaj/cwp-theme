@@ -188,7 +188,7 @@ server changed there. Before each page below, diff it against `original/` and bu
 - [x] `mod_ftp_accounts.html`: partly done: inline `<style>` moved to `cwp-modern.css`, shared page skeleton (file-lock alert, page header, footer inside the page), modal width inline style removed; ids, handlers and quota bar markup untouched; renders in preview (HTTP 200, no Twig errors), not checked visually, not tested on a real server. Not done: AJAX-filled table and the remaining inline styles in the modals. Original plan: table with
       user, directory, quota, status; add-account drawer; change-password modal (global) ; connection info card
       (host, port, protocol) with copy buttons. Data via JS.
-- [ ] `mod_backups.html` (473, tabs, modal, DataTable, flot): backups. Includes `mod_backups_auto.html` (187) and
+- [x] `mod_backups.html`: partly done: 200-line inline `<style>` moved to `cwp-modern.css`, shared page skeleton (file-lock alert, page header, footer inside the page); tabs, ids, handlers, `mod_backups_auto.html` and the restore partial untouched; renders in preview (HTTP 200, no Twig errors), not checked visually, not tested on a real server. Original plan: backups. Includes `mod_backups_auto.html` (187) and
       `modules/backups/backups_restore.html`. Plan: tabs "Backups", "Automatic", "Restore"; storage usage bar;
       backup list with download / restore / delete; wizard-style restore (choose what: files, databases, email);
       auto-backup settings as a switch + schedule + retention form.
