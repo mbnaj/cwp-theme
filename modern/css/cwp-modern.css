@@ -731,3 +731,13 @@ label { font-weight: 600; color: #4b556b; }
 .current-path-div { padding: 10px 0; }
 #dir_list { padding-bottom: 10px; }
 @media (max-width: 575px) { #form_redirect .dir-sel-btn { max-width: 40%; } #dir_explorer .modal-dialog { width: auto !important; margin: 10px; } }
+
+/* Usage / quota widget (domains, email, FTP, MySQL, Node.js, Tomcat): in flow above the list, not floated over the header */
+.mail-contracted { position: static !important; top: auto !important; right: auto !important; left: auto !important; width: auto !important; min-width: 0 !important; max-width: 360px; margin: 0 0 16px auto; box-shadow: none !important; z-index: auto; background: #fff; border: 1px solid var(--cwp-line); border-radius: 6px; }
+.mail-contracted .ibox-content { background: transparent; border: 0; padding: 12px 16px; }
+.mail-contracted .stat-list li { margin-top: 0; }
+.mail-contracted .stat-list h2 { font-size: 15px; font-weight: 700; color: var(--cwp-ink); margin: 0 0 2px; }
+.mail-contracted .stat-list small { color: var(--cwp-muted); }
+.mail-contracted .stat-percent { font-weight: 700; color: var(--cwp-ink); }
+.mail-contracted .progress-mini { height: 6px; margin: 6px 0 0; }
+@media (max-width: 575px) { .mail-contracted { max-width: none; margin-left: 0; } }
