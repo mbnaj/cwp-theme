@@ -429,6 +429,22 @@
 
     <!-- Custom and plugin javascript -->
     <script src="{{url}}/js/inspinia.js"></script>
+    <script>
+    // Mark the current module in the left menu and open the section that holds it
+    $(function () {
+        var cur = {{ mod.name|default('')|json_encode|raw }};
+        if (!cur) { return; }
+        var $link = $('#side-menu a[href]').filter(function () {
+            var h = $(this).attr('href') || '';
+            return h === '?module=' + cur || h.indexOf('?module=' + cur + '&') === 0;
+        }).first();
+        if (!$link.length) { return; }
+        $('#side-menu > li.active').removeClass('active');
+        $link.parent('li').addClass('active');
+        $link.parents('ul.nav-second-level, ul.nav-third-level').addClass('in').attr('aria-expanded', 'true').css('height', '');
+        $link.parents('#side-menu li').addClass('active');
+    });
+    </script>
     <script src="{{url}}/js/plugins/pace/pace.min.js"></script>
 
     <!-- GITTER -->
