@@ -314,7 +314,7 @@ dropzone).
 - [x] Dashboard showed ModSecurity under the `statistics` permission (fixed to `mod_security`).
 - [x] DNS menu used the same envelope icon as Email (fixed, `fa-sitemap`).
 - [ ] `mod_php_selector.html` vs `mod_phpselector.html`: two near-identical pages; decide which is live.
-- [ ] `mod_dashboard` / menu: `fant3menu` item links to `#` on the dashboard but to `?module=fantastico_f3` in the menu.
+- [x] `mod_dashboard` / menu: `fant3menu` linked to `#` on the dashboard (same in the stock theme); now `?module=fantastico_f3&path=?/` like the menu.
 - [x] `mod_email_filters.html`: partly done: inline styles moved to `cwp-modern.css`, shared page skeleton where the page has its own header; ids and handlers untouched; renders in preview (HTTP 200, no Twig errors), not checked visually, not tested on a real server. Original plan: opens in a new tab from the old dashboard (`target="_blank"`), probably unintended
       (new dashboard opens it in the same tab; confirm).
 - [ ] Mixed Font Awesome 4 and 5 class names (`fa`, `fab`) on one page.
