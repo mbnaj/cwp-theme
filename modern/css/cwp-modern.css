@@ -2325,3 +2325,165 @@ input[data-number="true"]{
   top: 4px;
   position: relative;
 }
+
+/* ---------- Subdomains page (moved from the inline style blocks of mod_subdomains.html) ---------- */
+.stats-module{
+  position: absolute;
+  top: -9rem;
+  right: 1.6rem;
+  z-index:50;
+}
+.stats-module-items{
+  display: flex;
+  justify-content: flex-end;
+}
+.stats-module-items-display{
+  box-shadow: 2px -9px 6px #00000008;
+}
+.dataTables_wrapper div.row{
+  width:auto !important;
+}
+#table_subdomains_filter label{
+  margin-right:0px;
+}
+#new_form_wrapper{
+  display:none;
+}
+.domain-header-title{
+  display: flex;
+  padding-right: 15px;
+  justify-content: space-between;
+}
+.ibox-footer{
+  font-size:100%;
+}
+.new-form-flex{
+  display:flex;
+  flex-wrap:wrap;
+}
+.new-form-flex-form{
+  width:70%;
+  padding-right:2rem;
+}
+.new-form-flex-info{
+  width:30%;
+}
+.ssl-row-label{
+  display: flex;
+  align-items: center;
+}
+#dir_explorer_domain .modal-body{
+  max-height:70vh;
+  min-height:40vh;
+  overflow:auto;
+}
+#dir_explorer_domain .dir-item:nth-child(even){
+  background-color:#f3f3f3;
+}
+#dir_explorer_domain .dir-item:hover{
+  background-color:#cccccc;
+  cursor:pointer;
+  color: #333;
+}
+#dir_explorer_domain .dir-item{
+  padding: 5px;
+}
+.dir-item .fa{
+  margin-right:5px;
+}
+.ssl-row-label .fa-stack {
+  font-size: 1rem;
+  margin-left: 3px;
+  color: #156192;
+  cursor: pointer;
+}
+.directory-selector-btn{
+  display:flex;
+}
+.dir-sel-btn .fa{
+  font-size: 2rem;
+  margin-right: 5px;
+}
+.dir-sel-btn{
+  display: flex;
+  align-items: center;
+}
+#dirsel{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 25rem;
+  /* border: 1px solid #999; */
+  direction: rtl;
+  text-align: left;
+  line-height: 1.5rem;
+  padding: 0px;
+  display: inline-block;
+  margin-bottom: 0px;
+}
+#dir_list{
+  padding-bottom: 10px;
+}
+#new_form_wrapper .form-group {
+  display: flex;
+  align-items: center;
+}
+#alert_info{
+  display:none;
+}
+#alert_info .alert-info{
+  display:flex;
+}
+#alert_info .alert-info p{
+  margin-left: 5px;
+  padding-left: 5px;
+  border-left: 1px solid #c2d2da;
+}
+.domain_bw .progress {
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+.td-table-domain-icon,
+.td-table-domain{
+  padding-top: 1.6rem !important;
+}
+.td-table-domain-icon .fa{
+  font-size:2rem;
+}
+.td-table-domain-btn{
+  padding-top: 1.3rem !important;
+}
+.error-field{
+  color: #ff0000;
+  margin-top: 5px;
+  font-size: 12px;
+  display: block;
+  margin-bottom: -10px;
+}
+.deleting_tr{
+  background-color: #f5f5f566;
+  color: #e7eaec;
+}
+.whole-subdomain-inputs{
+  display:flex;
+  flex-wrap:wrap;
+}
+.whole-subdomain-inputs input{
+  width:30%;
+  margin-right:1rem;
+}
+.whole-subdomain-inputs select{
+  width:68%;
+}
+#table_subdomains{
+  width:100% !important;
+}
+.infinite-bandwidth{
+  font-size: 2.5rem;
+  line-height: 10px;
+  top: 4px;
+  position: relative;
+}
+  .dataTables_wrapper div.row{
+      width: 100%;
+  }

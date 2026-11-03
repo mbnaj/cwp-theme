@@ -209,7 +209,7 @@ server changed there. Before each page below, diff it against `original/` and bu
 - [x] `mod_domains.html`: partly done: 150-line inline `<style>` moved to `cwp-modern.css`, shared page skeleton (file-lock alert, page header, footer inside the page), modal header inline styles removed; ids, handlers and quota bar untouched; renders in preview (HTTP 200, no Twig errors), not checked visually, not tested on a real server. Original plan: Plan: card
       per domain or table with document root, PHP version, SSL status pill, actions menu (manage DNS, SSL, redirect,
       delete); add-domain modal with type (addon / parked) and doc-root auto-fill.
-- [ ] `mod_subdomains.html` (414, 2 style blocks, DataTable): same pattern as domains. Plan: reuse the domains table.
+- [x] `mod_subdomains.html`: partly done: both inline `<style>` blocks moved to `cwp-modern.css`, shared page skeleton (file-lock alert, page header, footer inside the page), modal header inline styles removed; ids and handlers untouched; renders in preview (HTTP 200, no Twig errors), not checked visually, not tested on a real server. Original plan: same pattern as domains. Plan: reuse the domains table.
 - [ ] `mod_letsencrypt.html` (233, 1 modal): AutoSSL. Plan: per-domain certificate table (issued, expires in N days,
       status pill), "Issue / Renew" buttons, expiry warning colours.
 - [ ] `mod_sslwizard.html` (796, 2 modals, steps wizard, select2, tagsinput): SSL generator (CSR / certificate).
