@@ -741,3 +741,8 @@ label { font-weight: 600; color: #4b556b; }
 .mail-contracted .stat-percent { font-weight: 700; color: var(--cwp-ink); }
 .mail-contracted .progress-mini { height: 6px; margin: 6px 0 0; }
 @media (max-width: 575px) { .mail-contracted { max-width: none; margin-left: 0; } }
+
+/* Footer flows after the content on every page (style.css pins it absolutely, so it overlaps tall pages) */
+.footer:not(.fixed):not(.fixed_full) { position: relative; left: auto; right: auto; bottom: auto; clear: both; margin-top: 24px; }
+.wrapper-content > .footer:only-child { margin: -20px -22px -40px; }
+.wrapper-content:has(> .footer:only-child) { margin-top: 0 !important; padding-top: 0; padding-bottom: 0; }
