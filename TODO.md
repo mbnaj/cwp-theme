@@ -221,7 +221,7 @@ server changed there. Before each page below, diff it against `original/` and bu
       301/302, wildcard) plus table with test link.
 - [x] `mod_vdomaincache.html` (81, table): Varnish cache per domain. Plan: table with on/off switch per domain and
       "purge" action.
-- [ ] `mod_nodejs_manager.html` (738, 3 iboxes, 4 modals, select2, DataTable): Node.js apps. Plan: app cards with
+- [x] `mod_nodejs_manager.html`: partly done: 340-line inline `<style>` moved to `cwp-modern.css`, shared page skeleton (file-lock alert, page header, footer added), modal inline styles removed; the page title was the Domains key `DTITLE` by mistake, now the same text as the breadcrumb (hardcoded English, no language key yet); ids and handlers untouched; renders in preview (HTTP 200, no Twig errors), not checked visually, not tested on a real server. Original plan: Node.js apps. Plan: app cards with
       status, start/stop/restart, logs, env variables, quota bar; create-app wizard.
 - [ ] `mod_tomcat_manager.html` (102, 2 iboxes) + `modules/tomcat_manager/` (`app_deployment_form.html`, `modals.html`,
       `styles.css`): Tomcat apps. Plan: same card pattern as Node.js; WAR upload drop area.
