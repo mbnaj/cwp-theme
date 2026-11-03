@@ -359,3 +359,11 @@ Estimate: foundation plus the first group is the bulk of the design decisions; t
 - `modern/index.html` and `modern/menu_left.html` were behind the server copy. They are now rebuilt on the `original/` version (merged account dropdown with theme and dark-mode switches, tooltips, `ignore missing` includes, available PHP versions, Cloudflare menu link removed) with the modern additions re-applied (`cwp-modern.css` link, current-module highlight script, footer-to-bottom script, `#cwplook` toggle for the dark style, `fa-sitemap` DNS icon). The old "New" label next to the user name is gone with the server version. Rendered in preview (HTTP 200); not tested on a real server.
 - The server removed the Cloudflare menu link because "no such user panel module exists". `mod_dashboard.html` and `mod_cloudflare.html` still link to it: decide whether to hide them.
 - Panel settings modal: label and control now sit on one row (CSS only); no tabs, it only has five settings.
+
+---
+
+## Inline-style pass (latest)
+- 389 spacing / cursor / width / font-size / colour inline styles across 64 templates (`mod_*.html`, `modules/*/*.html`) replaced by `.cwp-*` helper classes in `cwp-modern.css`; JS-toggled `display:` styles and one-off styles were left alone.
+- PostgreSQL, MongoDB and Tomcat partials: modal widths now `.cwp-modal-w400` / `.cwp-modal-w500` (shrink on phones).
+- All 62 preview pages render (HTTP 200, no Twig errors). Not checked visually; not tested on a real server.
+- Still unticked and with nothing to redesign: `mod_filemanager`, `mod_pma`, `mod_softaculous`, `mod_pipemail` (empty or redirect templates).

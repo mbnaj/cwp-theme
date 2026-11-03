@@ -38,7 +38,7 @@
                       <div class="tab-content">
                           {% if ("backup_manager" in rmenu )or(swmenu==1) %}
                                 <div id="tab-1" class="tab-pane active">
-                          <div class="panel-body" style="padding-top: 0px;">
+                          <div class="panel-body cwp-pt-0">
                             <div class="row">
                                 <div class="col-sm-12">
                                   {% set account_icon = 'fa-hdd-o' %}
@@ -67,7 +67,7 @@
                                     {% set ssl_icon = 'fa-spinner fa-spin' %}
                                   {% endif %}
                                   <div id="new_backup_btns">
-                                    <h4 style="margin-top:10px;">{{langmod.BCCREATENB}}</h4>
+                                    <h4 class="cwp-mt-10">{{langmod.BCCREATENB}}</h4>
                                     <div class="new-backup-btns">
                                       <button type="button" id="btn-account" onclick="displayCreationWindow(this)" class="btn btn-success btn-xs btn-genwhole {{account_state}}" data-typeback="account" {{account_state}} data-icon="fa-hdd-o"><i class="fa {{account_icon}}" aria-hidden="true"></i> {{langmod.BCLABEL1}}</button>
                                       <button type="button" class="btn btn-primary btn-xs mr5 mb10 {{homedir_state}}" {{homedir_state}} data-toggle="tooltip" data-placement="top" data-typeback="homedir" title="{{langmod.BDBTC1DESC}}" id="btn-homedir" data-icon="fa-home" onclick="displayCreationWindow(this)"><i class="fa {{homedir_icon}}" aria-hidden="true"></i> {{langmod.BCHOMEDIR}}</button>
@@ -76,7 +76,7 @@
                                       <button type="button" class="btn btn-primary btn-xs mr5 mb10 {{ssl_state}}" {{ssl_state}} data-toggle="tooltip" data-placement="top" data-typeback="ssl" title="{{langmod.BDALLSSLBATT}}" id="btn-ssl" data-icon="fa-lock" onclick="displayCreationWindow(this)"><i class="fa {{ssl_icon}}" aria-hidden="true"></i> {{langmod.BDALLSSLBA}}</button>
                                     </div>
                                   </div>
-                                  <div class="" id="gen_whole_window" style="margin-bottom:10px">
+                                  <div class=" cwp-mb-10" id="gen_whole_window">
                                     <h3><span id="backup_creation_title"></span> {{langmod.BCCREATETIT}}.</h3>
                                     <div class="checkbox checkbox-primary">
                                       <input type="checkbox" name="send_backup_email" onchange="sendEmailBackup(this)" checked class="checkbox checkbox-danger" value="1" id="send_backup_email">
@@ -86,7 +86,7 @@
                                     </div>
                                     <div class="form-group" id="emaddress_backup_wrapper">
                                       <label for="emaddress_backup">{{langmod.DBEMAIL}}</label>
-                                      <input type="text" class="form-control" id="emaddress_backup" data-reqemail="true" data-required="true" value="{{mod.email_username}}" style="width:300px;">
+                                      <input type="text" class="form-control cwp-w-300" id="emaddress_backup" data-reqemail="true" data-required="true" value="{{mod.email_username}}">
                                     </div>
 
                                     <button type="button" class="btn btn-warning btn-xs" onclick="cancelNewBack()"><i class="fa fa-ban" aria-hidden="true"></i> {{langmod.DBCANCEL}}</button>
@@ -102,7 +102,7 @@
                                 </div>
                                 <!-- <div class="col-lg-offset-1 col-sm-8">
                                     <div class="input-group m-b"><span class="input-group-btn">
-                                        <button type="button" class="btn btn-primary btn-xs" style="margin-right: 5px">{{langmod.DBNOTIFI}}</button> </span>
+                                        <button type="button" class="btn btn-primary btn-xs cwp-mr-5">{{langmod.DBNOTIFI}}</button> </span>
                                         <input type="text" class="form-control">
                                     </div>
                                 </div> -->
@@ -110,7 +110,7 @@
                             <!-- <p>{{langmod.BCDESC}}</p> -->
                             <div class="row">
                               <div class="col-lg-12">
-                                  <div class="ibox" style="margin-bottom:0px;">
+                                  <div class="ibox cwp-mb-0">
                                       <div class="ibox-title backup_title">
                                           <h5>{{langmod.DBBACKAV}}
                                             <span class="fa-stack fa-xs" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{langmod.BCDOWNLOADMESS}}">
@@ -124,7 +124,7 @@
                                   </div>
                               </div>
                               <!-- <div class="col-lg-12">
-                                  <div class="ibox" style="margin-bottom:0px;">
+                                  <div class="ibox cwp-mb-0">
                                       <div class="ibox-title backup_title">
                                           <h5>{{langmod.BDRESPPA}}</h5>
                                       </div>
@@ -132,7 +132,7 @@
                                           <div class="other-backup-options">
 
                                           </div>
-                                          <div class="alert alert-info info-backup" style="margin-bottom: 0px;">
+                                          <div class="alert alert-info info-backup cwp-mb-0">
                                             <span class="fa-stack fa-sm">
                                               <i class="fa fa-circle fa-stack-2x"></i>
                                               <i class="fa fa-info fa-stack-1x fa-inverse"></i>
@@ -143,11 +143,11 @@
                                   </div>
                               </div> -->
                               <div class="col-lg-12">
-                                <div class="ibox" style="margin-bottom:0px;">
+                                <div class="ibox cwp-mb-0">
                                   <div class="ibox-title backup_title">
                                       <h5>{{langmod.DBONLYMYSQL}}</h5>
                                   </div>
-                                  <div class="ibox-content other-backup" style="padding-bottom: 0px;">
+                                  <div class="ibox-content other-backup cwp-pb-0">
                                     <div class="row">
                                       <div class="col-md-5">
                                         <select class="form-control" id="backup_db" data-required="true" data-reqmess="{{langmod.BCDBSELERR}}" name="">
@@ -227,7 +227,7 @@
                 <h4 class="modal-title">{{langmod.BCLABEL20}}</h4>
             </div>
             <div class="modal-body">
-                <div class="col-lg-12" style="margin-bottom: 15px">
+                <div class="col-lg-12 cwp-mb-15">
                     <div class="row">
                         <div class="checkbox-custom checkbox-inline">
                             <input type="checkbox" value="home" id="homeuser2" onclick="return valiarbackuser(0)"><label for="homeuser">Home</label>

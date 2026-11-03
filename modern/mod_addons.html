@@ -8,12 +8,12 @@
 {% if app == 'symfony' %}{% set swsf = ' active' %}{% set dicsf = 'in' %}{% else %}{% set swsf = '' %}{% set dicsf = '' %}{% endif %}
 {% if app == 'whcms' %}{% set swwhc = ' active' %}{% set dicwhc = 'in' %}{% else %}{% set swwhc = '' %}{% set dicwhc = '' %}{% endif %}
 <div class="modal" id="conf_installation" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog" style="width:500px;">
+  <div class="modal-dialog cwp-modal-w500">
     <div class="modal-content animated fadeIn">
       <div class="modal-header">
         <h4 class="text-center">{{langmod.ADDCONF}}</h4>
       </div>
-      <div class="modal-body" style="padding:15px">
+      <div class="modal-body cwp-p-15">
 
       </div>
       <div class="modal-footer">
@@ -25,14 +25,14 @@
 <div class="modal" id="deleteaddons" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content animated fadeIn">
-            <div class="modal-header" style="padding: 10px;">
+            <div class="modal-header cwp-p-10">
               <button type="button" class="close" data-dismiss="modal">
                 <span aria-hidden="true">×</span>
                 <span class="sr-only">{{langene.MDCLOSE}}</span>
               </button>
-              <h4 class="modal-title" style="font-size:2rem">{{langmod.ADDATENTION}}</h4>
+              <h4 class="modal-title cwp-fs-2r">{{langmod.ADDATENTION}}</h4>
             </div>
-            <div class="modal-body" style="padding: 20px;">
+            <div class="modal-body cwp-p-20">
               <p style="font-weight:600;font-size:1.6rem">{{langmod.ADDDELLAB1}}</p>
               <div id="desaddon"></div>
               <ul class="rem-addons-options">
@@ -77,7 +77,7 @@
       </ol>
     </div>
   </div>
-<div class="row" style="margin-top:2rem;">
+<div class="row cwp-mt-2r">
     <div class="col-lg-12">
         <div class="row">
             <div class="col-lg-12">

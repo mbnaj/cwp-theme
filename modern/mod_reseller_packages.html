@@ -64,7 +64,7 @@
           <input type="number" name="disk_quota" id="disk_quota" data-cwpmax="{{package_info.disk_quota}}"  data-required="true" class="form-control packinput tip"  maxlength="8">
           <div class="unlimited-pack">{{langmod.RSPACKLAB5}} &infin;</div>
       </div>
-      <div class="col-md-4 help-block"><span style="margin-right:10px;">MB</span>
+      <div class="col-md-4 help-block"><span class="cwp-mr-10">MB</span>
         {% if package_info.disk_quota == -1 %}
         <div class="checkbox checkbox-primary">
           <input class="checkbox checkbox-danger" onchange="setUnlimited(this)" type="checkbox" id="unl_disk_quota">
@@ -81,7 +81,7 @@
           <input type="number" name="bandwidth" data-cwpmax="{{package_info.bandwidth}}" id="bandwidth" data-required="true" class="form-control packinput">
           <div class="unlimited-pack">{{langmod.RSPACKLAB5}} &infin;</div>
       </div>
-      <div class="col-md-4 help-block"><span style="margin-right:10px;">MB</span>
+      <div class="col-md-4 help-block"><span class="cwp-mr-10">MB</span>
         {% if package_info.bandwidth == -1 %}
         <div class="checkbox checkbox-primary">
           <input class="checkbox checkbox-danger" onchange="setUnlimited(this)" type="checkbox" id="unl_bandwidth">

@@ -2,23 +2,23 @@
 <div id="tab_swlm" class="tab-pane fade {{diclm}} {{swlm}}">
     <div class="col-lg-12">
         {% if mod.stfilemng == 0 %}
-        <div id="row1" style="margin-top: 25px">
-            <div class="row text-center" style="margin-top: 15px" >
+        <div class="cwp-mt-25" id="row1">
+            <div class="row text-center cwp-mt-15" >
                 <div>
                     <b>{{langmod.PASS1}}</b>
                 </div>
             </div>
-            <div class="row text-center" style="margin-top: 15px">
+            <div class="row text-center cwp-mt-15">
                 <div class="col-lg-offset-4 col-lg-4">
                     <input type="text" class="form-control text-center" id="pass1fm" placeholder="{{langmod.TYPEPASS}}">
                 </div>
             </div>
-            <div class="row text-center" style="margin-top: 25px"  id="row2">
+            <div class="row text-center cwp-mt-25"  id="row2">
                 <div>
                     <b>{{langmod.PASS2}}</b>
                 </div>
             </div>
-            <div class="row text-center" style="margin-top: 15px">
+            <div class="row text-center cwp-mt-15">
                 <div class="col-lg-offset-4 col-lg-4">
                     <input type="text" class="form-control text-center" id="pass2fm" placeholder="{{langmod.TYPEPASS}}">
                 </div>
@@ -26,17 +26,17 @@
         </div>
 
         {% endif %}
-        <div class="row" style="margin-top: 25px" id="rowon">
+        <div class="row cwp-mt-25" id="rowon">
             <div class="panel" id="row3">
                 {% if mod.stfilemng == 1 %}
                     <div class="row col-lg-10">
                         <div class='alert alert-danger' id="alert-delete-filemanager" style="display: none">
-                            <div style="margin-bottom: 15px">{{langmod.DESINTALL}}  <a href="#" onclick="return alertdeletefilemanager(1)"><strong>{{langmod.TYES}}</strong></a> / <a href="#" onclick="return alertdeletefilemanager(0)"><strong>{{langmod.TNOT}}</strong></a></div>
+                            <div class="cwp-mb-15">{{langmod.DESINTALL}}  <a href="#" onclick="return alertdeletefilemanager(1)"><strong>{{langmod.TYES}}</strong></a> / <a href="#" onclick="return alertdeletefilemanager(0)"><strong>{{langmod.TNOT}}</strong></a></div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-12 text-center">
-                            <div style="margin-bottom: 15px">[<samp style="color: #4ca44c"><b>{{langmod.ADDEFMBTNON}}</b></samp>]</div>
+                            <div class="cwp-mb-15">[<samp style="color: #4ca44c"><b>{{langmod.ADDEFMBTNON}}</b></samp>]</div>
                         </div>
                     </div>
                     <div class="row col-lg-12">

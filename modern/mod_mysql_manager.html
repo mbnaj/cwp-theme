@@ -41,8 +41,8 @@
           <ul class="stat-list">
             <li>
               <input type="hidden" id="mysql_plan" value="{{mod.mysqlpack.package}}">
-              <h2 class="no-margins" style="vertical-align: inherit;" id="tlftpind">{{langmod.DBDUTITLE}} <span id="mysqldused"></span> / <span id="mysqldquota">{{mod.mysqlpack.disk_quota}}</span></h2>
-              <small style="vertical-align: inherit;">{{langmod.DBDASSIGNED}} / {{langmod.DBDUSED}}</small>
+              <h2 class="no-margins cwp-va-inherit" id="tlftpind">{{langmod.DBDUTITLE}} <span id="mysqldused"></span> / <span id="mysqldquota">{{mod.mysqlpack.disk_quota}}</span></h2>
+              <small class="cwp-va-inherit">{{langmod.DBDASSIGNED}} / {{langmod.DBDUSED}}</small>
               <div class="stat-percent" id="stat-percent-disk"></div>
               <div class="progress progress-mini">
                 <div class="progress-bar progress-bar-success" id="barmysqldusage"></div>
@@ -56,8 +56,8 @@
             <ul class="stat-list">
               <li>
                 <input type="hidden" id="mysql_plan" value="{{mod.mysqlpack.package}}">
-                <h2 class="no-margins" style="vertical-align: inherit;" id="tlftpind">{{langene.PGMYSQL}} <span id="mysqlused">{{mod.mysqlpack.used}}</span> / {{mysql_package|raw}}</h2>
-                <small style="vertical-align: inherit;">{{langmod.DBLABEL1}} / {{langmod.DBLABEL2}}</small>
+                <h2 class="no-margins cwp-va-inherit" id="tlftpind">{{langene.PGMYSQL}} <span id="mysqlused">{{mod.mysqlpack.used}}</span> / {{mysql_package|raw}}</h2>
+                <small class="cwp-va-inherit">{{langmod.DBLABEL1}} / {{langmod.DBLABEL2}}</small>
                 <div class="stat-percent" id="stat-percent">{{mysqlbar|round}}%</div>
                 <div class="progress progress-mini">
                   {% if mysqlbar >=26 and mysqlbar <=50 %}
@@ -78,7 +78,7 @@
         <div class="row" id="list_db_view">
             <div class="col-lg-12">
               <div class="ibox">
-                  <div class="ibox-title" style="padding:0px;">
+                  <div class="ibox-title cwp-p-0">
                     <div class="mysql-title">
                       <h4>{{langmod.DTITLE}}</h4>
                       <div class="text-right">
@@ -87,7 +87,7 @@
                           {% else %}
                           {% set stbtn = 'disabled' %}
                           {% endif %}
-                          <button type="button" class="btn btn-success btn-sm mr5 mb10 {{stbtn}}" {{stbtn}} data-dismiss="modal" onclick="changeView('add_db_view')" id="modal-btn-onlymysql" style="margin-right: 5px"><i class="fa fa-database"></i> {{langmod.DBADDDB}}</button>
+                          <button type="button" class="btn btn-success btn-sm mr5 mb10 {{stbtn}} cwp-mr-5" {{stbtn}} data-dismiss="modal" onclick="changeView('add_db_view')" id="modal-btn-onlymysql"><i class="fa fa-database"></i> {{langmod.DBADDDB}}</button>
                           <button type="button" class="btn btn-success btn-sm mr5 mb10" onclick="addJustUser()"><i class="fa fa-user"></i> {{langmod.DBBTNADDUSER}}</button>
                       </div>
                     </div>
@@ -99,9 +99,9 @@
                                   <li id="litab1" class="active"><a class="nav-link active show" data-toggle="tab" href="#tab-1" id="dbtab1"> {{langmod.DBTITLELIST}}</a></li>
                                   <li id="litab2"><a class="nav-link" data-toggle="tab" href="#tab-2"  id="dbtab2">{{langmod.DBBTNLISTUSER}}</a></li>
                               </ul>
-                              <div class="tab-content" style="width: 100%;">
-                                  <div role="tabpanel" id="tab-1" class="tab-pane active show" style="width: 100%;">
-                                      <div class="ibox-content" style="width: 100%;" id="table_db_container">
+                              <div class="tab-content cwp-w-100">
+                                  <div role="tabpanel" id="tab-1" class="tab-pane active show cwp-w-100">
+                                      <div class="ibox-content cwp-w-100" id="table_db_container">
                                         <div class="table_cron_loader"><span><i class="fa fa-circle-o-notch fa-spin"></i></span></div>
                                       </div>
                                   </div>
@@ -121,9 +121,9 @@
         <div class="row" id="add_db_view" style="display:none">
           <div class="col-lg-12">
             <div class="ibox">
-              <div class="ibox-title" style="padding:10px;">
+              <div class="ibox-title cwp-p-10">
                 <div style="display: flex;justify-content: space-between;">
-                  <h4 style="margin-top: 10px;">{{langmod.DBADDNEWDB}}</h4>
+                  <h4 class="cwp-mt-10">{{langmod.DBADDNEWDB}}</h4>
                   <div class="text-right">
                     <button type="button" class="btn btn-w-m btn-sm btn-success btn-save-mysql btn-action-cwp" onclick="createDB(this)"><i class="fa fa-floppy-o" aria-hidden="true"></i> <span class="btn-cwp-tag">{{langmod.DBSAVELABEL}}</span></button>
                     <button type="button" class="btn btn-w-m btn-sm btn-warning btn-cancel-mysql btn-action-cwp" id="cron_cancel_button" onclick="changeView('list_db_view')"><i class="fa fa-ban" aria-hidden="true"></i> {{langmod.DBCANCELLABEL}}</button>
@@ -140,7 +140,7 @@
                       </div>
                   </div>
                 </div>
-                <div class="form-group  row" style="margin-top: 5px">
+                <div class="form-group  row cwp-mt-5">
                     <label class="col-lg-3  control-label" for="charsetonly">{{langmod.DBCHARSET}}:</label>
                     <div class="col-lg-6">
                         <select class="form-control"  id="charsetonly">
@@ -462,8 +462,8 @@
                         </select>
                     </div>
                 </div>
-                <div class="form-group  row" style="margin-top: 5px">
-                    <!-- <label class="col-lg-4  control-label" for="" style="cursor:pointer" onclick="showCreateUser()"><i class="fa fa-user"></i> {{langmod.DBCREATEUSER}}</label> -->
+                <div class="form-group  row cwp-mt-5">
+                    <!-- <label class="col-lg-4  control-label cwp-pointer" for="" onclick="showCreateUser()"><i class="fa fa-user"></i> {{langmod.DBCREATEUSER}}</label> -->
                     <label class="col-lg-3  control-label" for="charsetonly"><i class="fa fa-user"></i> {{langmod.DBLABELN3}}:</label>
                     <div class="col-lg-6">
                       <select class="form-control" id="user_selector_db">
@@ -497,7 +497,7 @@
                 <div class="ibox-title" style="padding: 10px 15px;display:flex;justify-content: space-between;">
                   <input type="hidden" name="user_to_cp" id="user_to_cp" value="">
                   <input type="hidden" name="host_to_cp" id="host_to_cp" value="">
-                  <h4 style="margin-top: 10px;" id="user_chpass_title"></h4>
+                  <h4 class="cwp-mt-10" id="user_chpass_title"></h4>
                   <div class="text-right">
                     <button type="button" class="btn btn-w-m btn-sm btn-success btn-save-mysql btn-action-cwp" onclick="mkchangePass(this)"><i class="fa fa-floppy-o" aria-hidden="true"></i> <span class="btn-cp-tag">{{langmod.DBCHANGEPASS}}</span></button>
                     <button type="button" class="btn btn-w-m btn-sm btn-warning btn-cancel-mysql btn-action-cwp" onclick="changeView('list_db_view')"><i class="fa fa-ban" aria-hidden="true"></i> {{langmod.DBCANCELLABEL}}</button>
@@ -515,13 +515,13 @@
                       <div class="col-lg-4">
                         <span class="btn btn-default" title="Generate random password" onclick="generateNewPass('userp', this)"><i class="fa fa-key" aria-hidden="true"></i></span>
                         <div class="btn-group dropdown" id="show_options_button">
-                          <button type="button" class="btn btn-default" onclick="openPGOPT()">{{langmod.FTPENCRYTED}}<span class="caret" style="margin-left:10px"></span></button>
+                          <button type="button" class="btn btn-default" onclick="openPGOPT()">{{langmod.FTPENCRYTED}}<span class="caret cwp-ml-10"></span></button>
                           <div class="general-password-generator-options mysql_generator" id="pgopt_container" style="display: none;z-index: 20;box-shadow: 3px 7px 10px -6px #777;">
                             <!-- <span class="general-password-generator-options-title"><b>Options</b></span>
-                            <span class="general-password-generator-options-close" onclick="closePGOPT()" style="cursor:pointer">s<i class="fa fa-window-close"></i></span> -->
+                            <span class="general-password-generator-options-close cwp-pointer" onclick="closePGOPT()">s<i class="fa fa-window-close"></i></span> -->
                               <ul class="right animated fadeIn">
                                 <li>
-                                  <select class="form-control" id="lengthpass" title="Length" style="margin-bottom: 5px;">
+                                  <select class="form-control cwp-mb-5" id="lengthpass" title="Length">
                                     <option value="7"> {{langmod.FTPLENGTH}}  7</option>
                                     <option value="8"> {{langmod.FTPLENGTH}}  8</option>
                                     <option value="9"> {{langmod.FTPLENGTH}}  9</option>
@@ -545,7 +545,7 @@
                         </div>
                       </div>
                   </div>
-                  <div class="form-group row" style="margin-bottom:0px;">
+                  <div class="form-group row cwp-mb-0">
                       <label class="col-lg-3  control-label" for="pass2new">{{langmod.DBLABELPASS2}}:</label>
                       <div class="col-lg-4"><input type="text" class="form-control"  id="pass2new" value="" >
                       </div>

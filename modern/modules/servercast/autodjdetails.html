@@ -1,5 +1,5 @@
 {% if mod.serverAD == 1%}
-<div class="row" style="margin-top:20px">
+<div class="row cwp-mt-20">
     <div class="col-lg-12">
         <div class="alert alert-info" role="alert" id="alrtviewsound" style="display: none">
 
@@ -9,7 +9,7 @@
         </div>
     </div>
 </div>
-    <div class="row" style="margin-top:5px">
+    <div class="row cwp-mt-5">
         <div class="col-lg-8">
             {{langmod.SERVERCAST3}}  <button class="btn btn-primary btn-xs" title="{{langmod.SERVERCAST5}}" onclick="return openConfigPlay()"> <i class="fa fa-cog" title="{{langmod.SERVERCAST5}}"></i> {{langmod.SERVERCAST5}}</button>  <button class="btn btn-primary btn-xs" title="{{langmod.SERVERCAST6}}" onclick="return subir()"> <i class="fa fa-upload"></i> {{langmod.SERVERCAST6}}</button>
         </div>
@@ -27,12 +27,12 @@
         </div>
     </div>
 
-    <div class="row" style="margin-top:25px">
+    <div class="row cwp-mt-25">
         <div class="col-lg-2">
             <div class="progress">
                 <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">119 / 20480 MB</div>
             </div>
-            <div style="margin-bottom: 10px;">{{langmod.SERVERCAST10}}</div>
+            <div class="cwp-mb-10">{{langmod.SERVERCAST10}}</div>
         </div>
         <div class="col-lg-5">
             <div> </div>
@@ -68,13 +68,13 @@
     <div class="row">
         <div class="col-lg-2"  id="btnmedias">
             <input type="hidden" id="listMediaId">
-            <div class="row" style="margin-top:5px">
+            <div class="row cwp-mt-5">
                 <div class="col-lg-12"><button class="btn btn-success btn-xs col-lg-12 media" id="btnmusic_media" onclick="return search_music('media')">{{langmod.SERVERCAST19}}</button></div>
             </div>
-            <div class="row" style="margin-top:5px">
+            <div class="row cwp-mt-5">
                 <div class="col-lg-12"><button class="btn btn-success btn-xs col-lg-12 media" id="btnmusic_intro" onclick="return search_music('intro')">{{langmod.SERVERCAST20}}</button></div>
             </div>
-            <div class="row" style="margin-top:5px">
+            <div class="row cwp-mt-5">
                 <div class="col-lg-12"><button class="btn btn-success btn-xs col-lg-12 media" id="btnmusic_ondemand" onclick="return search_music('ondemand')">{{langmod.SERVERCAST21}}</button></div>
             </div>
             <div class="row" style="margin-top:10px;display: none" id="divaudio">

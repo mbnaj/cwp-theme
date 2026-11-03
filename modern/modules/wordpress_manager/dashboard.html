@@ -3,7 +3,7 @@
         <div style="display:flex;justify-content:space-between;align-items:center;">
             <h2>{{langmod.WPM_TITLE}}</h2>
             <div>
-                <button class="btn btn-default wpm-btn-scan" onclick="wpmScanInstallations()" id="wpm-btn-scan-main" style="margin-right: 10px;">
+                <button class="btn btn-default wpm-btn-scan cwp-mr-10" onclick="wpmScanInstallations()" id="wpm-btn-scan-main">
                     <i class="fa fa-search"></i>&nbsp; {{langmod.WPM_SCAN_INSTALLATIONS|default("Scan Installations")}}
                 </button>
                 <button class="btn btn-primary wpm-btn-install" onclick="wpmOpenInstall()">
@@ -11,7 +11,7 @@
                 </button>
             </div>
         </div>
-        <ol class="breadcrumb" style="margin-bottom:0;">
+        <ol class="breadcrumb cwp-mb-0">
             <li><a href="?">Home</a></li>
             <li class="active"><strong>{{langmod.WPM_TITLE}}</strong></li>
         </ol>
@@ -174,7 +174,7 @@
                         <span class="badge badge-warning" data-tooltip="{{inst.theme_updates}} Themes Update"><i class="fa fa-paint-brush"></i> {{inst.theme_updates}}</span>
                         {% endif %}
                         {% if inst.vulnerabilities > 0 %}
-                        <span class="badge badge-danger" onclick="wpmOpenVulnerabilities('{{inst.path}}')" style="cursor:pointer;" data-tooltip="{{inst.vulnerabilities}} Vulnerabilities"><i class="fa fa-bug"></i> {{inst.vulnerabilities}}</span>
+                        <span class="badge badge-danger cwp-pointer" onclick="wpmOpenVulnerabilities('{{inst.path}}')" data-tooltip="{{inst.vulnerabilities}} Vulnerabilities"><i class="fa fa-bug"></i> {{inst.vulnerabilities}}</span>
                         {% endif %}
                     </div>
                     {% endif %}

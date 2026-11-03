@@ -7122,3 +7122,17 @@ legend {
 .modal .dropdown-toggle .caret{margin-left:10px}
 .btn.btn-success#btn_add_pgresql_database_,.btn.btn-success#btn_add_mongodb_database_{font-size:90%}
 .modal select.pwlength{margin-bottom:5px}
+
+/* more template helpers (replace inline styles) */
+.cwp-ml-5{margin-left:5px}.cwp-ml-10{margin-left:10px}.cwp-ml-15{margin-left:15px}
+.cwp-mr-5{margin-right:5px}.cwp-mr-10{margin-right:10px}
+.cwp-mb-0{margin-bottom:0}.cwp-mb-8{margin-bottom:8px}.cwp-mb-10{margin-bottom:10px}.cwp-mb-15{margin-bottom:15px}
+.cwp-mt-25{margin-top:25px}.cwp-mt-2r{margin-top:2rem}
+.cwp-pt-0{padding-top:0}.cwp-pb-0{padding-bottom:0}
+.cwp-p-0{padding:0}.cwp-p-10{padding:10px}.cwp-p-15{padding:15px}.cwp-p-20{padding:20px}
+.cwp-pointer{cursor:pointer}
+.cwp-va-inherit{vertical-align:inherit}
+.cwp-w-100{width:100%}.cwp-w-300{width:300px;max-width:100%}
+.cwp-fs-14{font-size:14px}.cwp-fs-90{font-size:90%}.cwp-fs-2r{font-size:2rem}
+.cwp-text-red{color:#e74c3c}.cwp-text-orange{color:#e67e22}
+.modal-dialog.cwp-modal-w500,.modal-dialog.cwp-modal-w400{margin-left:auto;margin-right:auto}

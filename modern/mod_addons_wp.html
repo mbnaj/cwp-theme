@@ -1,6 +1,6 @@
 <div id="tab_swwp" class="tab-pane fade {{dicwp}} ">
   <!--<div class="script-container" id="wp_list">
-    <div class="panel panel-default" style="margin-bottom: 0px;">
+    <div class="panel panel-default cwp-mb-0">
       <div class="panel-heading white-bg script-container-title">
         <h4 class="panel-title">{{langmod.ADDWPINS}}</h4>
         <span class="btn-primary btn-xs btn pull-right" onclick="addonsChangeView('#wp_form','#wp_list')">
@@ -14,7 +14,7 @@
   </div>-->
   <div class="script-container" id="wp_form">
     {% if mod.mysqlpack and mod.mysqlpack.package != -1 and mod.mysqlpack.used >= mod.mysqlpack.package %}
-    <div class="alert alert-danger" style="margin-bottom: 15px;">
+    <div class="alert alert-danger cwp-mb-15">
       <i class="fa fa-exclamation-triangle"></i> <strong>{{langmod.ADDATENTION}}:</strong> {{langmod.ADDMYSQLEX}} ({{mod.mysqlpack.used}} / {{mod.mysqlpack.package}}).
     </div>
     {% endif %}
@@ -98,11 +98,11 @@
               <span class="btn btn-default" title="{{langmod.ADDCOPYPASS}}" data-toggle="tooltip" data-placement="top" aria-hidden="true" onclick="copyPass('wpadminpass')"><i class="fa fa-copy"></i></span>
               <span class="btn btn-default" title="{{langmod.ADDGENRPASS}}" data-toggle="tooltip" data-placement="top" aria-hidden="true" onclick="generateNewPass(this)"><i class="fa fa-key" aria-hidden="true"></i></span>
               <div class="btn-group dropdown show_options_wp">
-                <button type="button" class="btn btn-default" title="{{langmod.ADDCHOPTPAS}}" onclick="openPGOPT('#pass_wpad1', '.show_options_wp')">{{langmod.FTPENCRYTED}}<span class="caret" style="margin-left:10px"></span></button>
+                <button type="button" class="btn btn-default" title="{{langmod.ADDCHOPTPAS}}" onclick="openPGOPT('#pass_wpad1', '.show_options_wp')">{{langmod.FTPENCRYTED}}<span class="caret cwp-ml-10"></span></button>
                 <div class="general-password-generator-options mysql_generator" id="pass_wpad1" style="display: none;z-index: 20;box-shadow: 3px 7px 10px -6px #777;">
                   <ul class="right animated fadeIn">
                     <li>
-                      <select class="form-control pwlength" id="lengthpass2" title="{{langmod.FTPLENGTH}}" style="margin-bottom: 5px;">
+                      <select class="form-control pwlength cwp-mb-5" id="lengthpass2" title="{{langmod.FTPLENGTH}}">
                         <option value="7"> {{langmod.FTPLENGTH}}  7</option>
                         <option value="8"> {{langmod.FTPLENGTH}}  8</option>
                         <option value="9"> {{langmod.FTPLENGTH}}  9</option>
@@ -195,11 +195,11 @@
               <span class="btn btn-default" title="{{langmod.ADDCOPYPASS}}" data-toggle="tooltip" data-placement="top" aria-hidden="true" onclick="copyPass('wppassbd')"><i class="fa fa-copy"></i></span>
               <span id="gendbpass" class="btn btn-default" title="{{langmod.ADDGENRPASS}}" data-toggle="tooltip" data-placement="top" aria-hidden="true" onclick="generateNewPass(this)"><i class="fa fa-key" aria-hidden="true"></i></span>
               <div class="btn-group dropdown show_options_wp">
-                <button type="button" class="btn btn-default" title="{{langmod.ADDCHOPTPAS}}" onclick="openPGOPT('#pass_wpad2', '.show_options_wp')">{{langmod.FTPENCRYTED}}<span class="caret" style="margin-left:10px"></span></button>
+                <button type="button" class="btn btn-default" title="{{langmod.ADDCHOPTPAS}}" onclick="openPGOPT('#pass_wpad2', '.show_options_wp')">{{langmod.FTPENCRYTED}}<span class="caret cwp-ml-10"></span></button>
                 <div class="general-password-generator-options mysql_generator" id="pass_wpad2" style="display: none;z-index: 20;box-shadow: 3px 7px 10px -6px #777;">
                   <ul class="right animated fadeIn">
                     <li>
-                      <select class="form-control pwlength" id="lengthpass2" title="{{langmod.FTPLENGTH}}" style="margin-bottom: 5px;">
+                      <select class="form-control pwlength cwp-mb-5" id="lengthpass2" title="{{langmod.FTPLENGTH}}">
                         <option value="7"> {{langmod.FTPLENGTH}}  7</option>
                         <option value="8"> {{langmod.FTPLENGTH}}  8</option>
                         <option value="9"> {{langmod.FTPLENGTH}}  9</option>

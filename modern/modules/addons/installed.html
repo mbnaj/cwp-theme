@@ -1,7 +1,7 @@
 {% if app == 'installed' %}
-<div id="tab_installed" class="tab-pane fade in active" style="margin-top:10px">
+<div id="tab_installed" class="tab-pane fade in active cwp-mt-10">
     {% else %}
-    <div id="tab_installed" class="tab-pane fade" style="margin-top:10px">
+    <div id="tab_installed" class="tab-pane fade cwp-mt-10">
     {% endif %}
         <div class="panel-group accordion" id="accordion1">
             {% if (mod.installed|length > 0) %}
@@ -9,7 +9,7 @@
             {% for key, value in mod.installed %}
             <div class="panel panel-default" id="instaled_{{ key }}">
                 <div class="panel-heading white-bg script-container-title">
-                    <a class="accordion-toggle" style="width: 100%" data-toggle="collapse"  aria-expanded="true" aria-controls="panel_{{ key }}_container" data-parent="#accordion1" data-target="#panel_{{ key }}_container">
+                    <a class="accordion-toggle cwp-w-100" data-toggle="collapse"  aria-expanded="true" aria-controls="panel_{{ key }}_container" data-parent="#accordion1" data-target="#panel_{{ key }}_container">
                         <h4 class="panel-title">
                         {% if (foo==0) %}
                         <i class="more-less glyphicon-minus font-weight-bolder"></i>

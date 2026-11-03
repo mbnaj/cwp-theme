@@ -57,7 +57,7 @@
                                 <h4>{{langmod.LABTOMCAT134}}</h4>
                                 {% if (mod.apps_qty < mod.apps_quota) or (mod.apps_quota==-1) %} {% set swver='' %} {% else
                                     %} {% set swver='disabled' %} {% endif %} <button onclick="showTomcatManagerForm()"
-                                    id="_btn_add_app_" {{swver}} style="font-size:90%" class="btn btn-success">
+                                    id="_btn_add_app_" {{swver}} class="btn btn-success cwp-fs-90">
                                     <i class="fa fa-plus"></i>
                                     {{langmod.LABTOMCAT133}}
                                     </button>
@@ -79,7 +79,7 @@
                 <div class="ibox tomcat-manager-apps-list" id="">
                     <!-- <div class="ibox-title">
                                 <h4>Node JS application list</h4>
-                                <button onclick="showTomcatManagerForm()" style="font-size:90%" class="btn btn-success">
+                                <button onclick="showTomcatManagerForm()" class="btn btn-success cwp-fs-90">
                                     <i class="fa fa-plus"></i>
                                     Add new applicatiom
                                 </button>

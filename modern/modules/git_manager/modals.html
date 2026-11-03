@@ -14,7 +14,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-warning" data-dismiss="modal">
-                        <i class="fa fa-ban" style="margin-right: 5px;"></i> {{langmod.GITMGRCANCEL}}
+                        <i class="fa fa-ban cwp-mr-5"></i> {{langmod.GITMGRCANCEL}}
                     </button>
                 </div>
             </div>
@@ -53,7 +53,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-dismiss="modal">
-                        <i class="fa fa-check" style="margin-right: 5px;"></i> {{langmod.GITMGRCANCEL}}
+                        <i class="fa fa-check cwp-mr-5"></i> {{langmod.GITMGRCANCEL}}
                     </button>
                 </div>
             </div>
@@ -95,10 +95,10 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-white" data-dismiss="modal">
-                        <i class="fa fa-times" style="margin-right: 5px;"></i> {{langmod.GITMGRCANCEL}}
+                        <i class="fa fa-times cwp-mr-5"></i> {{langmod.GITMGRCANCEL}}
                     </button>
                     <button type="button" class="btn btn-primary" id="btn_retry_pull" style="display:none;" onclick="retryPullFromModal()">
-                        <i class="fa fa-refresh" style="margin-right: 5px;"></i> Retry Pull
+                        <i class="fa fa-refresh cwp-mr-5"></i> Retry Pull
                     </button>
                 </div>
             </div>
@@ -135,10 +135,10 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-warning" data-dismiss="modal">
-                        <i class="fa fa-ban" style="margin-right: 5px;"></i> {{langmod.GITMGRCANCEL}}
+                        <i class="fa fa-ban cwp-mr-5"></i> {{langmod.GITMGRCANCEL}}
                     </button>
                     <button type="button" class="btn btn-success" id="gitmgr-generate-webhook-btn">
-                        <i class="fa fa-bolt" style="margin-right: 5px;"></i> Generate
+                        <i class="fa fa-bolt cwp-mr-5"></i> Generate
                     </button>
                 </div>
             </div>
@@ -168,10 +168,10 @@
                 <div class="modal-footer" style="border-top: none; padding-top: 0;">
                     <div style="display: flex; justify-content: center;">
                         <button type="button" class="btn btn-white mr10" data-dismiss="modal">
-                            <i class="fa fa-ban" style="margin-right: 5px;"></i> {{langmod.GITMGRCANCEL}}
+                            <i class="fa fa-ban cwp-mr-5"></i> {{langmod.GITMGRCANCEL}}
                         </button>
                         <button type="button" class="btn btn-danger" id="gitmgr-confirm-delete-btn">
-                            <i class="fa fa-trash" style="margin-right: 5px;"></i> Remove Repository
+                            <i class="fa fa-trash cwp-mr-5"></i> Remove Repository
                         </button>
                     </div>
                 </div>
@@ -183,7 +183,7 @@
 <!-- Branch Management Modal -->
 <div class="modal fade mongodb-modal" id="gitmgrBranchModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="vertical-alignment-helper">
-        <div class="modal-dialog vertical-align-center" style="width: 500px;">
+        <div class="modal-dialog vertical-align-center cwp-modal-w500">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -193,9 +193,9 @@
                     </h4>
                 </div>
                 <div class="modal-body">
-                    <div id="gitmgrBranchListLoader" class="text-center" style="padding: 20px;">
+                    <div id="gitmgrBranchListLoader" class="text-center cwp-p-20">
                         <i class="fa fa-circle-o-notch fa-spin fa-2x"></i>
-                        <p style="margin-top: 10px;">Fetching branches...</p>
+                        <p class="cwp-mt-10">Fetching branches...</p>
                     </div>
                     <div id="gitmgrBranchListArea" style="display:none;">
                         <p>Select a branch to checkout:</p>
@@ -206,7 +206,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-white" data-dismiss="modal">
-                        <i class="fa fa-ban" style="margin-right: 5px;"></i> {{langmod.GITMGRCANCEL}}
+                        <i class="fa fa-ban cwp-mr-5"></i> {{langmod.GITMGRCANCEL}}
                     </button>
                 </div>
             </div>

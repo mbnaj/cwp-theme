@@ -1,5 +1,5 @@
 <div class="modal" id="dir_explorer_domain" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog" style="width:500px;">
+  <div class="modal-dialog cwp-modal-w500">
     <div class="modal-content animated fadeIn">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">
@@ -7,7 +7,7 @@
         </button>
         <h4>{{langmod.MFWLAB7}}</h4>
       </div>
-      <div class="modal-body" style="padding:0px">
+      <div class="modal-body cwp-p-0">
 
       </div>
       <div class="modal-footer">
@@ -60,8 +60,8 @@
                           <ul class="stat-list">
                               <li>
                                   <input type="hidden" id="emaccount_plan" value="{{mod.emaccounts_stats.pack}}">
-                                  <h2 class="no-margins" style="vertical-align: inherit;" id="tlftpind">{{langene.PGEMAIL}} <span id="emaccountused">{{mod.email_accounts}}</span> / {{email_package|raw}}</h2>
-                                  <small style="vertical-align: inherit;">{{langmod.EMLABEL4}} / {{langmod.EMLABEL5}}</small>
+                                  <h2 class="no-margins cwp-va-inherit" id="tlftpind">{{langene.PGEMAIL}} <span id="emaccountused">{{mod.email_accounts}}</span> / {{email_package|raw}}</h2>
+                                  <small class="cwp-va-inherit">{{langmod.EMLABEL4}} / {{langmod.EMLABEL5}}</small>
                                   <div class="stat-percent" id="stat-percent-accounts">{{emailbar|round}}%</div>
                                   <div class="progress progress-mini">
                                       <div class="progress-bar progress-bar-success" id="baremailind"></div>
@@ -72,8 +72,8 @@
                       <div class="ibox-content" id="indforw" style="display: block">
                           <ul class="stat-list">
                               <li>
-                                  <h2 class="no-margins" style="vertical-align: inherit;" id="tlforwind">{{langmod.PGFORWA}} <span id="forwardused">{{mod.fordwars_stats.account}}</span> / {{emailfor_package_label|raw}}</h2>
-                                  <small style="vertical-align: inherit;">{{langmod.EMLABEL4}} / {{langmod.EMLABEL5}}</small>
+                                  <h2 class="no-margins cwp-va-inherit" id="tlforwind">{{langmod.PGFORWA}} <span id="forwardused">{{mod.fordwars_stats.account}}</span> / {{emailfor_package_label|raw}}</h2>
+                                  <small class="cwp-va-inherit">{{langmod.EMLABEL4}} / {{langmod.EMLABEL5}}</small>
                                   <div class="stat-percent" id="stat_percent_forw">{{emailbar_forw|round}}%</div>
                                   <div class="progress progress-mini">
                                       {% if emailbar_forw >=26 and emailbar_forw <=50 %}
@@ -110,7 +110,7 @@
                             {% if ("mail_forwarders" in rmenu )or(swmenu==1) %}
                             <div role="tabpanel" id="tab-2" class="tab-pane active">
                                 <div class="panel-body">
-                                    <div class="mail-heading" style="margin-bottom: 0px;">
+                                    <div class="mail-heading cwp-mb-0">
                                         <div class="row" id="forwbtnadd" >
                                             <div class="col-lg-10">
                                               <h3>{{langmod.MFWLAB1}}</h3>
