@@ -7106,3 +7106,12 @@ legend {
 .dropdown-menu.cwp-notifications #li_load_more_notis a{
   color: #2a5db0;
 }
+
+/* spacing helpers (replace inline styles in templates) */
+.cwp-mb-5{margin-bottom:5px}
+.cwp-mt-5{margin-top:5px}
+.cwp-mt-10{margin-top:10px}
+.cwp-mt-15{margin-top:15px}
+.cwp-mt-20{margin-top:20px}
+.cwp-pr-15{padding-right:15px}
+.cwp-pt-15{padding-top:15px}

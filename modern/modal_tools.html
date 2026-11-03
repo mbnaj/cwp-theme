@@ -82,7 +82,7 @@
                         <span class="mail-password-generator-options-close" onclick="closePGOPT()"><i class="fa fa-window-close"></i></span>
                         <ul class="right animated fadeIn">
                           <li>
-                            <select class="form-control" id="lengthpass" title="Length" style="margin-bottom: 5px;">
+                            <select class="form-control cwp-mb-5" id="lengthpass" title="Length">
                               <option value="7"> Length  7</option>
                               <option value="8"> Length  8</option>
                               <option value="9"> Length  9</option>
@@ -109,7 +109,7 @@
                 <div class="form-group" id="changepass_container">
                   <input type="hidden" name="emailpass" id="emailpass" value="">
                   <label class="control-label" for="">{{langene.MDNEWPASS}}:</label>
-                  <input type="text" style="margin-bottom: 5px;" class="form-control" id="pass1email" placeholder="{{langene.MDYOURPASS}}">
+                  <input type="text" class="form-control cwp-mb-5" id="pass1email" placeholder="{{langene.MDYOURPASS}}">
                   <div class="pwstrength_viewport_progress"></div>
                 </div>
                 <div class="form-group">
@@ -354,7 +354,7 @@
                                                 </select>
                                             </li>
                                             <li>
-                                                <select class="form-control"  id="typepass" title="{{langmod.FTPTYPE}}" style="margin-top: 5px">
+                                                <select class="form-control cwp-mt-5"  id="typepass" title="{{langmod.FTPTYPE}}">
                                                     <option value="1">{{langmod.FTPTYPE}} {{langmod.FTPALF}}</option>
                                                     <option value="2" selected>{{langmod.FTPTYPE}} {{langmod.FTPALFNUM}}</option>
                                                     <option value="3">{{langmod.FTPTYPE}} {{langmod.FTPALFNUMSIG}}</option>
@@ -447,7 +447,7 @@
                         </select>
                    </div>
                </div>
-                <div class="row" style="margin-top: 5px">
+                <div class="row cwp-mt-5">
                     <div class="col-lg-6">{{langene.GNLABEL18}}</div>
                     <div class="col-lg-6">
                         <select class="form-control" id="listrow">
@@ -457,7 +457,7 @@
                             {% if confi.LISTROW == 100 %}<option value="100" selected>100</option>{% else %}<option value="100">100</option>{% endif %}
                         </select></div>
                 </div>
-                <div class="row" style="margin-top: 5px">
+                <div class="row cwp-mt-5">
                     <div class="col-lg-6">{{langene.GNLABEL19}}</div>
                     <div class="col-lg-6">
                         <select class="form-control" id="soundalert">
@@ -465,7 +465,7 @@
                             {% if confi.SOUNDALERT == 1 %}<option value="1" selected>{{langene.CRYES}}</option>{% else %}<option value="1">{{langene.CRYES}}</option>{% endif %}
                         </select></div>
                 </div>
-                <div class="row" style="margin-top: 5px">
+                <div class="row cwp-mt-5">
                     <div class="col-lg-6">{{langene.GNLABEL28}}</div>
                     <div class="col-lg-6">
                         {% if confi.GOOGLEFA == 0 %}
@@ -491,7 +491,7 @@
                     <div class="row">
                         <div class="col-lg-7">
                             <strong>{{langene.GNLABEL29}}</strong>
-                            <div class="panel-group accordion collapse in" id="accordion" aria-expanded="true" style="padding-top: 15px">
+                            <div class="panel-group accordion collapse in cwp-pt-15" id="accordion" aria-expanded="true">
                                 <div class="panel panel-default" id="supr0">
                                     <div class="panel-heading">
                                         <h4 class="panel-title">
@@ -621,7 +621,7 @@
                                   <span class="general-password-generator-options-close" onclick="closePGOPT()" style="cursor:pointer">s<i class="fa fa-window-close"></i></span> -->
                                     <ul class="right animated fadeIn">
                                       <li>
-                                        <select class="form-control pwlength" id="lengthpass2" title="{{langmod.FTPLENGTH}}" style="margin-bottom: 5px;">
+                                        <select class="form-control pwlength cwp-mb-5" id="lengthpass2" title="{{langmod.FTPLENGTH}}">
                                           <option value="7"> {{langene.FTPLENGTH}}  7</option>
                                           <option value="8"> {{langene.FTPLENGTH}}  8</option>
                                           <option value="9"> {{langene.FTPLENGTH}}  9</option>
@@ -682,10 +682,10 @@
                 <div class="page-header">
                     <small>{{langene.DESCRIPTANTIV}}</small>
                 </div>
-                <ul class="pager" style="margin-top: 15px">
-                    <label class="radio-inline" style="padding-right: 15px"><input class="form-control" type="radio" name="avtype2" value="1" checked><h5>{{langene.OPTION1}}</h5></label>
-                    <label class="radio-inline" style="padding-right: 15px"><input class="form-control" type="radio" name="avtype2" value="2"><h5>{{langene.OPTION2}}</h5></label>
-                    <label class="radio-inline" style="padding-right: 15px"><input class="form-control" type="radio" name="avtype2" value="3"><h5>{{langene.OPTION3}}</h5></label>
+                <ul class="pager cwp-mt-15">
+                    <label class="radio-inline cwp-pr-15"><input class="form-control" type="radio" name="avtype2" value="1" checked><h5>{{langene.OPTION1}}</h5></label>
+                    <label class="radio-inline cwp-pr-15"><input class="form-control" type="radio" name="avtype2" value="2"><h5>{{langene.OPTION2}}</h5></label>
+                    <label class="radio-inline cwp-pr-15"><input class="form-control" type="radio" name="avtype2" value="3"><h5>{{langene.OPTION3}}</h5></label>
                 </ul>
                 <ul class="pager">
                     <!--li><a href="#" id="btn-star-antivirus2">{{langene.BTN_ANTIVIRUSRUN}}</a></li-->
@@ -778,18 +778,18 @@
                                 <li class=""><a href="#profile2" data-toggle="tab" aria-expanded="false" onclick="return searchusersmysql()">{{langmod.DBUSERANMYSQLUSER}}</a></li>
                             </ul>
                             <div id="myTabContent2" class="tab-content" style="padding-left: 25px">
-                                <div class="tab-pane fade active in" id="home2" style="margin-top: 15px">
-                                    <div class="row" style="margin-bottom: 5px">
+                                <div class="tab-pane fade active in cwp-mt-15" id="home2">
+                                    <div class="row cwp-mb-5">
                                         <div class="col-md-4"><label >{{langmod.DBUSERNAME}}:</label></div>
                                         <div class="col-md-4"><input type="text" class="form-control" id="newuser" maxlength="7" placeholder=""></div>
                                         <div class="col-md-4"></div>
                                     </div>
-                                    <div class="row" style="margin-bottom: 5px">
+                                    <div class="row cwp-mb-5">
                                         <div class="col-md-4"><label>{{langmod.DBHOST}}:</label></div>
                                         <div class="col-md-4"><select id="newhost" class="form-control"><option value="localhost">localhost</option><option value="%">{{langmod.DBANY}}</option><option value="IP">{{langmod.DBLABEL5}}</option></select> </div>
                                         <div class="col-md-3"><input id="ippers" value="" class="form-control hidden" placeholder="XXX.XXX.XXX.XXX"></div>
                                     </div>
-                                    <div class="row" style="margin-bottom: 5px">
+                                    <div class="row cwp-mb-5">
                                         <div class="col-md-4"><label>{{langmod.DBLABELPASS2}}:</label></div>
                                         <div class="col-md-4"><input type="text" class="form-control" id="newpass1"  value="r6KnZEQrWA"></div>
                                         <div class="col-md-4">{{langmod.DBLABELRANDON}}   <a href="#"  onclick="return changerrandom('newpass1')" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{langmod.ICONRANDOM}}"><i class="fa fa-cog"></i></a>
@@ -813,7 +813,7 @@
                                                         </select>
                                                     </li>
                                                     <li>
-                                                        <select class="form-control"  id="typepass" title="{{langmod.FTPTYPE}}" style="margin-top: 5px">
+                                                        <select class="form-control cwp-mt-5"  id="typepass" title="{{langmod.FTPTYPE}}">
                                                             <option value="1">{{langmod.FTPTYPE}} {{langmod.FTPALF}}</option>
                                                             <option value="2" selected>{{langmod.FTPTYPE}} {{langmod.FTPALFNUM}}</option>
                                                             <option value="3">{{langmod.FTPTYPE}} {{langmod.FTPALFNUMSIG}}</option>
@@ -823,16 +823,16 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row" style="margin-bottom: 5px">
+                                    <div class="row cwp-mb-5">
                                         <div class="col-md-4"><label>{{langmod.DBLABELPASS2}}:</label></div>
                                         <div class="col-md-4"><input type="text" class="form-control" id="newpass2" placeholder=""></div>
                                         <div class="col-md-3"></div>
                                         <input type="hidden" id="dbasehiden" value="">
                                     </div>
-                                    <div class="row" style="margin-top: 20px">
+                                    <div class="row cwp-mt-20">
                                         <div class="col-md-4"><label>Permisos del usuario</label></div>
                                     </div>
-                                    <div class="row" style="margin-top: 15px">
+                                    <div class="row cwp-mt-15">
                                         <div class="row">
                                             <div class="col-md-3">
                                                 <div class="panel panel-default">
@@ -860,22 +860,22 @@
 
                                                     </div>
                                                     <div class="panel-body">
-                                                        <div class="row" style="margin-bottom: 5px">
+                                                        <div class="row cwp-mb-5">
                                                             <div class="col-md-4"><input type="checkbox" id="create" value="Y"> CREATE</div>
                                                             <div class="col-md-4"><input type="checkbox" id="alter" value="Y"> ALTER</div>
                                                             <div class="col-md-4"><input type="checkbox" id="index" value="Y"> INDEX</div>
                                                         </div>
-                                                        <div class="row" style="margin-bottom: 5px">
+                                                        <div class="row cwp-mb-5">
                                                             <div class="col-md-4"><input type="checkbox" id="drop" value="Y"> DROP</div>
                                                             <div class="col-md-4"><input type="checkbox" id="trigger" value="Y"> TRIGGER</div>
                                                             <div class="col-md-4"><input type="checkbox" id="showview" value="Y"> SHOW VIEW</div>
                                                         </div>
-                                                        <div class="row" style="margin-bottom: 5px">
+                                                        <div class="row cwp-mb-5">
                                                             <div class="col-md-4"><input type="checkbox" id="createroutine" value="Y"> CREATE ROUTINE </div>
                                                             <div class="col-md-4"><input type="checkbox" id="alterroutine" value="Y"> ALTER ROUTINE</div>
                                                             <div class="col-md-4"><input type="checkbox" id="execute" value="Y"> EXECUTE</div>
                                                         </div>
-                                                        <div class="row" style="margin-bottom: 5px">
+                                                        <div class="row cwp-mb-5">
                                                             <div class="col-md-4"><input type="checkbox" id="createview" value="Y"> CREATE VIEW</div>
                                                             <div class="col-md-4"><input type="checkbox" id="event" value="Y"> EVENT</div>
                                                             <div class="col-md-4"><input type="checkbox" id="creattemptable" value="Y"> CREATE TEMPORARY TABLES</div>
@@ -896,11 +896,11 @@
                                                         </div>
                                                     </div>
                                                     <div class="ibox-content" style="display: none;">
-                                                        <div class="row" style="margin-bottom: 5px">
+                                                        <div class="row cwp-mb-5">
                                                             <div class="col-md-4">MAX QUERIES PER HOUR</div><div class="col-md-2"><input type="number" value="0" id="maxqueryhour" class="form-control"></div>
                                                             <div class="col-md-4">MAX UPDATES PER HOUR</div><div class="col-md-2"><input type="number" value="0" id="maxupdhour" class="form-control"></div>
                                                         </div>
-                                                        <div class="row" style="margin-bottom: 5px">
+                                                        <div class="row cwp-mb-5">
                                                             <div class="col-md-4">MAX CONNECTIONS PER HOUR</div><div class="col-md-2"><input type="number" value="0" id="maxconnechour" class="form-control"></div>
                                                             <div class="col-md-4">MAX USER_CONNECTIONS</div><div class="col-md-2"><input type="number" value="0" id="maxuserconnec" class="form-control"></div>
                                                         </div>
@@ -919,13 +919,13 @@
                                         <button type="button" class="btn btn-primary" id="btn-newnewuser" >{{langmod.DBCREATEUSER}}</button>
                                     </div>
                                 </div>
-                                <div class="tab-pane fade" id="profile2"  style="margin-top: 15px">
-                                    <div class="row" style="margin-bottom: 5px">
+                                <div class="tab-pane fade cwp-mt-15" id="profile2" >
+                                    <div class="row cwp-mb-5">
                                         <div class="col-md-4"><label >{{langmod.DBUSERNAME}}:</label></div>
                                         <div class="col-md-4"><select class="form-control" id="useusermyqlsel" ></select></div>
                                         <div class="col-md-3"></div>
                                     </div>
-                                    <div class="row" style="margin-bottom: 5px">
+                                    <div class="row cwp-mb-5">
                                         <div class="col-md-4"><label>{{langmod.DBHOST}}:</label></div>
                                         <div class="col-md-4"><select id="newhostuser" class="form-control"><option value="localhost">localhost</option><option value="%">{{langmod.DBANY}}</option> </select> </div>
                                         <div class="col-md-3"></div>
@@ -1018,7 +1018,7 @@
                             <input type="text" class="form-control" id="newdb" maxlength="7" placeholder="">
                         </div>
                 </div>
-                <div class="form-group  row" style="margin-top: 5px">
+                <div class="form-group  row cwp-mt-5">
                     <label class="col-lg-4  control-label" for="charsetonly">{{langmod.DBCHARSET}}:</label>
                     <div class="col-lg-6">
                         <select class="form-control"  id="charsetonly">
@@ -1396,7 +1396,7 @@
                                     </select>
                                 </li>
                                 <li>
-                                    <select class="form-control"  id="typepass" title="{{langmod.FTPTYPE}}" style="margin-top: 5px">
+                                    <select class="form-control cwp-mt-5"  id="typepass" title="{{langmod.FTPTYPE}}">
                                         <option value="1">{{langmod.FTPTYPE}} {{langmod.FTPALF}}</option>
                                         <option value="2" selected>{{langmod.FTPTYPE}} {{langmod.FTPALFNUM}}</option>
                                         <option value="3">{{langmod.FTPTYPE}} {{langmod.FTPALFNUMSIG}}</option>
@@ -1411,7 +1411,7 @@
                     <div class="col-lg-4"><input type="text" class="form-control"  id="pass2new" value="" >
                     </div>
                 </div>
-                <div class="form-group  row" style="margin-top: 5px">
+                <div class="form-group  row cwp-mt-5">
                     <label class="col-lg-4  control-label" for="charset">{{langmod.DBCHARSET}}:</label>
                     <div class="col-lg-6">
                         <select class="form-control"  id="charset">
@@ -2056,7 +2056,7 @@
                         <input type="number" class="form-control" id="afsdbtl" placeholder="86400" value="86400">
                     </div>
                 </div>
-                <div class="row" style="padding-top: 15px">
+                <div class="row cwp-pt-15">
                     <label class="col-md-6 control-label" for="">{{langmod.DNSLABEL8}}</label>
                     <label class="col-md-6 control-label" for="">{{langmod.DNSLABEL9}}</label>
                 </div>
@@ -2276,7 +2276,7 @@
                         <input type="text" class="form-control" id="tlsattl" placeholder="" value="">
                     </div>
                 </div>
-                <div class="row" style="margin-top: 10px;">
+                <div class="row cwp-mt-10">
                     <label class="col-md-4 control-label" for="tlsaselector">{{langmod.DNSLABEL23}}</label>
                     <label class="col-md-4 control-label" for="tlsamatchin">{{langmod.DNSLABEL24}}</label>
                     <label class="col-md-4 control-label" for="tlsahash">{{langmod.DNSLABEL25}}</label>
@@ -2292,7 +2292,7 @@
                         <input type="text" class="form-control" id="tlsahash" placeholder="">
                     </div>
                 </div>
-                <div class="row" style="margin-top: 10px;">
+                <div class="row cwp-mt-10">
                     <label class="col-md-6 control-label" for="tlsaDomain">{{langmod.DNSLABEL21}}</label>
                     <label class="col-md-6 control-label" for="tlsusage">{{langmod.DNSLABEL22}}</label>
                 </div>
@@ -2337,7 +2337,7 @@
                     <input type="text" class="form-control" id="srvprio" placeholder="">
                 </div>
             </div>
-            <div class="row" style="margin-top: 10px;">
+            <div class="row cwp-mt-10">
                 <label class="col-md-2 control-label" for="">{{langmod.DNSSVRWEIG}}</label>
                 <label class="col-md-2 control-label" for="">{{langmod.DNSSVRPORT}}</label>
                 <label class="col-md-6 control-label" for="">{{langmod.DNSSVRTARGET}}</label>
@@ -2395,7 +2395,7 @@
                 <h4 class="modal-title" id="mySmallModalLabelemail">{{langene.MDCHANPASS}} for <samp id="ttcgpss"></samp></h4>
             </div>
             <div class="modal-body">
-                <div class="row" style="margin-top: 10px">
+                <div class="row cwp-mt-10">
                     <div class="col-md-3"><label style="margin-left: 5px">{{langmod.DBLABELPASS2}}:</label></div>
                     <div class="col-md-3"><input type="text" class="form-control" id="newpass2user"  value="r6KnZEQrWA"></div>
                     <div class="col-md-4">{{langmod.DBLABELRANDON}}   <a href="#"  onclick="return changerrandom('newpass2user')" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{langmod.DBLABELRANDON}}"><i class="fa fa-cog"></i></a>
@@ -2419,7 +2419,7 @@
                                     </select>
                                 </li>
                                 <li>
-                                    <select class="form-control"  id="typepass" title="{{langmod.FTPTYPE}}" style="margin-top: 5px">
+                                    <select class="form-control cwp-mt-5"  id="typepass" title="{{langmod.FTPTYPE}}">
                                         <option value="1">{{langmod.FTPTYPE}} {{langmod.FTPALF}}</option>
                                         <option value="2" selected>{{langmod.FTPTYPE}} {{langmod.FTPALFNUM}}</option>
                                         <option value="3">{{langmod.FTPTYPE}} {{langmod.FTPALFNUMSIG}}</option>
@@ -2430,7 +2430,7 @@
                     </div>
                 </div>
                 <input id="mysqluserpass" type="hidden" value="">
-                <div class="row" style="margin-top: 10px">
+                <div class="row cwp-mt-10">
                     <label class="col-md-3  control-label" for="">{{langene.MDCONFPASS}}:</label>
                     <div class="col-md-3">
                         <input type="text"  class="form-control" id="newpass2user2" placeholder="{{langene.MDYOURPASS}}">
@@ -2479,11 +2479,11 @@
                 <h4 class="modal-title">{{langmod.PGTIBLENEWUSER}}   <samp id="titlebdpg"></samp></h4>
             </div>
             <div class="modal-body">
-                <div class="row" style="margin-bottom: 5px">
+                <div class="row cwp-mb-5">
                     <div class="col-md-4"><label >{{langmod.PGUSERNAME}}:</label></div>
                     <div class="col-md-4"><input type="text" class="form-control" id="newuserpg" maxlength="7" placeholder=""></div>
                 </div>
-                <div class="row" style="margin-bottom: 5px">
+                <div class="row cwp-mb-5">
                     <div class="col-md-4"><label>{{langmod.PGLABELPASS2}}:</label></div>
                     <div class="col-md-6">
                         <div class="row">
@@ -2511,7 +2511,7 @@
                                                 </select>
                                             </li>
                                             <li>
-                                                <select class="form-control"  id="typepass" title="{{langmod.FTPTYPE}}" style="margin-top: 5px">
+                                                <select class="form-control cwp-mt-5"  id="typepass" title="{{langmod.FTPTYPE}}">
                                                     <option value="1">{{langmod.FTPTYPE}} {{langmod.FTPALF}}</option>
                                                     <option value="2" selected>{{langmod.FTPTYPE}} {{langmod.FTPALFNUM}}</option>
                                                     <option value="3">{{langmod.FTPTYPE}} {{langmod.FTPALFNUMSIG}}</option>
@@ -2524,7 +2524,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row" style="margin-bottom: 5px">
+                <div class="row cwp-mb-5">
                     <div class="col-md-4"><label>{{langmod.PGLABELPASS2}}:</label></div>
                     <div class="col-md-5"><input type="text" class="form-control" id="newpass2pg" placeholder=""></div>
                     <input type="hidden" id="dbasehidenpg" value="">
@@ -2589,11 +2589,11 @@
                         <div class="ibox-content">
 
                             <div id="myTabContent2" class="tab-content" style="padding-left: 25px">
-                                <div class="tab-pane fade active in" id="home2" style="margin-top: 15px">
-                                    <div class="row" style="margin-top: 20px">
+                                <div class="tab-pane fade active in cwp-mt-15" id="home2">
+                                    <div class="row cwp-mt-20">
                                         <div class="col-md-4"><label>{{langmod.DBLABEL7}}</label></div>
                                     </div>
-                                    <div class="row" style="margin-top: 15px">
+                                    <div class="row cwp-mt-15">
                                         <div class="row">
                                             <div class="col-md-3">
                                                 <div class="panel panel-default">
@@ -2619,22 +2619,22 @@
 
                                                     </div>
                                                     <div class="panel-body">
-                                                        <div class="row" style="margin-bottom: 5px">
+                                                        <div class="row cwp-mb-5">
                                                             <div class="col-md-4"><input type="checkbox" id="create_edi" value="Y"> CREATE</div>
                                                             <div class="col-md-4"><input type="checkbox" id="alter_edi" value="Y"> ALTER</div>
                                                             <div class="col-md-4"><input type="checkbox" id="index_edi" value="Y"> INDEX</div>
                                                         </div>
-                                                        <div class="row" style="margin-bottom: 5px">
+                                                        <div class="row cwp-mb-5">
                                                             <div class="col-md-4"><input type="checkbox" id="drop_edi" value="Y"> DROP</div>
                                                             <div class="col-md-4"><input type="checkbox" id="trigger_edi" value="Y"> TRIGGER</div>
                                                             <div class="col-md-4"><input type="checkbox" id="showview_edi" value="Y"> SHOW VIEW</div>
                                                         </div>
-                                                        <div class="row" style="margin-bottom: 5px">
+                                                        <div class="row cwp-mb-5">
                                                             <div class="col-md-4"><input type="checkbox" id="createroutine_edi" value="Y"> CREATE ROUTINE </div>
                                                             <div class="col-md-4"><input type="checkbox" id="alterroutine_edi" value="Y"> ALTER ROUTINE</div>
                                                             <div class="col-md-4"><input type="checkbox" id="execute_edi" value="Y"> EXECUTE</div>
                                                         </div>
-                                                        <div class="row" style="margin-bottom: 5px">
+                                                        <div class="row cwp-mb-5">
                                                             <div class="col-md-4"><input type="checkbox" id="createview_edi" value="Y"> CREATE VIEW</div>
                                                             <div class="col-md-4"><input type="checkbox" id="event_edi" value="Y"> EVENT</div>
                                                             <div class="col-md-4"><input type="checkbox" id="creattemptable_edi" value="Y"> CREATE TEMPORARY TABLES</div>
@@ -2655,11 +2655,11 @@
                                                         </div>
                                                     </div>
                                                     <div class="ibox-content" style="display: block;">
-                                                        <div class="row" style="margin-bottom: 5px">
+                                                        <div class="row cwp-mb-5">
                                                             <div class="col-md-4">{{langmod.DBLABEL10}}</div><div class="col-md-2"><input type="number" value="0" id="maxqueryhour_edi" class="form-control"></div>
                                                             <div class="col-md-4">{{langmod.DBLABEL11}}</div><div class="col-md-2"><input type="number" value="0" id="maxupdhour_edi" class="form-control"></div>
                                                         </div>
-                                                        <div class="row" style="margin-bottom: 5px">
+                                                        <div class="row cwp-mb-5">
                                                             <div class="col-md-4">{{langmod.DBLABEL12}}</div><div class="col-md-2"><input type="number" value="0" id="maxconnechour_edi" class="form-control"></div>
                                                             <div class="col-md-4">{{langmod.DBLABEL13}}</div><div class="col-md-2"><input type="number" value="0" id="maxuserconnec_edi" class="form-control"></div>
                                                         </div>
