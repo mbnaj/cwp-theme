@@ -4090,3 +4090,104 @@ input[data-number="true"]{
 .dataTables_wrapper{
   padding-bottom:0px;
 }
+
+/* ---------- Email forwarders page (moved from the inline style block of mod_forwarders_email.html) ---------- */
+.cwp-page-forwarders .actions-td{
+  width: 150px !important;
+}
+#new_pipe_form{
+  display:none;
+}
+.mail-forward-pipe-top{
+  border-bottom: 2px solid #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.mail-forward-pipe-top h3{
+  margin:0px;
+}
+.panel-body-pipe{
+  padding-top:5px !important;
+}
+.file-selector{
+  display: flex;
+  cursor:pointer;
+}
+.file-selector .input-group-addon{
+  line-height: 2.3rem;
+  border-left: 1px solid #e5e6e7;
+  padding-top: 5px;
+}
+.file-selector .form-control{
+  top: 0px !important;
+  cursor:pointer;
+}
+#dir_explorer_domain .modal-body{
+  max-height:70vh;
+  min-height:40vh;
+  overflow:auto;
+}
+#dir_explorer_domain .dir-item:nth-child(even){
+  background-color:#f3f3f3;
+}
+#dir_explorer_domain .dir-item:hover{
+  background-color:#cccccc;
+  cursor:pointer;
+  color: #333;
+}
+#dir_explorer_domain .dir-item{
+  padding: 5px;
+}
+.dir-item .fa{
+  margin-right:5px;
+}
+.current-path-div{
+  padding-bottom:10px;
+  padding-top:10px;
+}
+#dir_list{
+  padding-bottom: 10px;
+}
+#dirsel{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 25rem;
+  /* border: 1px solid #999; */
+  direction: rtl;
+  text-align: left;
+  line-height: 1.5rem;
+  padding: 0px;
+  display: inline-block;
+  margin-bottom: 0px;
+}
+.dir-sel-btn .fa{
+  font-size: 2rem;
+  margin-right: 5px;
+}
+.dir-sel-btn{
+  display: flex;
+  align-items: center;
+}
+.file-item-listing{
+  display:flex;
+  justify-content:space-between;
+}
+.file-item-listing .label-info{
+  padding-top: 5px;
+}
+.php-file-warning{
+  font-weight: 600;
+  padding-top: 3.3rem;
+  display: block;
+}
+#new_pipe_form .form-group{
+  margin-bottom:5px;
+}
+.new-forwarder-warning{
+  font-weight: 600;
+  margin-top: 10px;
+  display: block;
+}

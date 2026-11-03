@@ -244,7 +244,7 @@ server changed there. Before each page below, diff it against `original/` and bu
       bar; add account; "Manual settings for common mail clients" cards (SSL and non-SSL). Data via JS. Plan: table
       with usage bar per mailbox, webmail login button, change password / quota actions; manual settings as one card
       with Secure (recommended) and Insecure tabs, copy buttons.
-- [ ] `mod_forwarders_email.html` (466, 3 tables, tabs, 5 DataTable refs): forwarders + quota bars. Plan: tabs
+- [x] `mod_forwarders_email.html`: partly done: inline `<style>` block (130 lines) moved to `cwp-modern.css` (shared rules were already there; `.actions-td` width scoped to `.cwp-page-forwarders`), shared page skeleton (file-lock alert, header, footer inside the page), built on the server version (title shows `({{users}})`); ids and handlers untouched; renders in preview (HTTP 200, no Twig errors), not checked visually, not tested on a real server. Original plan: tabs
       "Forwarders" and "Domain forwarders"; add-forwarder form with destination chips.
 - [ ] `mod_mail_autoreply.html` (538, date/clock pickers, summernote): autoresponders. Plan: list + editor drawer
       with schedule (from / to), rich-text editor, enable switch.
