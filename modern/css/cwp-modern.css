@@ -125,8 +125,8 @@ ul.nav-second-level { background: var(--cwp-navy-3); padding: 4px 0; }
 .navbar-top-links .label { font-size: 11px; padding: 4px 8px; border-radius: 99px; }
 .navbar-top-links .fa-question-circle { font-size: 20px; }
 .navbar-top-links .dropdown-menu { border: 1px solid var(--cwp-line); border-radius: var(--cwp-radius); box-shadow: 0 6px 20px rgba(20, 30, 60, .14); }
-/* The top bar must paint above the page content at every width, or its dropdowns open underneath cards */
-#page-wrapper > .row.border-bottom { position: relative; z-index: 1500; background: #fff; margin: 0; }
+/* The top bar (first child only: page headers share these classes) must paint above the page content at every width, or its dropdowns open underneath cards and page headers */
+#page-wrapper > .row.border-bottom:first-child { position: relative; z-index: 1500; background: #fff; margin: 0; }
 .navbar-static-top, .navbar-top-links, .navbar-top-links > li { overflow: visible; }
 .navbar-top-links > li { position: relative; }
 .navbar-top-links .dropdown-menu { z-index: 1600; }
@@ -328,7 +328,7 @@ label { font-weight: 600; color: #4b556b; }
   #page-wrapper::-webkit-scrollbar { width: 10px; }
   #page-wrapper::-webkit-scrollbar-thumb { background: #c3c9d6; border-radius: 99px; }
   /* keep the top bar visible while the content scrolls */
-  #page-wrapper > .row.border-bottom { position: sticky; top: 0; }
+  #page-wrapper > .row.border-bottom:first-child { position: sticky; top: 0; }
   /* collapsed (icon-only) sidebar needs overflow visible so the flyout submenus are not clipped */
   body.mini-navbar .navbar-static-side .sidebar-collapse { overflow: visible; }
 }
