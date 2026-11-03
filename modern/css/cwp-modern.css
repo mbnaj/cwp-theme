@@ -7136,3 +7136,21 @@ legend {
 .cwp-fs-14{font-size:14px}.cwp-fs-90{font-size:90%}.cwp-fs-2r{font-size:2rem}
 .cwp-text-red{color:#e74c3c}.cwp-text-orange{color:#e67e22}
 .modal-dialog.cwp-modal-w500,.modal-dialog.cwp-modal-w400{margin-left:auto;margin-right:auto}
+
+.cwp-text-blue{color:#1c84c6!important}
+.cwp-icon-red{font-size:16px;margin-right:5px;color:#f14e32}
+.cwp-pt-7{padding-top:7px}.cwp-mt-8{margin-top:8px}
+.cwp-fs-12{font-size:12px}
+.cwp-mono-12{font-family:monospace;font-size:12px}
+.cwp-empty-box{text-align:center;padding:30px}
+.modal-dialog.cwp-modal-w450{width:450px}
+.modal-dialog.cwp-modal-w600{width:600px}
+.modal-dialog.cwp-modal-w650{width:650px}
+.modal-dialog.cwp-modal-w700{width:700px}
+.modal-dialog.cwp-modal-w850{width:850px}
+.modal-dialog[class*="cwp-modal-w"]{max-width:calc(100% - 20px)}
+.cwp-flex-row{margin-bottom:12px;display:flex;gap:8px}
+.cwp-flex-fill{flex:1;height:36px}
+.cwp-check-float{margin:5px 8px 0 0;cursor:pointer;position:relative;z-index:2;float:left}
+.cwp-check-help{margin-left:24px;font-size:12px;clear:both}
+.cwp-check-label{cursor:pointer;font-weight:normal;display:block;margin-left:24px;margin-bottom:0}
