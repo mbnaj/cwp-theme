@@ -744,5 +744,5 @@ label { font-weight: 600; color: #4b556b; }
 
 /* Footer flows after the content on every page (style.css pins it absolutely, so it overlaps tall pages) */
 .footer:not(.fixed):not(.fixed_full) { position: relative; left: auto; right: auto; bottom: auto; clear: both; margin-top: 24px; }
-.wrapper-content > .footer:only-child { margin: -20px -22px -40px; }
+.wrapper-content > .footer:only-child { margin: 0; }
 .wrapper-content:has(> .footer:only-child) { margin-top: 0 !important; padding-top: 0; padding-bottom: 0; }
