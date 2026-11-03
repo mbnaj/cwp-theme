@@ -255,7 +255,7 @@ server changed there. Before each page below, diff it against `original/` and bu
       (Local / Remote / Backup MX) per domain.
 - [ ] `mod_email_importer.html` (604, form, select2, dropzone): import mail from another server. Plan: 3-step
       wizard (source server credentials, select mailboxes, run), progress and log.
-- [ ] `mod_spamexperts.html` (68, form, table, 5 DataTable refs): SpamExperts login and domains. Plan: connection
+- [x] `mod_spamexperts.html`: done (shared page header, plain responsive table with hover, slimScroll leftovers and inline style removed, ids and login handler untouched; no connection card; not tested on a real server). Original plan: SpamExperts login and domains. Plan: connection
       card + domain table.
 - [ ] Spam Annihilator (`spam_annihilator` in the menu): **no template file found** in the theme; handled by the
       server. Confirm before redesigning.
