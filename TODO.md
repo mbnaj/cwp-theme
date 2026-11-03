@@ -291,7 +291,7 @@ dropzone).
 - [x] `mod_reseller_features.html`: light cleanup only (tab partial): dead commented markup and inline modal styles removed, labels linked to their selects, ids and handlers untouched; not tested on a real server. Original plan: feature sets. Plan: switch matrix per feature.
 - [x] `mod_reseller_nameservers.html`: light cleanup only (it is a tab partial): save button in the shared form-actions row, inline modal styles removed, ids and handlers untouched; not tested on a real server. Original plan: nameserver defaults. Plan: simple form card.
 - [x] `mod_reseller_branding.html`: light cleanup only (tab partial): dead commented column removed, save button inline style moved to CSS, logo scales on phones, ids and handlers untouched; not tested on a real server. Original plan: logo / name branding. Plan: preview of the logo with upload.
-- [ ] `mod_reseller_apimanager.html` (698, 5 tables): API keys and allowed IPs. Plan: split into sections with
+- [x] `mod_reseller_apimanager.html`: light cleanup only (tab partial): modal inline styles removed, labels linked to their inputs; JS-toggled display:none states, ids and handlers untouched; no section split or access log; not tested on a real server. Original plan: API keys and allowed IPs. Plan: split into sections with
       copy-key buttons and an access log table.
 - [x] `mod_reseller_modsecurity.html` (161, 2 iboxes, table): ModSecurity rules for the reseller. Done: inline styles and
       dead commented block removed, label typos fixed (Domian, Tipo); reuses the ModSecurity page CSS, ids and handlers
