@@ -274,7 +274,7 @@ server changed there. Before each page below, diff it against `original/` and bu
       site cards with version, update status, staging/clone, backup, auto-login, plugin/theme update lists.
 - [ ] `mod_git_manager.html` (9) + `modules/git_manager/` (`dashboard.html`, `modals.html`, `not_available.html`,
       `styles.css`): Git repos. Plan: repo cards with branch, last commit, deploy key copy, pull/deploy button.
-- [ ] `mod_siteprobuilder.html` (49, form): SiteProBuilder launcher. Plan: simple card with login button.
+- [x] `mod_siteprobuilder.html`: done (shared page header, domain card with label above select, error shown as an alert, inline style removed, form fields unchanged; not tested on a real server). Original plan: SiteProBuilder launcher. Plan: simple card with login button.
 - [ ] `mod_softaculous.html` (0): external script (Softaculous). Nothing in the theme to redesign; check the
       surrounding page.
 
