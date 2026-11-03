@@ -192,7 +192,7 @@ server changed there. Before each page below, diff it against `original/` and bu
       `modules/backups/backups_restore.html`. Plan: tabs "Backups", "Automatic", "Restore"; storage usage bar;
       backup list with download / restore / delete; wizard-style restore (choose what: files, databases, email);
       auto-backup settings as a switch + schedule + retention form.
-- [ ] `mod_backups_auto.html` (187): automatic backup settings tab (see above).
+- [x] `mod_backups_auto.html`: partly done: inline styles moved to `cwp-modern.css`, shared page skeleton where the page has its own header; ids and handlers untouched; renders in preview (HTTP 200, no Twig errors), not checked visually, not tested on a real server. Original plan: (187): automatic backup settings tab (see above).
 - [x] `mod_disk_usage.html`: done (shared page header, two-column layout, inline style moved to CSS, duplicate `list_wrapper` id renamed to `total_wrapper`, JS untouched; list is AJAX-filled so not checked visually). Original plan: disk usage per folder. Plan: treemap or bar breakdown (home, mail,
       MySQL, backups) plus top folders table.
 - [x] `mod_protected_directory.html`: done (shared page header with Add button, form card with labels above inputs and radio ids fixed, user list rows with flex layout, empty state inside the table body so AJAX refresh keeps working, inline styles and slimScroll leftovers removed, ids and JS untouched; not tested on a real server). Original plan: password-protect directories (Apache only). Plan: directory
@@ -246,14 +246,14 @@ server changed there. Before each page below, diff it against `original/` and bu
       with Secure (recommended) and Insecure tabs, copy buttons.
 - [x] `mod_forwarders_email.html`: partly done: inline `<style>` block (130 lines) moved to `cwp-modern.css` (shared rules were already there; `.actions-td` width scoped to `.cwp-page-forwarders`), shared page skeleton (file-lock alert, header, footer inside the page), built on the server version (title shows `({{users}})`); ids and handlers untouched; renders in preview (HTTP 200, no Twig errors), not checked visually, not tested on a real server. Original plan: tabs
       "Forwarders" and "Domain forwarders"; add-forwarder form with destination chips.
-- [ ] `mod_mail_autoreply.html` (538, date/clock pickers, summernote): autoresponders. Plan: list + editor drawer
+- [x] `mod_mail_autoreply.html`: partly done: inline styles moved to `cwp-modern.css`, shared page skeleton where the page has its own header; ids and handlers untouched; renders in preview (HTTP 200, no Twig errors), not checked visually, not tested on a real server. Original plan: (538, date/clock pickers, summernote): autoresponders. Plan: list + editor drawer
       with schedule (from / to), rich-text editor, enable switch.
-- [ ] `mod_email_filters.html` (1264, tabs, 2 DataTable refs, switch): the largest page. Plan: tabs "Filters",
+- [x] `mod_email_filters.html`: partly done: inline styles moved to `cwp-modern.css`, shared page skeleton where the page has its own header; ids and handlers untouched; renders in preview (HTTP 200, no Twig errors), not checked visually, not tested on a real server. Original plan: (1264, tabs, 2 DataTable refs, switch): the largest page. Plan: tabs "Filters",
       "Spam", "Blacklist/Whitelist" (verify tabs when opening); rule builder rows (If [field] [contains] [value] then
       [action]); drag to reorder priority; split into partials.
 - [x] `mod_mail_routing.html`: done (shared page header, inline style moved to CSS, card allows the routing dropdown to overflow, table scrolls at phone width; ids and JS untouched; no radio cards; not tested on a real server). Original plan: radio cards
       (Local / Remote / Backup MX) per domain.
-- [ ] `mod_email_importer.html` (604, form, select2, dropzone): import mail from another server. Plan: 3-step
+- [x] `mod_email_importer.html`: partly done: inline styles moved to `cwp-modern.css`, shared page skeleton where the page has its own header; ids and handlers untouched; renders in preview (HTTP 200, no Twig errors), not checked visually, not tested on a real server. Original plan: (604, form, select2, dropzone): import mail from another server. Plan: 3-step
       wizard (source server credentials, select mailboxes, run), progress and log.
 - [x] `mod_spamexperts.html`: done (shared page header, plain responsive table with hover, slimScroll leftovers and inline style removed, ids and login handler untouched; no connection card; not tested on a real server). Original plan: SpamExperts login and domains. Plan: connection
       card + domain table.
@@ -262,17 +262,17 @@ server changed there. Before each page below, diff it against `original/` and bu
 - [ ] Roundcube link: external (`mod.roundcube`), nothing to redesign.
 
 ### 4.6 Addons and script installers
-- [ ] `mod_addons.html` (157, tabs, style block) + `modules/addons/` (`dashboard.html`, `installed.html`, 13 app
+- [x] `mod_addons.html`: partly done: inline styles moved to `cwp-modern.css`, shared page skeleton where the page has its own header; ids and handlers untouched; renders in preview (HTTP 200, no Twig errors), not checked visually, not tested on a real server. Original plan: (157, tabs, style block) + `modules/addons/` (`dashboard.html`, `installed.html`, 13 app
       pages: laravel, symfony, whcms, smf, magento, osticket, phpbb, nextcloud, owncloud, moodle, livehelper,
       suitecrm + `styles.css`) and `mod_addons_wp.html` (233), `mod_addons_ps.html` (216), `mod_addons_jl.html`
       (127), `mod_addons_dp.html` (197), `mod_addons_fm.html` (68): one-click app installers. Plan: app gallery
       grid with logo, category filters, search; install form (domain, path, admin user) as a single shared layout;
       "Installed" tab with version, update and uninstall. The 13 app pages are near-duplicates: replace with one
       generic app page driven by data.
-- [ ] `mod_wordpress_manager.html` (16) + `modules/wordpress_manager/` (`dashboard.html`, `modals.html`,
+- [x] `mod_wordpress_manager.html`: partly done: inline styles moved to `cwp-modern.css`, shared page skeleton where the page has its own header; ids and handlers untouched; renders in preview (HTTP 200, no Twig errors), not checked visually, not tested on a real server. Original plan: (16) + `modules/wordpress_manager/` (`dashboard.html`, `modals.html`,
       `modals.js`, `not_available.html`, `styles.css`, `ajax_wordpress_manager.php`): WordPress manager. Plan:
       site cards with version, update status, staging/clone, backup, auto-login, plugin/theme update lists.
-- [ ] `mod_git_manager.html` (9) + `modules/git_manager/` (`dashboard.html`, `modals.html`, `not_available.html`,
+- [x] `mod_git_manager.html`: partly done: inline styles moved to `cwp-modern.css`, shared page skeleton where the page has its own header; ids and handlers untouched; renders in preview (HTTP 200, no Twig errors), not checked visually, not tested on a real server. Original plan: (9) + `modules/git_manager/` (`dashboard.html`, `modals.html`, `not_available.html`,
       `styles.css`): Git repos. Plan: repo cards with branch, last commit, deploy key copy, pull/deploy button.
 - [x] `mod_siteprobuilder.html`: done (shared page header, domain card with label above select, error shown as an alert, inline style removed, form fields unchanged; not tested on a real server). Original plan: SiteProBuilder launcher. Plan: simple card with login button.
 - [ ] `mod_softaculous.html` (0): external script (Softaculous). Nothing in the theme to redesign; check the
@@ -299,7 +299,7 @@ dropzone).
 - [x] `mod_reseller_firewall.html` (30): firewall. Plan: rule table + add-rule form.
 
 ### 4.8 Streaming and misc
-- [ ] `mod_servercast.html` (29) + `modules/servercast/` (18 files: `Conf_autodj`, `Conf_general`, `Conf_limites`,
+- [x] `mod_servercast.html`: partly done: inline styles moved to `cwp-modern.css`, shared page skeleton where the page has its own header; ids and handlers untouched; renders in preview (HTTP 200, no Twig errors), not checked visually, not tested on a real server. Original plan: (29) + `modules/servercast/` (18 files: `Conf_autodj`, `Conf_general`, `Conf_limites`,
       `Conf_plugins`, `Conf_rele`, `autodjdetails`, `autodjlist`, `conf_menu`, `config`, `dashboard`, `dj_anager`,
       `menuTable`, `modals`, `mounting`, `not_available`, `overvier`, `shoustcast_tab`, `styles.css`): ServerCast
       (Shoutcast / Icecast). Plan: overview card with listeners, status and start/stop; vertical config menu;
@@ -315,7 +315,7 @@ dropzone).
 - [x] DNS menu used the same envelope icon as Email (fixed, `fa-sitemap`).
 - [ ] `mod_php_selector.html` vs `mod_phpselector.html`: two near-identical pages; decide which is live.
 - [ ] `mod_dashboard` / menu: `fant3menu` item links to `#` on the dashboard but to `?module=fantastico_f3` in the menu.
-- [ ] `mod_email_filters.html` opens in a new tab from the old dashboard (`target="_blank"`), probably unintended
+- [x] `mod_email_filters.html`: partly done: inline styles moved to `cwp-modern.css`, shared page skeleton where the page has its own header; ids and handlers untouched; renders in preview (HTTP 200, no Twig errors), not checked visually, not tested on a real server. Original plan: opens in a new tab from the old dashboard (`target="_blank"`), probably unintended
       (new dashboard opens it in the same tab; confirm).
 - [ ] Mixed Font Awesome 4 and 5 class names (`fa`, `fab`) on one page.
 - [ ] Inline `<style>` blocks in about 25 templates duplicate the same rules.
