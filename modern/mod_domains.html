@@ -15,157 +15,6 @@
   {% set classbar = 'progress-bar' %}
   {% set label_dom = '&infin;' %}
 {% endif %}
-<style media="screen">
-  .mail-contracted{
-    min-width: 20vw;
-    top:-7.9rem;
-    width: auto;
-  }
-  #new_form_wrapper{
-    display:none;
-  }
-  .domain-header-title{
-    display: flex;
-    padding-right: 15px;
-    justify-content: space-between;
-  }
-  .ibox-footer{
-    font-size:100%;
-  }
-  #new_form_wrapper .form-group{
-    display:flex;
-    align-items: center;
-  }
-  .directory-selector-btn{
-    display:flex;
-  }
-  #dir_explorer_domain .modal-body{
-    max-height:70vh;
-    min-height:40vh;
-    overflow:auto;
-  }
-  #dir_explorer_domain .dir-item:nth-child(even){
-    background-color:#f3f3f3;
-  }
-  #dir_explorer_domain .dir-item:hover{
-    background-color:#cccccc;
-    cursor:pointer;
-    color: #333;
-  }
-  #dir_explorer_domain .dir-item{
-    padding: 5px;
-  }
-  .dir-item .fa{
-    margin-right:5px;
-  }
-  .current-path-div{
-    padding-bottom:10px;
-    padding-top:10px;
-  }
-  #dir_list{
-    padding-bottom: 10px;
-  }
-  #dirsel{
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 25rem;
-    /* border: 1px solid #999; */
-    direction: rtl;
-    text-align: left;
-    line-height: 1.5rem;
-    padding: 0px;
-    display: inline-block;
-    margin-bottom: 0px;
-  }
-  .dir-sel-btn .fa{
-    font-size: 2rem;
-    margin-right: 5px;
-  }
-  .dir-sel-btn{
-    display: flex;
-    align-items: center;
-  }
-  .new-form-flex{
-    display:flex;
-    flex-wrap:wrap;
-  }
-  .new-form-flex-form{
-    width:70%;
-    padding-right:2rem;
-  }
-  .new-form-flex-info{
-    width:30%;
-  }
-  .ssl-row-label .fa-stack{
-    font-size: 1rem;
-    margin-left: 3px;
-    color: #156192;
-    cursor:pointer;
-  }
-  .ssl-row-label{
-    display: flex;
-    align-items: center;
-  }
-  #ssl_checkbox{
-    cursor:pointer;
-  }
-  .error-field{
-    color: #ff0000;
-    margin-top: 5px;
-    font-size: 12px;
-    display: block;
-    margin-bottom: -10px;
-  }
-  #san_selector{
-    display:none;
-  }
-  .san-list{
-    list-style: none;
-    margin: 0px;
-    padding: 0px;
-  }
-  .san-selector-title{
-    border-bottom: 1px solid #e7eaec;
-    padding-bottom: 5px;
-    font-weight: 600;
-  }
-  .deleting_tr{
-    background-color: #f5f5f566;
-    color: #e7eaec;
-  }
-  .td-table-domain-icon,
-  .td-table-domain{
-    padding-top: 1.6rem !important;
-  }
-  .td-table-domain-btn{
-    padding-top: 1.3rem !important;
-  }
-  #alert_info{
-    display:none;
-  }
-  #alert_info .alert-info{
-    display:flex;
-  }
-  #alert_info .alert-info p{
-    margin-left: 5px;
-    padding-left: 5px;
-    border-left: 1px solid #c2d2da;
-  }
-  .subdomain-icon{
-    font-size:1.5em;
-  }
-  .domain_bw .progress{
-    margin-bottom:5px;
-    margin-top:5px;
-  }
-  .infinite-bandwidth{
-    font-size: 2.5rem;
-    line-height: 10px;
-    top: 4px;
-    position: relative;
-  }
-</style>
 <div class="modal" id="dir_explorer_domain" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog" style="width:500px;">
     <div class="modal-content animated fadeIn">
@@ -210,12 +59,12 @@
 <div class="modal" id="deletemodaldomain" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-sm" style="width:300px">
         <div class="modal-content animated fadeIn">
-            <div class="modal-header" style="padding: 10px;">
+            <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">
                 <span aria-hidden="true">×</span>
                 <span class="sr-only">{{langene.MDCLOSE}}</span>
               </button>
-              <h4 class="modal-title" style="font-size:2rem">{{langmod.DOMMODALATTENTION}}</h4>
+              <h4 class="modal-title">{{langmod.DOMMODALATTENTION}}</h4>
             </div>
             <div class="modal-body" style="padding: 20px;">
               <!-- <p>You are about to delete the FTP user: <br>
@@ -229,21 +78,25 @@
         </div>
     </div>
 </div>
-<div class="row  border-bottom white-bg dashboard-header">
+<div class="cwp-page">
   {% if mod.fsl == 1 %}
-    <div class="row  alert alert-warning col-lg-12" style="margin-left: 5px; padding-right: 5px;display:{{stflalert}}" id="alertfl">
-        <strong>{{langene.GALARTFILEBLOCK}}</strong>
-    </div>
+    {% set stflalert ='block' %}
+  {% else %}
+    {% set stflalert ='none' %}
   {% endif %}
-  <div class="col-lg-10">
-    <h2>{{langmod.DTITLE}}</h2>
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="?">Home</a></li>
-        <li class="breadcrumb-item active"><strong>{{langmod.DTITLE}}</strong></li>
-    </ol>
+  <div class="alert alert-warning" style="display:{{stflalert}}" id="alertfl">
+    <strong>{{langene.GALARTFILEBLOCK}}</strong>
   </div>
-</div>
-<div class="row" style="margin-top:2rem">
+  <div class="cwp-page-head">
+    <div>
+      <h2>{{langmod.DTITLE}}</h2>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="?">{{langene.GENLABLANG1}}</a></li>
+        <li class="breadcrumb-item active"><strong>{{langmod.DTITLE}}</strong></li>
+      </ol>
+    </div>
+  </div>
+<div class="row">
   <div class="col-lg-12">
     <div class="row" >
       <div class="col-lg-12">
@@ -382,7 +235,7 @@
       </div>
     </div>
   </div>
-  <div class="wrapper wrapper-content" style="margin-top: 35px">
-      {% include 'footer.html' %}
-  </div>
+    {% include 'footer.html' %}
+</div>
+
 </div>

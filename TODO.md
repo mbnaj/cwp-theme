@@ -206,7 +206,7 @@ server changed there. Before each page below, diff it against `original/` and bu
 - [ ] Files system lock: modal `modal-fsl` + `js/modules/files_system_lock.js.twig` (see 3.1).
 
 ### 4.3 Domains group
-- [ ] `mod_domains.html` (388, style block, footer): domains list with quota bar, add domain. Data via JS. Plan: card
+- [x] `mod_domains.html`: partly done: 150-line inline `<style>` moved to `cwp-modern.css`, shared page skeleton (file-lock alert, page header, footer inside the page), modal header inline styles removed; ids, handlers and quota bar untouched; renders in preview (HTTP 200, no Twig errors), not checked visually, not tested on a real server. Original plan: Plan: card
       per domain or table with document root, PHP version, SSL status pill, actions menu (manage DNS, SSL, redirect,
       delete); add-domain modal with type (addon / parked) and doc-root auto-fill.
 - [ ] `mod_subdomains.html` (414, 2 style blocks, DataTable): same pattern as domains. Plan: reuse the domains table.
