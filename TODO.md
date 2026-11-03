@@ -178,7 +178,7 @@ server changed there. Before each page below, diff it against `original/` and bu
       editor/CodeMirror tab was already disabled in the original. Not tested on a real server.
 - [x] `mod_statistics.html` (151): usage / traffic stats. Done: rebuilt on the server version (with the live log card), shared page header, form row with labels, live-log toolbar and viewer styled in CSS, inline styles and the `<style>` block moved out, ids unchanged; not done: stat tiles/charts (need JS), not tested on a real server. Original plan: Plan: summary stat tiles, charts (Chart.js already loaded),
       date range, export.
-- [ ] `mod_themely.html` (153, style block): theme chooser used by the WordPress addon. Plan: theme cards grid with
+- [x] `mod_themely.html`: done as far as a partial goes (it is included by `mod_addons_wp.html`, not a page: inline style moved to CSS, install/cancel pseudo-buttons are real buttons, ids and JS untouched; full redesign comes with the WordPress addon page). Original plan: theme chooser used by the WordPress addon. Plan: theme cards grid with
       preview image and Install button.
 
 ### 4.2 File management group
