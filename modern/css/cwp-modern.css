@@ -4041,3 +4041,52 @@ input[data-number="true"]{
 #_mongdb_not_running_wrapper_ .fa{
     font-size:4rem;
 }
+/* ---------- Email accounts page (moved from the inline style block of mod_email_accounts.html) ---------- */
+.deleting_tr{
+  background-color: #f5f5f566;
+  color: #e7eaec;
+}
+.email-accounts-table, #DataTables_Table_0_wrapper{
+  width:100% !important;
+}
+.DataTables_Table_0{
+  display:none;
+}
+.actions-td{
+  width: 180px !important;
+  text-align: center;
+}
+#table_email_container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height:200px;
+}
+#accounts_loader{
+  position: absolute;
+  background-color: #ffffff;
+  width: 20rem;
+  z-index: 1000;
+  height: auto;
+  border-radius: 5px;
+  border: 1px solid #cecece;
+  padding: .5rem 0px;
+}
+.catch-all-record{
+  background-color: #1c84c6 !important;
+  color: #fff;
+}
+.catch-all-record .btn-success{
+  border-color: #9ed2ff !important;
+}
+.mail-contracted{
+  top: -8.9rem;
+}
+.ibox-title-mail{
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+}
+.dataTables_wrapper{
+  padding-bottom:0px;
+}

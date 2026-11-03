@@ -240,7 +240,7 @@ server changed there. Before each page below, diff it against `original/` and bu
 - [ ] MySQL process list: modal `#mysql_processes` handler (see 3.1).
 
 ### 4.5 Email group
-- [ ] `mod_email_accounts.html` (212, 1 ibox, 2 tables, 4 DataTable refs, 2 style blocks): email accounts with usage
+- [x] `mod_email_accounts.html`: partly done: inline `<style>` blocks moved to `cwp-modern.css` (the second held only a commented rule), shared page skeleton (file-lock alert, header, footer inside the page), the `sefol` variable kept; ids and handlers untouched; had one more closing `</div>` than opening ones before this change (left as is); renders in preview (HTTP 200, no Twig errors), not checked visually, not tested on a real server. Original plan: email accounts with usage
       bar; add account; "Manual settings for common mail clients" cards (SSL and non-SSL). Data via JS. Plan: table
       with usage bar per mailbox, webmail login button, change password / quota actions; manual settings as one card
       with Secure (recommended) and Insecure tabs, copy buttons.
