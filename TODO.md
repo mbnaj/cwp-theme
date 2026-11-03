@@ -289,7 +289,7 @@ dropzone).
 - [ ] `mod_reseller_packages.html` (322, table): hosting packages. Plan: package cards or table, limits form in
       grouped sections (disk, bandwidth, email, domains, DB, FTP, features).
 - [ ] `mod_reseller_features.html` (80, steps): feature sets. Plan: switch matrix per feature.
-- [ ] `mod_reseller_nameservers.html` (114): nameserver defaults. Plan: simple form card.
+- [x] `mod_reseller_nameservers.html`: light cleanup only (it is a tab partial): save button in the shared form-actions row, inline modal styles removed, ids and handlers untouched; not tested on a real server. Original plan: nameserver defaults. Plan: simple form card.
 - [ ] `mod_reseller_branding.html` (59, form): logo / name branding. Plan: preview of the logo with upload.
 - [ ] `mod_reseller_apimanager.html` (698, 5 tables): API keys and allowed IPs. Plan: split into sections with
       copy-key buttons and an access log table.
