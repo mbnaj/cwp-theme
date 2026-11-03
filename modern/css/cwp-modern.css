@@ -2487,3 +2487,101 @@ input[data-number="true"]{
   .dataTables_wrapper div.row{
       width: 100%;
   }
+
+/* ---------- AutoSSL page (moved from the inline style block of mod_letsencrypt.html) ---------- */
+.letsencrypt-wrapper{
+}
+.letsencrypt-wrapper .ibox{
+  margin-bottom:1rem;
+}
+.domain-test-wrapper a{
+  margin-right:5px;
+}
+.domain-actions-wrapper .dropdown, .domain-actions-wrapper .btn-danger, .domain-actions-wrapper .forcerenew{
+  margin-right:5px;
+}
+.domain-actions-wrapper{
+  display:flex;
+}
+.domain-info-wrapper{
+  margin-top:5px;
+  margin-bottom:5px;
+}
+.info-expiration{
+  font-size: 1rem;
+  margin-left: 3px;
+  color: #156192;
+  cursor: pointer;
+}
+.ssl-extra-san .label-primary{
+  margin-right:5px;
+}
+#modalinfo_twice .modal-header{
+  padding:15px;
+}
+#modalinfo_twice .modal-title{
+  font-size:1.8rem;
+}
+.info_certificate_body{
+  line-height:2.5rem;
+}
+#modalinfo_twice .modal-body{
+  max-height: 80vh;
+  overflow: auto;
+}
+.file-content-ssl{
+  margin: -1rem;
+}
+.copy-file{
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 3px 5px;
+  color: #ccc;
+  cursor: pointer;
+}
+.copy-file:hover{
+  border-color:#999;
+  color:#999;
+}
+.tooltip {
+  position: fixed;
+}
+.file-content-ssl-header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.copied-message{
+  margin-right:5px;
+  display:none;
+  font-weight: 500;
+}
+#file_content{
+  display:none;
+}
+#services_toinstall .san_label{
+  display:block;
+  font-weight:bold;
+  margin-top:10px;
+}
+#services_toinstall{
+  display:none;
+}
+.services-toinstall-items{
+  display: flex;
+  align-items: baseline;
+}
+.services-toinstall-items .checkbox{
+  margin-right:10px;
+}
+.deleting_tr{
+  background-color: #f5f5f566;
+  color: #e7eaec;
+}
+.deleting_tr .label-primary{
+  background-color:#1ab39440;
+}
+.deleting_tr .info-expiration, .deleting_tr .ssl-go-link{
+  color:#15619261;
+}
