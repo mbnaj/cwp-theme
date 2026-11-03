@@ -229,7 +229,7 @@ server changed there. Before each page below, diff it against `original/` and bu
       filter and colour pills, "Add record" menu opening the per-type modals (3.1), inline TTL edit.
 
 ### 4.4 SQL services group
-- [ ] `mod_mysql_manager.html` (623, tabs, DataTable, select2, 2 style blocks): MySQL databases, users, privileges,
+- [x] `mod_mysql_manager.html`: partly done: both inline `<style>` blocks moved to `cwp-modern.css`, shared page skeleton (file-lock alert, header, footer inside the page); ids and handlers untouched; the file already had one more closing `</div>` than opening ones before this change (left as is); renders in preview (HTTP 200, no Twig errors), not checked visually, not tested on a real server. Node.js and Tomcat titles now use `langmod.DTITLE` with the English text as fallback. Original plan: MySQL databases, users, privileges,
       remote access, quota bar. Plan: tabs "Databases", "Users", "Remote access"; database table with size and
       user count; create DB + user wizard (modal-createbdanduser); privilege matrix as checkboxes.
 - [ ] `mod_postgresql_manager.html` (41) + `modules/postgresql_manager/` (`dashboard.html`, `databases.html`,

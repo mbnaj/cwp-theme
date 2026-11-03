@@ -16,74 +16,24 @@
   {% set mysqlbar = 0 %}
   {% set mysql_package = '&infin;' %}
 {% endif %}
-<style media="screen">
-  .extra-perm .checkbox{
-    margin:0px;
-  }
-  .user_db_host label{
-    margin-bottom:0px !important;
-  }
-  .user_db_host{
-    display:flex;
-    align-items:center;
-    margin-bottom:5px;
-  }
-  .user_db_host select{
-    padding: 2px 3px !important;
-    height:25px !important;
-  }
-  .user_db_host input{
-    height: 25px;
-    padding: 3px 6px;
-  }
-  #ippersedit{
-    padding: 2px 6px;
-    height: 25px;
-    margin-left: 10px;
-  }
-  .db_list_user_item{
-    margin-bottom:5px;
-  }
-  .priviliges-title{
-    background-color: #f5f5f5;
-    border-bottom: 1px solid transparent;
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
-  }
-  .select2.select2-container{
-    width:100% !important;
-  }
-  .select2-results__options li:nth-child(2) {
-    border-top: 1px solid #777;
-    border-bottom: 1px solid #777;
-    font-weight: 600;
-  }
-  .select2-results__options li:nth-child(2) .fa{
-    margin-right:5px;
-  }
-  .select2-container--default .select2-selection--single{
-    border: 1px solid #ddd;
-    border-radius: 2px;
-    height: 3.2rem;
-  }
-</style>
-<div class="row  border-bottom white-bg dashboard-header">
-    {% if mod.fsl == 1 %}
+<div class="cwp-page">
+  {% if mod.fsl == 1 %}
     {% set stflalert ='block' %}
-    {% else %}
+  {% else %}
     {% set stflalert ='none' %}
-    {% endif %}
-    <div class="row  alert alert-warning col-lg-12" style="margin-left: 5px; padding-right: 5px;display:{{stflalert}}" id="alertfl">
-        <strong>{{langene.GALARTFILEBLOCK}}</strong>
+  {% endif %}
+  <div class="alert alert-warning" style="display:{{stflalert}}" id="alertfl">
+    <strong>{{langene.GALARTFILEBLOCK}}</strong>
+  </div>
+  <div class="cwp-page-head">
+    <div>
+      <h2>{{langmod.DTITLE}}</h2>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="?">{{langene.GENLABLANG1}}</a></li>
+        <li class="breadcrumb-item active"><strong>{{langmod.DTITLE}}</strong></li>
+      </ol>
     </div>
-    <div class="col-lg-10">
-        <h2>{{langmod.DTITLE}}</h2>
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="?">Home</a></li>
-            <li class="breadcrumb-item active"><strong>{{langmod.DTITLE}}</strong></li>
-        </ol>
-    </div>
-</div>
+  </div>
 <div class="row mysql-module">
     <div class="col-lg-12" style="margin-top: 4rem;">
       <div class="mail-contracted mysql-contracted" style="left: 35vw;display:none;width: 24vw;" id="quotadisk_mysql">
@@ -612,12 +562,6 @@
         </div>
       </div>
     </div>
-    <div class="wrapper wrapper-content" style="margin-top: 35px">
-        {% include 'footer.html' %}
-    </div>
+    {% include 'footer.html' %}
 </div>
-<style>
-    .dataTables_wrapper div.row{
-        width: 100%;
-    }
-</style>
+</div>
