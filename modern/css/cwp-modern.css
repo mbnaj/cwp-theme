@@ -751,3 +751,17 @@ label { font-weight: 600; color: #4b556b; }
 .footer:not(.fixed):not(.fixed_full) { position: relative; left: auto; right: auto; bottom: auto; clear: both; margin-top: 24px; }
 .wrapper-content > .footer:only-child { margin: 0; }
 .wrapper-content:has(> .footer:only-child) { margin-top: 0 !important; padding-top: 0; padding-bottom: 0; }
+
+/* ---------- Mail routing ---------- */
+.cwp-page .ibox.cwp-ibox-visible { overflow: visible; }
+.mail_routing_wrapper table { margin-bottom: 0; }
+.mail_routing_wrapper .info-container { display: flex; align-items: center; gap: 4px; }
+.mail_routing_wrapper .icon-info { margin-right: 1rem; }
+.mail_routing_wrapper .title-info { margin: 0; font-size: 14px; line-height: 1.4; }
+.mail_routing_wrapper .line-info { height: 3rem; margin-right: 5px; }
+.mail_routing_wrapper .line-info::before { content: ''; position: absolute; width: inherit; height: inherit; margin-left: -5px; }
+.mail_routing_wrapper .line-warning::before { border-left: 2px solid #cc802d; }
+.mail_routing_wrapper .line-success::before { border-left: 2px solid #109d9e; }
+.routing_type .caret { margin-top: 0.8rem; }
+.routing_type .btn-default { width: 14rem; max-width: 100%; text-align: left; }
+@media (max-width: 575px) { .mail_routing_wrapper .ibox-content { overflow-x: auto; } }

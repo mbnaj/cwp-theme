@@ -251,7 +251,7 @@ server changed there. Before each page below, diff it against `original/` and bu
 - [ ] `mod_email_filters.html` (1264, tabs, 2 DataTable refs, switch): the largest page. Plan: tabs "Filters",
       "Spam", "Blacklist/Whitelist" (verify tabs when opening); rule builder rows (If [field] [contains] [value] then
       [action]); drag to reorder priority; split into partials.
-- [ ] `mod_mail_routing.html` (156, table): mail routing (local / remote per domain). Plan: radio cards
+- [x] `mod_mail_routing.html`: done (shared page header, inline style moved to CSS, card allows the routing dropdown to overflow, table scrolls at phone width; ids and JS untouched; no radio cards; not tested on a real server). Original plan: radio cards
       (Local / Remote / Backup MX) per domain.
 - [ ] `mod_email_importer.html` (604, form, select2, dropzone): import mail from another server. Plan: 3-step
       wizard (source server credentials, select mailboxes, run), progress and log.
