@@ -107,7 +107,7 @@ Change password (`modal-changepass`), panel settings (`modal-settings`), file sy
 `modal-newuserpg`), and one modal **per DNS record type** (A, AAAA, CNAME, MX, TXT, CAA, AFSDB, DNAME, HINFO, PTR,
 NS, RP, TLSA, SRV ...).
 - [ ] Unify modal header / footer / width, consistent form layout. Started: the 3 inline `width:30vw` dialogs and 3 inline header paddings now use `.cwp-modal-narrow` / `.cwp-modal-header-tight` (responsive on phones); about 110 other inline styles remain; not rendered in preview (server was stopped).
-- [ ] DNS record modals: one shared layout with record-type specific fields; add TTL presets and per-type help text.
+- [ ] DNS record modals: one shared layout with record-type specific fields; add TTL presets and per-type help text. Started: TTL inputs in the A / AAAA / CNAME / MX / TXT / RP panes offer presets (`<datalist id="cwp-ttl-presets">`), field-row margins moved to `.regit` in CSS; panes still separate; no per-type help yet.
 - [ ] Password modals: strength meter + generator button + show/hide.
 - [ ] Panel settings modal: group into tabs (Account, Notifications, Sounds, Display).
 - [ ] Process list modal: sortable table with kill action and auto-refresh.

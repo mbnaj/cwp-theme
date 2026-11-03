@@ -598,9 +598,9 @@
                 <button type="button" class="close" data-dismiss="modal">
                     <span aria-hidden="true">&times;</span><span class="sr-only">{{langene.MDCLOSE}}</span>
                 </button>
-                <h4 class="modal-title" style="font-size:2rem" id="mySmallModalLabel">{{langene.MDCHANPASS}}</h4>
+                <h4 class="modal-title" id="mySmallModalLabel">{{langene.MDCHANPASS}}</h4>
             </div>
-            <div class="modal-body" style="padding: 10px;">
+            <div class="modal-body">
                 <h4>{{langene.GNLABELCHPUS}}: {{users}}</h4>
                 <div class="row">
                     <div class="col-md-12">
@@ -706,7 +706,7 @@
             <div class="modal-header cwp-modal-header-tight">
 
             </div>
-            <div class="modal-body" style="padding: 15px;">
+            <div class="modal-body">
 
             </div>
             <div class="modal-footer">
@@ -721,7 +721,7 @@
             <div class="modal-header cwp-modal-header-tight">
 
             </div>
-            <div class="modal-body" style="padding: 20px;">
+            <div class="modal-body">
 
             </div>
             <div class="modal-footer">
@@ -981,7 +981,7 @@
                 </button>
                 <h4 class="modal-title" id="EDITQUOTAEMAILTITLE">{{langmod.ETITLECQUOTA}}</h4>
             </div>
-            <div class="modal-body" style="padding: 15px;">
+            <div class="modal-body">
                 <h5 class="col-lg-12 text-center" id="quotaemailtitle"></h5>
                 <!-- <div class="input-group col-lg-12 text-center">
                     <input type="text" class="form-control" id="quotaemailmodal" value="">
@@ -1842,7 +1842,7 @@
                         <input type="hidden" id="domainsel_A" value="">
                     </div>
                     <div class="col-lg-3">
-                        <input type="text" class="form-control" id="cachereg_A" placeholder="" value="14400">
+                        <input type="text" class="form-control" id="cachereg_A" list="cwp-ttl-presets" inputmode="numeric" placeholder="" value="14400">
                     </div>
                 </div>
             </div>
@@ -1854,7 +1854,7 @@
       </div>
       <div id="modal-AAAA">
         <div class="modal-body">
-            <div class="regit"  style="margin-left: 15px; margin-right: 15px; display: block" id="aipv4A">
+            <div class="regit"  style="display: block" id="aipv4A">
                 <div class="row">
                     <label class="col-md-4 control-label" for="">{{langmod.DNSNOAME}}</label>
                     <label class="col-md-5 control-label" for="" >{{langmod.DNSIP4}}</label>
@@ -1869,7 +1869,7 @@
                         <input type="hidden" id="domainsel_AAAA" value="">
                     </div>
                     <div class="col-lg-3">
-                        <input type="text" class="form-control" id="cachereg_AAAA" placeholder="" value="14400">
+                        <input type="text" class="form-control" id="cachereg_AAAA" list="cwp-ttl-presets" inputmode="numeric" placeholder="" value="14400">
                     </div>
 
                 </div>
@@ -1880,9 +1880,10 @@
             <button type="button" id="btn-dnscancel" class="btn btn-default btn-xs mr5 mb10" data-dismiss="modal">{{langmod.DNSCANCEL}}</button>
         </div> -->
       </div>
+<datalist id="cwp-ttl-presets"><option value="300">5 min</option><option value="3600">1 h</option><option value="14400">4 h</option><option value="86400">1 day</option></datalist>
       <div id="modal-CNAME">
         <div class="modal-body">
-            <div class="regit"  style="margin-left: 15px; margin-right: 15px; display: block" id="aipv4A">
+            <div class="regit"  style="display: block" id="aipv4A">
                 <div class="row">
                     <label class="col-md-4 control-label" for="">{{langmod.DNSNOAME}}</label>
                     <label class="col-md-5 control-label" for="" >{{lanmod.DNSLABEL31}}</label>
@@ -1897,7 +1898,7 @@
                         <input type="hidden" id="domainsel_CNAME" value="">
                     </div>
                     <div class="col-lg-3">
-                        <input type="text" class="form-control" id="cachereg_CNAME" placeholder="" value="14400">
+                        <input type="text" class="form-control" id="cachereg_CNAME" list="cwp-ttl-presets" inputmode="numeric" placeholder="" value="14400">
                     </div>
 
                 </div>
@@ -1917,7 +1918,7 @@
 
                 </div>
             </div> -->
-            <div class="regit"  style="margin-left: 15px; margin-right: 15px; display: block">
+            <div class="regit"  style="display: block">
               <div class="row">
                   <label class="col-md-4 control-label" for="">{{langmod.DNSNOAME}}</label>
                   <label class="col-md-4 control-label" for="" id="">{{langmod.DNSMAILSERVER}}</label>
@@ -1934,7 +1935,7 @@
                       <input type="text" class="form-control" id="mxvalue" placeholder="">
                   </div>
                   <div class="col-lg-2">
-                      <input type="text" class="form-control" id="mxcache" placeholder="">
+                      <input type="text" class="form-control" id="mxcache" list="cwp-ttl-presets" inputmode="numeric" placeholder="">
                   </div>
                   <div class="col-lg-2">
                       <input type="text" class="form-control" id="mxprio" placeholder="">
@@ -1949,7 +1950,7 @@
       </div>
       <div id="modal-TXT">
         <div class="modal-body">
-            <div class="row regit"  style="margin-left: 15px; margin-right: 15px; display: block" id="txt">
+            <div class="row regit"  style="display: block" id="txt">
                 <!-- <div class="panel panel-default">
                     <div class="panel-body">
                         <h4>{{langmod.DNSBTNADDTXT}}</h4>
@@ -1968,7 +1969,7 @@
                     </div>
 
                     <div class="col-lg-2">
-                        <input type="text" class="form-control" id="cachereg_TXT" placeholder="">
+                        <input type="text" class="form-control" id="cachereg_TXT" list="cwp-ttl-presets" inputmode="numeric" placeholder="">
                     </div>
                     <div class="col-lg-7">
                         <textarea id="valuereg_TXT" class="form-control" rows="5"></textarea>
@@ -1984,7 +1985,7 @@
       </div>
       <div id="modal-CAA">
         <div class="modal-body">
-            <div class="row regit"  style="margin-left: 15px; margin-right: 15px; display: block" id="txt">
+            <div class="row regit"  style="display: block" id="txt">
                 <!-- <div class="panel panel-default">
                     <div class="panel-body">
                         <h4>{{langmod.DNSLABEL5}}</h4>
@@ -2034,7 +2035,7 @@
       </div>
       <div id="modal-AFSDB">
         <div class="modal-body">
-            <div class="row regit"  style="margin-left: 15px; margin-right: 15px; display: block" id="txt4">
+            <div class="row regit"  style="display: block" id="txt4">
                 <!-- <div class="panel panel-default">
                     <div class="panel-body">
                         <h4>{{langmod.DNSLABEL5}}</h4>
@@ -2080,7 +2081,7 @@
       </div>
       <div id="modal-DNAME">
         <div class="modal-body">
-            <div class="row regit"  style="margin-left: 15px; margin-right: 15px; display: block" id="txt5">
+            <div class="row regit"  style="display: block" id="txt5">
                 <!-- <div class="panel panel-default">
                     <div class="panel-body">
                         <br>
@@ -2117,7 +2118,7 @@
       </div>
       <div id="modal-HINFO">
         <div class="modal-body">
-            <div class="row regit"  style="margin-left: 15px; margin-right: 15px; display: block" id="txt6">
+            <div class="row regit"  style="display: block" id="txt6">
                 <!-- <div class="panel panel-default">
                     <div class="panel-body">
                         <br>
@@ -2154,7 +2155,7 @@
       </div>
       <div id="modal-PTR">
         <div class="modal-body">
-            <div class="row regit"  style="margin-left: 15px; margin-right: 15px; display: block" id="txt7">
+            <div class="row regit"  style="display: block" id="txt7">
                 <!-- <div class="panel panel-default">
                     <div class="panel-body">
                         <br>
@@ -2186,7 +2187,7 @@
       </div>
       <div id="modal-NS">
         <div class="modal-body">
-            <div class="row regit"  style="margin-left: 15px; margin-right: 15px; display: block" id="txt8">
+            <div class="row regit"  style="display: block" id="txt8">
               <div class="row">
                   <label class="col-md-5 control-label" for="nsname">{{langmod.DNSLABEL11}}</label>
                   <label class="col-md-5 control-label" for="nsapunta">{{langmod.DNSSVRTARGET}}</label>
@@ -2212,7 +2213,7 @@
       </div>
       <div id="modal-RP">
         <div class="modal-body">
-            <div class="row regit"  style="margin-left: 15px; margin-right: 15px; display: block" id="txt9">
+            <div class="row regit"  style="display: block" id="txt9">
                 <!-- <div class="panel panel-default">
                     <div class="panel-body">
                         <br>
@@ -2232,7 +2233,7 @@
                         <input type="email" class="form-control" id="rpemail" placeholder="" value="">
                     </div>
                     <div class="col-lg-3">
-                        <input type="text" class="form-control" id="rpcache" placeholder="" value="">
+                        <input type="text" class="form-control" id="rpcache" list="cwp-ttl-presets" inputmode="numeric" placeholder="" value="">
                     </div>
                 </div>
                 <div class="row">
@@ -2252,7 +2253,7 @@
       </div>
       <div id="modal-TLSA">
         <div class="modal-body">
-            <div class="row regit"  style="margin-left: 15px; margin-right: 15px; display: block" id="txt10">
+            <div class="row regit"  style="display: block" id="txt10">
                 <!-- <div class="panel panel-default">
                     <div class="panel-body">
                         <br>
