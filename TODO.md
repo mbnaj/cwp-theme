@@ -232,9 +232,9 @@ server changed there. Before each page below, diff it against `original/` and bu
 - [x] `mod_mysql_manager.html`: partly done: both inline `<style>` blocks moved to `cwp-modern.css`, shared page skeleton (file-lock alert, header, footer inside the page); ids and handlers untouched; the file already had one more closing `</div>` than opening ones before this change (left as is); renders in preview (HTTP 200, no Twig errors), not checked visually, not tested on a real server. Node.js and Tomcat titles now use `langmod.DTITLE` with the English text as fallback. Original plan: MySQL databases, users, privileges,
       remote access, quota bar. Plan: tabs "Databases", "Users", "Remote access"; database table with size and
       user count; create DB + user wizard (modal-createbdanduser); privilege matrix as checkboxes.
-- [ ] `mod_postgresql_manager.html` (41) + `modules/postgresql_manager/` (`dashboard.html`, `databases.html`,
+- [x] `mod_postgresql_manager.html`: partly done (wrapper only): styles from `modules/postgresql_manager/styles.css` moved to `cwp-modern.css` (old file now unused), shared page skeleton (file-lock alert, header, footer added); the partials `dashboard.html`, `databases.html`, `modals.html`, `not_available.html` not touched; renders in preview (HTTP 200, no Twig errors), not checked visually, not tested on a real server. Original plan: `mod_postgresql_manager.html` (41) + `modules/postgresql_manager/` (`dashboard.html`, `databases.html`,
       `modals.html`, `not_available.html`, `styles.css`): same layout as MySQL manager.
-- [ ] `mod_mongodb_manager.html` (30) + `modules/mongodb_manager/` (same file set): same layout as MySQL manager.
+- [x] `mod_mongodb_manager.html`: partly done (wrapper only): same as PostgreSQL (styles moved, shared page skeleton, footer added; partials untouched); renders in preview (HTTP 200, no Twig errors), not checked visually, not tested on a real server. Original plan: `mod_mongodb_manager.html` (30) + `modules/mongodb_manager/` (same file set): same layout as MySQL manager.
       Note: the old dashboard linked MongoDB to `nodejs_manager`; fixed in the new dashboard.
 - [ ] `mod_pma.html` (0): redirect to phpMyAdmin (`?module=pma`, new tab). Nothing to redesign; check the link.
 - [ ] MySQL process list: modal `#mysql_processes` handler (see 3.1).
