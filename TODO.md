@@ -79,7 +79,7 @@ original JS; empty / loading / error states designed; works at 375px; strings tr
       preview. See section 6.
 - [ ] **Language keys**: the preview prints unknown keys as the key name. Collect the keys each redesigned page needs
       so a translator can add them.
-- [ ] Decide what to do with legacy files: `login_old.html` (363 lines, unused?), `without columns.html` (empty),
+- [x] Legacy files (`login_old.html`, `without columns.html`, `css/style_OLD.css`, `css/bootstrap_OLD.css`, `css/original.css`) removed from `modern/`; still in `original/`.
       `css/style_OLD.css`, `css/bootstrap_OLD.css`, `css/original.css`.
 
 ---

@@ -135,7 +135,7 @@ if ($path === '/__pages') {
         echo '<a href="/?module=' . $m . '" style="display:inline-block;margin:0 14px 0 0">' . $m . '</a>';
     }
     echo '<h3>Standalone</h3>';
-    foreach (['login.html', 'lost-password.html', '404.html', 'locked.html', 'locked_update.html', 'login_old.html'] as $f) {
+    foreach (['login.html', 'lost-password.html', '404.html', 'locked.html', 'locked_update.html'] as $f) {
         if (is_file($theme . '/' . $f)) {
             echo '<a href="/__tpl/' . $f . '" style="margin-right:14px">' . $f . '</a>';
         }
