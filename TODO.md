@@ -217,7 +217,7 @@ server changed there. Before each page below, diff it against `original/` and bu
       outputs, keep the wizard JS hooks.
 - [ ] `mod_cloudflare.html` (146, select2): Cloudflare integration. Plan: connection card (API key / email), domain
       select, DNS record table, purge-cache action.
-- [ ] `mod_redirect.html` (325, form, table): redirects (Apache without Nginx). Plan: form row (from, to, type
+- [x] `mod_redirect.html`: done (shared page header, labels above inputs, two-column form with help alerts, responsive table, inline style moved to CSS, ids and handlers unchanged; not tested on a real server). Original plan: redirects (Apache without Nginx). Plan: form row (from, to, type
       301/302, wildcard) plus table with test link.
 - [x] `mod_vdomaincache.html` (81, table): Varnish cache per domain. Plan: table with on/off switch per domain and
       "purge" action.

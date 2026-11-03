@@ -713,3 +713,21 @@ label { font-weight: 600; color: #4b556b; }
   .directory-item-path { width: 65%; }
   .directory-item-size { width: 35%; }
 }
+
+/* Redirects page */
+#form_redirect .directory-selector-btn { display: flex; gap: 8px; }
+#form_redirect .dir-sel-btn { display: flex; align-items: center; height: 38px; flex: 0 1 auto; max-width: 50%; }
+#form_redirect .dir-sel-btn .fa { font-size: 1.6rem; margin-right: 6px; }
+#dirsel { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 25rem; direction: rtl; text-align: left; line-height: 1.5rem; display: inline-block; }
+#form_redirect .form-check { margin-bottom: 6px; }
+#form_redirect .form-check label { font-weight: 400; margin-left: 4px; }
+#form_redirect legend.control-label { font-size: inherit; border: 0; margin-bottom: 6px; }
+#form_redirect .error-field { color: #c0392b; margin-top: 5px; font-size: 12px; display: block; }
+#dir_explorer .modal-body { max-height: 70vh; min-height: 40vh; overflow: auto; }
+#dir_explorer .dir-item { padding: 5px; }
+#dir_explorer .dir-item:nth-child(even) { background-color: #f3f3f3; }
+#dir_explorer .dir-item:hover { background-color: #ccc; cursor: pointer; color: #333; }
+#dir_explorer .dir-item .fa { margin-right: 5px; }
+.current-path-div { padding: 10px 0; }
+#dir_list { padding-bottom: 10px; }
+@media (max-width: 575px) { #form_redirect .dir-sel-btn { max-width: 40%; } #dir_explorer .modal-dialog { width: auto !important; margin: 10px; } }
