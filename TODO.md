@@ -284,7 +284,7 @@ dropzone).
 - [ ] `mod_reseller.html` + `mod_reseller_gentab.html`: tab container. Plan: left vertical tab nav (Stats, Accounts,
       Packages, Features, Nameservers, Branding, API Manager, ModSecurity, Firewall) instead of 9 horizontal tabs.
 - [x] `mod_reseller_statstab.html`: done (ten copy-pasted tiles replaced by one Twig loop on a responsive grid; canvas ids, data-* attributes and JS hooks unchanged; charts need the live JS so not checked visually; not tested on a real server). Original plan: stats. Plan: tiles + charts.
-- [ ] `mod_reseller_accounts.html` (252, table): customer accounts. Plan: table with search, status pills,
+- [x] `mod_reseller_accounts.html`: light cleanup only (tab partial, table is AJAX-filled): dead commented markup and inline modal styles removed, form labels linked to their inputs, "sss" typo in the close label fixed, CSV button gets a download icon, table card scrolls on phones; ids and handlers untouched; no create-account wizard or status pills; not tested on a real server. Original plan: customer accounts. Plan: table with search, status pills,
       impersonate/login, suspend, delete, create-account wizard.
 - [ ] `mod_reseller_packages.html` (322, table): hosting packages. Plan: package cards or table, limits form in
       grouped sections (disk, bandwidth, email, domains, DB, FTP, features).

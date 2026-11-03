@@ -7,18 +7,18 @@
         <div class="pull-right">
 
             {% if mod.licenseReseller != 0 %}
-            <button id="btn_add_account" onclick="showNewAccount()" class="btn btn-xs btn-success" style="margin-right: 5px;">
+            <button id="btn_add_account" onclick="showNewAccount()" class="btn btn-xs btn-success" >
                 <i class="fa fa-plus"></i> {{langmod.RSACCLAB2}}
             </button>
             {% endif %}
 
             <button id="btn_csv_accounts" onclick="csvAccounts()" class="btn btn-xs btn-primary">
-                <i class="fa fa-plus"></i> Export Accounts CSV
+                <i class="fa fa-download" aria-hidden="true"></i> Export Accounts CSV
             </button>
 
         </div>
     </div><input type="hidden" id="swajaxaccount" value="">
-    <div class="ibox-content  col-lg-12" id="table_accounts_wrapper">
+    <div class="ibox-content cwp-table-scroll" id="table_accounts_wrapper">
         <table class="table accounts_table table-striped table-bordered table-hover" id="accounts_table" width="100%">
             <thead>
             <tr>
@@ -34,7 +34,6 @@
 
             </tbody>
             </table>
-      <!--<div class="table_cron_loader"><span><i class="fa fa-circle-o-notch fa-spin"></i></span></div>-->
     </div>
 </div>
 {% if mod.licenseReseller != 0 %}
@@ -50,20 +49,20 @@
   </div>
   <div class="ibox-content">
     <div class="row">
-      <label class="col-md-2 control-label" for="">{{langmod.RSACCLAB3}}:</label>
+      <label class="col-md-2 control-label" for="domainadd">{{langmod.RSACCLAB3}}:</label>
       <div class="col-md-5">
           <input type="text" class="form-control checkdom" data-reqdomain="true" data-nowww="true" data-required="true" name="domainadd" id="domainadd" maxlength="255" value="">
           <span class="help-block">{{langmod.RSACCLAB4}}.</span>
       </div>
     </div>
     <div class="row reseller-row-form">
-      <label class="col-md-2 control-label" for="">{{langmod.RSACCLAB5}}:</label>
+      <label class="col-md-2 control-label" for="account_username">{{langmod.RSACCLAB5}}:</label>
       <div class="col-md-5">
           <input type="text" name="username" id="account_username" class="form-control tip checkdom" data-required="true" placeholder="Enter username" maxlength="16" title="" data-original-title="Maximum: 16 characters">
       </div>
     </div>
     <div class="row">
-      <label class="col-md-2 control-label" for="">{{langmod.RSACCLAB6}}:</label>
+      <label class="col-md-2 control-label" for="account_password">{{langmod.RSACCLAB6}}:</label>
       <div class="col-md-5 pass_form_div">
         <div class="pass_container">
           <input type="text" name="password" id="account_password" class="form-control checkdom" data-required="true" placeholder="Enter password" value="">
@@ -75,8 +74,6 @@
           <div class="btn-group dropdown show_options_button">
             <button type="button" class="btn btn-default" title="{{langmod.ADDCHOPTPAS}}" data-toggle="tooltip" data-placement="top" onclick="openPGOPT('#pass_jl_change')">{{langmod.FTPENCRYTED}}<span class="caret" style="margin-left:10px"></span></button>
             <div class="general-password-generator-options mysql_generator" id="pass_jl_change" style="display: none;z-index: 20;box-shadow: 3px 7px 10px -6px #777;">
-              <!-- <span class="general-password-generator-options-title"><b>Options</b></span>
-              <span class="general-password-generator-options-close" onclick="closePGOPT()" style="cursor:pointer">s<i class="fa fa-window-close"></i></span> -->
                 <ul class="right animated fadeIn">
                   <li>
                     <select class="form-control pwlength" id="lengthpass2" title="{{langmod.FTPLENGTH}}" style="margin-bottom: 5px;">
@@ -105,7 +102,7 @@
       </div>
     </div>
     <div class="row reseller-row-form">
-      <label class="col-md-2 control-label" for="">{{langmod.RSACCLAB7}}:</label>
+      <label class="col-md-2 control-label" for="emailadd">{{langmod.RSACCLAB7}}:</label>
       <div class="col-md-5">
           <input type="text" name="emailadd" id="emailadd" value="my@email.com" class="form-control tip checkdom" data-required="true" placeholder="{{langmod.RSACCLAB8}}" maxlength="255" title="" data-original-title="{{langmod.RSACCLAB9}}">
       </div>
@@ -160,23 +157,18 @@
   </div>
 </div>
 <div class="modal" id="delete_reselleracc_modal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-sm" style="width:300px">
+    <div class="modal-dialog modal-sm">
         <div class="modal-content animated fadeIn">
-            <div class="modal-header" style="padding: 10px;">
+            <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">
                 <span aria-hidden="true">×</span>
                 <span class="sr-only">{{langene.MDCLOSE}}</span>
               </button>
-              <h4 class="modal-title" style="font-size:2rem">{{langmod.RSLABEL41}}</h4>
+              <h4 class="modal-title">{{langmod.RSLABEL41}}</h4>
             </div>
-            <div class="modal-body" style="padding: 20px;">
-              <!-- <p>You are about to delete the FTP user: <br>
-              <strong id="descron">sanitarios@testcecilio.com</strong>
-              <br>Are you sure you want to continue?</p> -->
+            <div class="modal-body">
             </div>
             <div class="modal-footer">
-              <!-- <button type="button" class="btn btn-white" data-dismiss="modal">NO</button>
-              <button type="button" class="btn btn-primary" onclick="ftpdelete(1,'sanitarios','testcecilio.com',0)">YES</button>-->
             </div>
         </div>
     </div>
@@ -186,16 +178,15 @@
         <div class="modal-content animated fadeIn">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">
-                    <span aria-hidden="true">&times;</span><span class="sr-only">sss{{langmod.RSLABEL48}}</span>
+                    <span aria-hidden="true">&times;</span><span class="sr-only">{{langmod.RSLABEL48}}</span>
                 </button>
                 <h4 class="modal-title" id="mytitleresseller"></h4>
             </div>
             <div class="modal-body">
               <div class="form-group row">
-                  <label class="col-lg-3 col-form-label">{{langmod.RSLABEL49}}:</label>
+                  <label class="col-lg-3 col-form-label" for="resellerpass1">{{langmod.RSLABEL49}}:</label>
                   <div class="col-md-9 pass_form_div">
                     <div class="pass_container">
-                      <!-- <input type="text" id="resellerpass1" placeholder="{{langmod.RSLABEL51}}" class="form-control"> -->
                       <input type="text" name="resellerpass1" id="resellerpass1" class="form-control passchange-field" data-required="true" placeholder="Enter password" value="">
                       <div class="pwstrength_viewport_progress"></div>
                       <span class="btn btn-default btn-xs copy-pass-btn" title="{{langmod.ADDCOPYPASS}}" data-toggle="tooltip" data-placement="top" onclick="copyPass('resellerpass1')"><i class="fa fa-copy"></i></span>
@@ -205,8 +196,6 @@
                       <div class="btn-group dropdown show_options_button">
                         <button type="button" class="btn btn-default" title="{{langmod.ADDCHOPTPAS}}" data-toggle="tooltip" data-placement="top" onclick="openPGOPT('#pass_acc_change')">{{langmod.FTPENCRYTED}}<span class="caret" style="margin-left:10px"></span></button>
                         <div class="general-password-generator-options mysql_generator" id="pass_acc_change" style="display: none;z-index: 20;box-shadow: 3px 7px 10px -6px #777;">
-                          <!-- <span class="general-password-generator-options-title"><b>Options</b></span>
-                          <span class="general-password-generator-options-close" onclick="closePGOPT()" style="cursor:pointer">s<i class="fa fa-window-close"></i></span> -->
                             <ul class="right animated fadeIn">
                               <li>
                                 <select class="form-control pwlength" id="lengthpass2" title="{{langmod.FTPLENGTH}}" style="margin-bottom: 5px;">
@@ -235,7 +224,7 @@
                   </div>
               </div>
               <div class="form-group row">
-                  <label class="col-lg-3 control-label" for="">{{langmod.RSLABEL50}}:</label>
+                  <label class="col-lg-3 control-label" for="resellerpass2">{{langmod.RSLABEL50}}:</label>
                   <div class="col-lg-9">
                       <input type="text"  class="form-control passchange-field" data-required="true" data-equalto="#resellerpass1" id="resellerpass2" placeholder="{{langmod.RSLABEL51}}">
                   </div>
