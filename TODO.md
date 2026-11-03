@@ -185,7 +185,7 @@ server changed there. Before each page below, diff it against `original/` and bu
 - [x] `mod_clam.html`: partly done: 500-line inline `<style>` moved to `cwp-modern.css`, shared page skeleton (file-lock alert, page header with `Home` from `langene.GENLABLANG1`, no username), modal header and `margin-top:2rem` inline styles removed; ids, handlers and the 5 modals untouched; renders in preview (HTTP 200, no Twig errors), not checked visually, not tested on a real server. Not done: scan status card, remaining small inline styles inside the modals. Original plan: scan status card (last scan,
       signatures date), "Scan now" with progress, results table with quarantine / delete / restore, scheduled scan
       settings, split the 5 modals into the shared modal style.
-- [ ] `mod_ftp_accounts.html` (492, table + 5 DataTable refs, footer): FTP accounts and quota bar. Plan: table with
+- [x] `mod_ftp_accounts.html`: partly done: inline `<style>` moved to `cwp-modern.css`, shared page skeleton (file-lock alert, page header, footer inside the page), modal width inline style removed; ids, handlers and quota bar markup untouched; renders in preview (HTTP 200, no Twig errors), not checked visually, not tested on a real server. Not done: AJAX-filled table and the remaining inline styles in the modals. Original plan: table with
       user, directory, quota, status; add-account drawer; change-password modal (global) ; connection info card
       (host, port, protocol) with copy buttons. Data via JS.
 - [ ] `mod_backups.html` (473, tabs, modal, DataTable, flot): backups. Includes `mod_backups_auto.html` (187) and

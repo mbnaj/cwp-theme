@@ -1847,3 +1847,125 @@ input[data-number="true"]{
     color: #cc4856;
     font-weight: 600;
 }
+
+/* ---------- FTP accounts page (moved from the inline style block of mod_ftp_accounts.html) ---------- */
+.ftp_accounts_wrapper{
+  margin-top:2rem;
+}
+.ftp_accounts_wrapper .mail-contracted{
+  top: -8.9rem;
+}
+.dataTables_wrapper{
+  padding-bottom:0px;
+}
+#ftp_form{
+  display:none;
+}
+.ibox-footer{
+  font-size: 100%;
+}
+.pass_form_div{
+  display:flex;
+  flex-wrap:wrap;
+}
+#pass_container, #pass_container_ch{
+  width: 47%;
+  margin-right: 1rem;
+}
+.progress{
+  margin-bottom: 0px;
+  margin-top: 5px;
+}
+#ftp_details, #ftp_form_pass{
+  display:none;
+}
+#ftp_conf_wrapper{
+  display: flex;
+  align-items: center;
+}
+.error-field{
+  color: #ff0000;
+  margin-top: 5px;
+  font-size: 12px;
+  display: block;
+  margin-bottom: -10px;
+}
+.password-generator-copied{
+  margin-bottom: 0px;
+  display: none;
+  padding: 5px;
+  margin-top: 5px;
+}
+.action_ftp{
+  text-align:center;
+}
+.action_ftp .btn-primary{
+  margin-right:5px;
+}
+.deleting_tr{
+  background-color: #f5f5f566;
+  color: #e7eaec;
+}
+.select-client{
+  display:flex;
+  flex-wrap:wrap:
+}
+.select-client-div{
+  width:75%;
+}
+.select-client-btn{
+  width:25%;
+}
+#autoconfigfile{
+  display:none;
+}
+.directory-selector-btn{
+  display:flex;
+}
+#dir_explorer_domain .modal-body{
+  max-height:70vh;
+  min-height:40vh;
+  overflow:auto;
+}
+#dir_explorer_domain .dir-item:nth-child(even){
+  background-color:#f3f3f3;
+}
+#dir_explorer_domain .dir-item:hover{
+  background-color:#cccccc;
+  cursor:pointer;
+  color: #333;
+}
+#dir_explorer_domain .dir-item{
+  padding: 5px;
+}
+.dir-item .fa{
+  margin-right:5px;
+}
+.current-path-div{
+  padding-bottom:10px;
+  padding-top:10px;
+}
+#dir_list{
+  padding-bottom: 10px;
+}
+#dirsel{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 25rem;
+  /* border: 1px solid #999; */
+  direction: rtl;
+  text-align: left;
+  line-height: 1.5rem;
+  padding: 0px;
+  display: inline-block;
+  margin-bottom: 0px;
+}
+.dir-sel-btn .fa{
+  font-size: 2rem;
+  margin-right: 5px;
+}
+.dir-sel-btn{
+  display: flex;
+  align-items: center;
+}
