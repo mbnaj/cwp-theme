@@ -166,7 +166,7 @@
 </li>
 <li class="menugrande">
     <div class="ibox">
-        {% set porhome=(100/mod.packquota)*mod.sizehome %}
+        {% if mod.packquota > 0 %}{% set porhome=(100/mod.packquota)*mod.sizehome %}{% else %}{% set porhome=0 %}{% endif %}
         {% if porhome <50 %}
         {% set barhome='progress-bar-success' %}
         {% elseif porhome <=75 %}
@@ -174,11 +174,18 @@
         {% else %}
         {% set barhome='progress-bar-danger' %}
         {% endif %}
+        {% set totalhost=mod.packquotaused %}
+        {% if mod.packquota > 0 %}
         {% set pormysql=(100/mod.packquota)*mod.sizemysql %}
         {% set pormail=(100/mod.packquota)*mod.sizemail %}
-        {% set totalhost=mod.packquotaused %}
         {% set backup=(100/mod.packquota)*mod.backup_quota %}
         {% set portotal=100/mod.packquota*totalhost %}
+        {% else %}
+        {% set pormysql=0 %}
+        {% set pormail=0 %}
+        {% set backup=0 %}
+        {% set portotal=0 %}
+        {% endif %}
         {% if portotal <50 %}
         {% set bartotal='progress-bar-success' %}
         {% elseif portotal <=75 %}

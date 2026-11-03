@@ -155,7 +155,7 @@ Legend: lines = size of template; "data via JS" = the table/list is filled by AJ
       explorer is only visible with real AJAX data.
 
 ### Sync issue found (read before uploading `modern/`)
-`modern/` is behind the server's copy in `original/` for files not redesigned yet: `js/modules/{Dashboard,addons,
+`modern/` WAS behind the server's copy in `original/` (synced in the latest session: `top_notifications`, `locked`, `menu_locked`, `footer`, `404`, `login`, `lost-password` (cwp-login links kept), the listed `js/modules/*.js.twig` and `js/filemanager.php` were replaced by the server versions). Original list: `js/modules/{Dashboard,addons,
 addons_dp,addons_jl,addons_ps,addons_wp,backups,email_accounts,mysql_manager,reseller,statistics}.js.twig`,
 `js/filemanager.php`, `mod_email_filters.html`, `mod_fix_acc_perm.html`, `mod_statistics.html`,
 `top_notifications.html`, `locked.html`, `menu_locked.html`. Uploading `modern/` as is would revert whatever the

@@ -369,7 +369,7 @@ function mailAccountsTable(list){
       { data: 'email' },
       { data: 'domain' },
       { render: function ( data, type, row ){
-                  return (row.lastaccess != null ? row.lastaccess : 'Never');
+                  return (row.lastaccess ? row.lastaccess : 'Never');
                 }
       },
       { render: function ( data, type, row ){
@@ -476,8 +476,8 @@ function btnaddforwar(){
 function btnaddemail(){
     $("#alertemail").hide('blind');
     let quotamail = parseInt($("#quotamail").val());
-    if(($("#emailaddres").val()=='') || ($("#domain").val()=='') || ($("#pass").val()=='') || !quotamail === parseInt(quotamail, 10)){
-        if(!quotamail === parseInt(quotamail, 10)){
+    if(($("#emailaddres").val()=='') || ($("#domain").val()=='') || ($("#pass").val()=='') || !Number.isInteger(quotamail)){
+        if(!Number.isInteger(quotamail)){
           $("#quotamail").addClass('error');
         }
         noti_bubble('{{langmod.EFEILDR}}','{{langmod.EMERROR}}','error',false,false,'3000',true);

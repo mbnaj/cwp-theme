@@ -90,7 +90,7 @@
       </li>
     </ul>
   {% endif %}
-  <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+  <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#" title="{{ langene.HDRNOTIF|default('Notifications') }}">
       <i class="fa fa-bell"></i>
       {% if mod.visual_notifications_data.unreads > 0 %}
         <span class="label label-primary" id="unread_amount">{{mod.visual_notifications_data.unreads}}</span>

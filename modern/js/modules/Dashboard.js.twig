@@ -35,7 +35,7 @@ const changeGraph = (elem) => {
   });
 }
 const bandGraph = () => {
-  if(bwstats == null || !bwstats.hasOwnProperty('data') || bwstats.data.length == 0){
+  if(!bwstats || typeof bwstats !== 'object' || !bwstats.hasOwnProperty('data') || !bwstats.data || bwstats.data.length == 0){
     $('#bandwidth-graph').html('<div class="graph-nodata">{{langene.GRAPHNODATA}}</div>');
     return;
   }
@@ -108,6 +108,101 @@ const bandGraph = () => {
     $('#legend').append(newleg);
   }
 }
+/* ----- Live access/error log monitor (dashboard bandwidth panel) -----
+   Reuses the existing, server-validated error_log endpoint:
+     - module=error_log&acc=listdomains  -> only THIS user's own domains
+     - module=error_log&acc=select       -> tail -n of /usr/local/apache/domlogs/<domain>.{log,error.log}
+   Safe & light: domains are lazy-loaded on first switch, the tail is bounded,
+   and polling runs only while the live view is visible and the tab is focused. */
+var cwpLive = { timer: null, domainsLoaded: false, active: false, busy: false, lines: 200, interval: 5000 };
+
+function cwpLiveSetStatus(txt){ $('#cwp_live_status').text(txt || ''); }
+
+function cwpLiveLoadDomains(cb){
+  if(cwpLive.domainsLoaded){ if(cb){ cb(); } return; }
+  cwpLiveSetStatus('{{ langene.LIVELOGLOADING|default("Loading domains…") }}');
+  uchip.call('module=error_log&acc=listdomains', {
+    data: '',
+    callback: function(resp){
+      var $sel = $('#cwp_live_domain').empty();
+      if(Array.isArray(resp) && resp.length){
+        resp.forEach(function(d){
+          var name = (d && d.domain) ? d.domain : d;
+          $sel.append($('<option>').attr('value', name).text(name));
+        });
+        cwpLive.domainsLoaded = true;
+        cwpLiveSetStatus('');
+      }else{
+        $sel.append($('<option>').attr('value','').text('{{ langene.LIVELOGNODOMAIN|default("No domains") }}'));
+        cwpLiveSetStatus('');
+      }
+      if(cb){ cb(); }
+    }
+  });
+}
+
+function cwpLiveFetch(){
+  if(cwpLive.busy){ return; }
+  var domain = $('#cwp_live_domain').val();
+  var tipe   = $('#cwp_live_tipe').val();
+  if(!domain){ return; }
+  cwpLive.busy = true;
+  cwpLiveSetStatus('{{ langene.LIVELOGUPDATING|default("Updating…") }}');
+  uchip.call('module=error_log&acc=select', {
+    data: 'op=select&domain=' + encodeURIComponent(domain) +
+          '&tipe=' + encodeURIComponent(tipe) +
+          '&numline=' + cwpLive.lines + '&textsearch=',
+    callback: function(resp){
+      cwpLive.busy = false;
+      var out = $('#cwp_live_out')[0];
+      var atBottom = out ? (out.scrollTop + out.clientHeight >= out.scrollHeight - 20) : true;
+      var text = '';
+      try { text = (typeof resp === 'string') ? Base64.decode(resp) : ''; } catch(e){ text = ''; }
+      // Base64.decode returns <br>-joined HTML from the server; turn it back into plain lines.
+      text = (text || '').replace(/<br\s*\/?>/gi, '\n');
+      var tmp = document.createElement('textarea'); tmp.innerHTML = text; text = tmp.value;
+      if(text.trim() === ''){ text = '{{ langene.LIVELOGEMPTY|default("Log is empty.") }}'; }
+      $('#cwp_live_out').text(text);
+      if(out && atBottom){ out.scrollTop = out.scrollHeight; }
+      var now = new Date();
+      cwpLiveSetStatus('{{ langene.LIVELOGLAST|default("Last update") }}: ' + now.toLocaleTimeString());
+    }
+  });
+}
+
+function cwpLiveStop(){
+  if(cwpLive.timer){ clearInterval(cwpLive.timer); cwpLive.timer = null; }
+}
+
+function cwpLiveStart(){
+  cwpLiveStop();
+  if(!cwpLive.active || !$('#cwp_live_auto').is(':checked')){ return; }
+  cwpLive.timer = setInterval(function(){
+    if(document.hidden || !cwpLive.active){ return; } // pause when tab/view not visible -> no background load
+    cwpLiveFetch();
+  }, cwpLive.interval);
+}
+
+function switchBandView(elem){
+  var view = $(elem).val();
+  if(view === 'live'){
+    cwpLive.active = true;
+    $('#graph_content').hide();
+    $('#band_month_wrap').hide();
+    $('#live_log_content').show();
+    cwpLiveLoadDomains(function(){
+      cwpLiveFetch();
+      cwpLiveStart();
+    });
+  }else{
+    cwpLive.active = false;
+    cwpLiveStop();
+    $('#live_log_content').hide();
+    $('#band_month_wrap').show();
+    $('#graph_content').show();
+  }
+}
+
 function miniGraph(settings){
   // used, limit, label1, label2, selector
   let gf2a = settings.used;
@@ -144,12 +239,23 @@ function miniGraph(settings){
           }
       }
   };
-  var emailg = document.getElementById(settings.selector).getContext("2d");
+  var emailel = document.getElementById(settings.selector);
+  if(!emailel){ return; } // canvas removed (donuts replaced by KPI bars) -> no-op
+  var emailg = emailel.getContext("2d");
   new Chart(emailg, {type: 'doughnut', data: doughnutData, options:doughnutOptions});
 }
 $(document).ready(function() {
   uchip = new Uchip();
   bandGraph();
+
+  // Live-log widget bindings (no load/polling until the user opens the "Live" view).
+  $('#cwp_live_domain, #cwp_live_tipe').on('change', function(){ cwpLiveFetch(); cwpLiveStart(); });
+  $('#cwp_live_refresh').on('click', function(){ cwpLiveFetch(); });
+  $('#cwp_live_auto').on('change', function(){ if($(this).is(':checked')){ cwpLiveFetch(); } cwpLiveStart(); });
+  document.addEventListener('visibilitychange', function(){
+    if(document.hidden){ cwpLiveStop(); }
+    else if(cwpLive.active){ cwpLiveFetch(); cwpLiveStart(); }
+  });
 
           miniGraph({
             used: {{mod.email_accounts}},
@@ -187,6 +293,24 @@ $(document).ready(function() {
             label2: '{{langene.DSWLABLE1}}',
             selector: 'doughnutChart5'
           });
+
+  // Disk usage breakdown doughnut (Files / Email / Databases / Backups).
+  (function(){
+    var dc = document.getElementById('cwpDiskChart');
+    if(!dc || typeof Chart === 'undefined'){ return; }
+    var f = parseFloat(dc.getAttribute('data-files'))  || 0;
+    var m = parseFloat(dc.getAttribute('data-mail'))   || 0;
+    var db= parseFloat(dc.getAttribute('data-db'))     || 0;
+    var b = parseFloat(dc.getAttribute('data-backup')) || 0;
+    var data=[f,m,db,b], labels=['Files','Email','Databases','Backups'], colors=['#1c84c6','#23c6c8','#f8ac59','#ed5565'];
+    if((f+m+db+b) <= 0){ data=[1]; labels=['Empty']; colors=['#edf0f3']; }
+    new Chart(dc.getContext('2d'), {
+      type:'doughnut',
+      data:{ labels:labels, datasets:[{ data:data, backgroundColor:colors, borderWidth:0 }] },
+      options:{ cutoutPercentage:68, responsive:false, legend:{display:false},
+        tooltips:{ callbacks:{ label:function(ti,d){ return d.labels[ti.index]+': '+d.datasets[0].data[ti.index]+'%'; } } } }
+    });
+  })();
 
   $("#top-search").on("keyup", function() {
       var value = $(this).val().toLowerCase();

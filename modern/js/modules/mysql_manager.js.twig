@@ -434,7 +434,7 @@ function mkchangePass(elem){
     return;
   }
   buttonsHandle();
-  let data_send = 'pass=' + Base64.encode($("#adduserpass").val()) + '&user=' + $('#user_to_cp').val() + '&host=' + $('#host_to_cp').val();
+  let data_send = 'pass=' + encodeURIComponent(Base64.encode($("#adduserpass").val())) + '&user=' + $('#user_to_cp').val() + '&host=' + $('#host_to_cp').val();
   uchip.call('module=mysql_manager&acc=chageuserpass', {
     data: data_send,
     callback: function(response){
@@ -782,7 +782,7 @@ function getUserData(hosttype){
   if(invalid) {
       return false;
   }else{
-      var pass=Base64.encode($("#pass1new").val());
+      var pass=encodeURIComponent(Base64.encode($("#pass1new").val()));
       if($('#select').is(':checked')){var Vselect='Y';}else{var Vselect='';}
       if($('#insert').is(':checked')){var Vinsert='Y';}else{var Vinsert='';}
       if($('#update').is(':checked')){var Vupdate='Y';}else{var Vupdate='';}
@@ -1149,7 +1149,7 @@ function btnchangpassusermysql(){
             $.ajax({
                 type: "POST",
                 url: "./{{users}}/index.php?module=mail_autoreply&acc=changepassuserdb",
-                data:"dates="+merge+"&passuser="+Base64.encode($("#newpass2user").val()),
+                data:"dates="+merge+"&passuser="+encodeURIComponent(Base64.encode($("#newpass2user").val())),
                 complete: function(datos){
                     if(datos.responseText==1){
                         $("#modal-changepassusermysql").modal('hide');
@@ -1224,7 +1224,7 @@ function btnaddbdandusernew(){
         noti_bubble(msj,'','error',false,false,'3000',true);
         return false;
     }else{
-        var pass=Base64.encode($("#pass1new").val());
+        var pass=encodeURIComponent(Base64.encode($("#pass1new").val()));
         var collation='';
         var charset=$("#charset").val();
         btnporcess('off','btn-addbdandusernew','{{ langmod.DBLABEL4 }}');
@@ -1456,7 +1456,7 @@ $("#btn-newnewuser").click(function (){
         noti_bubble('{{ langmod.DBERROR4 }}', '{{ langmod.DBERROR }}', 'error', false, false, '4000', true);
         return false;
     }else{
-        var pass=Base64.encode($("#newpass1").val());
+        var pass=encodeURIComponent(Base64.encode($("#newpass1").val()));
         if($('#select').is(':checked')){var Vselect='Y';}else{var Vselect='';}
         if($('#insert').is(':checked')){var Vinsert='Y';}else{var Vinsert='';}
         if($('#update').is(':checked')){var Vupdate='Y';}else{var Vupdate='';}

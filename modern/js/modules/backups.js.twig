@@ -455,7 +455,7 @@ function listBackup(list){
         new_tag = ' <span class="badge badge-success new-file"><i class="fa fa-tag" aria-hidden="true"></i>  New</span>';
       }
       table_content += '<tr id="tr_bckfile_' + index + '">' +
-                        '<td><a class="backup-link" href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="{{langmod.BCDOWNLOADMESS}}"><i class="fa fa-download"></i> ' + backup.file + '</a>' + new_tag + '</td>' +
+                        '<td><a class="backup-link" href="./{{users}}/index.php?module=backups&acc=download&file=' + encodeURIComponent(backup.file) + '" download data-toggle="tooltip" data-placement="top" title="{{ langmod.BCDOWNLOADNOW|default('Download this backup') }}"><i class="fa fa-download"></i> ' + $('<span>').text(backup.file).html() + '</a>' + new_tag + '</td>' +
                         '<td class="text-right">' + uchip.humanFileSize(backup.size, true) + '</td>' +
                         '<td class="text-center">' + backup.date + '</td>' +
                         '<td style="width:50px;text-align:center;">' +

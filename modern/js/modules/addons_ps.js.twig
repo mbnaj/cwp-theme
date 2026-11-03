@@ -153,7 +153,7 @@ function addPrestaShop(){
             noti_bubble('{{langmod.ADDINSTALLSUCC}}','{{langmod.SUCCESS}}','success',false,false,'3000',true);
           }
         }else{
-          noti_bubble('{{langmod.ADDERRORGEN}}','{{langmod.FERROR}}','error',false,false,'3000',true);
+          noti_bubble(addonInstallErrorText(response),'{{langmod.FERROR}}','error',false,false,'3000',true);
         }
         var variableHTML='';
         var modulin='ps';

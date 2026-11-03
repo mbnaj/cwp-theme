@@ -154,7 +154,7 @@ function addDP(){
           cancelDp('dp');
         }else{
           if(!response.hasOwnProperty('result') || !response.db_result.hasOwnProperty('code') || response.db_result.code == 1000){
-            noti_bubble('{{langmod.ADDERRORGEN}}','{{langmod.FERROR}}','error',false,false,'3000',true);
+            noti_bubble(addonInstallErrorText(response),'{{langmod.FERROR}}','error',false,false,'3000',true);
           }else{
             let mysql_mess = handleDBError(response.db_result.code);
             noti_bubble('{{langmod.ADDDPDBERROR}} ' + mysql_mess,'{{langmod.FERROR}}','error',false,false,'6000',true);

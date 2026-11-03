@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>{{langmod.LGLLABEL1}}</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&amp;display=swap">
+    <link href="{{url}}/css/cwp-login.css?v=1" rel="stylesheet">
 
     <link href="{{url}}/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{url}}/font-awesome/css/fontawesome-all.css">
@@ -24,8 +26,6 @@
 
 
     <link rel="icon" href="{{url}}/img/ico/favicon.ico" type="image/png">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&amp;display=swap">
-    <link href="{{url}}/css/cwp-login.css?v=1" rel="stylesheet">
     <style media="screen">
       #btn_icon{
         display: none;
@@ -138,6 +138,7 @@
                                     <option value="no">{{langmod.LGLANGNO}}</option>
                                     <option value="pl">{{langmod.LGLANGPL}}</option>
                                     <option value="pt">{{langmod.LGLANGPT}}</option>
+                                    <option value="br">{{langmod.LGLANGBR|default('Português (Brasil)')}}</option>
                                     <option value="ro">{{langmod.LGLANGRO}}</option>
                                     <option value="ru">{{langmod.LGLANGRU}}</option>
                                     <option value="sl">{{langmod.LGLANGSL}}</option>
@@ -384,7 +385,7 @@
           $('#btn_icon').css('display','inline-block');
           $("#btn_title").html('{{langmod.LGLLABEL16}}');
             var pass=$("#password").val();
-            var pass= Base64.encode(pass);
+            var pass= encodeURIComponent(Base64.encode(pass));
             var userN =$("#username").val();
             userN =userN.trim();
             if($("#sessioning").is(':checked')){ var sessioning =1; }else{ var sessioning =0; }

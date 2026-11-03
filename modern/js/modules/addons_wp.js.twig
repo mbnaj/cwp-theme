@@ -74,7 +74,7 @@ function installWP(){
             noti_bubble('{{langmod.ADDINSTALLSUCC}}','{{langmod.SUCCESS}}','success',false,false,'3000',true);
           }
         }else{
-          noti_bubble('{{langmod.ADDERRORGEN}}','{{langmod.FERROR}}','error',false,false,'3000',true);
+          noti_bubble(addonInstallErrorText(response),'{{langmod.FERROR}}','error',false,false,'3000',true);
         }
         var variableHTML='';
         var modulin='wp';
@@ -117,6 +117,8 @@ function wpTable(list){
     let index = 0;
     wplist.forEach(function(installation){
       let insturl = installation.hasOwnProperty('url') ? installation.url : 'http://' + installation.domain;
+      // the stored URL has no trailing slash for some installs -> the admin link became "https://domain.comwp-admin/"
+      let wpadmin = insturl.replace(/\/+$/, '') + '/wp-admin/';
       let dbinf = '';
       if(installation.hasOwnProperty('db_result') && installation.db_result.result != 'success'){
         let dbtitle = '{{langmod.ADDDBNOT}} ' + handleDBError(installation.db_result.code);
@@ -129,7 +131,7 @@ function wpTable(list){
                         '<td>' + installation.domain + '<br>' +
                           '<a href="' + insturl + '" target="_blank">' + insturl + '</a></td>' +
                         '<td><div class="addon-td-item">' + installation.path + '</div></td>' +
-                        '<td><div class="addon-td-item"><a href="' + insturl + 'wp-admin/" target="_blank">' + insturl + 'wp-admin/</a></div></td>' +
+                        '<td><div class="addon-td-item"><a href="' + wpadmin + '" target="_blank">' + wpadmin + '</a></div></td>' +
                         '<td><div class="addon-td-item">' + installation.lang + '</div></td>' +
                         '<td>' +
                           '<div class="database-info-td">' +

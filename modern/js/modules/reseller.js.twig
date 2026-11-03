@@ -167,10 +167,10 @@ function listAccounts(list){
     let html_content = '';
     let index = 0;
     list_accounts.forEach(function(account){
-      let porcen = (100 * account.diskUsed) / account.disk_quota;
-      let porcenbw = (account.bandwidthusade * 100) / account.bandwidth;
+      let porcen = (!account.disk_quota || account.disk_quota <= 0) ? 0 : (100 * account.diskUsed) / account.disk_quota;
+      let porcenbw = (!account.bandwidth || account.bandwidth <= 0) ? 0 : (account.bandwidthusade * 100) / account.bandwidth;
       html_content +='<tr id="tr_raccount_' + account.id + '">' +
-                        '<td><a href="#" title="{{langmod.RSJSLAB1}}" data-toggle="tooltip" data-placement="top" aria-hidden="true" onclick="return autologin(\'' + account.token + ' \',\'https://' + account.hostname + ':2083/' + account.username + '/\',\'{{users}}\')"><i class="fa fa-user"></i> ' + account.username + ' </a>' +
+                        '<td><a href="#" title="{{langmod.RSJSLAB1}}" data-toggle="tooltip" data-placement="top" aria-hidden="true" onclick="return autologin(\'' + account.token + '\',\'https://' + account.hostname + ':2083/' + account.username + '/\',\'{{users}}\')"><i class="fa fa-user"></i> ' + account.username + ' </a>' +
                         '<br /><a href="http://' + account.domain + '" target="_blank"><i class="fa fa-globe"></i> ' + account.domain + '</a></td>' +
                         '<td>' +
                           '<div id="email' + account.id + '" data-email="' + account.email + '"><span id="email_title_'+ account.id +'">' + account.email + '</span>&nbsp;<button class="btn btn-success btn-xs goto-edit-btn" onclick="return changeemail(\'' + account.id + '\')" title="{{langmod.RSLABEL78}}"><i class="fa fa-edit"></i></button></div>' +
@@ -354,7 +354,7 @@ function updateIndi(selector, quota){
   let dd_used = $(selector).data('used');
   let dd_bar = $(selector).find('.indibar');
   $(selector).find('.package-limit').text(uchip.humanFileSize(quota * 1024 * 1024));
-  let porcen = (100 * dd_used) / quota;
+  let porcen = (!quota || quota <= 0) ? 0 : (100 * dd_used) / quota;
   dd_bar.width(porcen);
   dd_bar.removeClass();
   dd_bar.addClass('indibar ' + uchip.getBarColor(porcen));

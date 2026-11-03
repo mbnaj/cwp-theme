@@ -143,3 +143,37 @@ $("#btndelete").click(function (){
         }
     });
 });
+/* ----- Live access/error log monitor (statistics module) -----
+   Reuses the server-validated error_log endpoint (module=error_log&acc=select ->
+   bounded tail of the selected domain's /usr/local/apache/domlogs/<domain>.{log,error.log}).
+   Domains come server-rendered from mod.domains; polling runs only while the tab is visible. */
+var statLive = { timer:null, busy:false, lines:200, interval:5000 };
+function statLiveStatus(t){ $('#stat_live_status').text(t||''); }
+function statLiveFetch(){
+    var domain=$('#stat_live_domain').val(), tipe=$('#stat_live_tipe').val();
+    if(!domain || statLive.busy){ return; }
+    statLive.busy=true; statLiveStatus('{{ langene.LIVELOGUPDATING|default("Updating…") }}');
+    $.ajaxSetup({ headers:{ 'csrftoken':'{{ tokenajax }}' } });
+    $.ajax({ type:"POST", url:"./{{users}}/index.php?module=error_log&acc=select",
+        data:"op=select&domain="+encodeURIComponent(domain)+"&tipe="+encodeURIComponent(tipe)+"&numline="+statLive.lines+"&textsearch=",
+        complete:function(d){
+            statLive.busy=false;
+            var out=$('#stat_live_out')[0];
+            var atBottom= out ? (out.scrollTop+out.clientHeight >= out.scrollHeight-20) : true;
+            var text='';
+            try { text=decodeURIComponent(escape(atob(d.responseText))); } catch(e){ try{ text=atob(d.responseText); }catch(e2){ text=''; } }
+            text=(text||'').replace(/<br\s*\/?>/gi,'\n');
+            var tmp=document.createElement('textarea'); tmp.innerHTML=text; text=tmp.value;
+            if(text.trim()===''){ text='{{ langene.LIVELOGEMPTY|default("Log is empty.") }}'; }
+            $('#stat_live_out').text(text);
+            if(out && atBottom){ out.scrollTop=out.scrollHeight; }
+            statLiveStatus('{{ langene.LIVELOGLAST|default("Last update") }}: '+new Date().toLocaleTimeString());
+        }
+    });
+}
+function statLiveStop(){ if(statLive.timer){ clearInterval(statLive.timer); statLive.timer=null; } $('#stat_live_dot').hide(); }
+function statLiveStart(){ statLiveStop(); if(!$('#stat_live_auto').is(':checked') || !$('#stat_live_domain').val()){ return; } $('#stat_live_dot').show(); statLive.timer=setInterval(function(){ if(document.hidden){ return; } statLiveFetch(); }, statLive.interval); }
+$('#stat_live_domain,#stat_live_tipe').change(function(){ statLiveFetch(); statLiveStart(); });
+$('#stat_live_refresh').click(function(){ statLiveFetch(); });
+$('#stat_live_auto').change(function(){ if($(this).is(':checked')){ statLiveFetch(); } statLiveStart(); });
+document.addEventListener('visibilitychange', function(){ if(document.hidden){ statLiveStop(); } else if($('#stat_live_auto').is(':checked') && $('#stat_live_domain').val()){ statLiveFetch(); statLiveStart(); } });
