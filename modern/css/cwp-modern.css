@@ -6986,3 +6986,21 @@ legend {
     width: 90%;
     margin-left: 15px;
 }
+
+/* ---------- Global modals (modal_tools.html): width scale and tight header, replacing inline styles ---------- */
+.modal-dialog.cwp-modal-narrow{
+  width: 30vw;
+  min-width: 320px;
+  max-width: calc(100vw - 20px);
+}
+.modal-header.cwp-modal-header-tight{
+  padding: 10px;
+  font-size: 1.8rem;
+}
+@media (max-width: 767px){
+  .modal-dialog.cwp-modal-narrow{
+    width: auto;
+    min-width: 0;
+    margin: 10px;
+  }
+}
