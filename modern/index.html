@@ -420,46 +420,6 @@
 
     <!-- Custom and plugin javascript -->
     <script src="{{url}}/js/inspinia.js"></script>
-    <script>
-    // Mark the current module in the left menu and open the section that holds it
-    $(function () {
-        var cur = {{ mod.name|default('')|json_encode|raw }};
-        if (!cur) { return; }
-        var $link = $('#side-menu a[href]').filter(function () {
-            var h = $(this).attr('href') || '';
-            return h === '?module=' + cur || h.indexOf('?module=' + cur + '&') === 0;
-        }).first();
-        if (!$link.length) { return; }
-        $('#side-menu > li.active').removeClass('active');
-        $link.parent('li').addClass('active');
-        $link.parents('ul.nav-second-level, ul.nav-third-level').addClass('in').attr('aria-expanded', 'true').css('height', '');
-        $link.parents('#side-menu li').addClass('active');
-    });
-    </script>
-    <script>
-    // Keep the footer at the bottom of the screen when the page content is short
-    $(function () {
-        var pw = document.getElementById('page-wrapper'), queued = false;
-        if (!pw) { return; }
-        function fit() {
-            queued = false;
-            var f = pw.querySelector('.footer:not(.fixed):not(.fixed_full)');
-            if (!f) { return; }
-            f.style.marginTop = '';
-            var scroller = pw.scrollHeight > pw.clientHeight + 1 || getComputedStyle(pw).overflowY === 'auto';
-            var floor = scroller ? pw.getBoundingClientRect().bottom : window.innerHeight;
-            var gap = Math.floor(floor - f.getBoundingClientRect().bottom);
-            if (gap > 0) { f.style.marginTop = (parseInt(getComputedStyle(f).marginTop, 10) || 0) + gap + 'px'; }
-        }
-        function queue() { if (!queued) { queued = true; window.requestAnimationFrame(fit); } }
-        $(window).on('load resize', queue);
-        $('.navbar-minimalize, .collapse-link').on('click', function () { setTimeout(queue, 450); });
-        $(document).on('shown.bs.tab', queue);
-        if (window.MutationObserver) {
-            new MutationObserver(queue).observe(pw, { childList: true, subtree: true });
-        }
-        queue();
-    });
     <script src="{{url}}/js/plugins/pace/pace.min.js"></script>
 
     <!-- GITTER -->
@@ -528,6 +488,45 @@
     <script src="{{url}}/js/plugins/moment/moment.js"></script>
     <cwp-scripts></cwp-scripts> 
     <script> 
+    // --- moved here from the head: keeps the external script tags in one group ---
+    // Mark the current module in the left menu and open the section that holds it
+    $(function () {
+        var cur = {{ mod.name|default('')|json_encode|raw }};
+        if (!cur) { return; }
+        var $link = $('#side-menu a[href]').filter(function () {
+            var h = $(this).attr('href') || '';
+            return h === '?module=' + cur || h.indexOf('?module=' + cur + '&') === 0;
+        }).first();
+        if (!$link.length) { return; }
+        $('#side-menu > li.active').removeClass('active');
+        $link.parent('li').addClass('active');
+        $link.parents('ul.nav-second-level, ul.nav-third-level').addClass('in').attr('aria-expanded', 'true').css('height', '');
+        $link.parents('#side-menu li').addClass('active');
+    });
+    // Keep the footer at the bottom of the screen when the page content is short
+    $(function () {
+        var pw = document.getElementById('page-wrapper'), queued = false;
+        if (!pw) { return; }
+        function fit() {
+            queued = false;
+            var f = pw.querySelector('.footer:not(.fixed):not(.fixed_full)');
+            if (!f) { return; }
+            f.style.marginTop = '';
+            var scroller = pw.scrollHeight > pw.clientHeight + 1 || getComputedStyle(pw).overflowY === 'auto';
+            var floor = scroller ? pw.getBoundingClientRect().bottom : window.innerHeight;
+            var gap = Math.floor(floor - f.getBoundingClientRect().bottom);
+            if (gap > 0) { f.style.marginTop = (parseInt(getComputedStyle(f).marginTop, 10) || 0) + gap + 'px'; }
+        }
+        function queue() { if (!queued) { queued = true; window.requestAnimationFrame(fit); } }
+        $(window).on('load resize', queue);
+        $('.navbar-minimalize, .collapse-link').on('click', function () { setTimeout(queue, 450); });
+        $(document).on('shown.bs.tab', queue);
+        if (window.MutationObserver) {
+            new MutationObserver(queue).observe(pw, { childList: true, subtree: true });
+        }
+        queue();
+    });
+
         $(document).ready(function() {
             {% if mod.name !='Dashboard' %}
                 {{ include('/js/dready.js.twig') }}
