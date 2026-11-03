@@ -223,9 +223,9 @@ server changed there. Before each page below, diff it against `original/` and bu
       "purge" action.
 - [x] `mod_nodejs_manager.html`: partly done: 340-line inline `<style>` moved to `cwp-modern.css`, shared page skeleton (file-lock alert, page header, footer added), modal inline styles removed; the page title was the Domains key `DTITLE` by mistake, now the same text as the breadcrumb (hardcoded English, no language key yet); ids and handlers untouched; renders in preview (HTTP 200, no Twig errors), not checked visually, not tested on a real server. Original plan: Node.js apps. Plan: app cards with
       status, start/stop/restart, logs, env variables, quota bar; create-app wizard.
-- [ ] `mod_tomcat_manager.html` (102, 2 iboxes) + `modules/tomcat_manager/` (`app_deployment_form.html`, `modals.html`,
+- [x] `mod_tomcat_manager.html`: partly done: styles (383 lines from `modules/tomcat_manager/styles.css`, which the page included inline) moved to `cwp-modern.css` (the old file is now unused), shared page skeleton (file-lock alert, header, footer added), title was the Domains key `DTITLE` by mistake, now "Tomcat Manager" (hardcoded English); ids and handlers untouched; the partials `app_deployment_form.html` and `modals.html` not touched; renders in preview (HTTP 200, no Twig errors), not checked visually, not tested on a real server. Original plan: `mod_tomcat_manager.html` (102, 2 iboxes) + `modules/tomcat_manager/` (`app_deployment_form.html`, `modals.html`,
       `styles.css`): Tomcat apps. Plan: same card pattern as Node.js; WAR upload drop area.
-- [ ] `mod_dns_zone_editor.html` (138, table): DNS zone editor. Plan: domain selector, record table with type
+- [x] `mod_dns_zone_editor.html`: partly done: shared page skeleton (file-lock alert, header, footer inside the page), inline margin styles removed; ids and handlers untouched; renders in preview (HTTP 200, no Twig errors), not checked visually, not tested on a real server. Original plan: DNS zone editor. Plan: domain selector, record table with type
       filter and colour pills, "Add record" menu opening the per-type modals (3.1), inline TTL edit.
 
 ### 4.4 SQL services group

@@ -1,22 +1,22 @@
-<style>
-    {% include 'modules/tomcat_manager/styles.css' %}
-</style>
-<div class="row  border-bottom white-bg dashboard-header">
-    {% if mod.fsl == 1 %}
-    <div class="row  alert alert-warning col-lg-12" style="margin-left: 5px; padding-right: 5px;display:{{stflalert}}"
-        id="alertfl">
-        <strong>{{langene.GALARTFILEBLOCK}}</strong>
+<div class="cwp-page">
+  {% if mod.fsl == 1 %}
+    {% set stflalert ='block' %}
+  {% else %}
+    {% set stflalert ='none' %}
+  {% endif %}
+  <div class="alert alert-warning" style="display:{{stflalert}}" id="alertfl">
+    <strong>{{langene.GALARTFILEBLOCK}}</strong>
+  </div>
+  <div class="cwp-page-head">
+    <div>
+      <h2>Tomcat Manager</h2>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="?">{{langene.GENLABLANG1}}</a></li>
+        <li class="breadcrumb-item active"><strong>Tomcat Manager</strong></li>
+      </ol>
     </div>
-    {% endif %}
-    <div class="col-lg-10">
-        <h2>{{langmod.DTITLE}}</h2>
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="?">Home</a></li>
-            <li class="breadcrumb-item active"><strong>Tomcat Manager</strong></li>
-        </ol>
-    </div>
-</div>
-<div class="row tomcat-main-wrapper" style="margin-top:2rem;">
+  </div>
+<div class="row tomcat-main-wrapper">
     <div class="col-lg-12">
         <div class="row">
             {% if mod.mod_installed == 1 and mod.user_enabled == 1 and mod.tomcat_running == 1%}
@@ -99,5 +99,7 @@
             {% endif %}
         </div>
     </div>
+</div>
+  {% include 'footer.html' %}
 </div>
 {% include 'modules/tomcat_manager/modals.html' %}

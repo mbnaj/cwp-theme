@@ -1,23 +1,24 @@
-<div class="row  border-bottom white-bg dashboard-header">
-    {% if mod.fsl == 1 %}
+<div class="cwp-page">
+  {% if mod.fsl == 1 %}
     {% set stflalert ='block' %}
-    {% else %}
+  {% else %}
     {% set stflalert ='none' %}
-    {% endif %}
-    <div class="row  alert alert-warning col-lg-12" style="margin-left: 5px; padding-right: 5px;display:{{stflalert}}" id="alertfl">
-        <strong>{{langene.GALARTFILEBLOCK}}</strong>
+  {% endif %}
+  <div class="alert alert-warning" style="display:{{stflalert}}" id="alertfl">
+    <strong>{{langene.GALARTFILEBLOCK}}</strong>
+  </div>
+  <div class="cwp-page-head">
+    <div>
+      <h2>{{langmod.DNSTITLE}}</h2>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="?">{{langene.GENLABLANG1}}</a></li>
+        <li class="breadcrumb-item active"><strong>{{langmod.DNSTITLE}}</strong></li>
+      </ol>
     </div>
-    <div class="col-lg-10">
-        <h2>{{langmod.DNSTITLE}}</h2>
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="?">Home</a></li>
-            <li class="breadcrumb-item active"><strong>{{langmod.DNSTITLE}}</strong></li>
-        </ol>
-    </div>
-</div>
+  </div>
 <div class="row">
     <div class="col-lg-12">
-        <div class="row" style="margin-top:2rem;">
+        <div class="row">
             <div class="col-lg-8">
                 <div class="col-lg-12">
                     <div class="ibox">
@@ -132,7 +133,6 @@
           </div>
         </div>
     </div>
-    <div class="wrapper wrapper-content" style="margin-top: 35px">
-        {% include 'footer.html' %}
-    </div>
+    {% include 'footer.html' %}
+</div>
 </div>
