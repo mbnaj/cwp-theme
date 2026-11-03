@@ -54,3 +54,8 @@ Edit `serve.cmd` if your PHP is not at `D:\wamp\bin\php\php8.4.21` (PHP 8+ requi
 - PHP's built-in server handles one request at a time, so a page with many assets can take a moment.
 - The switcher box is injected by `router.php` only. It is not part of any theme.
 - This is a layout preview, not the panel: nothing here has been tested against a real CWP7 server.
+
+## Mock AJAX answers
+`mock_ajax.php` maps `module/acc` to a JSON array or an HTML string for panel AJAX calls (mailbox list, backup file
+listing, disk usage, protected directories, error log, MySQL consumption ...). Calls without an entry still answer `{}`.
+When a page stays on its spinner, read its `js/modules/<module>.js.twig`, add the response shape to the map, reload.

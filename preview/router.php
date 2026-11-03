@@ -166,6 +166,20 @@ if ($path === '/' || $path === '/index.php') {
     return true;
 }
 
+// Panel AJAX calls: realistic answers from mock_ajax.php where we have a shape, empty JSON otherwise.
+require_once __DIR__ . '/mock_ajax.php';
+$ajax = mock_ajax(preg_replace('/[^\w]/', '', $_GET['module'] ?? ''), preg_replace('/[^\w]/', '', $_GET['acc'] ?? ''));
+if ($ajax !== null) {
+    if (is_string($ajax)) {
+        header('Content-Type: text/html; charset=utf-8');
+        echo $ajax;
+    } else {
+        header('Content-Type: application/json');
+        echo json_encode($ajax);
+    }
+    return true;
+}
+
 // Anything else is treated as a panel AJAX call: answer with empty JSON so pages do not error.
 header('Content-Type: application/json');
 echo '{}';

@@ -326,7 +326,7 @@ dropzone).
 
 ## 6. Preview tool backlog (`preview/`)
 
-- [ ] Mock AJAX responses per module so list pages render (domains, subdomains, email accounts, forwarders, FTP,
+- [ ] (started: `preview/mock_ajax.php` covers email list, backups listing, disk usage, protected directories, error log, MySQL consumption) Mock AJAX responses per module so list pages render (domains, subdomains, email accounts, forwarders, FTP,
       MySQL, crontab, backups, DNS records, notifications...). Plan: `preview/mock_ajax.php` mapping
       `module=<name>&acc=<action>` to JSON files in `preview/mock/`.
 - [ ] Use real English strings: import the CWP language file if available, so pages stop showing `DTITLE`-style keys.
