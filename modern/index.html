@@ -65,6 +65,7 @@
     <!-- CWP7 modern look (loaded after every base/plugin stylesheet; disabled for the dark style) -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&amp;display=swap">
     <link id="cwplook" href="{{url}}/css/cwp-modern.css?v=15" rel="stylesheet" {% if mod.style == 'dark' %}disabled{% endif %}>
+
     <cwp-styles></cwp-styles>
     <style media="screen">
       .radio label::after {
@@ -240,18 +241,83 @@
                     <ul class="nav navbar-top-links navbar-right">
                         <li>
                             {% if mod.fa2 == 1%} <span style="margin-right: 20px;font-weight: bold"><i class="glyphicon glyphicon-phone" style="color:green"></i> 2FA</span> {% endif %}
-                            <span data-toggle="dropdown" class="dropdown-toggle m-r-sm text-muted welcome-message" style="cursor:pointer">
-                                <i class="fa fa-user" aria-hidden="true"></i> {{users}} <span class="label label-success newtost" id="showleftbottom"><i class="fa fa-bell"></i> New</span></span>
-                            <ul class="dropdown-menu animated fadeIn m-t-xs">
-                                <li><a href="#" data-toggle="modal"  data-target="#modal-changepass">{{langene.CHANGEPASS}}</a></li>
-                                <li><a href="#" data-toggle="modal"  data-target="#modal-settings">{{langene.GNLABLE10}}  <i class="fa fa-bell text-success"></i></a></li>
+                            <span data-toggle="dropdown" class="dropdown-toggle m-r-sm text-muted welcome-message" style="cursor:pointer" title="{{ langene.HDRACCOUNT|default('My account') }}">
+                                <i class="fa fa-user" aria-hidden="true"></i> {{users}}</span>
+                            <ul class="dropdown-menu animated fadeIn m-t-xs" style="min-width: 280px;">
+                                <li><a href="#" data-toggle="modal"  data-target="#modal-changepass"><i class="fa fa-key fa-fw text-muted"></i> {{langene.CHANGEPASS}}</a></li>
+                                <li><a href="#" data-toggle="modal"  data-target="#modal-settings"><i class="fa fa-cog fa-fw text-muted"></i> {{langene.GNLABLE10}}  <i class="fa fa-bell text-success"></i></a></li>
+                                {% if mod.viewtheme == 0 or mod.styles != '' %}
+                                <li class="divider"></li>
+                                {% if mod.viewtheme == 0 %}
+                                <li class="dropdown-header" style="padding:4px 15px;"><i class="fa fa-paint-brush"></i> {{ langene.HDRTHEME|default('Theme') }}</li>
+                                {% for key in array_theme %}
+                                    {% if key !='.' and key !='..' %}
+                                        <li>
+                                            <a href="#">
+                                                <div>
+                                                    <div class="row">
+                                                        <table class="col-lg-offset-1 col-lg-11">
+                                                            <tr>
+                                                                <td><img src="/{{users}}/cwp_theme/{{key}}/img/{{key}}.png" width="100"></td>
+                                                                <td><div>{{key}}</div></td>
+                                                                <td>
+                                                                    <div class="radio radio-danger">
+                                                                        {% if key == theme %}
+                                                                            <input type="radio" name="theme-save" class="radio radio-danger" checked  value="{{key}}" style="margin-top: -10px">
+                                                                        {% else %}
+                                                                            <input type="radio" name="theme-save" class="radio radio-danger"  value="{{key}}" style="margin-top: -10px">
+                                                                        {% endif %}
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
+                                <li>
+                                    <div style="text-align:right; padding:4px 15px 8px; clear:both; overflow:hidden;">
+                                        <button class="btn btn-success btn-xs" id="btn-save-theme">{{langene.PGCHANGTHEME}}</button>
+                                    </div>
+                                </li>
+                                {% endif %}
+                                {% if mod.viewtheme == 0 and mod.styles != '' %}
+                                <li class="divider"></li>
+                                {% endif %}
+                                {% if mod.styles != '' %}
+                                {% for styles in mod.styles %}
+                                <li>
+                                    <div class="setings-item">
+                                        <span>
+                                            <div class="row">
+                                                <div class="col-lg-10" style="padding-top:6px"><i class="fa fa-moon-o"></i> {{ langene.DARKMODE|default('Dark mode') }}</div>
+                                                <div class="col-lg-2">
+                                                    <div class="switch">
+                                                        <div class="onoffswitch">
+                                                            <input type="checkbox" name="collapsemenu" class="onoffswitch-checkbox" id="collapsemenu{{styles.name}}" {% if mod.style == styles.name %}checked{% endif %} onchange="return changestyles()">
+                                                            <label class="onoffswitch-label" for="collapsemenu{{styles.name}}">
+                                                                <span class="onoffswitch-inner"></span>
+                                                                <span class="onoffswitch-switch"></span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </span>
+                                    </div>
+                                </li>
+                                {% endfor %}
+                                {% endif %}
+                                {% endif %}
                                 <!-- <li class="divider"></li>
                                 <li><a href="#" class="logon">{{langene.BTN_LOGOUT}}</a></li> -->
                             </ul>
                         </li>
                         {% if mod.reseller ==1%}
                         <li>
-                            <a href="#" class="reseller"><span id="labelreseller" class="label label-primary float-right">{{langene.GNLABEL37}}</span></a>
+                            <a href="#" class="reseller" title="{{langene.GNLABEL37}}"><span id="labelreseller" class="label label-primary float-right">{{langene.GNLABEL37}}</span></a>
                         </li>
                         {% endif %}
 
@@ -263,7 +329,7 @@
                             {% set titlefl = langene.FSL_LOCKED %}
                         {% endif %}
                         <li>
-                            <a href="#" class="files_system_lock" id="btnfilelock"><span id="imglock" class="label  {{clasefl}}  float-right">{{titlefl}}</span></a>
+                            <a href="#" class="files_system_lock" id="btnfilelock" title="{{langene.FSL_TITLE}}"><span id="imglock" class="label  {{clasefl}}  float-right">{{titlefl}}</span></a>
                         </li>
 
 
@@ -272,7 +338,7 @@
                         </li> -->
                         {% include 'top_notifications.html' %}
                         <li class="dropdown">
-                            <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                            <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#" title="{{ langene.HDRLANG|default('Language') }}">
                                 <!--i class="fa fa-flag"></i-->
                                 <img src="{{url}}/img/{{lang}}.png" width="20" style="margin-right: 15px">
                             </a>
@@ -310,92 +376,17 @@
                               {% endif %}
                             </ul>
                         </li>
-                        {% if mod.viewtheme == 0 %}
-                        <li class="dropdown">
-                            <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                                <i class="fa fa-gears"></i>
-                            </a>
-                            <ul class="dropdown-menu dropdown-alerts">
-                                {% for key in array_theme %}
-                                    {% if key !='.' and key !='..' %}
-                                        <li>
-                                            <a href="#">
-                                                <div>
-                                                    <div class="row">
-                                                        <table class="col-lg-offset-1 col-lg-11">
-                                                            <tr>
-                                                                <td><img src="/{{users}}/cwp_theme/{{key}}/img/{{key}}.png" width="100"></td>
-                                                                <td><div>{{key}}</div></td>
-                                                                <td>
-                                                                    <div class="radio radio-danger">
-                                                                        {% if key == theme %}
-                                                                            <input type="radio" name="theme-save" class="radio radio-danger" checked  value="{{key}}" style="margin-top: -10px">
-                                                                        {% else %}
-                                                                            <input type="radio" name="theme-save" class="radio radio-danger"  value="{{key}}" style="margin-top: -10px">
-                                                                        {% endif %}
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </li>
-                                    {% endif %}
-                                {% endfor %}
-                                <li class="divider"></li>
-                                <li>
-                                    <div class="pull-right">
-                                        <button class="btn btn-success btn-xs" id="btn-save-theme">{{langene.PGCHANGTHEME}}</button>
-                                    </div>
-                                </li>
-                            </ul>
-                        </li>
-                        {% endif %}
-                        {% if mod.styles != '' %}
-                        <li class="dropdown">
-                            <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                                <i class="fa fa-paint-brush"></i>
-                            </a>
-                            <ul class="dropdown-menu dropdown-alerts">
-                                {% for styles in mod.styles %}
-                                <li>
-                                    <div class="setings-item">
-                                        <span>
-                                            <div class="row">
-                                                <div class="col-lg-6"><img alt="" id="logomenu" src="{{url}}/img/{{styles.pic}}" width="100" style="margin-right: 15px;border-radius: 0.25em; border: 1px"></div>
-                                                <div class="col-lg-4">{{styles.name}}</div>
-                                                <div class="col-lg-2">
-                                                    <div class="switch">
-                                                        <div class="onoffswitch">
-                                                            <input type="checkbox" name="collapsemenu" class="onoffswitch-checkbox" id="collapsemenu{{styles.name}}" onchange="return changestyles()">
-                                                            <label class="onoffswitch-label" for="collapsemenu{{styles.name}}">
-                                                                <span class="onoffswitch-inner"></span>
-                                                                <span class="onoffswitch-switch"></span>
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </span>
-                                    </div>
-                                </li>
-                                <li class="divider"></li>
-                                {% endfor %}
-                            </ul>
-                        </li>
-                        {% endif %}
                         <li>
-                            <a href="{{mod.linkhelpmod}}" target="_blank"><i class="fa fa-question-circle fa-2x"></i></a>
+                            <a href="https://docs.control-webpanel.com/docs/user-guide" target="_blank" title="{{ langene.HDRHELP|default('Documentation') }}"><i class="fa fa-question-circle fa-2x"></i></a>
                         </li>
                         <li>
-                            <a href="#}" onclick="return logon()"><i class="fa fa-power-off"></i> {{langene.BTN_LOGOUT}}</a>
+                            <a href="#}" onclick="return logon()" title="{{langene.BTN_LOGOUT}}"><i class="fa fa-power-off"></i> {{langene.BTN_LOGOUT}}</a>
                         </li>
                     </ul>
 
                 </nav>
             </div>
-            {% include mod.html %}
+            {% include mod.html ignore missing %}
         </div>
     </div>
     {% include 'modal_tools.html' %}
@@ -469,7 +460,6 @@
         }
         queue();
     });
-    </script>
     <script src="{{url}}/js/plugins/pace/pace.min.js"></script>
 
     <!-- GITTER -->
@@ -576,7 +566,7 @@
 
         {% if mod.name !='' %}
             /////-----///
-            {% include("/js/modules/"~ mod.name ~".js.twig") %}
+            {% include ("/js/modules/"~ mod.name ~".js.twig") ignore missing %}
             /////-----///
         {% endif %}
 

@@ -7036,3 +7036,13 @@ legend {
     margin-bottom: 2px;
   }
 }
+/* Panel settings modal: label and control on one line, even spacing */
+#modal-settings .modal-body > .row{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 10px;
+}
+#modal-settings .modal-body > .row[style*="display: none"]{
+  display: none;
+}

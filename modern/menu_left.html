@@ -114,9 +114,7 @@
         {% if ("sslwizard" in rmenu )or(swmenu==1) %}
         <li class="search"><a href="?module=sslwizard">{{langene.GEN002}}</a></li>
         {% endif %}
-        {% if ("cloudflare" in rmenu )or(swmenu==1) %}
-        <li class="search"><a href="?module=cloudflare">{{langene.CLOUDFLARE}}</a></li>
-        {% endif %}
+        {# Cloudflare: no such user panel module exists ("Error, module does not exist") - link removed #}
         {% if ("nodejs" in extra_rmenu )or(swmenu==1) %}
         <li class="search"><a href="?module=nodejs_manager">{{langene.NODEJSAPPS}}</a></li>
         {% endif %}
@@ -424,8 +422,12 @@
             <div>
               <div class="nav-label"><h5 style="color: white">Apache:</h5></div>
               <div style="margin-left: 5px" class="info-left-item">{{mod.infoserver.apache}}</div>
-              <div class="nav-label"><h5 style="color: white">PHP:</h5></div>
+              <div class="nav-label"><h5 style="color: white">{{ langene.MAINPHP|default('Main PHP') }}:</h5></div>
               <div style="margin-left: 5px" class="info-left-item">{{mod.infoserver.php}}</div>
+              {% if mod.available_php_versions is defined and mod.available_php_versions|length > 0 %}
+              <div class="nav-label"><h5 style="color: white">{{ langene.AVAILPHP|default('Available PHP') }}:</h5></div>
+              <div style="margin-left: 5px" class="info-left-item">{{ mod.available_php_versions|join(', ') }}</div>
+              {% endif %}
               <div class="nav-label"><h5 style="color: white">MySQL:</h5></div>
               <div style="margin-left: 5px" class="info-left-item">{{mod.infoserver.mysql}}</div>
             </div>

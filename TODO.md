@@ -351,3 +351,11 @@ dropzone).
 9. **Login polish**, dark variant, RTL pass, accessibility pass, real-server test.
 
 Estimate: foundation plus the first group is the bulk of the design decisions; the rest reuse the same components.
+
+---
+
+## 8. Notes from the latest sessions
+
+- `modern/index.html` and `modern/menu_left.html` were behind the server copy. They are now rebuilt on the `original/` version (merged account dropdown with theme and dark-mode switches, tooltips, `ignore missing` includes, available PHP versions, Cloudflare menu link removed) with the modern additions re-applied (`cwp-modern.css` link, current-module highlight script, footer-to-bottom script, `#cwplook` toggle for the dark style, `fa-sitemap` DNS icon). The old "New" label next to the user name is gone with the server version. Rendered in preview (HTTP 200); not tested on a real server.
+- The server removed the Cloudflare menu link because "no such user panel module exists". `mod_dashboard.html` and `mod_cloudflare.html` still link to it: decide whether to hide them.
+- Panel settings modal: label and control now sit on one row (CSS only); no tabs, it only has five settings.
