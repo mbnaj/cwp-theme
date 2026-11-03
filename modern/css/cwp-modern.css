@@ -7115,3 +7115,10 @@ legend {
 .cwp-mt-20{margin-top:20px}
 .cwp-pr-15{padding-right:15px}
 .cwp-pt-15{padding-top:15px}
+
+/* fixed-width modals that stay inside small screens */
+.modal-dialog.cwp-modal-w400{width:400px;max-width:calc(100% - 20px)}
+.modal-dialog.cwp-modal-w500{width:500px;max-width:calc(100% - 20px)}
+.modal .dropdown-toggle .caret{margin-left:10px}
+.btn.btn-success#btn_add_pgresql_database_,.btn.btn-success#btn_add_mongodb_database_{font-size:90%}
+.modal select.pwlength{margin-bottom:5px}
