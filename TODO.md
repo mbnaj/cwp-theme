@@ -281,7 +281,7 @@ server changed there. Before each page below, diff it against `original/` and bu
 ### 4.7 Reseller area (shown if `mod.reseller == 1`)
 Tabs are included by `mod_reseller_gentab.html` (82) inside `mod_reseller.html` (451, form, tabs, wizard, dualListbox,
 dropzone).
-- [ ] `mod_reseller.html` + `mod_reseller_gentab.html`: tab container. Plan: left vertical tab nav (Stats, Accounts,
+- [x] `mod_reseller.html` + `mod_reseller_gentab.html`: partly done: the 400-line inline `<style>` block moved to `cwp-modern.css` (stylesheet link now `?v=2`), markup, tab ids and scroller buttons unchanged; renders in preview (HTTP 200, no Twig errors), not checked visually, not tested on a real server. Not done: vertical tab nav (the tab scroller JS in `reseller.js.twig` is out of sync with the server, so the horizontal tabs stay for now). Original plan: left vertical tab nav (Stats, Accounts,
       Packages, Features, Nameservers, Branding, API Manager, ModSecurity, Firewall) instead of 9 horizontal tabs.
 - [x] `mod_reseller_statstab.html`: done (ten copy-pasted tiles replaced by one Twig loop on a responsive grid; canvas ids, data-* attributes and JS hooks unchanged; charts need the live JS so not checked visually; not tested on a real server). Original plan: stats. Plan: tiles + charts.
 - [x] `mod_reseller_accounts.html`: light cleanup only (tab partial, table is AJAX-filled): dead commented markup and inline modal styles removed, form labels linked to their inputs, "sss" typo in the close label fixed, CSV button gets a download icon, table card scrolls on phones; ids and handlers untouched; no create-account wizard or status pills; not tested on a real server. Original plan: customer accounts. Plan: table with search, status pills,
