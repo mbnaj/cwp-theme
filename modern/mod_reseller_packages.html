@@ -9,27 +9,26 @@
 
   </div><input type="hidden" id="swajaxpack" value="">
   <div class="ibox-content" id="table_packages_wrapper">
-    <!--<div class="table_cron_loader"><span><i class="fa fa-circle-o-notch fa-spin"></i></span></div>-->
     <table class="table packages_table table-striped table-bordered table-hover" id="packs_table">
       <thead>
       <tr>
-        <th style="width:60px">{{langmod.RSLABEL13}}</th>
-        <th style="width:100px">{{langmod.RSLABEL15}}</th>
-        <th style="width:100px">{{langmod.RSLABEL16}}</th>
-        <th style="width:100px">{{langmod.RSLABEL25}}</th>
-        <th style="width:100px">{{langmod.RSLABEL17}}</th>
-        <th style="width:100px">{{langmod.RSLABEL18}}</th>
-        <th style="width:100px">{{langmod.RSLABEL19}}</th>
-        <th style="width:100px">{{langmod.RSLABEL24}}</th>
-        <th style="width:100px">{{langmod.RSLABEL20}}</th>
-        <th style="width:100px">{{langmod.RSLABEL21}}</th>
-        <th style="width:100px">{{langmod.RSLABEL22}}</th>
-        <th style="width:100px">{{langmod.RSLABEL23}}</th>
-        <th style="width:100px">{{langmod.SECLABEL35}}</th>
+        <th>{{langmod.RSLABEL13}}</th>
+        <th>{{langmod.RSLABEL15}}</th>
+        <th>{{langmod.RSLABEL16}}</th>
+        <th>{{langmod.RSLABEL25}}</th>
+        <th>{{langmod.RSLABEL17}}</th>
+        <th>{{langmod.RSLABEL18}}</th>
+        <th>{{langmod.RSLABEL19}}</th>
+        <th>{{langmod.RSLABEL24}}</th>
+        <th>{{langmod.RSLABEL20}}</th>
+        <th>{{langmod.RSLABEL21}}</th>
+        <th>{{langmod.RSLABEL22}}</th>
+        <th>{{langmod.RSLABEL23}}</th>
+        <th>{{langmod.SECLABEL35}}</th>
 
-          <th style="width:100px">{{langmod.SECLABEL36}}</th>
+          <th>{{langmod.SECLABEL36}}</th>
 
-        <th style="width:100px">{{langmod.SECLABEL37}}</th>
+        <th>{{langmod.SECLABEL37}}</th>
       </tr>
       </thead>
       <tbody id="contenttr">
@@ -44,9 +43,6 @@
       {{langmod.RSLABEL101}}
     </h4>
     <input type="hidden" id="is_editing" value="0">
-    <!-- <a href="#" id="btnaddaccount" title="{{langmod.RSLABEL76}}">
-        <i class="fa fa-plus-circle fa-2x" style="color: #36a116"></i>
-    </a> -->
     <div class="actions-btn text-right">
       <button onclick="saveNewPackage()" class="sv-package-btn btn btn-w-m btn-sm btn-success btn-save-webdisk"><i class="fa fa-floppy-o" aria-hidden="true"></i> {{langmod.RSLABEL35}}</button>
       <button onclick="cancelNewPackage()" class="cnl-package-btn btn btn-w-m btn-sm btn-warning btn-cancel-webdisk"><i class="fa fa-ban" aria-hidden="true"></i> {{langmod.RSLABEL42}}</button>
@@ -55,15 +51,15 @@
   {% set package_info = mod.init_info.package_contracted %}
   <div class="ibox-content">
     <div class="row">
-      <label class="col-md-2 control-label" for="">{{langmod.RSLABEL15}}:</label>
+      <label class="col-md-2 control-label" for="package_name">{{langmod.RSLABEL15}}:</label>
       <div class="col-md-6">
           <input type="text" data-required="true" class="form-control packinput" name="package_name" id="package_name"  maxlength="255" value="">
           <div class="unlimited-pack">{{langmod.RSPACKLAB5}} &infin;</div>
       </div>
       <span class="help-block"></span>
     </div>
-    <div class="row" style="padding-top: 5px">
-      <label class="col-md-2 control-label" for="">{{langmod.RSLABEL16}}:</label>
+    <div class="row">
+      <label class="col-md-2 control-label" for="disk_quota">{{langmod.RSLABEL16}}:</label>
       <div class="col-md-2">
           <input type="number" name="disk_quota" id="disk_quota" data-cwpmax="{{package_info.disk_quota}}"  data-required="true" class="form-control packinput tip"  maxlength="8">
           <div class="unlimited-pack">{{langmod.RSPACKLAB5}} &infin;</div>
@@ -79,8 +75,8 @@
         {% endif %}
       </div>
     </div>
-    <div class="row" style="padding-top: 5px">
-      <label class="col-md-2 control-label" for="">{{langmod.RSLABEL25}}:</label>
+    <div class="row">
+      <label class="col-md-2 control-label" for="bandwidth">{{langmod.RSLABEL25}}:</label>
       <div class="col-md-2">
           <input type="number" name="bandwidth" data-cwpmax="{{package_info.bandwidth}}" id="bandwidth" data-required="true" class="form-control packinput">
           <div class="unlimited-pack">{{langmod.RSPACKLAB5}} &infin;</div>
@@ -96,8 +92,8 @@
         {% endif %}
       </div>
     </div>
-    <div class="row" style="padding-top: 5px">
-      <label class="col-md-2 control-label" for="">{{langmod.RSLABEL17}}:</label>
+    <div class="row">
+      <label class="col-md-2 control-label" for="ftp_accounts">{{langmod.RSLABEL17}}:</label>
       <div class="col-md-2">
           <input type="number" name="ftp_accounts" data-cwpmax="{{package_info.ftp_accounts}}" id="ftp_accounts" value="" data-required="true" class="form-control packinput tip" >
           <div class="unlimited-pack">{{langmod.RSPACKLAB5}} &infin;</div>
@@ -114,8 +110,8 @@
       </span>
     </div>
 
-    <div class="row" style="padding-top: 5px">
-      <label class="col-md-2 control-label" for="">{{langmod.RSLABEL18}}:</label>
+    <div class="row">
+      <label class="col-md-2 control-label" for="email_accounts">{{langmod.RSLABEL18}}:</label>
       <div class="col-md-2">
           <input type="number" name="email_accounts" data-cwpmax="{{package_info.email_accounts}}" id="email_accounts" value="" data-required="true" class="form-control packinput tip" >
           <div class="unlimited-pack">{{langmod.RSPACKLAB5}} &infin;</div>
@@ -132,8 +128,8 @@
       </div>
     </div>
 
-    <div class="row" style="padding-top: 5px">
-      <label class="col-md-2 control-label" for="">{{langmod.RSLABEL19}}:</label>
+    <div class="row">
+      <label class="col-md-2 control-label" for="email_lists">{{langmod.RSLABEL19}}:</label>
       <div class="col-md-2">
           <input type="number" name="email_lists" data-cwpmax="{{package_info.email_lists}}" id="email_lists" value="" data-required="true" class="form-control packinput tip" >
           <div class="unlimited-pack">{{langmod.RSPACKLAB5}} &infin;</div>
@@ -150,8 +146,8 @@
       </div>
     </div>
 
-    <div class="row" style="padding-top: 5px">
-      <label class="col-md-2 control-label" for="">{{langmod.RSLABEL24}}:</label>
+    <div class="row">
+      <label class="col-md-2 control-label" for="databases">{{langmod.RSLABEL24}}:</label>
       <div class="col-md-2">
           <input type="number" data-required="true" data-cwpmax="{{package_info.databases}}" class="form-control packinput input-small" name="databases" id="databases" maxlength="8">
           <div class="unlimited-pack">{{langmod.RSPACKLAB5}} &infin;</div>
@@ -167,8 +163,8 @@
         {% endif %}
       </div>
     </div>
-    <div class="row" style="padding-top: 5px">
-      <label class="col-md-2 control-label" for="">{{langmod.RSLABEL20}}:</label>
+    <div class="row">
+      <label class="col-md-2 control-label" for="sub_domains">{{langmod.RSLABEL20}}:</label>
       <div class="col-md-2">
           <input type="number" data-required="true" data-cwpmax="{{package_info.sub_domains}}" class="form-control packinput input-small"  name="sub_domains" id="sub_domains" maxlength="8">
           <div class="unlimited-pack">{{langmod.RSPACKLAB5}} &infin;</div>
@@ -184,8 +180,8 @@
         {% endif %}
       </div>
     </div>
-    <div class="row" style="padding-top: 5px">
-      <label class="col-md-2 control-label" for="">{{langmod.RSLABEL21}}:</label>
+    <div class="row">
+      <label class="col-md-2 control-label" for="parked_domains">{{langmod.RSLABEL21}}:</label>
       <div class="col-md-2">
           <input type="number" data-required="true" data-cwpmax="{{package_info.parked_domains}}" class="form-control packinput input-small" name="parked_domains" id="parked_domains" maxlength="6">
           <div class="unlimited-pack">{{langmod.RSPACKLAB5}} &infin;</div>
@@ -201,8 +197,8 @@
         {% endif %}
       </div>
     </div>
-    <div class="row" style="padding-top: 5px">
-      <label class="col-md-2 control-label" for="">{{langmod.RSLABEL22}}:</label>
+    <div class="row">
+      <label class="col-md-2 control-label" for="addons_domains">{{langmod.RSLABEL22}}:</label>
       <div class="col-md-2">
           <input type="number" data-required="true" data-cwpmax="{{package_info.addons_domains}}" class="form-control packinput input-small"  name="addons_domains" id="addons_domains" maxlength="6">
           <div class="unlimited-pack">{{langmod.RSPACKLAB5}} &infin;</div>
@@ -218,8 +214,8 @@
         {% endif %}
       </div>
     </div>
-    <div class="row" style="padding-top: 5px">
-      <label class="col-md-2 control-label" for="">{{langmod.RSLABEL23}}:</label>
+    <div class="row">
+      <label class="col-md-2 control-label" for="hourly_emails">{{langmod.RSLABEL23}}:</label>
       <div class="col-md-2">
           <input type="number" data-required="true" data-cwpmax="{{package_info.hourly_emails}}" class="form-control packinput input-small" name="hourly_emails" id="hourly_emails" maxlength="6">
           <div class="unlimited-pack">{{langmod.RSPACKLAB5}} &infin;</div>
@@ -235,8 +231,8 @@
         {% endif %}
       </div>
     </div>
-    <div class="row" style="padding-top: 5px">
-      <label class="col-md-2 control-label" for="">{{langmod.SECLABEL35}}:</label>
+    <div class="row">
+      <label class="col-md-2 control-label" for="nodejs_apps">{{langmod.SECLABEL35}}:</label>
       <div class="col-md-2">
         <input type="number" data-required="true" data-cwpmax="{{package_info.nodejs_apps}}" class="form-control packinput input-small"  name="nodejs_apps" id="nodejs_apps" maxlength="6">
         <div class="unlimited-pack">{{langmod.RSPACKLAB5}} &infin;</div>
@@ -253,8 +249,8 @@
       </div>
     </div>
 
-    <div class="row" style="padding-top: 5px">
-      <label class="col-md-2 control-label" for="">{{langmod.SECLABEL36}}:</label>
+    <div class="row">
+      <label class="col-md-2 control-label" for="mongo_database">{{langmod.SECLABEL36}}:</label>
       <div class="col-md-2">
         <input type="number" data-required="true" data-cwpmax="{{package_info.mongo_database}}" class="form-control packinput input-small"  name="mongo_database" id="mongo_database" maxlength="6">
         <div class="unlimited-pack">{{langmod.RSPACKLAB5}} &infin;</div>
@@ -271,8 +267,8 @@
       </div>
     </div>
 
-    <div class="row" style="padding-top: 5px">
-      <label class="col-md-2 control-label" for="">{{langmod.SECLABEL37}}:</label>
+    <div class="row">
+      <label class="col-md-2 control-label" for="pgresql_database">{{langmod.SECLABEL37}}:</label>
       <div class="col-md-2">
         <input type="number" data-required="true" data-cwpmax="{{package_info.pgresql_database}}" class="form-control packinput input-small"  name="pgresql_database" id="pgresql_database" maxlength="6">
         <div class="unlimited-pack">{{langmod.RSPACKLAB5}} &infin;</div>
@@ -287,7 +283,7 @@
         ({{langmod.RSPACKLAB3}} {{package_info.pgresql_database}})
         {% endif %}
       </div>
-    </div> 
+    </div>
 
   </div>
   <div class="ibox-footer">
@@ -302,16 +298,16 @@
   </div>
 </div>
 <div class="modal" id="delete_package_modal" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog modal-sm" style="width:300px">
+  <div class="modal-dialog modal-sm">
     <div class="modal-content animated fadeIn">
-      <div class="modal-header" style="padding: 10px;">
+      <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">
           <span aria-hidden="true">×</span>
           <span class="sr-only">{{langene.MDCLOSE}}</span>
         </button>
-        <h4 class="modal-title" style="font-size:2rem">{{langmod.RSLABEL98}}</h4>
+        <h4 class="modal-title">{{langmod.RSLABEL98}}</h4>
       </div>
-      <div class="modal-body" style="padding: 20px;">
+      <div class="modal-body">
 
       </div>
       <div class="modal-footer">
